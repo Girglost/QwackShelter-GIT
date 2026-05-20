@@ -4,7 +4,7 @@ import java.util.List;
 
 import quack.model.QuackShelter;
 
-public interface QuackShelter {
+public interface IDAOQuackShelter {
 
 	
 	public QuackShelter findById(Integer id);

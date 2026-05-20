@@ -14,7 +14,6 @@ import quack.dao.IDAOEmplacement;
 import quack.dao.IDAOHistoriqueSante;
 import quack.dao.IDAOLieu;
 import quack.dao.IDAOPersonne;
-import quack.dao.IDAOQuackShelter;
 import quack.dao.IDAOStatutAnimalRefuge;
 
 public class Singleton<IDAOQuackShelter> {

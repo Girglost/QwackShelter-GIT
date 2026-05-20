@@ -3,8 +3,8 @@ package quack.dao;
 import java.util.List;
 
 import jakarta.persistence.EntityManager;
+import quack.context.Singleton;
 import quack.model.StatutAnimal;
-import quest.context.Singleton;
 
 
 public class DAOStatutAnimalRefuge implements IDAOStatutAnimalRefuge {
