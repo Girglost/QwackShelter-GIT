@@ -2,17 +2,17 @@ package quack.dao;
 
 import java.util.List;
 
-import quack.model.StatutAnimalRefuge;
+import quack.model.StatutAnimal;
 
 public interface IDAOStatutAnimalRefuge {
 
-	public StatutAnimalRefuge findById(Integer id);
+	public StatutAnimal findById(Integer id);
 
-	public List<StatutAnimalRefuge> findAll();
+	public List<StatutAnimal> findAll();
 
-	public StatutAnimalRefuge save(StatutAnimalRefuge statut); 
+	public StatutAnimal save(StatutAnimal statut); 
 
-	public StatutAnimalRefuge update(StatutAnimalRefuge statut);
+	public StatutAnimal update(StatutAnimal statut);
 
 	public void delete(Integer id);
 	

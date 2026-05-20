@@ -73,7 +73,7 @@ public class QuackShelter {
     
 	  //methode pour ajouter un personnel
 	
-    public void ajouterPersonne(Personne personne) {
+    public void ajouterPersonnel(Personnel personnel) {
         this.personnel.add(personnel);
     }
 	
