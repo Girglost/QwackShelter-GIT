@@ -81,6 +81,7 @@ public class QuackShelter {
     
     public List<Animal> getAnimauxDuRefuge() {
         // On passerait par StatutAnimalRefuge ou Lieu selon le besoin
+    	return getAnimauxDuRefuge();
     }
 
 }

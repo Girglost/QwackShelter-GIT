@@ -42,12 +42,33 @@ public class DAOLieu implements IDAOLieu{
 	 
 	 
 	  @Override
-	    public void delete(Integer id) {
+	    public void deleteById(Integer id) {
 	        em.getTransaction().begin();
 	        Lieu lieu = em.find(Lieu.class, id);
 	        if (lieu != null) em.remove(lieu);
 	        em.getTransaction().commit();
 	    }
+
+
+	  @Override
+	  public Lieu findById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	  }
+
+
+	  @Override
+	  public void delete(Lieu obj) {
+		// TODO Auto-generated method stub
+		
+	  }
+
+
+	  @Override
+	  public void delete(Integer id) {
+		// TODO Auto-generated method stub
+		
+	  }
 	  
 
 }

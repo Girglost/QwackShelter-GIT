@@ -40,11 +40,18 @@ public class DAOEmplacement implements IDAOEmplacement{
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void deleteById(Integer id) {
 		em.getTransaction().begin();
 		Emplacement emplacement = em.find(Emplacement.class, id);
 		if (emplacement != null) em.remove(emplacement);
 		em.getTransaction().commit();
 	}
-	
+
+	@Override
+	public void delete(Emplacement obj) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }

@@ -2,9 +2,10 @@ package quack.dao;
 
 import java.util.List;
 
+import quack.model.Animal;
 import quack.model.Emplacement;
 
-public interface IDAOEmplacement {
+public interface IDAOEmplacement extends IDAO<Emplacement,Integer> {
 
 	public Emplacement findById(Integer id);
 
@@ -14,6 +15,6 @@ public interface IDAOEmplacement {
 
 	public Emplacement update(Emplacement emplacement);
 
-	public void delete(Integer id);
+	public void deleteById(Integer id);
 
 }

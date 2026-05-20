@@ -42,11 +42,26 @@ public class DAOQuackShelter implements IDAOQuackShelter {
 
 
 	@Override
-	public void delete(Integer id) {
+	public void deleteById(Integer id) {
 		em.getTransaction().begin();
 		QuackShelter quack = em.find(QuackShelter.class, id);
 		if (quack != null) em.remove(quack);
 		em.getTransaction().commit();
 	}
+
+
+	@Override
+	public void delete(QuackShelter obj) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void delete(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

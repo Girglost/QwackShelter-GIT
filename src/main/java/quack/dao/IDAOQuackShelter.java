@@ -2,9 +2,10 @@ package quack.dao;
 
 import java.util.List;
 
+import quack.model.HistoriqueSante;
 import quack.model.QuackShelter;
 
-public interface IDAOQuackShelter {
+public interface IDAOQuackShelter extends IDAO<QuackShelter,Integer>{
 
 	
 	public QuackShelter findById(Integer id);

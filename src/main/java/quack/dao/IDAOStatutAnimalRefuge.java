@@ -2,9 +2,10 @@ package quack.dao;
 
 import java.util.List;
 
+import quack.model.HistoriqueSante;
 import quack.model.StatutAnimal;
 
-public interface IDAOStatutAnimalRefuge {
+public interface IDAOStatutAnimalRefuge extends IDAO<StatutAnimal,Integer>{
 
 	public StatutAnimal findById(Integer id);
 

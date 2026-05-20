@@ -14,9 +14,10 @@ import quack.dao.IDAOEmplacement;
 import quack.dao.IDAOHistoriqueSante;
 import quack.dao.IDAOLieu;
 import quack.dao.IDAOPersonne;
+import quack.dao.IDAOQuackShelter;
 import quack.dao.IDAOStatutAnimalRefuge;
 
-public class Singleton<IDAOQuackShelter> {
+public class Singleton {
 	//Avec le polymorphisme, on pourra changer facilement de DAO au module JPA
 	//DAOVisite deviendra DAOVisiteJPA, mais le reste de l'appli fonctionnera toujours !
 

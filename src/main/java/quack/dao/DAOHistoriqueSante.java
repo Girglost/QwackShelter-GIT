@@ -41,11 +41,23 @@ public class DAOHistoriqueSante implements IDAOHistoriqueSante{
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void deleteById(Integer id) {
 		em.getTransaction().begin();
 		HistoriqueSante historique = em.find(HistoriqueSante.class, id);
 		if (historique != null) em.remove(historique);
 		em.getTransaction().commit();
 	}
-	
+
+	@Override
+	public void delete(HistoriqueSante obj) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
