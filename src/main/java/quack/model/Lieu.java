@@ -9,7 +9,7 @@ public abstract class  Lieu {
 	
 	//constructeur 
 	
-	 public Lieu(int id, String type, Adresse adresse) {
+	 public Lieu(int id, String type, String numero, String voie, String ville, String cp) {
 	        this.id = id;
 	        this.type = type;
 	        this.adresse = new Adresse(numero,voie,ville,cp);
