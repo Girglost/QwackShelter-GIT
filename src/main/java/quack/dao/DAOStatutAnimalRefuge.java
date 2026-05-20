@@ -5,19 +5,14 @@ import java.util.List;
 import jakarta.persistence.EntityManager;
 import quack.model.StatutAnimal;
 import quest.context.Singleton;
-import quest.model.Filiere;
 
 
 public class DAOStatutAnimalRefuge implements IDAOStatutAnimalRefuge {
 
-	private EntityManager em;
-	public void LieuDAO(EntityManager em) {
-		this.em = em;
-	}
-
-
+	
 	@Override
 	public StatutAnimal findById(Integer id) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		StatutAnimal statut = em.find(StatutAnimal.class, id);
 		em.close();
 		return statut;
@@ -27,6 +22,7 @@ public class DAOStatutAnimalRefuge implements IDAOStatutAnimalRefuge {
 
 	@Override
 	public List <StatutAnimal> findAll() {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		List<StatutAnimal> statut = em.createQuery("from StatutAnimal").getResultList();
 		em.close();
 		return statut;
@@ -34,6 +30,7 @@ public class DAOStatutAnimalRefuge implements IDAOStatutAnimalRefuge {
 
 	@Override
 	public StatutAnimal save(StatutAnimal statut) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
 		em.persist(statut);
 		em.getTransaction().commit();
@@ -42,6 +39,7 @@ public class DAOStatutAnimalRefuge implements IDAOStatutAnimalRefuge {
 
 	@Override
 	public StatutAnimal update(StatutAnimal statut) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
 		statut = em.merge(statut);
 		em.getTransaction().commit();
@@ -61,6 +59,7 @@ public class DAOStatutAnimalRefuge implements IDAOStatutAnimalRefuge {
 
 	@Override
 	public void deleteById(Integer id) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
 		StatutAnimal statut = em.find(StatutAnimal.class, id);
 		em.remove(statut);
