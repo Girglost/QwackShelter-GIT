@@ -4,7 +4,9 @@ import java.util.List;
 
 import jakarta.persistence.EntityManager;
 import quack.model.StatutAnimal;
-import quack.model.StatutAnimal;
+import quest.context.Singleton;
+import quest.model.Filiere;
+
 
 public class DAOStatutAnimalRefuge implements IDAOStatutAnimalRefuge {
 
@@ -16,13 +18,18 @@ public class DAOStatutAnimalRefuge implements IDAOStatutAnimalRefuge {
 
 	@Override
 	public StatutAnimal findById(Integer id) {
-		return em.find(StatutAnimal.class, id);
+		StatutAnimal statut = em.find(StatutAnimal.class, id);
+		em.close();
+		return statut;
+
 	}
 
 
 	@Override
 	public List <StatutAnimal> findAll() {
-		return em.createQuery("SELECT s FROM StatutAnimalRefuge s", StatutAnimal.class).getResultList();
+		List<StatutAnimal> statut = em.createQuery("from StatutAnimal").getResultList();
+		em.close();
+		return statut;
 	}
 
 	@Override
@@ -36,19 +43,30 @@ public class DAOStatutAnimalRefuge implements IDAOStatutAnimalRefuge {
 	@Override
 	public StatutAnimal update(StatutAnimal statut) {
 		em.getTransaction().begin();
-		StatutAnimal updated = em.merge(statut);
+		statut = em.merge(statut);
 		em.getTransaction().commit();
-		return updated;
+		return statut;
+	}
+
+	@Override
+	public void delete(StatutAnimal statut) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+		em.getTransaction().begin();
+		statut = em.merge(statut);
+		em.remove(statut);
+		em.getTransaction().commit();
+		em.close();
 	}
 
 
 	@Override
-	public void delete(Integer id) {
+	public void deleteById(Integer id) {
 		em.getTransaction().begin();
 		StatutAnimal statut = em.find(StatutAnimal.class, id);
-		if (statut != null) em.remove(statut);
+		em.remove(statut);
 		em.getTransaction().commit();
+		em.close();
 	}
-	
-	
+
+
 }

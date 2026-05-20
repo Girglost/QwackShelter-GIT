@@ -14,7 +14,11 @@ public interface IDAOStatutAnimalRefuge {
 
 	public StatutAnimal update(StatutAnimal statut);
 
-	public void delete(Integer id);
+	public void deleteById(Integer id);
+	
+	public void delete(StatutAnimal statut);
+	
+	
 	
 	
 }
