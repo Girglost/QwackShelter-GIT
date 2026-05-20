@@ -43,11 +43,26 @@ public class DAOPersonne implements IDAOPersonne {
 
 
 	@Override
-	public void delete(Integer id) {
+	public void deleteById(Integer id) {
 		em.getTransaction().begin();
 		Personne personne = em.find(Personne.class, id);
 		if (personne != null) em.remove(personne);
 		em.getTransaction().commit();
 	}
+
+
+	@Override
+	public void delete(Personne obj) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void delete(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

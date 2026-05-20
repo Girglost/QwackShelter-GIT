@@ -42,12 +42,25 @@ public class DAOAnimal implements IDAOAnimal {
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void deleteById(Integer id) {
 		em.getTransaction().begin();
 		Animal animal = em.find(Animal.class, id);
 		if (animal != null) em.remove(animal);
 		em.getTransaction().commit();
 	}
+
+	@Override
+	public void delete(Animal obj) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
 
 

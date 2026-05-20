@@ -4,7 +4,7 @@ import java.util.List;
 
 import quack.model.Animal;
 
-public interface IDAOAnimal {
+public interface IDAOAnimal extends IDAO<Animal,Integer> {
 
 	public Animal findById(Integer id);
 	

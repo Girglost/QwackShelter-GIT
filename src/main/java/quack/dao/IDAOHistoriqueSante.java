@@ -2,9 +2,10 @@ package quack.dao;
 
 import java.util.List;
 
+import quack.model.Animal;
 import quack.model.HistoriqueSante;
 
-public interface IDAOHistoriqueSante {
+public interface IDAOHistoriqueSante extends IDAO<HistoriqueSante,Integer> {
 
 	
 	public HistoriqueSante findById(Integer id);
