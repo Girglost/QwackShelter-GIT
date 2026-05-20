@@ -6,7 +6,7 @@ public abstract class Personne {
 	protected String nom;
 	protected String prenom;
 
-
+	protected Lieu habitation;
 
 
 	//constructeur vide
@@ -14,13 +14,22 @@ public abstract class Personne {
 	public Personne() {}
 
 	//constructeur
-	public Personne(Integer id, String nom, String prenom) {
+	public Personne(Integer id, String nom, String prenom, Lieu habitation) {
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
+		this.habitation = habitation;
 	}
 
 	//get set
+
+	public Lieu getHabitation() {
+		return habitation;
+	}
+
+	public void setHabitation(Lieu habitation) {
+		this.habitation = habitation;
+	}
 
 	public Integer getId() {
 		return id;
@@ -45,9 +54,8 @@ public abstract class Personne {
 
 	@Override
 	public String toString() {
-		return "Personne [id=" + id + ", nom=" + nom + ", prenom=" + prenom + "]";
+		return "Personne [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", habitation=" + habitation + "]";
 	}
-	
 
 	//methodes
 
