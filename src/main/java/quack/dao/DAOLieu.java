@@ -48,5 +48,6 @@ public class DAOLieu implements IDAOLieu{
 	        if (lieu != null) em.remove(lieu);
 	        em.getTransaction().commit();
 	    }
+	  
 
 }
