@@ -3,7 +3,6 @@ package quack.dao;
 import java.util.List;
 
 import jakarta.persistence.EntityManager;
-import quack.model.Emplacement;
 import quack.model.HistoriqueSante;
 
 public class DAOHistoriqueSante implements IDAOHistoriqueSante{

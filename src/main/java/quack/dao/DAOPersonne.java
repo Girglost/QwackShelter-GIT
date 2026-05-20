@@ -3,7 +3,6 @@ package quack.dao;
 import java.util.List;
 
 import jakarta.persistence.EntityManager;
-import quack.model.Lieu;
 import quack.model.Personne;
 
 public class DAOPersonne implements IDAOPersonne {

@@ -4,7 +4,6 @@ import java.util.List;
 
 import jakarta.persistence.EntityManager;
 import quack.model.Animal;
-import quack.model.Lieu;
 
 public class DAOAnimal implements IDAOAnimal {
 

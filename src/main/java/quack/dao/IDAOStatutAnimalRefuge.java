@@ -2,6 +2,8 @@ package quack.dao;
 
 import java.util.List;
 
+import quack.model.StatutAnimalRefuge;
+
 public interface IDAOStatutAnimalRefuge {
 
 	public StatutAnimalRefuge findById(Integer id);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.persistence.EntityManager;
 import quack.model.QuackShelter;
+import quack.model.StatutAnimalRefuge;
 
 public class DAOStatutAnimalRefuge implements IDAOStatutAnimalRefuge {
 
@@ -44,7 +45,7 @@ public class DAOStatutAnimalRefuge implements IDAOStatutAnimalRefuge {
 	@Override
 	public void delete(Integer id) {
 		em.getTransaction().begin();
-		QuackShelter quack = em.find(StatutAnimalRefuge.class, id);
+		StatutAnimalRefuge statut = em.find(StatutAnimalRefuge.class, id);
 		if (statut != null) em.remove(statut);
 		em.getTransaction().commit();
 	}
