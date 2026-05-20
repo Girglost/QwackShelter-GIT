@@ -1,5 +1,8 @@
 package quack.model;
 
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class Adresse {
 
 	private String numero;

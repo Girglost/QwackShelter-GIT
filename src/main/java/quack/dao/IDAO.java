@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface IDAO <T, K>{
 
-	T findById(int id);
-	List<T> findAll();
-	boolean save(T t);
-	boolean update(T t);
-	boolean delete(int id);
+	public T findById(K id);
+	public List<T> findAll();
+	public T save(T obj);
+	public void delete(T obj);	
+	public void deleteById(K id);
 }
 

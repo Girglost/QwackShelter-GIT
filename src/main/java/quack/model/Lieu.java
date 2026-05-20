@@ -1,9 +1,25 @@
 package quack.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "Lieu")
 public abstract class  Lieu {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer id;
+	
+	@Column(length = 40, nullable=false)
 	protected String type;
+	
+	@Embedded
 	private Adresse adresse;
 
 	
