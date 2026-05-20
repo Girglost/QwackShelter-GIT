@@ -2,7 +2,7 @@ package quack.model;
 
 import java.time.LocalDate;
 
-public class StatutAnimalRefuge {
+public class StatutAnimal {
 
 	private Integer id;
 	private LocalDate dateArrivee;
@@ -12,7 +12,7 @@ public class StatutAnimalRefuge {
 	private Personne adoptant;
 	private Animal animal;
 	
-	public StatutAnimalRefuge(LocalDate dateArrivee, LocalDate dateDepart, Statut statut, Emplacement emplecement, Personne adoptant, Animal animal) {
+	public StatutAnimal(LocalDate dateArrivee, LocalDate dateDepart, Statut statut, Emplacement emplecement, Personne adoptant, Animal animal) {
 		this.dateArrivee = dateArrivee;
 		this.dateDepart = dateDepart;
 		this.statut = statut;
@@ -21,7 +21,7 @@ public class StatutAnimalRefuge {
 		this.animal = animal;
 	}
 	
-	public StatutAnimalRefuge(LocalDate dateArrivee, Statut statut, Emplacement emplecement,	Personne adoptant, Animal animal) {
+	public StatutAnimal(LocalDate dateArrivee, Statut statut, Emplacement emplecement,	Personne adoptant, Animal animal) {
 		this.dateArrivee = dateArrivee;
 		this.statut = statut;
 		this.emplecement = emplecement;
@@ -29,7 +29,7 @@ public class StatutAnimalRefuge {
 		this.animal = animal;
 	}
 	
-	public StatutAnimalRefuge(Statut statut, Emplacement emplecement, Personne adoptant, Animal animal) {
+	public StatutAnimal(Statut statut, Emplacement emplecement, Personne adoptant, Animal animal) {
 		this.dateArrivee = LocalDate.now();
 		this.statut = statut;
 		this.emplecement = emplecement;
@@ -37,7 +37,7 @@ public class StatutAnimalRefuge {
 		this.animal = animal;
 	}
 	
-	public StatutAnimalRefuge() {}
+	public StatutAnimal() {}
 
 	
 	
