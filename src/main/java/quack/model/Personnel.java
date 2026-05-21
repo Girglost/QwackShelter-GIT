@@ -1,31 +1,23 @@
 package quack.model;
 
-public class Personnel extends Personne{
-	protected boolean patron;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+// On ne la persiste pas en BDD
+public abstract class Personnel extends Personne{
+
 	
 	
 	public Personnel() {}
+	public Personnel(Integer id, String nom, String prenom, String login, String password, Lieu habitation,
+			boolean patron) {
+		super(id, nom, prenom, login, password, habitation);
+	}
+
 	
-	public Personnel(Integer id, String nom, String prenom, boolean patron, Lieu habitation) {
-		super(id, nom, prenom, habitation);
-		this.patron = patron;
-	}
-
-	public boolean isPatron() {
-		return patron;
-	}
-
-	public void setPatron(boolean patron) {
-		this.patron = patron;
-	}
-
 	@Override
 	public String toString() {
-		return "Personnel [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", habitation=" + habitation
-				+ ", patron=" + patron + "]";
+		return "Personnel [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", login=" + login + ", password="
+				+ password + ", habitation=" + habitation+"]";
 	}
-	
-	
-
-	
 }

@@ -1,16 +1,24 @@
 package quack.model;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("Benevole")
 public class Benevole extends Personnel {
 
 	public Benevole() {}
-	public Benevole(Integer id, String nom, String prenom, boolean patron, Lieu habitation) {
-		super(id, nom, prenom, patron, habitation);
+
+	public Benevole(Integer id, String nom, String prenom, String login, String password, Lieu habitation,
+			boolean patron) {
+		super(id, nom, prenom, login, password, habitation, patron);
 	}
 
 	@Override
 	public String toString() {
-		return "Benevole [patron=" + patron + ", id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", habitation="
-				+ habitation + "]";
+		return "Benevole [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", login=" + login + ", password="
+				+ password + ", habitation=" + habitation + "]";
 	}
+
 	
 }
