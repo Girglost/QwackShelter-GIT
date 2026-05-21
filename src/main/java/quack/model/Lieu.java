@@ -26,7 +26,7 @@ public abstract class  Lieu {
 	@Embedded
 	private Adresse adresse;
 
-	@OneToMany
+	@OneToMany(mappedBy="habitation")
 	private List<Personne> personne = new ArrayList<>();
 	
 	//constructeur vide
