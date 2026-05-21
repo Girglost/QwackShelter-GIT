@@ -1,11 +1,15 @@
 package quack.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,16 +26,26 @@ public abstract class  Lieu {
 	@Embedded
 	private Adresse adresse;
 
+	@OneToMany
+	private List<Personne> personne = new ArrayList<>();
 	
-	//constructeur 
+	//constructeur vide
 	
-	 public Lieu(int id, String type, String numero, String voie, String ville, String cp) {
-	        this.id = id;
-	        this.type = type;
-	        this.adresse = new Adresse(numero,voie,ville,cp);
-	    }
+	 public Lieu() {}
 	 
-	 //get set
+	
+	 //constructeur
+	 
+	 public Lieu(Integer id, String type, Adresse adresse, List<Personne> personne) {
+		this.id = id;
+		this.type = type;
+		this.adresse = adresse;
+		this.personne = personne;
+	}
+
+
+ //get set
+
 
 	 public Integer getId() {
 		 return id;
@@ -56,13 +70,22 @@ public abstract class  Lieu {
 	 public void setAdresse(Adresse adresse) {
 		 this.adresse = adresse;
 	 }
-
-	 //to String 
 	 
+	 public List<Personne> getPersonne() {
+		return personne;
+	}
+
+	 public void setPersonne(List<Personne> personne) {
+		 this.personne = personne;
+	 }
+
+	 //to String
 	 @Override
 	 public String toString() {
-		return "Lieu [id=" + id + ", type=" + type + ", adresse=" + adresse + "]";
+		return "Lieu [id=" + id + ", type=" + type + ", adresse=" + adresse + ", personne=" + personne + "]";
 	 }
+
+	
 	 
 	 
 }
