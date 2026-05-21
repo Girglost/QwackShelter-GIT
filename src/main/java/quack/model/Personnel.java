@@ -6,8 +6,7 @@ import jakarta.persistence.Entity;
 // On ne la persiste pas en BDD
 public abstract class Personnel extends Personne{
 
-	
-	
+
 	public Personnel() {}
 	public Personnel(Integer id, String nom, String prenom, String login, String password, Lieu habitation,
 			boolean patron) {
