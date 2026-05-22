@@ -2,18 +2,23 @@ package quack.dao;
 
 import java.util.List;
 
+import quack.model.Admin;
+import quack.model.Benevole;
+import quack.model.Employe;
 import quack.model.Personne;
+import quack.model.Visiteur;
 
 public interface IDAOPersonne extends IDAO<Personne,Integer>{
 
-	public Personne findById(Integer id);
-
-	public List<Personne> findAll();
-
-	public Personne save(Personne personne); 
-
-	public Personne update(Personne personne);
-
-	public void delete(Integer id);
+	public List<Admin> findAllAdmin();
+	
+	public List<Visiteur> findAllVisiteur();
+	
+	public List<Employe> findAllEmploye();
+	
+	public List<Benevole> findAllBenevole();
+//	
+//	public Personne findbyIdwithVisite();
+//	public Personne findbyIdwithAdoption();
 	
 }

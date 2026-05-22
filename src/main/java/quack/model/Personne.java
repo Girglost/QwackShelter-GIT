@@ -44,11 +44,6 @@ public abstract class Personne {
 		this.habitation = habitation;
 	}
 
-
-
-
-
-
 	//get set
 	public Integer getId() {
 		return id;

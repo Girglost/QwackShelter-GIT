@@ -1,9 +1,43 @@
 package quack.test;
 
-public class App {
+import java.util.Scanner;
 
+public class App {
+	//------------PARTIE APP--------------//
+		public static int saisieInt(String message)
+		{
+			Scanner monScanner = new Scanner(System.in);
+			System.out.println(message);
+			return monScanner.nextInt();
+		}
+
+		public static double saisieDouble(String message)
+		{
+			Scanner monScanner = new Scanner(System.in);
+			System.out.println(message);
+			return monScanner.nextDouble();
+		}
+
+		public static String saisieString(String message)
+		{
+			Scanner monScanner = new Scanner(System.in);
+			System.out.println(message);
+			return monScanner.nextLine();
+		}
+
+		public static boolean saisieBoolean(String message)
+		{
+			Scanner monScanner = new Scanner(System.in);
+			System.out.println(message);
+			return monScanner.nextBoolean();
+		}
+
+	
+	
+	
 	public static void main(String[] args) {
-		System.out.println("Hello world !");
+		System.out.println("Bienvenue Chez Quack Shelter ! ");
+		
 
 	}
 
