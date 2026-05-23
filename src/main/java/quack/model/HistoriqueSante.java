@@ -3,26 +3,54 @@ package quack.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
+@Entity
 public class HistoriqueSante {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(nullable=false)
 	private String commentaire;
+	@Column(columnDefinition = "DECIMAL(6,2)", nullable=false)
 	private double poids;
+	@Column(nullable=false)
 	private LocalDate date;
+	@Column(nullable=false)
 	private LocalTime heure;
 	private int duree;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable=false)
 	private Cause cause;
+	@ManyToOne
+	@Column(nullable=false)
 	private Animal animal;
 	
 	
 	
-	public HistoriqueSante(Integer id, String commentaire, double poids, LocalDate date, LocalTime heure, int duree, Cause cause, Animal animal) {
-		this.id = id;
+	public HistoriqueSante(String commentaire, double poids, LocalDate date, LocalTime heure, int duree, Cause cause, Animal animal) {
 		this.commentaire = commentaire;
 		this.poids = poids;
 		this.date = date;
 		this.heure = heure;
 		this.duree = duree;
+		this.cause = cause;
+		this.animal = animal;
+	}
+	
+	public HistoriqueSante(String commentaire, double poids, Cause cause, Animal animal) {
+		this.commentaire = commentaire;
+		this.poids = poids;
+		this.date = LocalDate.now();
+		this.heure = LocalTime.now();
 		this.cause = cause;
 		this.animal = animal;
 	}
@@ -95,6 +123,8 @@ public class HistoriqueSante {
 	public void setDuree(int duree) {
 		this.duree = duree;
 	}
+	
+	
 
 	@Override
 	public String toString() {
