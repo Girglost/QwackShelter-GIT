@@ -8,7 +8,7 @@ import quack.dao.DAOHistoriqueSante;
 import quack.dao.DAOLieu;
 import quack.dao.DAOPersonne;
 import quack.dao.DAOQuackShelter;
-import quack.dao.DAOStatutAnimalRefuge;
+import quack.dao.DAOStatutAnimal;
 import quack.dao.IDAOAnimal;
 import quack.dao.IDAOEmplacement;
 import quack.dao.IDAOHistoriqueSante;
@@ -27,7 +27,7 @@ public class Singleton {
 	private IDAOHistoriqueSante daoHistoriqueSante = new DAOHistoriqueSante();
 	private IDAOLieu daoLieu = new DAOLieu();
 	private IDAOQuackShelter daoQuackShelter = new DAOQuackShelter();
-	private IDAOStatutAnimal daoStatutAnimalRefuge = new DAOStatutAnimalRefuge();
+	private IDAOStatutAnimal daoStatutAnimalRefuge = new DAOStatutAnimal();
 
 
 	/*private PatientService patientSrv = new PatientService();

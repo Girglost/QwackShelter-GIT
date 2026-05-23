@@ -7,7 +7,7 @@ import quack.context.Singleton;
 import quack.model.StatutAnimal;
 
 
-public class DAOStatutAnimalRefuge implements IDAOStatutAnimal {
+public class DAOStatutAnimal implements IDAOStatutAnimal {
 
 	
 	@Override
