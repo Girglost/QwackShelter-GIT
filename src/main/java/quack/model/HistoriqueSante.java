@@ -11,8 +11,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="historique_sante")
 public class HistoriqueSante {
 
 	@Id
@@ -24,7 +26,7 @@ public class HistoriqueSante {
 	private double poids;
 	@Column(nullable=false)
 	private LocalDate date;
-	@Column(nullable=false)
+	@Column(nullable=false, name="time")
 	private LocalTime heure;
 	private int duree;
 	@Enumerated(EnumType.STRING)
