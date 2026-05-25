@@ -3,11 +3,13 @@ package quack.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
 public class NAC extends Animal{
 
+	@Column(length = 50, nullable = true)
 	private String espece;
 
 	public NAC(int id, String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
