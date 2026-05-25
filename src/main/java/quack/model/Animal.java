@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
@@ -34,6 +35,7 @@ public abstract class Animal {
 	protected String nomAnimal;
 	@Column(name="date_naissance",nullable=false)
 	protected LocalDate dateNaissance;
+	@Column(length = 50, nullable = true)
 	protected String couleur;
 	@Column(name="regime_alimentaire",length = 200,nullable=true)
 	protected String regimeAlimentaire;
@@ -52,9 +54,9 @@ public abstract class Animal {
   	@ManyToOne
   	@JoinColumn(name="refuge",nullable = false)
 	protected QuackShelter qwackShelter;
-  	@OneToMany(mappedBy = "animal")
+  	@OneToMany(mappedBy = "animal",cascade = CascadeType.ALL)
 	List<HistoriqueSante> historiqueSante = new ArrayList<>();
-  	@OneToMany(mappedBy = "animal")
+  	@OneToMany(mappedBy = "animal",cascade = CascadeType.ALL)
 	List<StatutAnimal> statutAnimal = new ArrayList<>();
 	
 	public Animal(int id, String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
