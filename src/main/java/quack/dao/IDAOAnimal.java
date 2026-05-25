@@ -6,15 +6,9 @@ import quack.model.Animal;
 
 public interface IDAOAnimal extends IDAO<Animal,Integer> {
 
-	public Animal findById(Integer id);
-	
-	public List<Animal> findAll();
-	
-	public Animal save(Animal animal); 
-
 	public Animal update(Animal animal);
 
-	public void delete(Integer id);
+public Animal findByName(Animal String);
 
 	
 }

@@ -55,9 +55,9 @@ public abstract class Animal {
   	@JoinColumn(name="refuge",nullable = false)
 	protected QuackShelter qwackShelter;
   	@OneToMany(mappedBy = "animal",cascade = CascadeType.ALL)
-	List<HistoriqueSante> historiqueSante = new ArrayList<>();
+	static List<HistoriqueSante> historiqueSante = new ArrayList<>();
   	@OneToMany(mappedBy = "animal",cascade = CascadeType.ALL)
-	List<StatutAnimal> statutAnimal = new ArrayList<>();
+	static List<StatutAnimal> statutsAnimal = new ArrayList<>();
 	
 	public Animal(int id, String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter qwackShelter) {
@@ -121,7 +121,7 @@ public abstract class Animal {
 	}
 
 	public List<StatutAnimal> getStatutAnimal() {
-		return statutAnimal;
+		return statutsAnimal;
 	}
 
 	public void setId(int id) {
@@ -168,8 +168,20 @@ public abstract class Animal {
 		this.historiqueSante = historiqueSante;
 	}
 
-	public void setStatutAnimal(List<StatutAnimal> statutAnimal) {
-		this.statutAnimal = statutAnimal;
+	public void setStatutAnimal(List<StatutAnimal> statutsAnimal) {
+		this.statutsAnimal = statutsAnimal;
+	}
+	
+	//Méthodrs
+	
+	public StatutAnimal showStatut() {
+		
+		for(StatutAnimal s: statutsAnimal) {
+			if (s.getDateDepart()==null){
+				return s;
+			}
+		}		
+		return null;
 	}
 
 	@Override

@@ -55,10 +55,11 @@ public class DAOAnimal implements IDAOAnimal {
 		
 	}
 
+
 	@Override
-	public void delete(Integer id) {
+	public Animal findByName(Animal String) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 }
