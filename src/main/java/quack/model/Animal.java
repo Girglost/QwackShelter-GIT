@@ -53,14 +53,14 @@ public abstract class Animal {
   	
   	@ManyToOne
   	@JoinColumn(name="refuge",nullable = false)
-	protected QuackShelter qwackShelter;
+	protected QuackShelter quackShelter;
   	@OneToMany(mappedBy = "animal",cascade = CascadeType.ALL)
 	static List<HistoriqueSante> historiqueSante = new ArrayList<>();
   	@OneToMany(mappedBy = "animal",cascade = CascadeType.ALL)
 	static List<StatutAnimal> statutsAnimal = new ArrayList<>();
 	
 	public Animal(int id, String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
-			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter qwackShelter) {
+			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter quackShelter) {
 		this.id = id;
 		this.nomAnimal = nomAnimal;
 		this.dateNaissance = dateNaissance;
@@ -70,7 +70,7 @@ public abstract class Animal {
 		this.famille = famille;
 		this.genre = genre;
 		this.caracteres = caracteres;
-		this.qwackShelter = qwackShelter;
+		this.quackShelter = quackShelter;
 	}
 
 	public Animal() {
@@ -112,8 +112,8 @@ public abstract class Animal {
 		return caracteres;
 	}
 
-	public QuackShelter getQwackShelter() {
-		return qwackShelter;
+	public QuackShelter getquackShelter() {
+		return quackShelter;
 	}
 
 	public List<HistoriqueSante> getHistoriqueSante() {
@@ -160,8 +160,8 @@ public abstract class Animal {
 		this.caracteres = caracteres;
 	}
 
-	public void setQwackShelter(QuackShelter qwackShelter) {
-		this.qwackShelter = qwackShelter;
+	public void setquackShelter(QuackShelter quackShelter) {
+		this.quackShelter = quackShelter;
 	}
 
 	public void setHistoriqueSante(List<HistoriqueSante> historiqueSante) {
@@ -188,7 +188,7 @@ public abstract class Animal {
 	public String toString() {
 		return "Animal [id=" + id + ", nomAnimal=" + nomAnimal + ", dateNaissance=" + dateNaissance + ", couleur="
 				+ couleur + ", regimeAlimentaire=" + regimeAlimentaire + ", traitement=" + traitement + ", famille="
-				+ famille + ", genre=" + genre + ", caractere=" + caracteres + ", qwackShelter=" + qwackShelter
+				+ famille + ", genre=" + genre + ", caractere=" + caracteres + ", quackShelter=" + quackShelter
 				+ ", historiqueSante=" + historiqueSante + "]";
 	}
 	
