@@ -6,9 +6,7 @@ import jakarta.persistence.ManyToOne;
 // On ne la persiste pas en BDD
 public abstract class Personnel extends Personne{
 
-	@ManyToOne
-    @JoinColumn(name = "quack_shelter_id", nullable = false)
-    private QuackShelter quackShelter;
+	
     
     
 	public Personnel() {}

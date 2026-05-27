@@ -32,6 +32,9 @@ public abstract class Personne {
     @JoinColumn(name="habitation",nullable = false)
 	protected Lieu habitation;
 	
+    @ManyToOne
+    @JoinColumn(name = "quack_shelter_id", nullable = false)
+    private QuackShelter quackShelter;
 	
 	//constructeur vide
 	public Personne() {}
