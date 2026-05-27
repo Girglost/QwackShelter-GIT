@@ -36,7 +36,7 @@ public class NAC extends Animal{
 		return "NAC [id=" + id + ", nomAnimal=" + nomAnimal + ", dateNaissance=" + dateNaissance + ", couleur="
 				+ couleur + ", regimeAlimentaire=" + regimeAlimentaire + ", traitement=" + traitement + ", famille="
 				+ famille + ", genre=" + genre + ", caracteres=" + caracteres + ", qwackShelter=" + qwackShelter
-				+ ", historiqueSante=" + historiqueSante + ", statutAnimal=" + statutAnimal + ", espece=" + espece
+				+ ", historiqueSante=" + historiqueSante + ", statutAnimal=" + statutsAnimal + ", espece=" + espece
 				+ "]";
 	}
 	

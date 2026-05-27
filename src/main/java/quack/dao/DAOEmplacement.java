@@ -15,42 +15,48 @@ public class DAOEmplacement implements IDAOEmplacement{
 	
 	@Override
 	public Emplacement findById(Integer id) {
-		return em.find(Emplacement.class, id);
-	}
-
-	@Override
-	public List<Emplacement> findAll() {
-		return em.createQuery("SELECT e FROM Emplacement e", Emplacement.class).getResultList();
-	}
-
-	@Override
-	public Emplacement save(Emplacement emplacement) {
-		em.getTransaction().begin();
-		em.persist(emplacement);
-		em.getTransaction().commit();
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+		Emplacement emplacement = em.find(Emplacement.class, id);
+		em.close();
 		return emplacement;
 	}
 
 	@Override
-	public Emplacement update(Emplacement emplacement) {
+	public List<Emplacement> findAll() {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+		List<Emplacement> emplacements = em.createQuery("FROM Emplacement", Emplacement.class).getResultList();
+		em.close();
+		return emplacements;
+	}
+
+	@Override
+	public Emplacement save(Emplacement emplacement) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
-		Emplacement updated = em.merge(emplacement);
+		em.merge(emplacement);
 		em.getTransaction().commit();
-		return updated;
+		em.close();
+		return emplacement;
 	}
 
 	@Override
 	public void deleteById(Integer id) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
 		Emplacement emplacement = em.find(Emplacement.class, id);
-		if (emplacement != null) em.remove(emplacement);
+		em.remove(emplacement);
 		em.getTransaction().commit();
+		em.close();
 	}
 
 	@Override
-	public void delete(Emplacement obj) {
-		// TODO Auto-generated method stub
-		
+	public void delete(Emplacement emplacement) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+		em.getTransaction().begin();
+		Emplacement emplacement = em.find(Emplacement.class, obj.getId());
+		em.remove(emplacement);
+		em.getTransaction().commit();
+		em.close();
 	}
 
 

@@ -34,7 +34,7 @@ public class Poule extends Oiseaux {
 				+ nomAnimal + ", dateNaissance=" + dateNaissance + ", couleur=" + couleur + ", regimeAlimentaire="
 				+ regimeAlimentaire + ", traitement=" + traitement + ", famille=" + famille + ", genre=" + genre
 				+ ", caracteres=" + caracteres + ", qwackShelter=" + qwackShelter + ", historiqueSante="
-				+ historiqueSante + ", statutAnimal=" + statutAnimal + ", race=" + race + "]";
+				+ historiqueSante + ", statutAnimal=" + statutsAnimal + ", race=" + race + "]";
 	}
     
     

@@ -4,6 +4,7 @@ import java.util.List;
 
 import quack.dao.DAOAnimal;
 import quack.model.Animal;
+import quack.model.Genre;
 
 public class AnimalService {
 
@@ -33,4 +34,13 @@ public class AnimalService {
 	{
 		daoAnimal.deleteById(id);
 	}
+	
+	
+    public List<Animal> getByName(String name) {
+        return daoAnimal.findByName(name);
+    }
+
+    public List<Animal> getByGenre(Genre genre) {
+        return daoAnimal.findByGenre(genre);
+    }
 }

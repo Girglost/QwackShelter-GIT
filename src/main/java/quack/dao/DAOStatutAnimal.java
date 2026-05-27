@@ -16,7 +16,6 @@ public class DAOStatutAnimal implements IDAOStatutAnimal {
 		StatutAnimal statut = em.find(StatutAnimal.class, id);
 		em.close();
 		return statut;
-
 	}
 
 
@@ -32,16 +31,7 @@ public class DAOStatutAnimal implements IDAOStatutAnimal {
 	public StatutAnimal save(StatutAnimal statut) {
 		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
-		em.persist(statut);
-		em.getTransaction().commit();
-		return statut;
-	}
-
-	@Override
-	public StatutAnimal update(StatutAnimal statut) {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		em.getTransaction().begin();
-		statut = em.merge(statut);
+		em.merge(statut);
 		em.getTransaction().commit();
 		return statut;
 	}

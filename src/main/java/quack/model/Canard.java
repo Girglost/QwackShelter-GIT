@@ -43,7 +43,7 @@ public class Canard extends Oiseaux {
 				+ nomAnimal + ", dateNaissance=" + dateNaissance + ", couleur=" + couleur + ", regimeAlimentaire="
 				+ regimeAlimentaire + ", traitement=" + traitement + ", famille=" + famille + ", genre=" + genre
 				+ ", caracteres=" + caracteres + ", qwackShelter=" + qwackShelter + ", historiqueSante="
-				+ historiqueSante + ", statutAnimal=" + statutAnimal + ", race=" + race + ", estSauvage=" + estSauvage
+				+ historiqueSante + ", statutAnimal=" + statutsAnimal + ", race=" + race + ", estSauvage=" + estSauvage
 				+ "]";
 	}
     
