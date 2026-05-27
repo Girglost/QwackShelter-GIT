@@ -2,14 +2,37 @@ package quack.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="statu_animal")
 public class StatutAnimal {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(nullable=false,name="date_arrivee")
 	private LocalDate dateArrivee;
+	@Column(name="date_depart")
 	private LocalDate dateDepart;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable=false)
 	private Statut statut;
+	@Column(name="emplacement")
 	private Emplacement emplecement;
+	@ManyToOne
+	@Column(name="adoptant",nullable=true)
 	private Personne adoptant;
+	@ManyToOne
+	@Column(nullable=false,name="animal")
 	private Animal animal;
 	
 	public StatutAnimal(LocalDate dateArrivee, LocalDate dateDepart, Statut statut, Emplacement emplecement, Personne adoptant, Animal animal) {

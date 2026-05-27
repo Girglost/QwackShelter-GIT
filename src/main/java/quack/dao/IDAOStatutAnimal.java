@@ -5,7 +5,7 @@ import java.util.List;
 import quack.model.HistoriqueSante;
 import quack.model.StatutAnimal;
 
-public interface IDAOStatutAnimalRefuge extends IDAO<StatutAnimal,Integer>{
+public interface IDAOStatutAnimal extends IDAO<StatutAnimal,Integer>{
 
 	public StatutAnimal findById(Integer id);
 

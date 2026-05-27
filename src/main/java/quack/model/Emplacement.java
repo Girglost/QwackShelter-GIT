@@ -1,21 +1,33 @@
 package quack.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="emplecement")
 public class Emplacement {
 
+	@Id
 	private Integer id;
+	
+	//Je veux mettre une condition min=1
+	@Column(name="nb_place",nullable=false)
 	private int nbPlace;
+	
+	@Column(nullable=false)
 	private boolean complet;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable=false, name="type_box")
 	private typeBox box;
 	
 	public Emplacement(Integer id, int nbPlace, boolean complet, typeBox box) {
-		super();
 		this.id = id;
-		this.nbPlace = nbPlace;
-		this.complet = complet;
-		this.box = box;
-	}
-	
-	public Emplacement(int nbPlace, boolean complet, typeBox box) {
 		this.nbPlace = nbPlace;
 		this.complet = complet;
 		this.box = box;

@@ -8,14 +8,14 @@ import quack.dao.DAOHistoriqueSante;
 import quack.dao.DAOLieu;
 import quack.dao.DAOPersonne;
 import quack.dao.DAOQuackShelter;
-import quack.dao.DAOStatutAnimalRefuge;
+import quack.dao.DAOStatutAnimal;
 import quack.dao.IDAOAnimal;
 import quack.dao.IDAOEmplacement;
 import quack.dao.IDAOHistoriqueSante;
 import quack.dao.IDAOLieu;
 import quack.dao.IDAOPersonne;
 import quack.dao.IDAOQuackShelter;
-import quack.dao.IDAOStatutAnimalRefuge;
+import quack.dao.IDAOStatutAnimal;
 
 public class Singleton {
 	//Avec le polymorphisme, on pourra changer facilement de DAO au module JPA
@@ -27,14 +27,14 @@ public class Singleton {
 	private IDAOHistoriqueSante daoHistoriqueSante = new DAOHistoriqueSante();
 	private IDAOLieu daoLieu = new DAOLieu();
 	private IDAOQuackShelter daoQuackShelter = new DAOQuackShelter();
-	private IDAOStatutAnimalRefuge daoStatutAnimalRefuge = new DAOStatutAnimalRefuge();
+	private IDAOStatutAnimal daoStatutAnimalRefuge = new DAOStatutAnimal();
 
 
 	/*private PatientService patientSrv = new PatientService();
 		private CompteService compteSrv = new CompteService();
 		private VisiteService visiteSrv = new VisiteService();*/
 
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("quackShelter");
+	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("contextJPA");
 
 
 	private static Singleton instance=null;
@@ -77,7 +77,7 @@ public class Singleton {
 	public IDAOQuackShelter getDaoQuackShelter() {
 		return daoQuackShelter;
 	}
-	public IDAOStatutAnimalRefuge getDaoStatutAnimalRefuge() {
+	public IDAOStatutAnimal getDaoStatutAnimalRefuge() {
 		return daoStatutAnimalRefuge;
 	}
 	/*public PatientService getPatientSrv() {
