@@ -34,7 +34,7 @@ public class Singleton {
 		private CompteService compteSrv = new CompteService();
 		private VisiteService visiteSrv = new VisiteService();*/
 
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("quackShelter");
+	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("contextJPA");
 
 
 	private static Singleton instance=null;
