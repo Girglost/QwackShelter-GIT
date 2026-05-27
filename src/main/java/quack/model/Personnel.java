@@ -14,11 +14,6 @@ public abstract class Personnel extends Personne{
 			boolean patron) {
 		super(id, nom, prenom, login, password, habitation);
 	}
-
-	public QuackShelter getQuackShelter() { return quackShelter; }
-    public void setQuackShelter(QuackShelter quackShelter) {
-        this.quackShelter = quackShelter;
-    }
 	
 	@Override
 	public String toString() {
