@@ -16,36 +16,36 @@ public class DAOHistoriqueSante implements IDAOHistoriqueSante{
 	
 	@Override
 	public HistoriqueSante findById(Integer id) {
-		return em.find(HistoriqueSante.class, id);
-	}
-
-	@Override
-	public List<HistoriqueSante> findAll() {
-		return em.createQuery("SELECT h FROM HistoriqueSante h", HistoriqueSante.class).getResultList();
-	}
-
-	@Override
-	public HistoriqueSante save(HistoriqueSante historique) {
-		em.getTransaction().begin();
-		em.persist(historique);
-		em.getTransaction().commit();
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+		HistoriqueSante historique = em.find(HistoriqueSante.class, id);
+		em.close();
 		return historique;
 	}
 
 	@Override
-	public HistoriqueSante update(HistoriqueSante historique) {
-		em.getTransaction().begin();
-		HistoriqueSante updated = em.merge(historique);
-		em.getTransaction().commit();
-		return updated;
+	public List<HistoriqueSante> findAll() {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+		List<HistoriqueSante> historiques = em.createQuery("from HistoriqueSante", HistoriqueSante.class).getResultList();
+		em.close();
+		return historiques;
 	}
 
 	@Override
-	public void delete(HistoriqueSante statut) {
+	public HistoriqueSante save(HistoriqueSante historique) {
 		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
-		statut = em.merge(statut);
-		em.remove(statut);
+		em.merge(historique);
+		em.getTransaction().commit();
+		em.close();
+		return historique;
+	}
+
+	@Override
+	public void delete(HistoriqueSante historique) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+		em.getTransaction().begin();
+		historique = em.merge(historique);
+		em.remove(historique);
 		em.getTransaction().commit();
 		em.close();
 	}
