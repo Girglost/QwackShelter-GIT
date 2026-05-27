@@ -7,7 +7,7 @@ import jakarta.persistence.Entity;
 
 
 @Entity
-public class Mamifere extends Animal{
+public abstract class Mamifere extends Animal{
 
 	protected boolean sterilisation;
 	protected boolean gestante;

@@ -3,6 +3,9 @@ package quack.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class QuackShelter {
 	
 	private Integer id;

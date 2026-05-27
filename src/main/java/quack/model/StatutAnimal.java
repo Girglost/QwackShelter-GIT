@@ -9,6 +9,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -29,10 +30,10 @@ public class StatutAnimal {
 	@Column(name="emplacement")
 	private Emplacement emplecement;
 	@ManyToOne
-	@Column(name="adoptant",nullable=true)
+	@JoinColumn(name="adoptant",nullable=true)
 	private Personne adoptant;
 	@ManyToOne
-	@Column(nullable=false,name="animal")
+	@JoinColumn(nullable=false,name="animal")
 	private Animal animal;
 	
 	public StatutAnimal(LocalDate dateArrivee, LocalDate dateDepart, Statut statut, Emplacement emplecement, Personne adoptant, Animal animal) {
