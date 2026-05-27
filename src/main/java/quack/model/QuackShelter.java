@@ -3,19 +3,40 @@ package quack.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class QuackShelter {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@Column(columnDefinition = "DECIMAL(20,2)")
 	private double tresorerie;
+	
+	@Column(name = "nb_place", nullable = false)
 	private int nbPlace;
 	
+	@OneToOne
+	@JoinColumn(name = "lieu_id")
 	private Lieu lieu;
 	
+	@OneToMany(mappedBy = "quackShelter")
 	private List<Personnel> personnel;
 	
+	@OneToMany(mappedBy = "quackShelter")
+    private List<Animal> animaux = new ArrayList<>();
 	
 	// constructeur vide 
 	
@@ -83,8 +104,14 @@ public class QuackShelter {
     //methode pour recuperer les animaux du refuge
     
     public List<Animal> getAnimauxDuRefuge() {
-        // On passerait par StatutAnimalRefuge ou Lieu selon le besoin
-    	return getAnimauxDuRefuge();
+        return new ArrayList<>(this.animaux);
     }
 
+  //methode pour verifier le nombre de plavces dans le refuge
+    
+    public boolean aDesPlacesDisponibles() {
+        return this.animaux.size() < this.nbPlace;
+    }
+    
+    
 }
