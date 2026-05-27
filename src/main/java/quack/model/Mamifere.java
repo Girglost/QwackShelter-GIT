@@ -52,7 +52,7 @@ public abstract class Mamifere extends Animal{
 	public String toString() {
 		return "Mamifere [id=" + id + ", nomAnimal=" + nomAnimal + ", dateNaissance=" + dateNaissance + ", couleur="
 				+ couleur + ", regimeAlimentaire=" + regimeAlimentaire + ", traitement=" + traitement + ", famille="
-				+ famille + ", genre=" + genre + ", caractere=" + caracteres + ", qwackShelter=" + qwackShelter
+				+ famille + ", genre=" + genre + ", caractere=" + caracteres + ", qwackShelter=" + quackShelter
 				+ ", historiqueSante=" + historiqueSante + ", sterilisation=" + sterilisation + ", gestante=" + gestante
 				+ "]";
 	}
