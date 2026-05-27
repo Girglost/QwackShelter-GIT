@@ -9,7 +9,7 @@ public interface IDAOAnimal extends IDAO<Animal,Integer> {
 
 	public Animal update(Animal animal);
 
-	public Animal findByName(String name);
+	public List<Animal> findByName(String name);
 
 	public List<Animal> findByGenre(Genre genre);
 

@@ -3,7 +3,9 @@ package quack.dao;
 import java.util.List;
 
 import jakarta.persistence.EntityManager;
+import quack.context.Singleton;
 import quack.model.Animal;
+import quack.model.Genre;
 
 public class DAOAnimal implements IDAOAnimal {
 
@@ -21,8 +23,15 @@ public class DAOAnimal implements IDAOAnimal {
 
 	@Override
 	public List<Animal> findAll() {
-		return em.createQuery("SELECT a FROM Animal a", Animal.class)
-				.getResultList();
+	    EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+
+	    List<Animal> animaux = em.createQuery(
+	            "SELECT a FROM Animal a",Animal.class)
+	            .getResultList();
+
+	    em.close();
+
+	    return animaux;
 	}
 
 	@Override
@@ -50,15 +59,39 @@ public class DAOAnimal implements IDAOAnimal {
 	}
 
 	@Override
-	public void delete(Animal obj) {
-		// TODO Auto-generated method stub
-		
+	public void delete(Animal animal) {
+		em.getTransaction().begin();
+		em.remove(animal);
+		em.getTransaction().commit();
 	}
 
 
 	@Override
-	public Animal findByName(Animal String) {
-		// TODO Auto-generated method stub
+	public List<Animal> findByName(String name) {
+	    return em.createQuery(
+	            "SELECT a FROM Animal a WHERE a.nomAnimal = :name",
+	            Animal.class)
+	            .setParameter("name", name)
+	            .getResultList();
+	}
+
+	@Override
+	public List<Animal> findByGenre(Genre genre) {
+	    return em.createQuery(
+	            "SELECT a FROM Animal a WHERE a.genre = :genre",
+	            Animal.class)
+	            .setParameter("genre", genre)
+	            .getResultList();
+	}
+
+	@Override
+	public List<Animal> findByType(String type) {
+	return null; // DEMANDER A JORDAN
+	}
+
+	@Override
+	public List<Animal> findByDispo() {
+		// DEMANDER A JORDAN
 		return null;
 	}
 
