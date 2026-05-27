@@ -56,7 +56,7 @@ public class Oiseaux extends Animal {
 		return "Oiseaux [id=" + id + ", nomAnimal=" + nomAnimal + ", dateNaissance=" + dateNaissance + ", couleur="
 				+ couleur + ", regimeAlimentaire=" + regimeAlimentaire + ", traitement=" + traitement + ", famille="
 				+ famille + ", genre=" + genre + ", caracteres=" + caracteres + ", qwackShelter=" + qwackShelter
-				+ ", historiqueSante=" + historiqueSante + ", statutAnimal=" + statutAnimal + ", capaciteVol="
+				+ ", historiqueSante=" + historiqueSante + ", statutAnimal=" + statutsAnimal + ", capaciteVol="
 				+ capaciteVol + ", pondeuse=" + pondeuse + "]";
 	}
 	
