@@ -86,13 +86,19 @@ public class DAOAnimal implements IDAOAnimal {
 
 	@Override
 	public List<Animal> findByType(String type) {
-	return null; // DEMANDER A JORDAN
+	    return em.createQuery(
+	            "FROM :type",
+	            Animal.class)
+	            .setParameter("type", type)
+	            .getResultList();
 	}
 
 	@Override
 	public List<Animal> findByDispo() {
-		// DEMANDER A JORDAN
-		return null;
+	    return em.createQuery(
+	            "SELECT a FROM Animal a JOIN statutsAnimal s WHERE s.dateDepart is null",
+	            Animal.class)
+	            .getResultList();
 	}
 
 }

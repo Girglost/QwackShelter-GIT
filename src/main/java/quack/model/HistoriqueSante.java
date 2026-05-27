@@ -10,6 +10,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -33,7 +34,7 @@ public class HistoriqueSante {
 	@Column(nullable=false)
 	private Cause cause;
 	@ManyToOne
-	@Column(nullable=false)
+	@JoinColumn(nullable=false)
 	private Animal animal;
 	
 	
