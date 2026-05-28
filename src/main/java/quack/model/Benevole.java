@@ -15,15 +15,15 @@ public class Benevole extends Personnel {
 	public Benevole() {}
 
 	public Benevole(Integer id, String nom, String prenom, String login, String password, Lieu habitation,
-			boolean patron,LocalDate dateEngagement) {
-		super(id, nom, prenom, login, password, habitation, patron);
+			boolean admin,LocalDate dateEngagement) {
+		super(id, nom, prenom, login, password, habitation, admin);
 		this.dateEngagement=dateEngagement;
 	}	
 
 	@Override
 	public String toString() {
-		return "Benevole [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", login=" + login + ", password="
-				+ password + ", habitation=" + habitation + "]";
+		return "Benevole [admin=" + admin + ", id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", login=" + login
+				+ ", password=" + password + ", habitation=" + habitation + ", dateEngagement=" + dateEngagement + "]";
 	}
 
 	

@@ -13,7 +13,7 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="type_personne",columnDefinition = "ENUM('Employe','Benevole','Admin','Visiteur')")
+@DiscriminatorColumn(name="type_personne",columnDefinition = "ENUM('Employe','Benevole','Patron','Visiteur')")
 public abstract class Personne {
 	
 	@Id
@@ -46,11 +46,6 @@ public abstract class Personne {
 		this.password = password;
 		this.habitation = habitation;
 	}
-
-
-
-
-
 
 	//get set
 	public Integer getId() {
