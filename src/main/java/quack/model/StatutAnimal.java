@@ -14,7 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="statu_animal")
+@Table(name="statut_animal")
 public class StatutAnimal {
 
 	@Id
@@ -27,8 +27,9 @@ public class StatutAnimal {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable=false)
 	private Statut statut;
-	@Column(name="emplacement")
-	private Emplacement emplecement;
+	@ManyToOne
+	@JoinColumn(name="emplacement")
+	private Emplacement emplacement;
 	@ManyToOne
 	@JoinColumn(name="adoptant",nullable=true)
 	private Personne adoptant;
@@ -40,7 +41,7 @@ public class StatutAnimal {
 		this.dateArrivee = dateArrivee;
 		this.dateDepart = dateDepart;
 		this.statut = statut;
-		this.emplecement = emplecement;
+		this.emplacement = emplecement;
 		this.adoptant = adoptant;
 		this.animal = animal;
 	}
@@ -48,7 +49,7 @@ public class StatutAnimal {
 	public StatutAnimal(LocalDate dateArrivee, Statut statut, Emplacement emplecement,	Personne adoptant, Animal animal) {
 		this.dateArrivee = dateArrivee;
 		this.statut = statut;
-		this.emplecement = emplecement;
+		this.emplacement = emplecement;
 		this.adoptant = adoptant;
 		this.animal = animal;
 	}
@@ -56,7 +57,7 @@ public class StatutAnimal {
 	public StatutAnimal(Statut statut, Emplacement emplecement, Personne adoptant, Animal animal) {
 		this.dateArrivee = LocalDate.now();
 		this.statut = statut;
-		this.emplecement = emplecement;
+		this.emplacement = emplecement;
 		this.adoptant = adoptant;
 		this.animal = animal;
 	}
@@ -97,12 +98,12 @@ public class StatutAnimal {
 		this.statut = statut;
 	}
 
-	public Emplacement getEmplecement() {
-		return emplecement;
+	public Emplacement getEmplacement() {
+		return emplacement;
 	}
 
-	public void setEmplecement(Emplacement emplecement) {
-		this.emplecement = emplecement;
+	public void setEmplecement(Emplacement emplacement) {
+		this.emplacement = emplacement;
 	}
 
 	public Personne getAdoptant() {
@@ -124,7 +125,7 @@ public class StatutAnimal {
 	@Override
 	public String toString() {
 		return "StatuAnimalRefuge [id=" + id + ", dateArrivee=" + dateArrivee + ", dateDepart=" + dateDepart
-				+ ", statut=" + statut + ", emplecement=" + emplecement + ", adoptant=" + adoptant + ", animal="
+				+ ", statut=" + statut + ", emplacement=" + emplacement + ", adoptant=" + adoptant + ", animal="
 				+ animal + "]";
 	}
 
