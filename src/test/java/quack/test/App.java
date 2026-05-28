@@ -2,6 +2,9 @@ package quack.test;
 
 import java.util.Scanner;
 
+import jakarta.persistence.EntityManagerFactory;
+import quack.context.Singleton;
+
 public class App {
 	//------------PARTIE APP--------------//
 		public static int saisieInt(String message)
@@ -38,7 +41,9 @@ public class App {
 	public static void main(String[] args) {
 		System.out.println("Bienvenue Chez Quack Shelter ! ");
 		
-
+		EntityManagerFactory emf = Singleton.getInstance().getEmf();
+		
+		emf.close();
 	}
 
 }
