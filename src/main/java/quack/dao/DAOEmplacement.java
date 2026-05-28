@@ -3,6 +3,7 @@ package quack.dao;
 import java.util.List;
 
 import jakarta.persistence.EntityManager;
+import quack.context.Singleton;
 import quack.model.Emplacement;
 
 public class DAOEmplacement implements IDAOEmplacement{
@@ -53,7 +54,7 @@ public class DAOEmplacement implements IDAOEmplacement{
 	public void delete(Emplacement emplacement) {
 		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
-		Emplacement emplacement = em.find(Emplacement.class, obj.getId());
+		emplacement = em.merge(emplacement);
 		em.remove(emplacement);
 		em.getTransaction().commit();
 		em.close();
