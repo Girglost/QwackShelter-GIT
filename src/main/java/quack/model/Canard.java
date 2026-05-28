@@ -7,7 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
-public class Canard extends Oiseaux {
+public class Canard extends Oiseau {
     
 	@Column(length = 50, nullable = true)
     protected String race;

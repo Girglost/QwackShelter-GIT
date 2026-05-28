@@ -9,14 +9,14 @@ import jakarta.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("OISEAU")
-public abstract class Oiseaux extends Animal {
+public abstract class Oiseau extends Animal {
     
 	@Column(name="capacite_vol")
     protected boolean capaciteVol;  
     protected boolean pondeuse;
     
     
-	public Oiseaux(int id, String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
+	public Oiseau(int id, String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter qwackShelter,
 			boolean capaciteVol, boolean pondeuse) {
 		super(id, nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre, caracteres,
@@ -26,7 +26,7 @@ public abstract class Oiseaux extends Animal {
 	}
 
 
-	public Oiseaux() {
+	public Oiseau() {
 
 	}
 
