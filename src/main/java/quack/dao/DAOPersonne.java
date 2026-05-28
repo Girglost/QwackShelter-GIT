@@ -4,7 +4,7 @@ import java.util.List;
 
 import jakarta.persistence.EntityManager;
 import quack.context.Singleton;
-import quack.model.Admin;
+import quack.model.Patron;
 import quack.model.Benevole;
 import quack.model.Employe;
 import quack.model.Personne;
@@ -29,11 +29,11 @@ public class DAOPersonne implements IDAOPersonne {
 	}
 	
 	@Override
-	public List <Admin> findAllAdmin() {
+	public List <Patron> findAllPatron() {
 		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		List<Admin> admins = em.createQuery("from Admin").getResultList();
+		List<Patron> patrons = em.createQuery("from Patron").getResultList();
 		em.close();
-		return admins;
+		return patrons;
 	}
 	@Override
 	public List <Visiteur> findAllVisiteur() {
