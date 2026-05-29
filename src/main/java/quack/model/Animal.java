@@ -59,9 +59,8 @@ public abstract class Animal {
   	@OneToMany(mappedBy = "animal",cascade = CascadeType.ALL)
 	static List<StatutAnimal> statutsAnimal = new ArrayList<>();
 	
-	public Animal(int id, String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
+	public Animal( String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter quackShelter) {
-		this.id = id;
 		this.nomAnimal = nomAnimal;
 		this.dateNaissance = dateNaissance;
 		this.couleur = couleur;

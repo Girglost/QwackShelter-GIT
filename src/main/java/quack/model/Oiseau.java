@@ -19,7 +19,7 @@ public abstract class Oiseau extends Animal {
 	public Oiseau(int id, String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter qwackShelter,
 			boolean capaciteVol, boolean pondeuse) {
-		super(id, nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre, caracteres,
+		super(nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre, caracteres,
 				qwackShelter);
 		this.capaciteVol = capaciteVol;
 		this.pondeuse = pondeuse;
