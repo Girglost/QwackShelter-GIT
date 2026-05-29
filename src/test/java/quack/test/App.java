@@ -10,6 +10,7 @@ import quack.model.Benevole;
 import quack.model.Employe;
 import quack.model.Lieu;
 import quack.model.Patron;
+import quack.model.QuackShelter;
 import quack.model.Visiteur;
 
 public class App {
@@ -69,10 +70,14 @@ public class App {
 		}
 	
 		public static void inscription(int choixTypeCompte) {
+			
+			
 			Lieu lieu1  = new Lieu("Shelter", "14", "Rue Qwack", "Nantes", "44100");
 			Lieu lieu2  = new Lieu("Maison", "14", "Avenue Coin", "Paris", "75016");
 			Lieu lieu3  = new Lieu("Appartement", "12", "Boulevard  du General Coin", "Paris", "75014");
 			Lieu lieu4  = new Lieu("Appartement", "8", "Chemin du Coin", "Paris", "75008");
+			
+			QuackShelter quackshelter = new QuackShelter(10000, 5, lieu1);
 			
 			System.out.println("Creation du compte");
 			EntityManagerFactory emf = Singleton.getInstance().getEmf();
@@ -82,6 +87,7 @@ public class App {
 			em.persist(lieu2);
 			em.persist(lieu3);
 			em.persist(lieu4);
+			em.persist(quackshelter);
 			
 			switch(choixTypeCompte) {
 			case 1 :{
@@ -102,14 +108,14 @@ public class App {
 			}
 			case 3 :{
 				System.out.println("Employe");
-				Employe personne = new Employe("Clea","Clea","Clea","Clea", lieu3,true, 800.5,LocalDate.now());
+				Employe personne = new Employe("Clea","Clea","Clea","Clea", lieu3,true, 800.5,LocalDate.now(),quackshelter);
 				em.persist(personne);
 				System.out.println("Nouveau Employe inscrit !");
 				break;
 			}
 			case 4 :{
 				System.out.println("Benevole");
-				Benevole personne = new Benevole("Clea","Clea","Clea","Clea", lieu4,true,LocalDate.now());
+				Benevole personne = new Benevole("Clea","Clea","Clea","Clea", lieu4,true,LocalDate.now(),quackshelter);
 				em.persist(personne);
 				System.out.println("Nouveau Benevole inscrit !");
 				break;
@@ -119,14 +125,12 @@ public class App {
 			}
 			
 			em.getTransaction().commit();
-			emf.close();
+			em.close();
 		}
 	public static void main(String[] args) {
 		System.out.println("Bienvenue Chez Quack Shelter ! ");
 		menuPrincipal();
 		
-		
-
 	}
 
 }

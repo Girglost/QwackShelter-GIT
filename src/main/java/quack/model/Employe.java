@@ -21,8 +21,8 @@ public class Employe extends Personnel {
 	public Employe() {}
 
 	public Employe(String nom, String prenom, String login, String password, Lieu habitation,
-			boolean admin, double salaire,LocalDate dateEmbauche) {
-		super(nom, prenom, login, password, habitation, admin);
+			boolean admin, double salaire,LocalDate dateEmbauche,QuackShelter quackshelter) {
+		super(nom, prenom, login, password, habitation, admin,quackshelter);
 		this.salaire = salaire;
 
 		this.dateEmbauche = dateEmbauche;

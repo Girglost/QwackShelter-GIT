@@ -44,8 +44,7 @@ public class QuackShelter {
 	
 	// constructeur
 	
-    public QuackShelter(Integer id, double tresorerie, int nbPlace, Lieu lieu) {
-        this.id = id;
+    public QuackShelter( double tresorerie, int nbPlace, Lieu lieu) {
         this.tresorerie = tresorerie;
         this.nbPlace = nbPlace;
         this.lieu = lieu;
