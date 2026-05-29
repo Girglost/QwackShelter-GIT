@@ -17,7 +17,12 @@
 			<version>6.5.2.Final</version>
 		</dependency>
 
-	</dependencies>
+		<dependency>
+			<groupId>formation-ajc</groupId>
+			<artifactId>demoJPA</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+  </dependencies>
 
 	<properties>
 		<maven.compiler.source>21</maven.compiler.source>

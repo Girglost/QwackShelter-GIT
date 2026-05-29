@@ -4,14 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -42,7 +39,7 @@ public abstract class  Lieu {
 	 public Lieu(Integer id, String type, Adresse adresse, List<Personne> personne) {
 		this.id = id;
 		this.type = type;
-		this.adresse = adresse;
+		this.adresse = new Adresse ();
 		this.personne = personne;
 	}
 
