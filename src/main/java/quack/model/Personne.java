@@ -38,8 +38,8 @@ public abstract class Personne {
 	
 	//constructeur vide
 	public Personne() {}
-	public Personne(Integer id, String nom, String prenom, String login, String password, Lieu habitation) {
-		this.id = id;
+	public Personne( String nom, String prenom, String login, String password, Lieu habitation) {
+
 		this.nom = nom;
 		this.prenom = prenom;
 		this.login = login;
@@ -48,12 +48,7 @@ public abstract class Personne {
 	}
 
 	//get set
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+
 	public String getNom() {
 		return nom;
 	}

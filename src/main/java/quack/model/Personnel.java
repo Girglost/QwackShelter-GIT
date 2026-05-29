@@ -12,9 +12,9 @@ public abstract class Personnel extends Personne{
     protected boolean admin;
     
 	public Personnel() {}
-	public Personnel(Integer id, String nom, String prenom, String login, String password, Lieu habitation,
+	public Personnel(String nom, String prenom, String login, String password, Lieu habitation,
 			boolean admin) {
-		super(id, nom, prenom, login, password, habitation);
+		super(nom, prenom, login, password, habitation);
 		this.admin = admin;
 	}
 	

@@ -20,9 +20,9 @@ public class Employe extends Personnel {
 	
 	public Employe() {}
 
-	public Employe(Integer id, String nom, String prenom, String login, String password, Lieu habitation,
+	public Employe(String nom, String prenom, String login, String password, Lieu habitation,
 			boolean admin, double salaire,LocalDate dateEmbauche) {
-		super(id, nom, prenom, login, password, habitation, admin);
+		super(nom, prenom, login, password, habitation, admin);
 		this.salaire = salaire;
 
 		this.dateEmbauche = dateEmbauche;

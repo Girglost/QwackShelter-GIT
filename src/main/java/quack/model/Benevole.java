@@ -14,9 +14,9 @@ public class Benevole extends Personnel {
 	private LocalDate dateEngagement;
 	public Benevole() {}
 
-	public Benevole(Integer id, String nom, String prenom, String login, String password, Lieu habitation,
+	public Benevole(String nom, String prenom, String login, String password, Lieu habitation,
 			boolean admin,LocalDate dateEngagement) {
-		super(id, nom, prenom, login, password, habitation, admin);
+		super(nom, prenom, login, password, habitation, admin);
 		this.dateEngagement=dateEngagement;
 	}	
 
