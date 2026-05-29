@@ -9,8 +9,8 @@ public class Patron extends Personne {
 
 	public Patron() {
 	}
-	public Patron(Integer id, String nom, String prenom, String login, String password, Lieu habitation) {
-		super(id, nom, prenom,login,password, habitation);
+	public Patron(String nom, String prenom, String login, String password, Lieu habitation) {
+		super(nom, prenom,login,password, habitation);
 	}
 	
 	@Override

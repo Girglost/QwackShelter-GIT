@@ -36,10 +36,10 @@ public abstract class  Lieu {
 	
 	 //constructeur
 	 
-	 public Lieu(Integer id, String type, Adresse adresse, List<Personne> personne) {
+	 public Lieu(Integer id, String type, String numero, String voie, String ville, String cp, List<Personne> personne) {
 		this.id = id;
 		this.type = type;
-		this.adresse = new Adresse ();
+		this.adresse = new Adresse(numero, voie, ville, cp);
 		this.personne = personne;
 	}
 

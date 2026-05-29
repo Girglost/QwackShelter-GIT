@@ -26,8 +26,8 @@ public class Visiteur extends Personne {
 	public Visiteur() {
 	}
 
-	public Visiteur(Integer id, String nom, String prenom, String login, String password, Lieu habitation,LocalDate dateInscription) {
-		super(id, nom, prenom, login, password, habitation);
+	public Visiteur(String nom, String prenom, String login, String password, Lieu habitation,LocalDate dateInscription) {
+		super(nom, prenom, login, password, habitation);
 		this.dateInscription= dateInscription;
 	}
 	
