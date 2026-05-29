@@ -9,15 +9,9 @@ import quack.model.Genre;
 
 public class DAOAnimal implements IDAOAnimal {
 
-
-	private EntityManager em;
-
-	public void AnimalDAO(EntityManager em) {
-		this.em = em;
-	}
-
 	@Override
 	public Animal findById(Integer id) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		return em.find(Animal.class, id);
 	}
 
@@ -36,6 +30,7 @@ public class DAOAnimal implements IDAOAnimal {
 
 	@Override
 	public Animal save(Animal animal) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
 		em.persist(animal);
 		em.getTransaction().commit();
@@ -44,6 +39,7 @@ public class DAOAnimal implements IDAOAnimal {
 
 	@Override
 	public Animal update(Animal animal) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
 		Animal updated = em.merge(animal);
 		em.getTransaction().commit();
@@ -52,6 +48,7 @@ public class DAOAnimal implements IDAOAnimal {
 
 	@Override
 	public void deleteById(Integer id) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
 		Animal animal = em.find(Animal.class, id);
 		if (animal != null) em.remove(animal);
@@ -60,6 +57,7 @@ public class DAOAnimal implements IDAOAnimal {
 
 	@Override
 	public void delete(Animal animal) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
 		em.remove(animal);
 		em.getTransaction().commit();
@@ -68,6 +66,7 @@ public class DAOAnimal implements IDAOAnimal {
 
 	@Override
 	public List<Animal> findByName(String name) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 	    return em.createQuery(
 	            "SELECT a FROM Animal a WHERE a.nomAnimal = :name",
 	            Animal.class)
@@ -77,6 +76,7 @@ public class DAOAnimal implements IDAOAnimal {
 
 	@Override
 	public List<Animal> findByGenre(Genre genre) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 	    return em.createQuery(
 	            "SELECT a FROM Animal a WHERE a.genre = :genre",
 	            Animal.class)
@@ -86,6 +86,7 @@ public class DAOAnimal implements IDAOAnimal {
 
 	@Override
 	public List<Animal> findByType(String type) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 	    return em.createQuery(
 	            "FROM :type",
 	            Animal.class)
@@ -95,6 +96,7 @@ public class DAOAnimal implements IDAOAnimal {
 
 	@Override
 	public List<Animal> findByDispo() {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 	    return em.createQuery(
 	            "SELECT a FROM Animal a JOIN statutsAnimal s WHERE s.dateDepart is null",
 	            Animal.class)
