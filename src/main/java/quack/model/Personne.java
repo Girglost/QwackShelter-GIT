@@ -28,7 +28,20 @@ public abstract class Personne {
 	@Column(length = 25,nullable=false)
 	protected String password;
 
-    @ManyToOne
+    public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public QuackShelter getQuackShelter() {
+		return quackShelter;
+	}
+	public void setQuackShelter(QuackShelter quackShelter) {
+		this.quackShelter = quackShelter;
+	}
+
+	@ManyToOne
     @JoinColumn(name="habitation",nullable = false)
 	protected Lieu habitation;
 	

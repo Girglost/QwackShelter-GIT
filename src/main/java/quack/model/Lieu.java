@@ -36,17 +36,12 @@ public class  Lieu {
 	
 	 //constructeur
 	 
-	 public Lieu(Integer id, String type, String numero, String voie, String ville, String cp, List<Personne> personne) {
-		this.id = id;
+	 public Lieu(String type, String numero, String voie, String ville, String cp) {
 		this.type = type;
 		this.adresse = new Adresse(numero, voie, ville, cp);
-		this.personne = personne;
 	}
 
-
  //get set
-
-
 	 public Integer getId() {
 		 return id;
 	 }
@@ -85,7 +80,4 @@ public class  Lieu {
 		return "Lieu [id=" + id + ", type=" + type + ", adresse=" + adresse + ", personne=" + personne + "]";
 	 }
 
-	
-	 
-	 
 }

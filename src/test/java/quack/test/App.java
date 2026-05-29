@@ -69,15 +69,24 @@ public class App {
 		}
 	
 		public static void inscription(int choixTypeCompte) {
+			Lieu lieu1  = new Lieu("Shelter", "14", "Rue Qwack", "Nantes", "44100");
+			Lieu lieu2  = new Lieu("Maison", "14", "Avenue Coin", "Paris", "75016");
+			Lieu lieu3  = new Lieu("Appartement", "12", "Boulevard  du General Coin", "Paris", "75014");
+			Lieu lieu4  = new Lieu("Appartement", "8", "Chemin du Coin", "Paris", "75008");
+			
 			System.out.println("Creation du compte");
 			EntityManagerFactory emf = Singleton.getInstance().getEmf();
 			EntityManager em = emf.createEntityManager();
 			em.getTransaction().begin();
+			em.persist(lieu1);
+			em.persist(lieu2);
+			em.persist(lieu3);
+			em.persist(lieu4);
 			
 			switch(choixTypeCompte) {
 			case 1 :{
 				System.out.println("Visiteur");
-				Visiteur personne = new Visiteur("Doe", "John", "Doe", "John", null,LocalDate.now());
+				Visiteur personne = new Visiteur("Doe", "John", "Doe", "John", lieu2,LocalDate.now());
 				
 				em.persist(personne);
 				
@@ -86,21 +95,21 @@ public class App {
 			}
 			case 2 :{
 				System.out.println("Patron");
-				Patron personne = new Patron( "Doe", "Jane", "Doe", "Jane", null);
+				Patron personne = new Patron( "Doe", "Jane", "Doe", "Jane", lieu1);
 				em.persist(personne);
 				System.out.println("Nouveau Patron inscrit !");
 				break;
 			}
 			case 3 :{
 				System.out.println("Employe");
-				Employe personne = new Employe("Clea","Clea","Clea","Clea", null,true, 800.5,LocalDate.now());
+				Employe personne = new Employe("Clea","Clea","Clea","Clea", lieu3,true, 800.5,LocalDate.now());
 				em.persist(personne);
 				System.out.println("Nouveau Employe inscrit !");
 				break;
 			}
 			case 4 :{
 				System.out.println("Benevole");
-				Benevole personne = new Benevole("Clea","Clea","Clea","Clea", null,true,LocalDate.now());
+				Benevole personne = new Benevole("Clea","Clea","Clea","Clea", lieu4,true,LocalDate.now());
 				em.persist(personne);
 				System.out.println("Nouveau Benevole inscrit !");
 				break;
