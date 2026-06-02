@@ -14,7 +14,7 @@ public abstract class Mamifere extends Animal{
 	
 
 
-	public Mamifere(int id, String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
+	public Mamifere( String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter qwackShelter,
 			boolean sterilisation, boolean gestante) {
 		super( nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre, caracteres,

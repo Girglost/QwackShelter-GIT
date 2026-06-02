@@ -12,10 +12,10 @@ public class Poule extends Oiseau {
 	@Column(length = 50, nullable = true)
     protected String race;
     
-	public Poule(int id, String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
+	public Poule(String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter qwackShelter,
 			boolean capaciteVol, boolean pondeuse, String race, boolean couveuse) {
-		super(id, nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre, caracteres,
+		super(nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre, caracteres,
 				qwackShelter, capaciteVol, pondeuse);
 		this.race = race;
 	}

@@ -12,10 +12,10 @@ public class NAC extends Animal{
 	@Column(length = 50, nullable = true)
 	private String espece;
 
-	public NAC(int id, String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
+	public NAC(String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter qwackShelter,
 			String espece) {
-		super(id, nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre, caracteres,
+		super(nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre, caracteres,
 				qwackShelter);
 		this.espece = espece;
 	}

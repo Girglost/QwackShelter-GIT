@@ -10,10 +10,10 @@ public class Chien extends Mamifere{
 
 private String race;
 
-public Chien(int id, String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
+public Chien( String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 		String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter qwackShelter,
 		boolean sterilisation, boolean gestante, String race) {
-	super(id, nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre, caracteres,
+	super(nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre, caracteres,
 			qwackShelter, sterilisation, gestante);
 	this.race = race;
 }
