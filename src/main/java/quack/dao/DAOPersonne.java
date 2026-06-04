@@ -100,6 +100,25 @@ public class DAOPersonne implements IDAOPersonne {
 		em.getTransaction().commit();
 	}
 	
+	@Override
+	public Personne findByLoginAndPassword(String login, String password) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+		Personne personne =null;
+		try 
+		{
+			personne = em.createQuery("SELECT p from Personne p where p.login=:login and p.password=:password",Personne.class)
+					.setParameter("login", login)
+					.setParameter("password", password)
+					.getSingleResult();
+		}
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+		}
+		em.close();
+		return personne;
+	}
+	
 
 
 

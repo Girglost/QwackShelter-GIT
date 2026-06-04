@@ -1,5 +1,6 @@
 package quack.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
@@ -35,7 +36,7 @@ public abstract class Personne {
 		this.id = id;
 	}
 
-	@ManyToOne
+	@ManyToOne(/*cascade = CascadeType.PERSIST*/)
     @JoinColumn(name="habitation",nullable = false)
 	protected Lieu habitation;
 

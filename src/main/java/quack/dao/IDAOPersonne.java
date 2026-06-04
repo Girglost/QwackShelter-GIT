@@ -17,6 +17,8 @@ public interface IDAOPersonne extends IDAO<Personne,Integer>{
 	public List<Employe> findAllEmploye();
 	
 	public List<Benevole> findAllBenevole();
+	
+	public Personne findByLoginAndPassword(String login,String password);
 //	
 //	public Personne findbyIdwithVisite();
 //	public Personne findbyIdwithAdoption();
