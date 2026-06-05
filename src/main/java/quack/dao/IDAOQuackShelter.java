@@ -18,13 +18,11 @@ public interface IDAOQuackShelter extends JpaRepository<QuackShelter,Integer>{
 
 	//methode pour recuperer les animaux du refuge
 	
-	@Query("SELECT a FROM Animal a WHERE a.refuge.id = :idRefuge")
-	List<Animal> getAnimauxDuRefuge(@Param("idRefuge") Integer idRefuge);
+	public List<Animal> findByRefugeId(Integer idRefuge);
 	
 	//methode pour compter les animaux dans le refuge 
 	
-	@Query("SELECT COUNT(a) FROM Animal a WHERE a.refuge.id = :idRefuge")
-	long countAnimauxDansRefuge(@Param("idRefuge") Integer idRefuge);
+	public int countByRefugeNotNull();
 	
 	//methode pour verifier le nombre de plavces dans le refuge
 	//public boolean aDesPlacesDisponibles();
