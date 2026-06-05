@@ -57,7 +57,7 @@ public abstract class Animal {
   	@OneToMany(mappedBy = "animal",cascade = CascadeType.ALL)
 	static List<HistoriqueSante> historiqueSante = new ArrayList<>();
   	@OneToMany(mappedBy = "animal",cascade = CascadeType.ALL)
-	static List<StatutAnimal> statutsAnimal = new ArrayList<>();
+	static StatutAnimal statutsAnimal;
 	
 	public Animal( String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter quackShelter) {
@@ -119,7 +119,7 @@ public abstract class Animal {
 		return historiqueSante;
 	}
 
-	public List<StatutAnimal> getStatutAnimal() {
+	public StatutAnimal getStatutAnimal() {
 		return statutsAnimal;
 	}
 
@@ -167,12 +167,12 @@ public abstract class Animal {
 		this.historiqueSante = historiqueSante;
 	}
 
-	public void setStatutAnimal(List<StatutAnimal> statutsAnimal) {
+	public void setStatutAnimal(StatutAnimal statutsAnimal) {
 		this.statutsAnimal = statutsAnimal;
 	}
 	
 	//Méthodrs
-	
+	/*
 	public StatutAnimal showStatut() {
 		
 		for(StatutAnimal s: statutsAnimal) {
@@ -181,7 +181,7 @@ public abstract class Animal {
 			}
 		}		
 		return null;
-	}
+	}*/
 
 	@Override
 	public String toString() {

@@ -9,11 +9,13 @@ import quack.model.Genre;
 
 public interface IDAOAnimal extends JpaRepository<Animal,Integer> {
 
-	public List<Animal> findByName(String name);
+	
+	public List<Animal> findByNomAnimal(String name);
 
 	public List<Animal> findByGenre(Genre genre);
 
-	public List<Animal> findByType(String type);
-
-	public List<Animal>	findByDispo();
+	public List<Animal> findByFamille(String type);
+/*
+	@Query("SELECT a FROM Animal a WHERE a.statutAnimal.dateDepart is null")
+	public List<Animal>	findByDispo();*/
 }

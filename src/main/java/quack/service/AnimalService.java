@@ -47,7 +47,7 @@ public class AnimalService {
 	// --------------- PERSO ----------------
 	
     public List<Animal> getByName(String name) {
-        return daoAnimal.findByName(name);
+        return daoAnimal.findByNomAnimal(name);
     }
 
     public List<Animal> getByGenre(Genre genre) {
@@ -55,11 +55,11 @@ public class AnimalService {
     }
     
     public List<Animal> getByType(String type){
-    	return daoAnimal.findByType(type);
+    	return daoAnimal.findByFamille(type);
     }
-    
+    /*
     public List<Animal>	getDispo(){
     	return daoAnimal.findByDispo();
-    }
+    }*/
     
 }
