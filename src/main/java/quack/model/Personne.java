@@ -36,7 +36,7 @@ public abstract class Personne {
 		this.id = id;
 	}
 
-	@ManyToOne(/*cascade = CascadeType.PERSIST*/)
+	@ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="habitation",nullable = false)
 	protected Lieu habitation;
 

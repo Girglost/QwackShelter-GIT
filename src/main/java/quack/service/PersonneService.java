@@ -2,12 +2,15 @@ package quack.service;
 
 import java.util.List;
 
-import quack.context.Singleton;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import quack.dao.IDAOPersonne;
 import quack.model.Personne;
-
+@Service
 public class PersonneService {
-	static IDAOPersonne daoPersonne =  Singleton.getInstance().getDaoPersonne();
+	@Autowired
+	IDAOPersonne daoPersonne;
 	
 	public List<Personne> getAll()
 	{
@@ -16,7 +19,7 @@ public class PersonneService {
 	
 	public Personne getById(Integer id) 
 	{
-		return daoPersonne.findById(id);
+		return daoPersonne.findById(id).orElse(null);
 	}
 	
 	public Personne getByLoginAndPassword(String login,String password) 
@@ -33,7 +36,6 @@ public class PersonneService {
 	{
 		daoPersonne.save(personne);
 	}
-
 	
 	public void delete(Personne personne) 
 	{
