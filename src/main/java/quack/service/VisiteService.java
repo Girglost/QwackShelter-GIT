@@ -6,13 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import quack.dao.IDAOEmplacement;
+import quack.dao.IDAOVisite;
 import quack.model.Emplacement;
+import quack.model.Visite;
 
 @Service
 public class VisiteService {
 
 	@Autowired
 	IDAOEmplacement daoEmplacement;
+	
+	@Autowired
+	IDAOVisite daoVisite;
 	
 	// --------------- CRUD ----------------
 	
@@ -30,6 +35,14 @@ public class VisiteService {
 	}
 	public void delete(Integer id) {
 		daoEmplacement.deleteById(id);
+	}
+	
+	public List<Visite> getByIdPersonne(Integer idPersonne){
+		return daoVisite.findByIdPersonne(idPersonne);
+	}
+	
+	public List<Visite> getByIdShelter(Integer idShelter){
+		return daoVisite.findByIdShelter(idShelter);
 	}
 	
 	
