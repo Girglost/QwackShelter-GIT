@@ -13,8 +13,6 @@ public class Employe extends Personnel {
 	@Column(length=5)
 	private double salaire;
 	
-
-	
 	@Column(name="date_embauche")
 	private LocalDate dateEmbauche;
 	
