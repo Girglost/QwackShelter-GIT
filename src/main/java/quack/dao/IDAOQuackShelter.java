@@ -2,10 +2,11 @@ package quack.dao;
 
 import java.util.List;
 
-import quack.model.HistoriqueSante;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import quack.model.QuackShelter;
 
-public interface IDAOQuackShelter extends IDAO<QuackShelter,Integer>{
+public interface IDAOQuackShelter extends JpaRepository <QuackShelter,Integer>{
 
 	
 	public QuackShelter findById(Integer id);
