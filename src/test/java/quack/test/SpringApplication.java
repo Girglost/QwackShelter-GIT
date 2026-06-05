@@ -2,7 +2,7 @@ package quack.test;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import quest.config.AppConfig;
+import quack.config.AppConfig;
 
 public class SpringApplication {
 

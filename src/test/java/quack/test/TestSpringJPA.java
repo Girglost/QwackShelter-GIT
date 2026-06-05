@@ -2,39 +2,28 @@ package quack.test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import quest.dao.IDAOFiliere;
-import quest.dao.IDAOModule;
-import quest.model.Filiere;
-import quest.model.Matiere;
-import quest.service.MatiereService;
+import quack.service.AnimalService;
+import quack.service.EmplacementService;
+import quack.service.HistoriqueSanteService;
+import quack.service.PersonneService;
+import quack.service.StatutAnimalService;
 
 public class TestSpringJPA {
 
 	@Autowired
-	IDAOFiliere daoFiliere;
-	
+	HistoriqueSanteService santeSrv;
 	@Autowired
-	MatiereService matiereSrv;
-	
-	
+	EmplacementService emplacementSrv;
 	@Autowired
-	IDAOModule daoModule;
-	public void run() 
-	{
-		System.out.println("ALLLO");
-		for(Filiere f : daoFiliere.findAll()) 
-		{
-			System.out.println(f);
-		}
-		
-		
-		for(Matiere m  : matiereSrv.getAll()) 
-		{
-			System.out.println(m);
-		}
-		
-		
-		
-		System.out.println(daoModule.findByFiliereId(1));
-	}
+	StatutAnimalService statutSrv;
+	@Autowired
+	LieuService lieuSrv;
+	@Autowired
+	PersonneService personneSrv;
+	@Autowired
+	AnimalService animalSrv;
+	@Autowired
+	QuachShelterService quackSrv;
+	
+	
 }
