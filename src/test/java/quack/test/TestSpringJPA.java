@@ -7,6 +7,7 @@ import quack.service.EmplacementService;
 import quack.service.HistoriqueSanteService;
 import quack.service.LieuService;
 import quack.service.PersonneService;
+import quack.service.QuackShelterService;
 import quack.service.StatutAnimalService;
 
 public class TestSpringJPA {
@@ -24,7 +25,7 @@ public class TestSpringJPA {
 	@Autowired
 	AnimalService animalSrv;
 	@Autowired
-	QuachShelterService quackSrv;
+	QuackShelterService quackSrv;
 	
 	public void run()
 	{
