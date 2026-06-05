@@ -60,7 +60,7 @@ public class Visite {
 	}
 	@Override
 	public String toString() {
-		return "Visite [id=" + id + ", personne=" + personne + ", quackshelter=" + quackshelter + ", dateVisite="
+		return "Visite [id=" + id + ", personne=" + visiteur + ", quackshelter=" + quackshelter + ", dateVisite="
 				+ dateVisite + "]";
 	}
 	
