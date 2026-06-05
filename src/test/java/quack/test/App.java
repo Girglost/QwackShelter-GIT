@@ -166,7 +166,7 @@ public class App {
 
 			daoPersonne.save(visiteur);
 
-			System.out.println("Bonjour "+visiteur.getLogin()+", vous êtes maintenant Visiteur !");
+			System.out.println("Bonjour "+visiteur.getLogin()+", vous êtes maintenant Visiteur id ="+visiteur.getId());
 		}
 		public static void devenirBenevole() {
 			

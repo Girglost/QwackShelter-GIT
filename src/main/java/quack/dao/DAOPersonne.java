@@ -63,7 +63,7 @@ public class DAOPersonne implements IDAOPersonne {
 	public Personne save(Personne personne) {
 		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
-			em.persist(personne);
+		personne = em.merge(personne);
 		em.getTransaction().commit();
 		em.close();
 		return personne;
