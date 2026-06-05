@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import quack.service.AnimalService;
 import quack.service.EmplacementService;
 import quack.service.HistoriqueSanteService;
+import quack.service.LieuService;
 import quack.service.PersonneService;
 import quack.service.StatutAnimalService;
 
@@ -25,5 +26,9 @@ public class TestSpringJPA {
 	@Autowired
 	QuachShelterService quackSrv;
 	
+	public void run()
+	{
+		
+	}
 	
 }
