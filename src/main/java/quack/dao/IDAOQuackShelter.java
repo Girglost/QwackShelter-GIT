@@ -3,6 +3,8 @@ package quack.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import quack.model.Animal;
 import quack.model.Personnel;
@@ -15,9 +17,18 @@ public interface IDAOQuackShelter extends JpaRepository<QuackShelter,Integer>{
 	public void ajouterPersonnel(Personnel personnel);
 
 	//methode pour recuperer les animaux du refuge
-	public List<Animal> getAnimauxDuRefuge();
-
+	
+	@Query("SELECT a FROM Animal a WHERE a.refuge.id = :idRefuge")
+	List<Animal> getAnimauxDuRefuge(@Param("idRefuge") Integer idRefuge);
+	
+	//methode pour compter les animaux dans le refuge 
+	
+	@Query("SELECT COUNT(a) FROM Animal a WHERE a.refuge.id = :idRefuge")
+	long countAnimauxDansRefuge(@Param("idRefuge") Integer idRefuge);
+	
 	//methode pour verifier le nombre de plavces dans le refuge
-	public boolean aDesPlacesDisponibles();
+	//public boolean aDesPlacesDisponibles();
 
+
+	
 }
