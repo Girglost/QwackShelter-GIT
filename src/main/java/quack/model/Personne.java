@@ -1,5 +1,8 @@
 package quack.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
@@ -11,6 +14,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -29,22 +33,19 @@ public abstract class Personne {
 	@Column(length = 25,nullable=false)
 	protected String password;
 
-    public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	@ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="habitation",nullable = false)
 	protected Lieu habitation;
-
 	
+	@OneToMany(mappedBy="adoptant")
+	protected List<StatutAnimal> adoptions = new ArrayList(); 
+	
+	@OneToMany(mappedBy="visiteur")
+	protected List<Visite> visites = new ArrayList(); 
+
 	//constructeur vide
 	public Personne() {}
-	public Personne( String nom, String prenom, String login, String password, Lieu habitation) {
-
+	public Personne(String nom, String prenom, String login, String password, Lieu habitation) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.login = login;
@@ -53,6 +54,13 @@ public abstract class Personne {
 	}
 
 	//get set
+
+    public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getNom() {
 		return nom;
@@ -85,6 +93,12 @@ public abstract class Personne {
 		this.habitation = habitation;
 	}
 	
+	public List<StatutAnimal> getAdoptions() {
+		return adoptions;
+	}
+	public void setAdoptions(List<StatutAnimal> adoptions) {
+		this.adoptions = adoptions;
+	}
 	
 	//to String
 

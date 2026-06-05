@@ -38,6 +38,9 @@ public class QuackShelter {
 	@OneToMany(mappedBy = "quackShelter")
     private List<Animal> animaux = new ArrayList<>();
 	
+	@OneToMany(mappedBy="quackshelter")
+	protected List<Visite> visites = new ArrayList(); 
+	
 	// constructeur vide 
 	
 	public QuackShelter() {}

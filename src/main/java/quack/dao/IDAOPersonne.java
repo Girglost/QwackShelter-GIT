@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import quack.model.Benevole;
 import quack.model.Employe;
@@ -22,8 +23,8 @@ public interface IDAOPersonne extends JpaRepository<Personne,Integer>{
 	public List<Benevole> findAllBenevole();
 	
 	public Personne findByLoginAndPassword(String login,String password);
-//	
-//	public Personne findbyIdwithVisite();
-//	public Personne findbyIdwithAdoption();
+	
+	@Query("SELECT p FROM Personne p LEFT JOIN FETCH p.adoptions where p.id =:idPersonne")
+	public Personne findbyIdwithAdoptions(@Param("idPersonne")Integer idPersonne);
 	
 }
