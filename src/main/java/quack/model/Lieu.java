@@ -18,7 +18,7 @@ public class  Lieu {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected Integer id;
+	private Integer id;
 	
 	@Column(length = 40, nullable=false)
 	protected String type;
