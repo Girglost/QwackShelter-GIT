@@ -4,19 +4,20 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import quack.model.Animal;
+import quack.model.Personnel;
 import quack.model.QuackShelter;
 
-public interface IDAOQuackShelter extends JpaRepository <QuackShelter,Integer>{
+public interface IDAOQuackShelter extends JpaRepository<QuackShelter,Integer>{
 
-	
-	public QuackShelter findById(Integer id);
 
-	public List<QuackShelter> findAll();
+	//methode pour ajouter un personnel
+	public void ajouterPersonnel(Personnel personnel);
 
-	public QuackShelter save(QuackShelter quack); 
+	//methode pour recuperer les animaux du refuge
+	public List<Animal> getAnimauxDuRefuge();
 
-	public QuackShelter update(QuackShelter quack);
+	//methode pour verifier le nombre de plavces dans le refuge
+	public boolean aDesPlacesDisponibles();
 
-	public void delete(Integer id);
-	
 }

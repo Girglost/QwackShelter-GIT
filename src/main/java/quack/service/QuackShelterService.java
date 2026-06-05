@@ -18,7 +18,7 @@ public class QuackShelterService {
 	public List<QuackShelter> getAll(){
 		return daoQuackShelter.findAll();
 	}
-	public Lieu getById(Integer id) {
+	public QuackShelter getById(Integer id) {
 		return  daoQuackShelter.findById(id).orElse(null);
 	}
 	public void insert(QuackShelter quack) {
