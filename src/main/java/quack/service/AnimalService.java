@@ -2,13 +2,20 @@ package quack.service;
 
 import java.util.List;
 
-import quack.dao.DAOAnimal;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import quack.dao.IDAOAnimal;
 import quack.model.Animal;
 import quack.model.Genre;
 
+@Service
 public class AnimalService {
 
-	static DAOAnimal daoAnimal = new DAOAnimal();
+	@Autowired
+	IDAOAnimal daoAnimal;
+	
+	// --------------- CRUD ----------------
 	
 	public List<Animal> getAll()
 	{
@@ -17,24 +24,27 @@ public class AnimalService {
 	
 	public Animal getById(Integer id) 
 	{
-		return daoAnimal.findById(id);
+		return daoAnimal.findById(id).orElse(null);
 	}
 	
-	public void insert(Animal matiere) 
+	public void insert(Animal animal) 
 	{
-		daoAnimal.save(matiere);
+		daoAnimal.save(animal);
 	}
 	
-	public void update(Animal matiere) 
+	public void update(Animal animal) 
 	{
-		daoAnimal.update(matiere);
+		daoAnimal.save(animal);
 	}
 
-	public void deleteById(Integer id) 
+	public void delete(Integer id) 
 	{
 		daoAnimal.deleteById(id);
 	}
 	
+	
+	
+	// --------------- PERSO ----------------
 	
     public List<Animal> getByName(String name) {
         return daoAnimal.findByName(name);
@@ -43,4 +53,13 @@ public class AnimalService {
     public List<Animal> getByGenre(Genre genre) {
         return daoAnimal.findByGenre(genre);
     }
+    
+    public List<Animal> getByType(String type){
+    	return daoAnimal.findByType(type);
+    }
+    
+    public List<Animal>	getDispo(){
+    	return daoAnimal.findByDispo();
+    }
+    
 }
