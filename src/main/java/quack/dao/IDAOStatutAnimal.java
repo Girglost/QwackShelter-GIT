@@ -1,11 +1,10 @@
 package quack.dao;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import quack.model.HistoriqueSante;
 import quack.model.StatutAnimal;
 
-public interface IDAOStatutAnimal extends IDAO<StatutAnimal,Integer>{
+public interface IDAOStatutAnimal extends JpaRepository<StatutAnimal,Integer>{
 
 
 	
