@@ -45,5 +45,4 @@ public class VisiteService {
 		return daoVisite.findByIdShelter(idShelter);
 	}
 	
-	
 }

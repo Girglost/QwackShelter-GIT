@@ -18,7 +18,7 @@ public class Visite {
 	
 	@ManyToOne
 	@JoinColumn(name="visiteur",nullable = false)
-	private Personne personne;
+	private Personne visiteur;
 	
 	@ManyToOne
 	@JoinColumn(name="quackshelter",nullable = false)
@@ -30,7 +30,7 @@ public class Visite {
 	public Visite() {
 	}
 	public Visite(Personne personne, QuackShelter quackshelter, LocalDateTime dateVisite) {
-		this.personne = personne;
+		this.visiteur = personne;
 		this.quackshelter = quackshelter;
 		this.dateVisite = dateVisite;
 	}
@@ -40,11 +40,11 @@ public class Visite {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Personne getPersonne() {
-		return personne;
+	public Personne getVisiteur() {
+		return visiteur;
 	}
-	public void setPersonne(Personne personne) {
-		this.personne = personne;
+	public void setVisiteur(Personne visiteur) {
+		this.visiteur = visiteur;
 	}
 	public QuackShelter getQuackshelter() {
 		return quackshelter;
