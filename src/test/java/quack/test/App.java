@@ -149,7 +149,7 @@ public class App {
 				break;
 			}
 
-			/*System.out.println("Entrer votre Adresse :");
+			System.out.println("Entrer votre Adresse :");
 			String numero = saisieString("Numero : ");
 			String voie = saisieString("Voie : ");
 			String ville = saisieString("Ville : ");
@@ -159,10 +159,10 @@ public class App {
 
 			Lieu habitation = new Lieu(typeLieu, numero, voie, ville, cp);
 			daoLieu.save(habitation);
-			System.out.println("Lieu ID "+ habitation);*/
+			System.out.println("Lieu ID "+ habitation);
 			LocalDate dateInscription = LocalDate.now();
 
-			Visiteur visiteur = new Visiteur(nom,prenom,login,password,lieu3,dateInscription);
+			Visiteur visiteur = new Visiteur(nom,prenom,login,password,habitation,dateInscription);
 
 			daoPersonne.save(visiteur);
 
