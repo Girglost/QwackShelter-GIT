@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 public class Emplacement {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	//Je veux mettre une condition min=1
@@ -26,8 +27,8 @@ public class Emplacement {
 	@Column(nullable=false, name="type_box")
 	private typeBox box;
 	
-	public Emplacement(Integer id, int nbPlace, boolean complet, typeBox box) {
-		this.id = id;
+	public Emplacement(int nbPlace, boolean complet, typeBox box) {
+
 		this.nbPlace = nbPlace;
 		this.complet = complet;
 		this.box = box;

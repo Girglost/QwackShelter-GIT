@@ -3,11 +3,11 @@ package quack.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import quack.dao.IDAOQuackShelter;
-import quack.model.Lieu;
 import quack.model.QuackShelter;
-
+@Service
 public class QuackShelterService {
 
 	@Autowired

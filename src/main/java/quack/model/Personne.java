@@ -33,7 +33,7 @@ public abstract class Personne {
 	@Column(length = 25,nullable=false)
 	protected String password;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne
     @JoinColumn(name="habitation",nullable = false)
 	protected Lieu habitation;
 	
