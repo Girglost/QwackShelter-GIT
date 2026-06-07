@@ -55,6 +55,7 @@ public class TestSpringJPA {
 		Lieu lieu2  = new Lieu("Maison", "14", "Avenue Coin", "Paris", "75016");
 		Lieu lieu3  = new Lieu("Appartement", "12", "Boulevard  du General Coin", "Paris", "75014");
 		Lieu lieu4  = new Lieu("Appartement", "8", "Chemin du Coin", "Paris", "75008");
+		Lieu testLieu = new Lieu("TESTLIEU", "8TESTLIEU", "TESTLIEU", "TESTLIEU", "TESTLIEU");
 		
 		lieuSrv.insert(lieu1);
 		lieuSrv.insert(lieu2);

@@ -11,9 +11,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "Lieu")
+@Table(name = "Lieu",uniqueConstraints = @UniqueConstraint(columnNames = {"numero", "voie", "ville", "cp"}))
+
 public class  Lieu {
 	
 	@Id
@@ -77,7 +79,7 @@ public class  Lieu {
 	 //to String
 	 @Override
 	 public String toString() {
-		return "Lieu [id=" + id + ", type=" + type + ", adresse=" + adresse + ", personne=" + personne + "]";
+		return "Lieu [id=" + id + ", type=" + type + ", adresse=" + adresse+"]";
 	 }
 
 }
