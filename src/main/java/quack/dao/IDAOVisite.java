@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import quack.model.Emplacement;
 import quack.model.Visite;
 
-public interface IDAOVisite extends JpaRepository<Emplacement,Integer> {
+public interface IDAOVisite extends JpaRepository<Visite,Integer> {
 	
 	@Query("SELECT v from Visite v where v.visiteur=:idPersonne")
 	public List<Visite> findByIdPersonne(@Param("idPersonne")Integer idPersonne);

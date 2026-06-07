@@ -5,36 +5,34 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import quack.dao.IDAOEmplacement;
 import quack.dao.IDAOVisite;
-import quack.model.Emplacement;
+import quack.dao.IDAOVisite;
+import quack.model.Visite;
 import quack.model.Visite;
 
 @Service
 public class VisiteService {
 
 	@Autowired
-	IDAOEmplacement daoEmplacement;
-	
-	@Autowired
 	IDAOVisite daoVisite;
+	
 	
 	// --------------- CRUD ----------------
 	
-	public List<Emplacement> getAll(){
-		return daoEmplacement.findAll();
+	public List<Visite> getAll(){
+		return daoVisite.findAll();
 	}
-	public Emplacement getById(Integer id) {
-		return  daoEmplacement.findById(id).orElse(null);
+	public Visite getById(Integer id) {
+		return  daoVisite.findById(id).orElse(null);
 	}
-	public void insert(Emplacement emplacement) {
-		daoEmplacement.save(emplacement);
+	public void insert(Visite visite) {
+		daoVisite.save(visite);
 	}
-	public void update(Emplacement emp) {
-		daoEmplacement.save(emp);
+	public void update(Visite emp) {
+		daoVisite.save(emp);
 	}
 	public void delete(Integer id) {
-		daoEmplacement.deleteById(id);
+		daoVisite.deleteById(id);
 	}
 	
 	public List<Visite> getByIdPersonne(Integer idPersonne){

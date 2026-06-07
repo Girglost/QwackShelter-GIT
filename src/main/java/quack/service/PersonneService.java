@@ -8,8 +8,13 @@ import org.springframework.stereotype.Service;
 import quack.dao.IDAOLieu;
 import quack.dao.IDAOPersonne;
 import quack.model.Adresse;
+import quack.model.Benevole;
+import quack.model.Employe;
 import quack.model.Lieu;
+import quack.model.Patron;
 import quack.model.Personne;
+import quack.model.Personnel;
+import quack.model.Visiteur;
 @Service
 public class PersonneService {
 	@Autowired
@@ -21,6 +26,32 @@ public class PersonneService {
 	{
 		return daoPersonne.findAll();
 	}
+	
+	public List<Benevole> getAllBenevole()
+	{
+		return daoPersonne.findAllBenevole();
+	}
+	
+	public List<Employe> getAllEmploye()
+	{
+		return daoPersonne.findAllEmploye();
+	}
+	
+	public List<Visiteur> getAllVisiteur()
+	{
+		return daoPersonne.findAllVisiteur();
+	}
+	
+	public List<Patron> getAllPatron()
+	{
+		return daoPersonne.findAllPatron();
+	}
+	
+	public List<Personnel> getAllPersonnel()
+	{
+		return daoPersonne.findAllPersonnel();
+	}
+	
 	
 	public Personne getById(Integer id) 
 	{
@@ -36,12 +67,12 @@ public class PersonneService {
 	{
 		//Permet d'insert un Lieu en cascade si il n'est pas  en bdd au moment de la creation de la personne
 		Lieu lieuPersonne = personne.getHabitation();
-		System.out.println("Adresse de la personne "+lieuPersonne);
+		//System.out.println("Adresse de la personne "+lieuPersonne);
 		String typeLieu = personne.getHabitation().getType();
 		Adresse adresse = personne.getHabitation().getAdresse();
 		
 		Lieu lieu = daoLieu.findByAdresse(adresse);
-		System.out.println("Lieu trouvé "+lieu);
+		//System.out.println("Lieu trouvé "+lieu);
 		if(lieu ==null) {
 			
 			lieu = new Lieu(typeLieu,adresse.getNumero(),adresse.getVoie(),adresse.getVille(),adresse.getCp());
@@ -55,7 +86,23 @@ public class PersonneService {
 	
 	public void update(Personne personne) 
 	{
-		daoPersonne.save(personne);
+		//Permet d'insert un Lieu en cascade si il n'est pas  en bdd au moment de la creation de la personne
+				Lieu lieuPersonne = personne.getHabitation();
+				//System.out.println("Adresse de la personne "+lieuPersonne);
+				String typeLieu = personne.getHabitation().getType();
+				Adresse adresse = personne.getHabitation().getAdresse();
+				
+				Lieu lieu = daoLieu.findByAdresse(adresse);
+				//System.out.println("Lieu trouvé "+lieu);
+				if(lieu ==null) {
+					
+					lieu = new Lieu(typeLieu,adresse.getNumero(),adresse.getVoie(),adresse.getVille(),adresse.getCp());
+					daoLieu.save(lieu);
+					//System.out.println(lieu);
+					personne.setHabitation(lieu);
+				}
+				//System.out.println(personne);
+				personne = daoPersonne.save(personne);
 	}
 	
 	public void delete(Personne personne) 

@@ -4,9 +4,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import quack.model.Animal;
 import quack.model.Benevole;
 import quack.model.Canard;
 import quack.model.Caractere;
@@ -18,8 +20,11 @@ import quack.model.Famille;
 import quack.model.Genre;
 import quack.model.Lieu;
 import quack.model.Patron;
+import quack.model.Personne;
+import quack.model.Personnel;
 import quack.model.Poule;
 import quack.model.QuackShelter;
+import quack.model.Visite;
 import quack.model.Visiteur;
 import quack.model.typeBox;
 import quack.service.AnimalService;
@@ -29,6 +34,7 @@ import quack.service.LieuService;
 import quack.service.PersonneService;
 import quack.service.QuackShelterService;
 import quack.service.StatutAnimalService;
+import quack.service.VisiteService;
 
 public class TestSpringJPA {
 
@@ -46,7 +52,245 @@ public class TestSpringJPA {
 	AnimalService animalSrv;
 	@Autowired
 	QuackShelterService quackSrv;
+	@Autowired
+	VisiteService visiteSrv;
 	
+	static Personne connected = null;
+	
+	public static int saisieInt(String message)
+	{
+		Scanner monScanner = new Scanner(System.in);
+		System.out.println(message);
+		return monScanner.nextInt();
+	}
+
+	public static double saisieDouble(String message)
+	{
+		Scanner monScanner = new Scanner(System.in);
+		System.out.println(message);
+		return monScanner.nextDouble();
+	}
+
+	public static String saisieString(String message)
+	{
+		Scanner monScanner = new Scanner(System.in);
+		System.out.println(message);
+		return monScanner.nextLine();
+	}
+
+	public static boolean saisieBoolean(String message)
+	{
+		Scanner monScanner = new Scanner(System.in);
+		System.out.println(message);
+		return monScanner.nextBoolean();
+	}
+	
+	public void menuPrincipal()
+	{
+		System.out.println("----BIENVENUE AU QUACK SHELTER-------");
+		System.out.println("1 - Se connecter");
+		System.out.println("2 - Devenir Visiteur");
+		System.out.println("3 - Devenir Bénévole");
+		System.out.println("4 - Stop");
+
+		int choix = saisieInt("Choisir un menu");
+		switch(choix)
+		{
+		case 1 : seConnecter();break;
+		case 2 : devenirVisiteur();break;
+		case 3 : devenirBenevole();break;
+		case 4 : System.exit(0);break;
+		}
+
+		menuPrincipal();
+	}
+	public void devenirVisiteur() {
+
+		System.out.println("Creation d'un Compte Visiteur");
+		String nom = saisieString("Entrer votre nom");
+		String prenom = saisieString("Entrer votre prenom");
+		String login = saisieString("Entrer votre login");
+		String password = saisieString("Entrer votre mot de passe");
+
+		int choixLieu = saisieInt("Vous avez dans : 1 - Une maison, 2 - Un appartement ?");
+		String typeLieu = null;
+		switch (choixLieu) {
+		case 1:
+			typeLieu = "Maison";
+			break;
+		case 2: 
+			typeLieu = "Appartement";
+			break;
+
+		default:
+			typeLieu = "Inconnu";
+			break;
+		}
+
+		System.out.println("Entrer votre Adresse :");
+		String numero = saisieString("Numero : ");
+		String voie = saisieString("Voie : ");
+		String ville = saisieString("Ville : ");
+		String cp = saisieString("CP : ");
+
+
+
+		Lieu habitation = new Lieu(typeLieu, numero, voie, ville, cp);
+		LocalDate dateInscription = LocalDate.now();
+
+		Visiteur visiteur = new Visiteur(nom,prenom,login,password,habitation,dateInscription);
+
+		personneSrv.insert(visiteur);
+
+		System.out.println("Bonjour "+visiteur.getLogin()+", vous êtes maintenant Visiteur id ="+visiteur.getId());
+	}
+	
+	public void devenirBenevole() {
+		
+		System.out.println("Creation d'un Compte Bénévole");
+		String nom = saisieString("Entrer votre nom");
+		String prenom = saisieString("Entrer votre prenom");
+		String login = saisieString("Entrer votre login");
+		String password = saisieString("Entrer votre mot de passe");
+		
+		int choixLieu = saisieInt("Vous avez dans : 1 - Une maison, 2 - Un appartement ?");
+		String typeLieu = null;
+		switch (choixLieu) {
+		case 1:
+			typeLieu = "Maison";
+			break;
+		case 2: 
+			typeLieu = "Appartement";
+			break;
+
+		default:
+			typeLieu = "Inconnu";
+			break;
+		}
+		
+		System.out.println("Entrer votre Adresse :");
+		String numero = saisieString("Numero : ");
+		String voie = saisieString("Voie : ");
+		String ville = saisieString("Ville : ");
+		String cp = saisieString("CP : ");
+		Lieu habitation = new Lieu(typeLieu, numero, voie, ville, cp);
+		LocalDate dateEngagement = LocalDate.now();
+		
+		QuackShelter quackshelter = quackSrv.getAll().get(0);
+		
+		Benevole benevole = new Benevole(nom, prenom,login,password, habitation,
+				false,dateEngagement,quackshelter);
+		//System.out.println("benevole ID avant insert "+ benevole);
+		personneSrv.insert(benevole);
+		//System.out.println("benevole ID apres insert "+ benevole);
+		System.out.println("Bonjour "+benevole.getLogin()+", vous êtes maintenant bénévole !");
+	}
+	public void seConnecter() {
+		String login = saisieString("Entrer votre Login");
+		String password = saisieString("Entrer votre Mot de Passe");
+		
+		connected = personneSrv.getByLoginAndPassword(login, password);
+		System.out.println("Bonjour "+connected.getLogin()+" !");
+		
+		if(connected instanceof Patron) {
+			
+			menuPatron();
+		}
+		
+		if(connected instanceof Visiteur) {
+			System.out.println("Menu Visiteur !");
+			//menuVisiteur();
+		}
+		if (connected instanceof Employe)
+		{
+			System.out.println("Menu Employe !");
+			if(((Employe) connected).isAdmin()) {
+				System.out.println("MENU EMPLOYE ADMIN");
+				//menuAdmin();
+			}else {
+				//menuEmploye();
+			}
+		}
+		if (connected instanceof Benevole)
+		{
+			System.out.println("Menu Benevole !");
+			if(((Benevole) connected).isAdmin()) {
+				System.out.println("MENU BENEVOLE ADMIN");
+				//menuAdmin();
+			}else {
+				//menuBenevole();
+			}
+		}
+	}
+	
+	
+	
+	private void menuPatron() {
+		System.out.println("Espace Patron");
+		
+		System.out.println("1 - Gerer les QuackShelters");
+		System.out.println("2 - Se déconnecter");
+
+		int choix = saisieInt("Choisir un menu");
+		switch(choix)
+		{
+			case 1 : gestionQuackShelters();break;
+			case 2 :
+				connected = null;
+				menuPrincipal();
+				return;
+		}
+		menuPatron();
+	}
+
+	private void gestionQuackShelters() {
+		System.out.println("Liste des Quack Shelter");
+		List<QuackShelter> quackshelters = quackSrv.getAll();
+		System.out.println("Choisir un QuackShelter");
+		for(QuackShelter quackShelter : quackshelters) {
+			System.out.println("ID - "+quackShelter.getId());
+		}
+		
+		int idShelter = saisieInt("");
+		QuackShelter quackShelter = quackSrv.getById(idShelter);
+		
+		System.out.println(" 1 - Liste du Personnel");
+		System.out.println(" 2 - Liste des animaux");
+		System.out.println(" 3 - Liste des visites");
+		System.out.println(" 4 - Retour");
+		int choix = saisieInt("Que voulez-vous y faire ?");
+		
+		
+		switch (choix) {
+		case 1:
+			List<Personnel> personnels = personneSrv.getAllPersonnel();
+			for(Personnel p : personnels) {
+				System.out.println(p.getId()+" - "+p.getNom()+" - "+p.getPrenom()+" - "+p.getClass().getSimpleName());
+			}
+			break;
+		case 2:
+			List<Animal> animaux = animalSrv.getAll();
+			for(Animal a : animaux) {
+				System.out.println(a.getId()+" - "+a.getNomAnimal()+" - "+a.getClass().getSimpleName()+" - "+a.getStatutAnimal()+" - "+a.getHistoriqueSante());
+			}
+			break;
+		case 3:
+			List<Visite> visites = visiteSrv.getAll();
+			if(visites.isEmpty()) {
+				System.out.println("Aucune Visite recu");
+			}else {
+				for(Visite v : visites) {
+					System.out.println(v.getQuackshelter()+" - "+v.getId()+" - "+v.getDateVisite()+" - "+v.getVisiteur());
+				}
+			}
+			
+		case 4: menuPatron();break;
+		default:
+			break;
+		}
+		gestionQuackShelters();
+	}
+
 	public void run()
 	{
 		 //  TEST DU MAPPING JPA
@@ -118,6 +362,8 @@ public class TestSpringJPA {
 		emplacementSrv.insert(emplacement2);
 		emplacementSrv.insert(emplacement3);
 		emplacementSrv.insert(emplacement4);
+		
+		menuPrincipal();
 		
 		
 		

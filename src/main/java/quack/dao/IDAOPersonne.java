@@ -10,6 +10,7 @@ import quack.model.Benevole;
 import quack.model.Employe;
 import quack.model.Patron;
 import quack.model.Personne;
+import quack.model.Personnel;
 import quack.model.Visiteur;
 
 public interface IDAOPersonne extends JpaRepository<Personne,Integer>{
@@ -21,10 +22,12 @@ public interface IDAOPersonne extends JpaRepository<Personne,Integer>{
 	public List<Employe> findAllEmploye();
 	@Query("FROM Benevole")
 	public List<Benevole> findAllBenevole();
-	
+	@Query("FROM Personnel")
+	public List<Personnel> findAllPersonnel();
 	public Personne findByLoginAndPassword(String login,String password);
 	
 	@Query("SELECT p FROM Personne p LEFT JOIN FETCH p.adoptions where p.id =:idPersonne")
 	public Personne findbyIdwithAdoptions(@Param("idPersonne")Integer idPersonne);
+	
 	
 }
