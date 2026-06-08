@@ -28,6 +28,8 @@ public interface IDAOPersonne extends JpaRepository<Personne,Integer>{
 	
 	@Query("SELECT p FROM Personne p LEFT JOIN FETCH p.adoptions where p.id =:idPersonne")
 	public Personne findbyIdwithAdoptions(@Param("idPersonne")Integer idPersonne);
+	@Query("SELECT p FROM Personne p LEFT JOIN FETCH p.visites where p.id =:idPersonne")
+	public Personne findbyIdwithVisites(@Param("idPersonne")Integer idPersonne);
 	
 	
 }

@@ -1,6 +1,11 @@
 package quack.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,12 +13,17 @@ import org.springframework.stereotype.Service;
 import quack.dao.IDAOLieu;
 import quack.dao.IDAOPersonne;
 import quack.model.Adresse;
+import quack.model.Animal;
 import quack.model.Benevole;
 import quack.model.Employe;
 import quack.model.Lieu;
 import quack.model.Patron;
 import quack.model.Personne;
 import quack.model.Personnel;
+import quack.model.QuackShelter;
+import quack.model.Statut;
+import quack.model.StatutAnimal;
+import quack.model.Visite;
 import quack.model.Visiteur;
 @Service
 public class PersonneService {
@@ -21,6 +31,15 @@ public class PersonneService {
 	IDAOPersonne daoPersonne;
 	@Autowired
 	IDAOLieu daoLieu;
+	@Autowired
+	LieuService lieuSrv;
+	@Autowired
+	QuackShelterService quackSrv;
+	@Autowired
+	VisiteService visiteSrv;
+	@Autowired
+	AnimalService animalSrv;
+	
 	
 	public List<Personne> getAll()
 	{
@@ -51,7 +70,9 @@ public class PersonneService {
 	{
 		return daoPersonne.findAllPersonnel();
 	}
-	
+	public Personne getByIdWithVisites(Integer idPersonne) {
+		return daoPersonne.findbyIdwithVisites(idPersonne);
+	}
 	
 	public Personne getById(Integer id) 
 	{
@@ -113,5 +134,58 @@ public class PersonneService {
 	public void deleteById(Integer id) 
 	{
 		daoPersonne.deleteById(id);
+	}
+	
+	
+	// METHODES INTERACTIONS AVEC SHELTER ( VISITES ADOPTIONS DONS ETC ) 
+	public void demanderVisite(Personne personne,int idQuackShelter, String date) {
+		QuackShelter quackShelter = quackSrv.getById(idQuackShelter);
+		
+		DateTimeFormatter formatter =
+		        DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+		LocalDateTime dateVisite = LocalDateTime.parse(date,formatter);
+		
+		Visite visite = new Visite(personne, quackShelter, dateVisite);
+		visiteSrv.insert(visite);
+		
+		personne = daoPersonne.findbyIdwithVisites(personne.getId());
+		
+		 personne.getVisites().add(visite);
+		 
+		 daoPersonne.save(personne);
+		
+		System.out.println("Votre visite est reservé le " + visite.getDateVisite());
+	}
+	
+	public void faireDon(int idQuackShelter,double don) {
+		QuackShelter quackShelter = quackSrv.getById(idQuackShelter);
+		quackShelter.setTresorerie(quackShelter.getTresorerie()+ don);
+		quackSrv.update(quackShelter);
+		System.out.println("La trésorerie du quackShelter s'élève maintenant a "+quackShelter.getTresorerie()+" €");
+		
+	}
+
+	public void demanderAdoption(int idQuackShelter,Personne personne, int idAnimal){
+		
+		QuackShelter quackShelter = quackSrv.getById(idQuackShelter);
+		
+		Animal animalAdopted = animalSrv.getById(idAnimal);
+		
+		animalAdopted.getStatutAnimal().setAdoptant(personne);
+		animalAdopted.getStatutAnimal().setAnimal(animalAdopted);
+		animalAdopted.getStatutAnimal().setStatut(Statut.Adopte);
+		animalAdopted.getStatutAnimal().setDateDepart(LocalDate.now());
+		
+		System.out.println("Adoption réussi ! ");
+		System.out.println(animalAdopted.getStatutAnimal());
+		
+		animalSrv.update(animalAdopted);
+		
+		personne = daoPersonne.findbyIdwithAdoptions(personne.getId());
+		
+		personne.getAdoptions().add(animalAdopted.getStatutAnimal());
+		daoPersonne.save(personne);
+		
 	}
 }

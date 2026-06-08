@@ -99,7 +99,13 @@ public abstract class Personne {
 	public void setAdoptions(List<StatutAnimal> adoptions) {
 		this.adoptions = adoptions;
 	}
-	
+
+	public List<Visite> getVisites() {
+		return visites;
+	}
+	public void setVisites(List<Visite> visites) {
+		this.visites = visites;
+	}
 	//to String
 
 	@Override
@@ -108,24 +114,4 @@ public abstract class Personne {
 				+ password + ", habitation=" + habitation + "]";
 	}
 	
-	//methodes
-	public void demandeAdoption() {
-
-	}
-
-	public void demandeVisite() {
-
-	}
-
-	public void faireDon() {
-
-	}
-
-	public void parrainerAnimal() {
-
-	}
-
-	public void adopter(Animal animal) {
-
-	}
 }

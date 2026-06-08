@@ -199,7 +199,6 @@ public class TestSpringJPA {
 		System.out.println("Bonjour "+connected.getLogin()+" !");
 		
 		if(connected instanceof Patron) {
-			
 			menuPatron();
 		}
 		
@@ -241,77 +240,64 @@ public class TestSpringJPA {
 		
 		switch (choix) {
 		case 1:
-			List<QuackShelter> quackShelters = quackSrv.getAll();
-			 for(QuackShelter q : quackShelters) {
-				 System.out.println(q.getId() +" - "+q.getLieu());
-			 }
-			int choixShelter = saisieInt("Choisir un QuackShelter");
-			
-			QuackShelter quackShelter = quackSrv.getById(choixShelter);
-			
-			DateTimeFormatter formatter =
-			        DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-
-			LocalDateTime dateVisite = LocalDateTime.parse(saisieString("Choisir une date (dd/MM/yyyy HH:mm)"),formatter);
-			
-			Visite visite = new Visite(connected, quackShelter, dateVisite);
-			visiteSrv.insert(visite);
-			System.out.println("Votre visite est reservé le " + visite.getDateVisite());
-			
+			demanderVisite();
 			break;
 		case 2:
-			quackShelters = quackSrv.getAll();
-			 for(QuackShelter q : quackShelters) {
-				 System.out.println(q.getId() +" - "+q.getLieu());
-			 }
-			choixShelter = saisieInt("Choisir un QuackShelter");
-			
-			quackShelter = quackSrv.getById(choixShelter);
-			
-			List<Animal> animauxDispo = animalSrv.getDispoWithCaracteres();
-			
-			System.out.println("Liste des animaux disponibles à l'adoption");
-			
-			for(Animal a : animauxDispo) {
-				System.out.println(a.getId()+" - "+a.getNomAnimal()+" - "+a.getFamille()+" - "+a.getStatutAnimal());
-				System.out.println(a.getCaractere());
-				a = animalSrv.getByIdWithHistoriqueSante(a.getId());
-				System.out.println(a.getHistoriqueSante());
-			}
-			int choixAnimal = saisieInt("Choisir un animal a adopter");
-			
-			Animal animalAdopted = animalSrv.getById(choixAnimal);
-			
-			animalAdopted.getStatutAnimal().setAdoptant(connected);
-			animalAdopted.getStatutAnimal().setAnimal(animalAdopted);
-			animalAdopted.getStatutAnimal().setStatut(Statut.Adopte);
-			animalAdopted.getStatutAnimal().setDateDepart(LocalDate.now());
-			
-			System.out.println("Adoption réussi ! ");
-			System.out.println(animalAdopted.getStatutAnimal());
+			demanderAdoption();
 			break;
 		case 3:
-			quackShelters = quackSrv.getAll();
-			 for(QuackShelter q : quackShelters) {
-				 System.out.println(q.getId() +" - "+q.getLieu());
-			 }
-			choixShelter = saisieInt("Choisir un QuackShelter");
-			
-			quackShelter = quackSrv.getById(choixShelter);
-			
-			double don = saisieDouble("Faire un don de : ");
-			quackShelter.setTresorerie(quackShelter.getTresorerie()+don);
-			
-			System.out.println("La trésorerie du quackShelter s'élève maintenant a "+quackShelter.getTresorerie()+" €");
+			faireDon();
 			break;
 		case 4:
-			System.out.println("PArrainage en cours d'implementation");
+			System.out.println("Parrainage en cours d'implementation");
 			break;
 
 		default:
 			break;
 		}
 		menuVisiteur();
+	}
+
+	private void demanderAdoption() {
+		List<QuackShelter> quackShelters = quackSrv.getAll();
+		 for(QuackShelter q : quackShelters) {
+			 System.out.println(q.getId() +" - "+q.getLieu());
+		 }
+		int choixShelter = saisieInt("Choisir un QuackShelter");
+		
+		List<Animal> animauxDispo = animalSrv.getDispoWithCaracteres();
+		
+		System.out.println("Liste des animaux disponibles à l'adoption");
+		
+		for(Animal a : animauxDispo) {
+			System.out.println(a.getId()+" - "+a.getNomAnimal()+" - "+a.getFamille()+" - "+a.getStatutAnimal());
+			System.out.println(a.getCaractere());
+			a = animalSrv.getByIdWithHistoriqueSante(a.getId());
+			System.out.println(a.getHistoriqueSante());
+		}
+		int choixAnimal = saisieInt("Choisir un animal a adopter");
+		personneSrv.demanderAdoption(choixShelter,connected,choixAnimal);
+		
+	}
+
+	private void faireDon() {
+		List<QuackShelter> quackShelters = quackSrv.getAll();
+		 for(QuackShelter q : quackShelters) {
+			 System.out.println(q.getId() +" - "+q.getLieu());
+		 }
+		int choixShelter = saisieInt("Choisir un QuackShelter");
+		double don = saisieDouble("Faire un don de : ");
+		personneSrv.faireDon(choixShelter, don);
+	}
+
+	private void demanderVisite() {
+		List<QuackShelter> quackShelters = quackSrv.getAll();
+		 for(QuackShelter q : quackShelters) {
+			 System.out.println(q.getId() +" - "+q.getLieu());
+		 }
+		int choixShelter = saisieInt("Choisir un QuackShelter");
+		String date = saisieString("Choisir une date (dd/MM/yyyy HH:mm)");
+		personneSrv.demanderVisite(connected,choixShelter, date);
 	}
 
 	private void menuPatron() {
