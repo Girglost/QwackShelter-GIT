@@ -39,14 +39,13 @@ public class Canard extends Oiseau {
 	}
 	@Override
 	public String toString() {
-		return "Poule [capaciteVol=" + capaciteVol + ", pondeuse=" + pondeuse + ", id=" + id + ", nomAnimal="
+		return "Canard [capaciteVol=" + capaciteVol + ", pondeuse=" + pondeuse + ", id=" + id + ", nomAnimal="
 				+ nomAnimal + ", dateNaissance=" + dateNaissance + ", couleur=" + couleur + ", regimeAlimentaire="
 				+ regimeAlimentaire + ", traitement=" + traitement + ", famille=" + famille + ", genre=" + genre
-				+ ", caracteres=" + caracteres + ", qwackShelter=" + quackShelter + ", historiqueSante="
-				+ historiqueSante + ", statutAnimal=" + statutsAnimal + ", race=" + race + ", estSauvage=" + estSauvage
-				+ "]";
+				+ ", quackShelter=" + quackShelter + ", statutAnimal=" + statutAnimal + ", race=" + race
+				+ ", estSauvage=" + estSauvage + "]";
 	}
-    
+
     
     
 }

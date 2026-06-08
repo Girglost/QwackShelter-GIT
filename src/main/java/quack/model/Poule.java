@@ -33,8 +33,7 @@ public class Poule extends Oiseau {
 		return "Poule [capaciteVol=" + capaciteVol + ", pondeuse=" + pondeuse + ", id=" + id + ", nomAnimal="
 				+ nomAnimal + ", dateNaissance=" + dateNaissance + ", couleur=" + couleur + ", regimeAlimentaire="
 				+ regimeAlimentaire + ", traitement=" + traitement + ", famille=" + famille + ", genre=" + genre
-				+ ", caracteres=" + caracteres + ", qwackShelter=" + quackShelter + ", historiqueSante="
-				+ historiqueSante + ", statutAnimal=" + statutsAnimal + ", race=" + race + "]";
+				+ ", quackShelter=" + quackShelter + ", statutAnimal=" + statutAnimal + ", race=" + race + "]";
 	}
     
     

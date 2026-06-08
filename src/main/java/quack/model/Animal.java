@@ -20,6 +20,7 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 
 @Entity
@@ -55,9 +56,9 @@ public abstract class Animal {
   	@JoinColumn(name="refuge",nullable = false)
 	protected QuackShelter quackShelter;
   	@OneToMany(mappedBy = "animal",cascade = CascadeType.ALL)
-	static List<HistoriqueSante> historiqueSante = new ArrayList<>();
-  	@OneToMany(mappedBy = "animal",cascade = CascadeType.ALL)
-	static StatutAnimal statutsAnimal;
+	protected List<HistoriqueSante> historiqueSante = new ArrayList<>();
+  	@OneToOne(mappedBy = "animal",cascade = CascadeType.ALL)
+  	protected StatutAnimal statutAnimal;
 	
 	public Animal( String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter quackShelter) {
@@ -120,7 +121,7 @@ public abstract class Animal {
 	}
 
 	public StatutAnimal getStatutAnimal() {
-		return statutsAnimal;
+		return statutAnimal;
 	}
 
 	public void setId(int id) {
@@ -167,8 +168,8 @@ public abstract class Animal {
 		this.historiqueSante = historiqueSante;
 	}
 
-	public void setStatutAnimal(StatutAnimal statutsAnimal) {
-		this.statutsAnimal = statutsAnimal;
+	public void setStatutAnimal(StatutAnimal statutAnimal) {
+		this.statutAnimal = statutAnimal;
 	}
 	
 	//Méthodrs
@@ -187,8 +188,8 @@ public abstract class Animal {
 	public String toString() {
 		return "Animal [id=" + id + ", nomAnimal=" + nomAnimal + ", dateNaissance=" + dateNaissance + ", couleur="
 				+ couleur + ", regimeAlimentaire=" + regimeAlimentaire + ", traitement=" + traitement + ", famille="
-				+ famille + ", genre=" + genre + ", caractere=" + caracteres + ", quackShelter=" + quackShelter
-				+ ", historiqueSante=" + historiqueSante + "]";
+				+ famille + ", genre=" + genre + ", quackShelter=" + quackShelter
+				+ "]";
 	}
 	
 	

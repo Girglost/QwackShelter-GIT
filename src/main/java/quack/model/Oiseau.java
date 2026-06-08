@@ -52,11 +52,10 @@ public abstract class Oiseau extends Animal {
 
 	@Override
 	public String toString() {
-		return "Oiseaux [id=" + id + ", nomAnimal=" + nomAnimal + ", dateNaissance=" + dateNaissance + ", couleur="
+		return "Oiseau [id=" + id + ", nomAnimal=" + nomAnimal + ", dateNaissance=" + dateNaissance + ", couleur="
 				+ couleur + ", regimeAlimentaire=" + regimeAlimentaire + ", traitement=" + traitement + ", famille="
-				+ famille + ", genre=" + genre + ", caracteres=" + caracteres + ", qwackShelter=" + quackShelter
-				+ ", historiqueSante=" + historiqueSante + ", statutAnimal=" + statutsAnimal + ", capaciteVol="
-				+ capaciteVol + ", pondeuse=" + pondeuse + "]";
+				+ famille + ", genre=" + genre + ", quackShelter=" + quackShelter + ", statutAnimal=" + statutAnimal
+				+ ", capaciteVol=" + capaciteVol + ", pondeuse=" + pondeuse + "]";
 	}
 	
 	

@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,31 +34,31 @@ public class StatutAnimal {
 	@ManyToOne
 	@JoinColumn(name="adoptant",nullable=true)
 	private Personne adoptant;
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(nullable=false,name="animal")
 	private Animal animal;
 	
-	public StatutAnimal(LocalDate dateArrivee, LocalDate dateDepart, Statut statut, Emplacement emplecement, Personne adoptant, Animal animal) {
+	public StatutAnimal(LocalDate dateArrivee, LocalDate dateDepart, Statut statut, Emplacement emplacement, Personne adoptant, Animal animal) {
 		this.dateArrivee = dateArrivee;
 		this.dateDepart = dateDepart;
 		this.statut = statut;
-		this.emplacement = emplecement;
+		this.emplacement = emplacement;
 		this.adoptant = adoptant;
 		this.animal = animal;
 	}
 	
-	public StatutAnimal(LocalDate dateArrivee, Statut statut, Emplacement emplecement,	Personne adoptant, Animal animal) {
+	public StatutAnimal(LocalDate dateArrivee, Statut statut, Emplacement emplacement,	Personne adoptant, Animal animal) {
 		this.dateArrivee = dateArrivee;
 		this.statut = statut;
-		this.emplacement = emplecement;
+		this.emplacement = emplacement;
 		this.adoptant = adoptant;
 		this.animal = animal;
 	}
 	
-	public StatutAnimal(Statut statut, Emplacement emplecement, Personne adoptant, Animal animal) {
+	public StatutAnimal(Statut statut, Emplacement emplacement, Personne adoptant, Animal animal) {
 		this.dateArrivee = LocalDate.now();
 		this.statut = statut;
-		this.emplacement = emplecement;
+		this.emplacement = emplacement;
 		this.adoptant = adoptant;
 		this.animal = animal;
 	}
@@ -125,8 +126,7 @@ public class StatutAnimal {
 	@Override
 	public String toString() {
 		return "StatuAnimalRefuge [id=" + id + ", dateArrivee=" + dateArrivee + ", dateDepart=" + dateDepart
-				+ ", statut=" + statut + ", emplacement=" + emplacement + ", adoptant=" + adoptant + ", animal="
-				+ animal + "]";
+				+ ", statut=" + statut + ", emplacement=" + emplacement + ", adoptant=" + adoptant + "]";
 	}
 
 	

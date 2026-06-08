@@ -132,7 +132,7 @@ public class HistoriqueSante {
 	@Override
 	public String toString() {
 		return "HistoriqueSante [id=" + id + ", commentaire=" + commentaire + ", poids=" + poids + ", date=" + date
-				+ ", heure=" + heure + ", duree=" + duree + ", cause=" + cause + ", animal=" + animal + "]";
+				+ ", heure=" + heure + ", duree=" + duree + ", cause=" + cause + "]";
 	}
 
 		
