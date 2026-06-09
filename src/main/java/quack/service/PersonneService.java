@@ -167,6 +167,7 @@ public class PersonneService {
 	}
 
 	public void demanderAdoption(int idQuackShelter,Personne personne, int idAnimal){
+	
 		
 		QuackShelter quackShelter = quackSrv.getById(idQuackShelter);
 		

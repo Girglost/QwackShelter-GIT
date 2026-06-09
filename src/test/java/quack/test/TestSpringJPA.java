@@ -277,7 +277,6 @@ public class TestSpringJPA {
 		}
 		int choixAnimal = saisieInt("Choisir un animal a adopter");
 		personneSrv.demanderAdoption(choixShelter,connected,choixAnimal);
-		
 	}
 
 	private void faireDon() {
@@ -346,6 +345,7 @@ public class TestSpringJPA {
 		case 2:
 			List<Animal> animaux = animalSrv.getAll();
 			for(Animal a : animaux) {
+				a = animalSrv.getByIdWithHistoriqueSante(a.getId());
 				System.out.println(a.getId()+" - "+a.getNomAnimal()+" - "+a.getClass().getSimpleName()+" - "+a.getStatutAnimal()+" - "+a.getHistoriqueSante());
 			}
 			break;
@@ -405,8 +405,6 @@ public class TestSpringJPA {
 		emplacementSrv.insert(emplacement2);
 		emplacementSrv.insert(emplacement3);
 		emplacementSrv.insert(emplacement4);
-		
-		
 		
 		
 		List<Caractere> caracteresChien = new ArrayList<>();

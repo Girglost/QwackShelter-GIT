@@ -64,4 +64,5 @@ public class AnimalService {
     public Animal getByIdWithHistoriqueSante(Integer id){
     	return daoAnimal.findByIdWithHistoriqueSante(id);
     }
+   
 }

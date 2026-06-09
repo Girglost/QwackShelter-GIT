@@ -107,7 +107,6 @@ public abstract class Personne {
 		this.visites = visites;
 	}
 	//to String
-
 	@Override
 	public String toString() {
 		return "Personne [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", login=" + login + ", password="
