@@ -104,7 +104,7 @@ public class TestSpringJPA {
 		{
 		case 1 : seConnecter();break;
 		case 2 : devenirVisiteur();break;
-		case 3 : devenirBenevole();break;
+		case 3 : engagerBenevole();break;
 		case 4 : System.exit(0);break;
 		}
 
@@ -151,15 +151,15 @@ public class TestSpringJPA {
 		System.out.println("Bonjour "+visiteur.getLogin()+", vous êtes maintenant Visiteur id ="+visiteur.getId());
 	}
 	
-	public void devenirBenevole() {
+	public void engagerBenevole() {
 		
 		System.out.println("Creation d'un Compte Bénévole");
-		String nom = saisieString("Entrer votre nom");
-		String prenom = saisieString("Entrer votre prenom");
-		String login = saisieString("Entrer votre login");
-		String password = saisieString("Entrer votre mot de passe");
+		String nom = saisieString("Entrer le nom");
+		String prenom = saisieString("Entrer le prenom");
+		String login = saisieString("Entrer le login");
+		String password = saisieString("Entrer le mot de passe");
 		
-		int choixLieu = saisieInt("Vous avez dans : 1 - Une maison, 2 - Un appartement ?");
+		int choixLieu = saisieInt("Type D'habitation : 1 - Maison, 2 - Appartement ?");
 		String typeLieu = null;
 		switch (choixLieu) {
 		case 1:
@@ -174,7 +174,7 @@ public class TestSpringJPA {
 			break;
 		}
 		
-		System.out.println("Entrer votre Adresse :");
+		System.out.println("Entrer l'adresse :");
 		String numero = saisieString("Numero : ");
 		String voie = saisieString("Voie : ");
 		String ville = saisieString("Ville : ");
@@ -189,7 +189,7 @@ public class TestSpringJPA {
 		//System.out.println("benevole ID avant insert "+ benevole);
 		personneSrv.insert(benevole);
 		//System.out.println("benevole ID apres insert "+ benevole);
-		System.out.println("Bonjour "+benevole.getLogin()+", vous êtes maintenant bénévole !");
+		System.out.println(benevole.getLogin()+" est maintenant bénévole !");
 	}
 	public void seConnecter() {
 		String login = saisieString("Entrer votre Login");
@@ -328,19 +328,16 @@ public class TestSpringJPA {
 		int idShelter = saisieInt("");
 		QuackShelter quackShelter = quackSrv.getById(idShelter);
 		
-		System.out.println(" 1 - Liste du Personnel");
-		System.out.println(" 2 - Liste des animaux");
-		System.out.println(" 3 - Liste des visites");
+		System.out.println(" 1 - Gestion du Personnel");
+		System.out.println(" 2 - Gestion des animaux");
+		System.out.println(" 3 - Gestion des visites");
 		System.out.println(" 4 - Retour");
 		int choix = saisieInt("Que voulez-vous y faire ?");
 		
 		
 		switch (choix) {
 		case 1:
-			List<Personnel> personnels = personneSrv.getAllPersonnel();
-			for(Personnel p : personnels) {
-				System.out.println(p.getId()+" - "+p.getNom()+" - "+p.getPrenom()+" - "+p.getClass().getSimpleName());
-			}
+			gestionPersonnel();
 			break;
 		case 2:
 			List<Animal> animaux = animalSrv.getAll();
@@ -364,6 +361,92 @@ public class TestSpringJPA {
 			break;
 		}
 		gestionQuackShelters();
+	}
+
+	private void gestionPersonnel() {
+			System.out.println("1 - Liste du personnel");
+			System.out.println("2 - Embaucher un nouveau collaborateur");
+			System.out.println("3 - Virer un collaborateur");
+			System.out.println("4 - Retour");
+			int choix = saisieInt("");
+			switch (choix) {
+			case 1:
+				List<Personnel> personnels = personneSrv.getAllPersonnel();
+				for(Personnel p : personnels) {
+					System.out.println(p.getId()+" - "+p.getNom()+" - "+p.getPrenom()+" - "+p.getClass().getSimpleName());
+				}
+				break;
+			case 2:
+				System.out.println("Type de poste : 1 - Benevole, 2 - Employe");
+				int choixPoste = saisieInt("");
+				switch (choixPoste) {
+				case 1:
+					engagerBenevole();
+					break;
+				case 2:
+					engagerEmploye();
+					break;
+				default:
+					break;
+				}
+				
+				
+				break;
+			case 3:
+				virerEmploye();
+				break;
+			case 4:
+				gestionQuackShelters();
+				break;
+			default:
+				break;
+			}
+	}
+
+	private void virerEmploye() {
+		System.out.println("Virer Employe en cours...");
+		
+	}
+
+
+	private void engagerEmploye() {
+		System.out.println("Creation d'un Compte Employe");
+		String nom = saisieString("Entrer le nom");
+		String prenom = saisieString("Entrer le prenom");
+		String login = saisieString("Entrer le login");
+		String password = saisieString("Entrer le mot de passe");
+		
+		int choixLieu = saisieInt("Type D'habitation : 1 - Maison, 2 - Appartement ?");
+		String typeLieu = null;
+		switch (choixLieu) {
+		case 1:
+			typeLieu = "Maison";
+			break;
+		case 2: 
+			typeLieu = "Appartement";
+			break;
+
+		default:
+			typeLieu = "Inconnu";
+			break;
+		}
+		
+		System.out.println("Entrer l'adresse :");
+		String numero = saisieString("Numero : ");
+		String voie = saisieString("Voie : ");
+		String ville = saisieString("Ville : ");
+		String cp = saisieString("CP : ");
+		Lieu habitation = new Lieu(typeLieu, numero, voie, ville, cp);
+		LocalDate dateEmbauche = LocalDate.now();
+		double salaire = 2000.5;
+		
+		QuackShelter quackshelter = quackSrv.getAll().get(0);
+		Employe employe = new Employe(nom, prenom,login,password, habitation,
+				false,salaire,dateEmbauche,quackshelter);
+		//System.out.println("benevole ID avant insert "+ benevole);
+		personneSrv.insert(employe);
+		//System.out.println("benevole ID apres insert "+ benevole);
+		System.out.println(employe.getLogin()+" est maintenant Employe !");
 	}
 
 	public void run()
@@ -469,10 +552,6 @@ public class TestSpringJPA {
 		animalSrv.insert(poule);
 		
 		menuPrincipal();
-		
-		
-		
-		
 		
 	}
 	
