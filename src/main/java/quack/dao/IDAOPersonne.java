@@ -14,6 +14,9 @@ import quack.model.Personnel;
 import quack.model.Visiteur;
 
 public interface IDAOPersonne extends JpaRepository<Personne,Integer>{
+	
+	// LOGIN UNIQUE => Si exist en bdd, on peut pas le créer
+	public boolean existsByLogin(String login);
 	@Query("FROM Patron")
 	public List<Patron> findAllPatron();
 	@Query("FROM Visiteur")

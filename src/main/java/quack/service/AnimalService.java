@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import quack.dao.IDAOAnimal;
 import quack.model.Animal;
 import quack.model.Genre;
+import quack.model.Statut;
 
 @Service
 public class AnimalService {
@@ -64,5 +65,9 @@ public class AnimalService {
     public Animal getByIdWithHistoriqueSante(Integer id){
     	return daoAnimal.findByIdWithHistoriqueSante(id);
     }
+
+	public List<Animal> getByStatut(Statut statut) {
+		return daoAnimal.findByStatut(statut);
+	}
    
 }

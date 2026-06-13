@@ -1,13 +1,12 @@
 package quack.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import quack.dao.IDAOVisite;
-import quack.dao.IDAOVisite;
-import quack.model.Visite;
 import quack.model.Visite;
 
 @Service
@@ -41,6 +40,10 @@ public class VisiteService {
 	
 	public List<Visite> getByIdShelter(Integer idShelter){
 		return daoVisite.findByIdShelter(idShelter);
+	}
+	public List<Visite> getAllByDate(LocalDateTime date) {
+		
+		return daoVisite.findAllByDate(date);
 	}
 	
 }

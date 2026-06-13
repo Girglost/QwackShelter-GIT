@@ -31,4 +31,9 @@ public class StatutAnimalService {
 	public void delete(Integer id) {
 		daoStatutAnimal.deleteById(id);
 	}
+	
+	public List<StatutAnimal> getByAdoptant(Integer idPersonne){
+		return daoStatutAnimal.findByAdoptant(idPersonne);
+	}
+
 }
