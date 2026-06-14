@@ -20,12 +20,12 @@ public class Poule extends Oiseau {
 		this.race = race;
 	}
 	
-	public Poule(String nomAnimal, String couleur,	String traitement, Genre genre, QuackShelter qwackShelter, boolean pondeuse, String race) {
+	public Poule(String nomAnimal, String couleur, Genre genre, QuackShelter qwackShelter, boolean pondeuse, String race) {
 		super(nomAnimal, 
 				LocalDate.now(), 
 				couleur, 
 				null, 
-				traitement, 
+				null, 
 				Famille.Galide, 
 				genre, 
 				qwackShelter, 

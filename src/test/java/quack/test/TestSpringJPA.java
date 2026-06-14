@@ -63,6 +63,8 @@ public class TestSpringJPA {
 	VisiteService visiteSrv;
 	@Autowired
 	StatutAnimalService statutAnimalSrv;
+	@Autowired
+	HistoriqueSanteService historiqueSanteSrv;
 	
 	static Personne connected = null;
 	
@@ -212,6 +214,13 @@ public class TestSpringJPA {
 		String password = saisieString("Entrer votre Mot de Passe");
 		
 		connected = personneSrv.getByLoginAndPassword(login, password);
+		while(connected == null) {
+			System.out.println("Login ou mot de passe incorrect");
+			login = saisieString("Entrer votre Login");
+			password = saisieString("Entrer votre Mot de Passe");
+			connected = personneSrv.getByLoginAndPassword(login, password);
+		}
+		
 		System.out.println("Bonjour "+connected.getLogin()+" !");
 		
 		if(connected instanceof Patron) {
@@ -309,11 +318,8 @@ public class TestSpringJPA {
 			break;
 		}
 		menuVisiteur();
-		
 	}
 
-	
-	
 	private void BaladerUnAnimal() {
 		System.out.println("Animaux présents au Shelter");
 		List<Animal> animaux = animalSrv.getByStatut(Statut.Present);
@@ -327,6 +333,8 @@ public class TestSpringJPA {
 		StatutAnimal statutAnimal  = animalEnBalade.getStatutAnimal();
 		statutAnimal.setStatut(Statut.EnBalade);
 		statutAnimalSrv.update(statutAnimal);
+		
+		System.out.println(connected.getLogin()+" et "+animalEnBalade.getNomAnimal()+"("+animalEnBalade.getFamille()+") sont en balade !");
 	}
 
 //////////////FONCTIONS DU VISITEUR /////////////////////////
@@ -375,7 +383,7 @@ public class TestSpringJPA {
 			}
 			break;
 		case 7:
-			modifierVisiteur();
+			modifierVisiteur(connected);
 			break;
 		case 8:
 			deconnexion();
@@ -388,7 +396,7 @@ public class TestSpringJPA {
 	}
 	
 
-	private void modifierVisiteur() {
+	private void modifierVisiteur(Personne visiteur) {
 		System.out.println("Modification de votre compte");
 		String nom = saisieString("Entrer votre nom");
 		String prenom = saisieString("Entrer votre prenom");
@@ -397,9 +405,11 @@ public class TestSpringJPA {
 		
 		String ancienPassword = saisieString("Entrer votre ancien mot de passe");
 		
-		while(ancienPassword != connected.getPassword()) {
+		
+		while(!ancienPassword.equals(visiteur.getPassword())) {
 			System.out.println("Mot de passe incorrect");
-			ancienPassword = saisieString("Entrer a noouveau l'ancien mot de passe");
+			System.out.println("ANCIEN PASSWORD = "+ancienPassword+" -- "+visiteur.getPassword());
+			ancienPassword = saisieString("Entrer a nouveau l'ancien mot de passe");
 		}
 		
 		String password = saisieString("Entrer votre  nouveau mot de passe");
@@ -430,12 +440,14 @@ public class TestSpringJPA {
 		Lieu habitation = new Lieu(typeLieu, numero, voie, ville, cp);
 		LocalDate dateInscription = LocalDate.now();
 
-		Visiteur visiteur = new Visiteur(nom,prenom,login,password,habitation,dateInscription);
+		visiteur.setHabitation(habitation);
+		visiteur.setNom(nom);
+		visiteur.setPrenom(prenom);
+		visiteur.setHabitation(habitation);
+		visiteur.setPassword(password);
+		personneSrv.update(visiteur);
 
-		personneSrv.insert(visiteur);
-
-		System.out.println("Modification du compte Visiteur de "+visiteur.getLogin());
-		
+		System.out.println("Modification du compte Visiteur de "+visiteur.getLogin());	
 	}
 
 
@@ -519,13 +531,28 @@ public class TestSpringJPA {
 			gestionPersonnel();
 			break;
 		case 2:
-			List<Animal> animaux = animalSrv.getAll();
-			for(Animal a : animaux) {
-				a = animalSrv.getByIdWithHistoriqueSante(a.getId());
-				System.out.println(a.getId()+" - "+a.getNomAnimal()+" - "+a.getClass().getSimpleName()+" - "+a.getStatutAnimal()+" - "+a.getHistoriqueSante());
-			}
+			gestionAnimaux();
 			break;
 		case 3:
+			gestionVisites();
+			break;
+		case 4: menuPatron();break;
+		default:
+			break;
+		}
+		gestionQuackShelters();
+	}
+
+	private void gestionVisites() {
+		System.out.println("Gestion des Visites");
+		System.out.println("1 - Liste des visites");
+		System.out.println("2 - Ajouter une visite");
+		System.out.println("3 - Supprimer une visite");
+		System.out.println("4 - retour");
+		
+		int choix = saisieInt("Que voulez-vous faire ?");
+		switch (choix) {
+		case 1:
 			List<Visite> visites = visiteSrv.getAll();
 			if(visites.isEmpty()) {
 				System.out.println("Aucune Visite reçue");
@@ -534,18 +561,197 @@ public class TestSpringJPA {
 					System.out.println(v.getQuackshelter()+" - "+v.getId()+" - "+v.getDateVisite()+" - "+v.getVisiteur());
 				}
 			}
+			break;
+		case 2:
+			List<QuackShelter> quackShelters = quackSrv.getAll();
+			 for(QuackShelter q : quackShelters) {
+				 System.out.println(q.getId() +" - "+q.getLieu());
+			 }
+			int choixShelter = saisieInt("Choisir un QuackShelter");
+			String date = saisieString("Choisir une date (dd/MM/yyyy HH:mm)");
 			
-		case 4: menuPatron();break;
+			System.out.println("Liste des visiteurs");
+			List<Visiteur> visiteurs = personneSrv.getAllVisiteur();
+			for(Visiteur v:visiteurs) {
+				System.out.println(v.getId()+" - "+v.getLogin());
+			}
+			int idVisiteur = saisieInt("Qui Visite ?");
+			Personne visiteur = personneSrv.getById(idVisiteur);
+			
+			personneSrv.demanderVisite(visiteur,choixShelter, date);
+			break;
+		case 3: 
+			visites = visiteSrv.getAll();
+			if(visites.isEmpty()) {
+				System.out.println("Aucune Visite reçue");
+			}else {
+				for(Visite v : visites) {
+					System.out.println(v.getQuackshelter()+" - "+v.getId()+" - "+v.getDateVisite()+" - "+v.getVisiteur());
+				}
+			}
+			int idVisite = saisieInt("Choisir la visite a supprimer");
+			Visite visite = visiteSrv.getById(idVisite);
+			visiteSrv.delete(idVisite);
+			
+			System.out.println("Visite "+visite.getId()+" - "+visite.getDateVisite()+" supprimé ! ");
+		case 4:
+			gestionQuackShelters();
+			break;
 		default:
 			break;
 		}
-		gestionQuackShelters();
+		
+		
+	}
+
+	private void gestionAnimaux() {
+		System.out.println("1 - Liste des animaux");
+		System.out.println("2 - Etat de santé des animaux");
+		System.out.println("3 - Faire une adoption");
+		System.out.println("4 - Recueillir un animal");
+		System.out.println("5 - Supprimer un animal");
+		System.out.println("6 - Retour");
+		 
+		int choix = saisieInt("Que voulez-vous faire ?");
+		switch (choix) {
+		case 1:
+			List<Animal> animaux = animalSrv.getAll();
+			for(Animal a:animaux) {
+				System.out.println(a.getId()+" - "+a.getNomAnimal()+" - "+a.getFamille()+" arrivé le :"+a.getStatutAnimal().getDateArrivee());
+			}
+			break;
+		case 2:
+			animaux = animalSrv.getAll();
+			for(Animal a:animaux) {
+				System.out.println(a.getId()+" - "+a.getNomAnimal()+" - "+a.getFamille());
+			}
+			int idAnimal = saisieInt("Choisir un animal");
+			 Animal animal = animalSrv.getByIdWithHistoriqueSante(idAnimal);
+			 List<HistoriqueSante> historiqueSante = animal.getHistoriqueSante();
+			 for(HistoriqueSante hs:historiqueSante) {
+				 System.out.println(hs);
+			 }
+			break;
+		case 3:
+			List<Personne> personnes = personneSrv.getAll();
+			for(Personne p:personnes) {
+				System.out.println(p.getId()+" - "+p.getLogin());
+			}
+			int idAdoptant = saisieInt("Qui adopte ?");
+			
+			Personne adoptant = personneSrv.getById(idAdoptant);
+			
+			List<Animal> animauxDispo = animalSrv.getDispoWithCaracteres();
+			
+			System.out.println("Liste des animaux disponibles à l'adoption");
+			
+			for(Animal a : animauxDispo) {
+				System.out.println(a.getId()+" - "+a.getNomAnimal()+" - "+a.getFamille()+" - "+a.getStatutAnimal());
+				System.out.println(a.getCaractere());
+			}
+			int choixAnimal = saisieInt("Choisir un animal a adopter");
+			personneSrv.demanderAdoption(1,adoptant,choixAnimal);
+			
+			Animal adopted = animalSrv.getById(choixAnimal);
+			
+			System.out.println(adoptant.getLogin()+" a adopté "+adopted.getId()+" - "+adopted.getNomAnimal());
+			break;
+		case 4:
+			
+			System.out.println("Recueil d'un animal en détresse");
+			System.out.println("Type d'animal : ");
+			System.out.println("1 - "+Chien.class);
+			System.out.println("2 - "+Chat.class);
+			System.out.println("3 - "+Canard.class);
+			System.out.println("4 - "+Poule.class);
+			int choixTypeAnimal = saisieInt("Choisir le type d'animal");
+			
+			String nom = saisieString("Nom de l'animal");
+			LocalDate dateNaissance = LocalDate.parse(saisieString("date de Naissance (AAAA-MM-JJ)"));
+			String couleur = saisieString("Couleurs de l'animal");
+			String regime = saisieString("Régime alimentaire");
+			String traitement = saisieString("Traitement");
+			Famille famille = Famille.valueOf(saisieString("Famille : "+Famille.values()));
+			Genre genre = Genre.valueOf(saisieString("Genre : "+Genre.values()));
+			
+			QuackShelter qwackShelter=quackSrv.getById(1);
+			boolean sterilisation = saisieBoolean("Stérilisé ? (true/false)");
+			boolean gestante = saisieBoolean("En gestation ? (true/false)");
+			String race = saisieString("Race");
+			
+			System.out.println("Selectionner l'emplacement");
+			List<Emplacement> emplacements = emplacementSrv.getAll();
+			for(Emplacement e:emplacements) {
+				System.out.println(e.getId()+" - "+e.getBox());
+			}
+			int idEmplacement = saisieInt("");
+			Emplacement emplacement = emplacementSrv.getById(idEmplacement);
+			
+			switch (choixTypeAnimal) {
+			case 1:
+				Chien chien = new Chien(nom, couleur, genre, qwackShelter, sterilisation, gestante, race);
+				
+				StatutAnimal StatutAnimal = new StatutAnimal(LocalDate.now(), null, Statut.Present, 
+						emplacement, null, chien);
+				chien.setStatutAnimal(StatutAnimal);
+				animalSrv.insert(chien);
+				break;
+			case 2:
+				Chat chat = new Chat(nom, couleur, genre, qwackShelter, sterilisation, gestante, race);
+				
+				StatutAnimal = new StatutAnimal(LocalDate.now(), null, Statut.Present, 
+						emplacement, null, chat);
+				chat.setStatutAnimal(StatutAnimal);
+				animalSrv.insert(chat);
+				break;
+			case 3:
+				boolean pondeuse = saisieBoolean("Pondeuse ? (true/false)");
+				boolean estSauvage = saisieBoolean("Sauvage ? (true/false)");
+				Canard canard = new Canard(nom, couleur,genre,qwackShelter, pondeuse, race, estSauvage);
+				
+				StatutAnimal = new StatutAnimal(LocalDate.now(), null, Statut.Present, 
+						emplacement, null, canard);
+				canard.setStatutAnimal(StatutAnimal);
+				animalSrv.insert(canard);
+				break;
+			case 4:
+				pondeuse = saisieBoolean("Pondeuse ? (true/false)");
+				estSauvage = saisieBoolean("Sauvage ? (true/false)");
+				Poule poule = new Poule(nom, couleur, genre, qwackShelter, pondeuse, race);
+				
+				StatutAnimal = new StatutAnimal(LocalDate.now(), null, Statut.Present, 
+						emplacement, null, poule);
+				poule.setStatutAnimal(StatutAnimal);
+				animalSrv.insert(poule);
+				break;
+
+			default:
+				break;
+			}
+		case 5:
+			animaux = animalSrv.getAll();
+			for(Animal a:animaux) {
+				System.out.println(a.getId()+" - "+a.getNomAnimal()+" - "+a.getFamille());
+			}
+			idAnimal = saisieInt("Choisir un animal a supprimer");
+			Animal animalSuppr = animalSrv.getById(idAnimal);
+			animalSrv.delete(idAnimal);
+			System.out.println(" L'animal "+animalSuppr.getId()+" - "+animalSuppr.getNomAnimal()+"  a été supprimé");
+			break;
+			
+		case 6:
+			gestionAnimaux();
+			break;
+		default:
+			break;
+		}
+		
 	}
 
 	private void gestionPersonnel() {
 			System.out.println("1 - Liste du personnel");
-			System.out.println("2 - Embaucher un nouveau collaborateur");
-			System.out.println("3 - Virer un collaborateur");
+			System.out.println("2 - Embaucher du personnel");
+			System.out.println("3 - Virer une personne");
 			System.out.println("4 - Retour");
 			int choix = saisieInt("");
 			switch (choix) {
@@ -568,11 +774,9 @@ public class TestSpringJPA {
 				default:
 					break;
 				}
-				
-				
 				break;
 			case 3:
-				virerEmploye();
+				virerPersonne();
 				break;
 			case 4:
 				gestionQuackShelters();
@@ -582,9 +786,16 @@ public class TestSpringJPA {
 			}
 	}
 
-	private void virerEmploye() {
-		System.out.println("Virer Employe en cours...");
+	private void virerPersonne() {
+		List<Personne> personnes = personneSrv.getAll();
+		for(Personne p:personnes) {
+			System.out.println(p.getId()+" - "+p.getClass().getSimpleName()+" - "+p.getLogin());
+		}
+		int idPersonne  = saisieInt("Choisir une personne");
+		Personne personneViree = personneSrv.getById(idPersonne);
+		personneSrv.deleteById(idPersonne);
 		
+		System.out.println(personneViree.getId()+" - "+personneViree.getLogin()+" est viré !");
 	}
 
 
@@ -593,6 +804,10 @@ public class TestSpringJPA {
 		String nom = saisieString("Entrer le nom");
 		String prenom = saisieString("Entrer le prenom");
 		String login = saisieString("Entrer le login");
+		while(personneSrv.loginExist(login)) {
+			System.out.println("Login déjà utilisé");
+			login = saisieString("Entrer un autre login");
+		}
 		String password = saisieString("Entrer le mot de passe");
 		
 		int choixLieu = saisieInt("Type D'habitation : 1 - Maison, 2 - Appartement ?");

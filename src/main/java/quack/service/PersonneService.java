@@ -129,10 +129,7 @@ public class PersonneService {
 			//System.out.println(lieu);
 			personne.setHabitation(lieu);
 		}
-		//System.out.println(personne);
-		if (loginExist(personne.getLogin())) {
-			throw new IllegalArgumentException("Login déjà utilisé");
-		}
+
 		personne = daoPersonne.save(personne);
 	}
 
@@ -197,6 +194,6 @@ public class PersonneService {
 
 		personne.getAdoptions().add(animalAdopted.getStatutAnimal());
 		daoPersonne.save(personne);
-
+		
 	}
 }

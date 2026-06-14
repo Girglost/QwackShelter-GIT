@@ -24,12 +24,12 @@ public class Canard extends Oiseau {
 		this.estSauvage = estSauvage;
 	}
 	
-	public Canard(String nomAnimal, String couleur,	String traitement, Genre genre, QuackShelter qwackShelter, boolean pondeuse, String race, boolean estSauvage) {
+	public Canard(String nomAnimal, String couleur, Genre genre, QuackShelter qwackShelter, boolean pondeuse, String race, boolean estSauvage) {
 		super(nomAnimal, 
 				LocalDate.now(), 
 				couleur, 
 				null, 
-				traitement, 
+				null, 
 				Famille.Galide, 
 				genre, 
 				qwackShelter, 
