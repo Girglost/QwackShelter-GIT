@@ -19,6 +19,18 @@ public class NAC extends Animal{
 				qwackShelter);
 		this.espece = espece;
 	}
+	
+	public NAC(String nomAnimal, String couleur, Famille famille, Genre genre, QuackShelter qwackShelter,String espece) {
+		super(nomAnimal, 
+				LocalDate.now(), 
+				couleur, 
+				null, 
+				null, 
+				famille, 
+				genre,
+				qwackShelter);
+		this.espece = espece;
+	}
 
 	public NAC() {
 	}

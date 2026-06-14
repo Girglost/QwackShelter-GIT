@@ -19,6 +19,21 @@ public class Poule extends Oiseau {
 				qwackShelter, capaciteVol, pondeuse);
 		this.race = race;
 	}
+	
+	public Poule(String nomAnimal, String couleur,	String traitement, Genre genre, QuackShelter qwackShelter, boolean pondeuse, String race) {
+		super(nomAnimal, 
+				LocalDate.now(), 
+				couleur, 
+				null, 
+				traitement, 
+				Famille.Galide, 
+				genre, 
+				qwackShelter, 
+				true, 
+				pondeuse);
+		this.race = race;
+	}
+	
 	public Poule() {
 	}
 	public String getRace() {

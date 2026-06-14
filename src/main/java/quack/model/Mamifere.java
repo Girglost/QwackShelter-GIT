@@ -28,6 +28,16 @@ public abstract class Mamifere extends Animal{
 	}
 
 
+	public Mamifere( String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
+			String traitement, Famille famille, Genre genre, QuackShelter qwackShelter,
+			boolean sterilisation, boolean gestante) {
+		super( nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre,
+				qwackShelter);
+		this.sterilisation = sterilisation;
+		this.gestante = gestante;
+	}
+
+
 	public boolean isSterilisation() {
 		return sterilisation;
 	}

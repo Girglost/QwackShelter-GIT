@@ -18,6 +18,20 @@ public Chien( String nomAnimal, LocalDate dateNaissance, String couleur, String 
 	this.race = race;
 }
 
+public Chien(String nomAnimal, String couleur, Genre genre, QuackShelter qwackShelter, boolean sterilisation, boolean gestante, String race) {
+	super(nomAnimal, 
+			LocalDate.now(), 
+			couleur,
+			null, 
+			null, 
+			Famille.Canin, 
+			genre,
+			qwackShelter, 
+			sterilisation, 
+			gestante);
+	this.race = race;
+}
+
 public Chien() {
 }
 

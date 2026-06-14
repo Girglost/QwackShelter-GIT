@@ -24,7 +24,15 @@ public abstract class Oiseau extends Animal {
 		this.pondeuse = pondeuse;
 	}
 
-
+	public Oiseau(String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
+			String traitement, Famille famille, Genre genre, QuackShelter qwackShelter,
+			boolean capaciteVol, boolean pondeuse) {
+		super(nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre,
+				qwackShelter);
+		this.capaciteVol = capaciteVol;
+		this.pondeuse = pondeuse;
+	}
+	
 	public Oiseau() {
 
 	}

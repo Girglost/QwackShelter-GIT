@@ -17,6 +17,20 @@ public class Chat extends Mamifere {
 				qwackShelter, sterilisation, gestante);
 		this.race = race;
 	}
+	
+	public Chat(String nomAnimal, String couleur, Genre genre, QuackShelter qwackShelter, boolean sterilisation, boolean gestante, String race) {
+		super(nomAnimal, 
+				LocalDate.now(), 
+				couleur,
+				null, 
+				null, 
+				Famille.Felin, 
+				genre, 
+				qwackShelter, 
+				sterilisation, 
+				gestante);
+		this.race = race;
+	}
 
 	public Chat() {
 	}
