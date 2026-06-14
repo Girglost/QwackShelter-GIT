@@ -50,7 +50,7 @@ public abstract class Animal {
   	@ElementCollection(targetClass = Caractere.class)
   	@Enumerated(EnumType.STRING)
   	@CollectionTable(name = "caracteres", joinColumns = @JoinColumn(name = "id_animal"))
-	protected List<Caractere> caracteres;
+	protected List<Caractere> caracteres = new ArrayList<>();
   	
   	@ManyToOne
   	@JoinColumn(name="refuge",nullable = false)
@@ -70,6 +70,18 @@ public abstract class Animal {
 		this.famille = famille;
 		this.genre = genre;
 		this.caracteres = caracteres;
+		this.quackShelter = quackShelter;
+	}
+	
+	public Animal( String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
+			String traitement, Famille famille, Genre genre,  QuackShelter quackShelter) {
+		this.nomAnimal = nomAnimal;
+		this.dateNaissance = dateNaissance;
+		this.couleur = couleur;
+		this.regimeAlimentaire = regimeAlimentaire;
+		this.traitement = traitement;
+		this.famille = famille;
+		this.genre = genre;
 		this.quackShelter = quackShelter;
 	}
 
