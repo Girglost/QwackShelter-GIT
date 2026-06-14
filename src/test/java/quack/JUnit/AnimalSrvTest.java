@@ -23,7 +23,8 @@ public class AnimalSrvTest {
 		
 		
 		Assertions.assertNotNull(animals);
-		Assertions.assertFalse(animals.isEmpty());
+		Assertions.assertTrue(animals.isEmpty());
+		Assertions.assertEquals(0, animals.get(0).getId());
 		
 	}
 }
