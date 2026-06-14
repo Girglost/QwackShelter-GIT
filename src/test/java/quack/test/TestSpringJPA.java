@@ -509,7 +509,7 @@ public class TestSpringJPA {
 	}
 
 	private void gestionQuackShelters() {
-		System.out.println("Liste des Quack Shelter");
+		/*System.out.println("Liste des Quack Shelter");
 		List<QuackShelter> quackshelters = quackSrv.getAll();
 		System.out.println("Choisir un QuackShelter");
 		for(QuackShelter quackShelter : quackshelters) {
@@ -517,8 +517,8 @@ public class TestSpringJPA {
 		}
 		
 		int idShelter = saisieInt("");
-		QuackShelter quackShelter = quackSrv.getById(idShelter);
-		
+		QuackShelter quackShelter = quackSrv.getById(idShelter); */
+		QuackShelter quackShelter = quackSrv.getById(1);
 		System.out.println(" 1 - Gestion du Personnel");
 		System.out.println(" 2 - Gestion des animaux");
 		System.out.println(" 3 - Gestion des visites");
@@ -601,7 +601,7 @@ public class TestSpringJPA {
 			break;
 		}
 		
-		
+		gestionVisites();
 	}
 
 	private void gestionAnimaux() {
@@ -740,7 +740,7 @@ public class TestSpringJPA {
 			break;
 			
 		case 6:
-			gestionAnimaux();
+			gestionQuackShelters();
 			break;
 		default:
 			break;
