@@ -41,9 +41,26 @@ public class VisiteService {
 	public List<Visite> getByIdShelter(Integer idShelter){
 		return daoVisite.findByIdShelter(idShelter);
 	}
-	public List<Visite> getAllByDate(LocalDateTime date) {
+	/*public List<Visite> getAllByDateExacte(LocalDateTime date) {
 		
-		return daoVisite.findAllByDate(date);
+		return daoVisite.findAllByDateExacte(date);
+	}*/
+	public List<Visite> getAllByDateVisiteBetween(LocalDateTime dateDebut,LocalDateTime dateFin) {
+		
+		return daoVisite.findAllByDateVisiteBetween(dateDebut, dateFin);
+	}
+
+	
+	public long  NbVisitesByIdAnimalAndIdVisiteur(int idAnimal,int idVisiteur) {
+		return daoVisite.NbVisitesByIdAnimalAndIdVisiteur(idAnimal,idVisiteur);
+	}
+	
+	public long NbVisitesByIdAnimal(int idAnimal) {
+		return daoVisite.NbVisitesByIdAnimal(idAnimal);
+	}
+
+	public long NbVisitesByIdVisiteur(int idVisiteur) {
+		return daoVisite.NbVisitesByIdVisiteur(idVisiteur);
 	}
 	
 }

@@ -3,9 +3,10 @@ package quack.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,8 +23,8 @@ public class  Lieu {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(length = 40, nullable=false)
-	protected String type;
+	@Enumerated(EnumType.STRING)
+	private TypeLieu type;
 	
 	@Embedded
 	private Adresse adresse;
@@ -38,7 +39,7 @@ public class  Lieu {
 	
 	 //constructeur
 	 
-	 public Lieu(String type, String numero, String voie, String ville, String cp) {
+	 public Lieu(TypeLieu type, String numero, String voie, String ville, String cp) {
 		this.type = type;
 		this.adresse = new Adresse(numero, voie, ville, cp);
 	}
@@ -52,11 +53,11 @@ public class  Lieu {
 		 this.id = id;
 	 }
 
-	 public String getType() {
+	 public TypeLieu getType() {
 		 return type;
 	 }
 
-	 public void setType(String type) {
+	 public void setType(TypeLieu type) {
 		 this.type = type;
 	 }
 

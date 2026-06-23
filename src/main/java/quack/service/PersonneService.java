@@ -6,23 +6,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 import quack.dao.IDAOLieu;
 import quack.dao.IDAOPersonne;
+import quack.dao.IDAOVisite;
 import quack.model.Adresse;
 import quack.model.Animal;
-import quack.model.Benevole;
-import quack.model.Employe;
 import quack.model.Lieu;
-import quack.model.Patron;
 import quack.model.Personne;
-import quack.model.Personnel;
 import quack.model.QuackShelter;
+import quack.model.Role;
 import quack.model.Statut;
+import quack.model.TypeLieu;
 import quack.model.Visite;
-import quack.model.Visiteur;
 @Service
 public class PersonneService {
 	@Autowired
@@ -37,6 +35,10 @@ public class PersonneService {
 	VisiteService visiteSrv;
 	@Autowired
 	AnimalService animalSrv;
+	@Autowired
+	IDAOVisite daoVisite;
+	@Autowired
+	StatutAnimalService statutAnimalSrv;
 
 
 	public List<Personne> getAll()
@@ -44,37 +46,33 @@ public class PersonneService {
 		return daoPersonne.findAll();
 	}
 
-	public List<Benevole> getAllBenevole()
+	public List<Personne> getAllBenevole()
 	{
 		return daoPersonne.findAllBenevole();
 	}
 
-	public List<Employe> getAllEmploye()
+	public List<Personne> getAllEmploye()
 	{
 		return daoPersonne.findAllEmploye();
 	}
 
-	public List<Visiteur> getAllVisiteur()
+	public List<Personne> getAllVisiteur()
 	{
 		return daoPersonne.findAllVisiteur();
 	}
 
-	public List<Patron> getAllPatron()
+	public List<Personne> getAllPatron()
 	{
 		return daoPersonne.findAllPatron();
 	}
-
-	public List<Personnel> getAllPersonnel()
-	{
-		return daoPersonne.findAllPersonnel();
-	}
-	public Personne getByIdWithVisites(Integer idPersonne) {
-		return daoPersonne.findbyIdwithVisites(idPersonne);
-	}
-
+	
 	public Personne getById(Integer id) 
 	{
 		return daoPersonne.findById(id).orElse(null);
+	}
+
+	public Personne getByIdWithVisites(Integer idPersonne) {
+		return daoPersonne.findbyIdwithVisites(idPersonne);
 	}
 
 	public Personne getByLoginAndPassword(String login,String password) 
@@ -90,7 +88,7 @@ public class PersonneService {
 		//Permet d'insert un Lieu en cascade si il n'est pas  en bdd au moment de la creation de la personne
 		Lieu lieuPersonne = personne.getHabitation();
 		//System.out.println("Adresse de la personne "+lieuPersonne);
-		String typeLieu = personne.getHabitation().getType();
+		TypeLieu typeLieu = personne.getHabitation().getType();
 		Adresse adresse = personne.getHabitation().getAdresse();
 
 		Lieu lieu = daoLieu.findByAdresse(adresse);
@@ -117,7 +115,7 @@ public class PersonneService {
 		//Permet d'insert un Lieu en cascade si il n'est pas  en bdd au moment de la creation de la personne
 		Lieu lieuPersonne = personne.getHabitation();
 		//System.out.println("Adresse de la personne "+lieuPersonne);
-		String typeLieu = personne.getHabitation().getType();
+		TypeLieu typeLieu = personne.getHabitation().getType();
 		Adresse adresse = personne.getHabitation().getAdresse();
 
 		Lieu lieu = daoLieu.findByAdresse(adresse);
@@ -140,20 +138,22 @@ public class PersonneService {
 
 	public void deleteById(Integer id) 
 	{
+		
 		daoPersonne.deleteById(id);
 	}
 
 
 	// METHODES INTERACTIONS AVEC SHELTER ( VISITES ADOPTIONS DONS ETC ) 
-	public void demanderVisite(Personne personne,int idQuackShelter, String date) {
+	public void demanderVisite(Personne personne,int idQuackShelter, String date, int idAnimal) {
 		QuackShelter quackShelter = quackSrv.getById(idQuackShelter);
+		Animal animal = animalSrv.getById(idAnimal);
 
 		DateTimeFormatter formatter =
 				DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
 		LocalDateTime dateVisite = LocalDateTime.parse(date,formatter);
 
-		Visite visite = new Visite(personne, quackShelter, dateVisite);
+		Visite visite = new Visite(personne, animal ,quackShelter, dateVisite);
 		visiteSrv.insert(visite);
 
 		personne = daoPersonne.findbyIdwithVisites(personne.getId());
@@ -175,25 +175,44 @@ public class PersonneService {
 
 	public void demanderAdoption(int idQuackShelter,Personne personne, int idAnimal){
 
-
 		QuackShelter quackShelter = quackSrv.getById(idQuackShelter);
 
 		Animal animalAdopted = animalSrv.getById(idAnimal);
-
-		animalAdopted.getStatutAnimal().setAdoptant(personne);
-		animalAdopted.getStatutAnimal().setAnimal(animalAdopted);
-		animalAdopted.getStatutAnimal().setStatut(Statut.Adopte);
-		animalAdopted.getStatutAnimal().setDateDepart(LocalDate.now());
-
-		System.out.println("Adoption réussi ! ");
-		System.out.println(animalAdopted.getStatutAnimal());
-
-		animalSrv.update(animalAdopted);
-
-		personne = daoPersonne.findbyIdwithAdoptions(personne.getId());
-
-		personne.getAdoptions().add(animalAdopted.getStatutAnimal());
-		daoPersonne.save(personne);
+		System.out.println("personne id "+personne.getId());
+		long nbVisite = visiteSrv.NbVisitesByIdAnimalAndIdVisiteur(idAnimal,personne.getId());
 		
+		if(nbVisite >=1) {
+			
+			animalAdopted.getStatutAnimal().setAdoptant(personne);
+			animalAdopted.getStatutAnimal().setAnimal(animalAdopted);
+			animalAdopted.getStatutAnimal().setStatut(Statut.Adopte);
+			animalAdopted.getStatutAnimal().setDateDepart(LocalDate.now());
+
+			System.out.println("Adoption réussi ! ");
+			System.out.println(animalAdopted.getStatutAnimal());
+
+			animalSrv.update(animalAdopted);
+
+			personne = daoPersonne.findbyIdwithAdoptions(personne.getId());
+
+			personne.getAdoptions().add(animalAdopted.getStatutAnimal());
+			daoPersonne.save(personne);
+			System.out.println(animalAdopted +" a bien été adopté !");
+		}else {
+			System.out.println("Pour adopter un animal, vous devez lui rendre visite");
+		}
+	}
+	
+	@Transactional
+    public Personne transformerEnBenevole(Personne personne) {
+		personne.setRole(Role.BENEVOLE);
+		personne.setAdmin(false);
+		personne.setDateEngagement(LocalDate.now());
+		return daoPersonne.save(personne);
+    }
+
+	public List<Personne> getByRoleIn(List<Role> roles) {
+		
+		return daoPersonne.findByRoleIn(roles);
 	}
 }

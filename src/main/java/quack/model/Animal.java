@@ -59,6 +59,9 @@ public abstract class Animal {
 	protected List<HistoriqueSante> historiqueSante = new ArrayList<>();
   	@OneToOne(mappedBy = "animal",cascade = CascadeType.ALL)
   	protected StatutAnimal statutAnimal;
+  	
+	@OneToMany(mappedBy="animal")
+	private List<Visite> visites = new ArrayList(); 
 	
 	public Animal( String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter quackShelter) {
@@ -120,11 +123,11 @@ public abstract class Animal {
 		return genre;
 	}
 
-	public List<Caractere> getCaractere() {
+	public List<Caractere> getCaracteres() {
 		return caracteres;
 	}
 
-	public QuackShelter getquackShelter() {
+	public QuackShelter getQuackShelter() {
 		return quackShelter;
 	}
 
@@ -168,12 +171,20 @@ public abstract class Animal {
 		this.genre = genre;
 	}
 
-	public void setCaractere(List<Caractere> caracteres) {
+	public void setCaracteres(List<Caractere> caracteres) {
 		this.caracteres = caracteres;
 	}
 
-	public void setquackShelter(QuackShelter quackShelter) {
+	public void setQuackShelter(QuackShelter quackShelter) {
 		this.quackShelter = quackShelter;
+	}
+
+	public List<Visite> getVisites() {
+		return visites;
+	}
+
+	public void setVisites(List<Visite> visites) {
+		this.visites = visites;
 	}
 
 	public void setHistoriqueSante(List<HistoriqueSante> historiqueSante) {

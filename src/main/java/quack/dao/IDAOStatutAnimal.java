@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import quack.model.Animal;
+import quack.model.Statut;
 import quack.model.StatutAnimal;
 
 public interface IDAOStatutAnimal extends JpaRepository<StatutAnimal,Integer>{
@@ -14,4 +15,6 @@ public interface IDAOStatutAnimal extends JpaRepository<StatutAnimal,Integer>{
 	public List<Animal>	findByDispo();
 	@Query("SELECT s FROM StatutAnimal s WHERE s.adoptant.id =:idPersonne")
 	public List<StatutAnimal> findByAdoptant(@Param("idPersonne")Integer idPersonne);
+	
+	public List<StatutAnimal> findByStatut(Statut statut);
 }

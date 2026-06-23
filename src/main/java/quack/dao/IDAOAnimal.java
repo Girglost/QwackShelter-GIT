@@ -25,4 +25,7 @@ public interface IDAOAnimal extends JpaRepository<Animal,Integer> {
 	public Animal findByIdWithHistoriqueSante(@Param("id")Integer idAnimal);
 	@Query("SELECT a FROM Animal a WHERE a.statutAnimal.statut=:statut")
 	public List<Animal> findByStatut(@Param("statut")Statut statut);
+	
+	@Query("SELECT a FROM Animal a LEFT JOIN FETCH a.visites WHERE a.id=:idAnimal")
+	public Animal findByIdWithVisite(@Param("idAnimal")int idAnimal);
 }

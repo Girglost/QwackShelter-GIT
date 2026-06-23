@@ -33,12 +33,12 @@ public class QuackShelter {
 	private Lieu lieu;
 	
 	@OneToMany(mappedBy = "quackShelter")
-	private List<Personnel> personnel;
+	private List<Personne> personnel;
 	
 	@OneToMany(mappedBy = "quackShelter")
     private List<Animal> animaux = new ArrayList<>();
 	
-	@OneToMany(mappedBy="quackshelter")
+	@OneToMany(mappedBy="quackShelter")
 	protected List<Visite> visites = new ArrayList(); 
 	
 	// constructeur vide 
@@ -88,18 +88,18 @@ public class QuackShelter {
 		this.lieu = lieu;
 	}
 
-	public List<Personnel> getPersonnel() {
+	public List<Personne> getPersonnel() {
 		return personnel;
 	}
 
-	public void setPersonnel(List<Personnel> personnel) {
+	public void setPersonnel(List<Personne> personnel) {
 		this.personnel = personnel;
 	}
 	
     
 	  //methode pour ajouter un personnel
 	
-    public void ajouterPersonnel(Personnel personnel) {
+    public void ajouterPersonnel(Personne personnel) {
         this.personnel.add(personnel);
     }
 	
@@ -114,6 +114,12 @@ public class QuackShelter {
     public boolean aDesPlacesDisponibles() {
         return this.animaux.size() < this.nbPlace;
     }
+
+	@Override
+	public String toString() {
+		return "QuackShelter [id=" + id + ", tresorerie=" + tresorerie + ", nbPlace=" + nbPlace + ", lieu=" + lieu
+				+ "]";
+	}
     
     
 }

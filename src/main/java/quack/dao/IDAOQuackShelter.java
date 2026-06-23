@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import quack.model.Animal;
-import quack.model.Personnel;
 import quack.model.QuackShelter;
 
 public interface IDAOQuackShelter extends JpaRepository<QuackShelter,Integer>{

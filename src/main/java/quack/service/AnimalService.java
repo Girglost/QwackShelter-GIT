@@ -56,18 +56,23 @@ public class AnimalService {
     }
     
     public List<Animal> getByType(String type){
-    	return daoAnimal.findByFamille(type);
+    		return daoAnimal.findByFamille(type);
     }
     
     public List<Animal>	getDispoWithCaracteres(){
-    	return daoAnimal.findByDispoWithCaracteres();
+    		return daoAnimal.findByDispoWithCaracteres();
     }
     public Animal getByIdWithHistoriqueSante(Integer id){
-    	return daoAnimal.findByIdWithHistoriqueSante(id);
+    		return daoAnimal.findByIdWithHistoriqueSante(id);
     }
+	public Animal getByIdWithVisite(int idAnimal) {
+		return daoAnimal.findByIdWithVisite(idAnimal);
+	}
 
 	public List<Animal> getByStatut(Statut statut) {
 		return daoAnimal.findByStatut(statut);
 	}
+
+
    
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import quack.dao.IDAOStatutAnimal;
+import quack.model.Statut;
 import quack.model.StatutAnimal;
 
 @Service
@@ -34,6 +35,10 @@ public class StatutAnimalService {
 	
 	public List<StatutAnimal> getByAdoptant(Integer idPersonne){
 		return daoStatutAnimal.findByAdoptant(idPersonne);
+	}
+	
+	public List<StatutAnimal> getByStatut(Statut statut){
+		return daoStatutAnimal.findByStatut(statut);
 	}
 
 }

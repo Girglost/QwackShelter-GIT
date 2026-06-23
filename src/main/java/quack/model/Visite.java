@@ -21,18 +21,29 @@ public class Visite {
 	private Personne visiteur;
 	
 	@ManyToOne
+	@JoinColumn(name="animal",nullable = false)
+	private Animal animal;
+	
+	@ManyToOne
 	@JoinColumn(name="quackshelter",nullable = false)
-	private QuackShelter quackshelter;
+	private QuackShelter quackShelter;
 	
 	@Column
 	private LocalDateTime dateVisite;
 
 	public Visite() {
 	}
-	public Visite(Personne personne, QuackShelter quackshelter, LocalDateTime dateVisite) {
+	public Visite(Personne personne, Animal animal ,QuackShelter quackShelter, LocalDateTime dateVisite) {
 		this.visiteur = personne;
-		this.quackshelter = quackshelter;
+		this.animal = animal;
+		this.quackShelter = quackShelter;
 		this.dateVisite = dateVisite;
+	}
+	public Animal getAnimal() {
+		return animal;
+	}
+	public void setAnimal(Animal animal) {
+		this.animal = animal;
 	}
 	public Integer getId() {
 		return id;
@@ -46,11 +57,11 @@ public class Visite {
 	public void setVisiteur(Personne visiteur) {
 		this.visiteur = visiteur;
 	}
-	public QuackShelter getQuackshelter() {
-		return quackshelter;
+	public QuackShelter getQuackShelter() {
+		return quackShelter;
 	}
-	public void setQuackshelter(QuackShelter quackshelter) {
-		this.quackshelter = quackshelter;
+	public void setQuackShelter(QuackShelter quackShelter) {
+		this.quackShelter = quackShelter;
 	}
 	public LocalDateTime getDateVisite() {
 		return dateVisite;
@@ -58,10 +69,11 @@ public class Visite {
 	public void setDateVisite(LocalDateTime dateVisite) {
 		this.dateVisite = dateVisite;
 	}
+	
 	@Override
 	public String toString() {
-		return "Visite [id=" + id + ", personne=" + visiteur + ", quackshelter=" + quackshelter + ", dateVisite="
-				+ dateVisite + "]";
+		return "Visite [id=" + id + ", visiteur=" + visiteur + ", animal=" + animal + ", quackShelter=" + quackShelter
+				+ ", dateVisite=" + dateVisite + "]";
 	}
 	
 	
