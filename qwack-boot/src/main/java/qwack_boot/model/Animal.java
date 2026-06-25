@@ -1,4 +1,4 @@
-package quack.model;
+package qwack_boot.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,48 +22,47 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
-
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type_animal")
 public abstract class Animal {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected int id;
-	
-	@Column(name="nom_animal",length = 50,nullable=true)
+
+	@Column(name = "nom_animal", length = 50, nullable = true)
 	protected String nomAnimal;
-	@Column(name="date_naissance",nullable=false)
+	@Column(name = "date_naissance", nullable = false)
 	protected LocalDate dateNaissance;
 	@Column(length = 50, nullable = true)
 	protected String couleur;
-	@Column(name="regime_alimentaire",length = 200,nullable=true)
+	@Column(name = "regime_alimentaire", length = 200, nullable = true)
 	protected String regimeAlimentaire;
-	@Column(length = 200,nullable=true)
+	@Column(length = 200, nullable = true)
 	protected String traitement;
 	@Enumerated(EnumType.STRING)
 	protected Famille famille;
 	@Enumerated(EnumType.STRING)
 	protected Genre genre;
-	
-  	@ElementCollection(targetClass = Caractere.class)
-  	@Enumerated(EnumType.STRING)
-  	@CollectionTable(name = "caracteres", joinColumns = @JoinColumn(name = "id_animal"))
+
+	@ElementCollection(targetClass = Caractere.class)
+	@Enumerated(EnumType.STRING)
+	@CollectionTable(name = "caracteres", joinColumns = @JoinColumn(name = "id_animal"))
 	protected List<Caractere> caracteres = new ArrayList<>();
-  	
-  	@ManyToOne
-  	@JoinColumn(name="refuge",nullable = false)
+
+	@ManyToOne
+	@JoinColumn(name = "refuge", nullable = false)
 	protected QuackShelter quackShelter;
-  	@OneToMany(mappedBy = "animal",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "animal", cascade = CascadeType.ALL)
 	protected List<HistoriqueSante> historiqueSante = new ArrayList<>();
-  	@OneToOne(mappedBy = "animal",cascade = CascadeType.ALL)
-  	protected StatutAnimal statutAnimal;
-  	
-	@OneToMany(mappedBy="animal")
-	private List<Visite> visites = new ArrayList(); 
-	
-	public Animal( String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
+	@OneToOne(mappedBy = "animal", cascade = CascadeType.ALL)
+	protected StatutAnimal statutAnimal;
+
+	@OneToMany(mappedBy = "animal")
+	private List<Visite> visites = new ArrayList();
+
+	public Animal(String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter quackShelter) {
 		this.nomAnimal = nomAnimal;
 		this.dateNaissance = dateNaissance;
@@ -75,9 +74,9 @@ public abstract class Animal {
 		this.caracteres = caracteres;
 		this.quackShelter = quackShelter;
 	}
-	
-	public Animal( String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
-			String traitement, Famille famille, Genre genre,  QuackShelter quackShelter) {
+
+	public Animal(String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
+			String traitement, Famille famille, Genre genre, QuackShelter quackShelter) {
 		this.nomAnimal = nomAnimal;
 		this.dateNaissance = dateNaissance;
 		this.couleur = couleur;
@@ -194,18 +193,19 @@ public abstract class Animal {
 	public void setStatutAnimal(StatutAnimal statutAnimal) {
 		this.statutAnimal = statutAnimal;
 	}
-	
-	//Méthodrs
+
+	// Méthodrs
 	/*
-	public StatutAnimal showStatut() {
-		
-		for(StatutAnimal s: statutsAnimal) {
-			if (s.getDateDepart()==null){
-				return s;
-			}
-		}		
-		return null;
-	}*/
+	 * public StatutAnimal showStatut() {
+	 * 
+	 * for(StatutAnimal s: statutsAnimal) {
+	 * if (s.getDateDepart()==null){
+	 * return s;
+	 * }
+	 * }
+	 * return null;
+	 * }
+	 */
 
 	@Override
 	public String toString() {
@@ -214,8 +214,5 @@ public abstract class Animal {
 				+ famille + ", genre=" + genre + ", quackShelter=" + quackShelter
 				+ "]";
 	}
-	
-	
-	
-	
+
 }
