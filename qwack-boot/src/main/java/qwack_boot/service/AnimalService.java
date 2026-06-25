@@ -1,0 +1,71 @@
+package qwack_boot.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import qwack_boot.dao.IDAOAnimal;
+import qwack_boot.model.Animal;
+import qwack_boot.model.Genre;
+import qwack_boot.model.Statut;
+
+@Service
+public class AnimalService {
+
+	@Autowired
+	IDAOAnimal daoAnimal;
+
+	// --------------- CRUD ----------------
+
+	public List<Animal> getAll() {
+		return daoAnimal.findAll();
+	}
+
+	public Animal getById(Integer id) {
+		return daoAnimal.findById(id).orElse(null);
+	}
+
+	public void insert(Animal animal) {
+		daoAnimal.save(animal);
+	}
+
+	public void update(Animal animal) {
+		daoAnimal.save(animal);
+	}
+
+	public void delete(Integer id) {
+		daoAnimal.deleteById(id);
+	}
+
+	// --------------- PERSO ----------------
+
+	public List<Animal> getByName(String name) {
+		return daoAnimal.findByNomAnimal(name);
+	}
+
+	public List<Animal> getByGenre(Genre genre) {
+		return daoAnimal.findByGenre(genre);
+	}
+
+	public List<Animal> getByType(String type) {
+		return daoAnimal.findByFamille(type);
+	}
+
+	public List<Animal> getDispoWithCaracteres() {
+		return daoAnimal.findByDispoWithCaracteres();
+	}
+
+	public Animal getByIdWithHistoriqueSante(Integer id) {
+		return daoAnimal.findByIdWithHistoriqueSante(id);
+	}
+
+	public Animal getByIdWithVisite(int idAnimal) {
+		return daoAnimal.findByIdWithVisite(idAnimal);
+	}
+
+	public List<Animal> getByStatut(Statut statut) {
+		return daoAnimal.findByStatut(statut);
+	}
+
+}
