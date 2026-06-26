@@ -204,4 +204,8 @@ public class PersonneService {
 
 		return daoPersonne.findByRoleIn(roles);
 	}
+
+	public Personne getByLogin(String login) {
+		return daoPersonne.findByLogin(login);
+	}
 }

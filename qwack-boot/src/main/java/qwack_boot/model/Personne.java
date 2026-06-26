@@ -5,15 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -31,9 +28,9 @@ public class Personne {
 	private String nom;
 	@Column(length = 25, nullable = false)
 	private String prenom;
-	@Column(length = 25, nullable = false)
+	@Column(length = 100, nullable = false)
 	private String login;
-	@Column(length = 25, nullable = false)
+	@Column(length = 100, nullable = false)
 	private String password;
 
 	@ManyToOne

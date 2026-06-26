@@ -1,4 +1,4 @@
-package quest.security;
+package qwack_boot.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,8 +19,9 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http, JwtHeaderFilter jwtHeaderFilter) throws Exception {
         // Configuration des autorisations
         http.authorizeHttpRequests(auth -> {
-            // On commence toujours par le plus spécifique, pour terminer par le plus général
-            auth.requestMatchers("/api/auth", "/api/home/free").permitAll();
+            // On commence toujours par le plus spécifique, pour terminer par le plus
+            // général
+            auth.requestMatchers("/api/auth", "/api/auth/me", "/api/home").permitAll();
 
             // Les utilisateurs doivent être authentifiés pour accéder à /quelquechose
             auth.requestMatchers("/**").authenticated();
@@ -40,11 +41,15 @@ public class SecurityConfig {
     @Bean
     PasswordEncoder passwordEncoder() {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
+        System.out.println("Yohann ENCODED = " + passwordEncoder.encode("Yohann"));
+        System.out.println("Ronan ENCODED = " + passwordEncoder.encode("Ronan"));
+        System.out.println("Clea ENCODED = " + passwordEncoder.encode("Clea"));
+        System.out.println("Marie ENCODED = " + passwordEncoder.encode("Marie"));
         return passwordEncoder;
     }
 
-    // Permet d'ajouter un AuthenticationManager de Spring Security dans le contexte de Spring, pour pouvoir le récupérer ailleurs et l'utiliser
+    // Permet d'ajouter un AuthenticationManager de Spring Security dans le contexte
+    // de Spring, pour pouvoir le récupérer ailleurs et l'utiliser
     @Bean
     AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();

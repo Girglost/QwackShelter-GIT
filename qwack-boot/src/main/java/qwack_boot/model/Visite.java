@@ -25,7 +25,7 @@ public class Visite {
 	private Animal animal;
 
 	@ManyToOne
-	@JoinColumn(name = "quackshelter", nullable = false)
+	@JoinColumn(name = "quack_shelter", nullable = false)
 	private QuackShelter quackShelter;
 
 	@Column
