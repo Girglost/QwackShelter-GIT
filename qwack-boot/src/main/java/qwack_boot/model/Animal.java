@@ -52,7 +52,7 @@ public abstract class Animal {
 	protected List<Caractere> caracteres = new ArrayList<>();
 
 	@ManyToOne
-	@JoinColumn(name = "refuge", nullable = false)
+	@JoinColumn(name = "quack_shelter", nullable = false)
 	protected QuackShelter quackShelter;
 	@OneToMany(mappedBy = "animal", cascade = CascadeType.ALL)
 	protected List<HistoriqueSante> historiqueSante = new ArrayList<>();
