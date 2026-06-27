@@ -6,66 +6,72 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonView;
+import qwack_boot.dto.AnimalDTO;
+import qwack_boot.model.Animal;
+import qwack_boot.model.Genre;
+import qwack_boot.model.Statut;
+import qwack_boot.service.AnimalService;
 
-import qwack_boot.dao.IDAOAnimal;
-
+@RestController
+@RequestMapping("api/animal")
 public class AnimalRestController {
-    
-    
-	@Autowired
-	IDAOAnimal daoAnimal;
 
-	
+	@Autowired
+	AnimalService srvAnimal;
+
 	@GetMapping
-	@JsonView(Views.Filiere.class)
-	public List<Filiere> chercherTous()  
-	{
-		return daoFiliere.findAll();	
+	public List<AnimalDTO> chercherTous() {
+		return srvAnimal.getAll().stream().map(a -> AnimalDTO.convert(a)).toList();
 	}
-	
+
 	@GetMapping("/{id}")
-	@JsonView(Views.Filiere.class)
-	public Filiere chercherParId(@PathVariable Integer id)  
-	{
-		return daoFiliere.findById(id).orElse(null);
+	public AnimalDTO chercherParId(@PathVariable Integer id) {
+		Animal animal = srvAnimal.getById(id);
+		return AnimalDTO.convert(animal);
 	}
-	
-	
-	@GetMapping("/{id}/stagiaires")
-	@JsonView(Views.FiliereWithStagiaires.class)
-	public Filiere chercherParIdAvecEleves(@PathVariable Integer id)  
-	{
-		return daoFiliere.findByIdWithStagiaires(id);
+
+	@GetMapping("/{id}/historique-sante")
+	public AnimalDTO chercherParIdAvecHistoriqueSante(@PathVariable Integer id) {
+		return AnimalDTO.convertWithHistoriqueSante(srvAnimal.getByIdWithHistoriqueSante(id));
 	}
-	
-	@GetMapping("/{id}/modules")
-	@JsonView(Views.FiliereWithModules.class)
-	public Filiere chercherParIdAvecCours(@PathVariable Integer id)  
-	{
-		return daoFiliere.findByIdWithModules(id);
+
+	@GetMapping("/{id}/visites")
+	public AnimalDTO chercherParIdAvecVisites(@PathVariable Integer id) {
+		return AnimalDTO.convertWithVisites(srvAnimal.getByIdWithVisite(id));
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public void supprimer(@PathVariable Integer id)  
-	{
-		daoFiliere.deleteById(id);
+	public void supprimer(@PathVariable Integer id) {
+		srvAnimal.delete(id);
 	}
-	
-	@PostMapping
-	public Filiere ajouter(@RequestBody Filiere filiere)  
-	{
-		return daoFiliere.save(filiere);
+
+	@GetMapping("/nom/{nom}")
+	public List<AnimalDTO> chercherParNom(@PathVariable String nom) {
+		return srvAnimal.getByName(nom).stream().map(a -> AnimalDTO.convert(a)).toList();
 	}
-	
-	@PutMapping("/{id}")
-	public Filiere modifier(@PathVariable Integer id,@RequestBody Filiere filiere)  
-	{
-		filiere.setId(id);
-		return daoFiliere.save(filiere);
+
+	// Pour pouvoir filtrer les 3 en meme temps ou pas
+	@GetMapping("/recherche")
+	public List<AnimalDTO> rechercher(
+			@RequestParam(required = false) String type,
+			@RequestParam(required = false) Genre genre,
+			@RequestParam(required = false) Statut statut) {
+		return srvAnimal.rechercher(type, genre, statut)
+				.stream().map(a -> AnimalDTO.convert(a)).toList();
 	}
+
+	@GetMapping("/disponible/{statut}")
+	public List<AnimalDTO> chercherDisponibles(@PathVariable Statut statut) {
+		return srvAnimal.getByStatut(statut).stream().map(a -> AnimalDTO.convert(a)).toList();
+	}
+
+	@GetMapping("/present")
+	public List<AnimalDTO> chercherPresentRefuge() {
+		return srvAnimal.getPresentAuRefugeWithCaracteres().stream().map(a -> AnimalDTO.convert(a)).toList();
+	}
+
 }

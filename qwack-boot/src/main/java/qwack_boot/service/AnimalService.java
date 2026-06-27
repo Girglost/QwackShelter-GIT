@@ -6,8 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import qwack_boot.dao.IDAOAnimal;
+import qwack_boot.dao.IDAOQuackShelter;
+import qwack_boot.dto.ChatDTO;
 import qwack_boot.model.Animal;
+import qwack_boot.model.Canard;
+import qwack_boot.model.Caractere;
+import qwack_boot.model.Chat;
+import qwack_boot.model.Chien;
+import qwack_boot.model.Famille;
 import qwack_boot.model.Genre;
+import qwack_boot.model.NAC;
+import qwack_boot.model.Poule;
+import qwack_boot.model.QuackShelter;
 import qwack_boot.model.Statut;
 
 @Service
@@ -15,6 +25,9 @@ public class AnimalService {
 
 	@Autowired
 	IDAOAnimal daoAnimal;
+
+	@Autowired
+	IDAOQuackShelter daoQuackShelter;
 
 	// --------------- CRUD ----------------
 
@@ -44,16 +57,41 @@ public class AnimalService {
 		return daoAnimal.findByNomAnimal(name);
 	}
 
+	public List<Animal> getByStatut(Statut statut) {
+		return daoAnimal.findByStatut(statut);
+	}
+
 	public List<Animal> getByGenre(Genre genre) {
 		return daoAnimal.findByGenre(genre);
 	}
 
-	public List<Animal> getByType(String type) {
-		return daoAnimal.findByFamille(type);
+	// on indique un string sur le front et on traduit ça pour renvoyer la bonne
+	// classe qui correspond
+
+	public List<Animal> rechercher(String type, Genre genre, Statut statut) {
+		Class<? extends Animal> classe = (type != null) ? resoudreClasse(type) : null;
+		return daoAnimal.rechercher(classe, genre, statut);
 	}
 
-	public List<Animal> getDispoWithCaracteres() {
-		return daoAnimal.findByDispoWithCaracteres();
+	private Class<? extends Animal> resoudreClasse(String type) {
+		switch (type.toLowerCase()) {
+			case "chat":
+				return Chat.class;
+			case "chien":
+				return Chien.class;
+			case "canard":
+				return Canard.class;
+			case "nac":
+				return NAC.class;
+			case "poule":
+				return Poule.class;
+			default:
+				throw new IllegalArgumentException("Type d'animal inconnu : " + type);
+		}
+	}
+
+	public List<Animal> getPresentAuRefugeWithCaracteres() {
+		return daoAnimal.PresentsAuRefugeWithCaracteres();
 	}
 
 	public Animal getByIdWithHistoriqueSante(Integer id) {
@@ -64,8 +102,5 @@ public class AnimalService {
 		return daoAnimal.findByIdWithVisite(idAnimal);
 	}
 
-	public List<Animal> getByStatut(Statut statut) {
-		return daoAnimal.findByStatut(statut);
-	}
 
 }
