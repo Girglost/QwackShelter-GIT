@@ -9,48 +9,69 @@ import qwack_boot.model.Animal;
 import qwack_boot.model.Caractere;
 import qwack_boot.model.Famille;
 import qwack_boot.model.Genre;
-import qwack_boot.model.QuackShelter;
+import qwack_boot.model.HistoriqueSante;
 
 public class AnimalDTO {
 
-    private Integer id;
-    private String nomAnimal;
-    private LocalDate dateNaissance;
-    private String couleur;
-    private String regimeAlimentaire;
-    private String traitement;
-    private Famille famille;
-    private Genre genre;
+	private Integer id;
+	private String nomAnimal;
+	private LocalDate dateNaissance;
+	private String couleur;
+	private String regimeAlimentaire;
+	private String traitement;
+	private Famille famille;
+	private Genre genre;
 	private Integer idQuackShelter;
-    private List<Caractere> caracteres;
+	private List<Caractere> caracteres;
+	private List<VisiteDTO> visites;
+	private List<HistoriqueSanteDTO> historiqueSantes;
 
-
-	public static AnimalDTO convert(Animal animal)
-	{
+	public static AnimalDTO convert(Animal animal) {
 		AnimalDTO a = new AnimalDTO();
 		BeanUtils.copyProperties(animal, a);
-		a.idQuackShelter=animal.getQuackShelter().getId();
+		a.idQuackShelter = animal.getQuackShelter().getId();
 		return a;
 	}
 
-    public static AnimalDTO convertWithHistoriqueSante(Animal animal)
-	{
-	AnimalDTO a = new AnimalDTO();
-	BeanUtils.copyProperties(animal, a);
+	public static AnimalDTO convertWithHistoriqueSante(Animal animal) {
+		AnimalDTO a = convert(animal);
 
-    return a;
+		a.setHistoriqueSantes(
+				animal.getHistoriqueSante()
+						.stream()
+						.map(HistoriqueSanteDTO::convert)
+						.toList());
+
+		return a;
 	}
 
-        public static AnimalDTO convertWithVisites(Animal animal)
-	{
-	AnimalDTO a = new AnimalDTO();
-	BeanUtils.copyProperties(animal, a);
+	public static AnimalDTO convertWithVisites(Animal animal) {
+		AnimalDTO a = convert(animal);
 
-    return a;
+		a.setVisites(
+				animal.getVisites()
+						.stream()
+						.map(VisiteDTO::convert)
+						.toList());
+
+		return a;
 	}
 
+	public List<VisiteDTO> getVisites() {
+		return visites;
+	}
 
+	public void setVisites(List<VisiteDTO> visites) {
+		this.visites = visites;
+	}
 
+	public List<HistoriqueSanteDTO> getHistoriqueSantes() {
+		return historiqueSantes;
+	}
+
+	public void setHistoriqueSantes(List<HistoriqueSanteDTO> historiqueSantes) {
+		this.historiqueSantes = historiqueSantes;
+	}
 
 	public Integer getId() {
 		return id;
