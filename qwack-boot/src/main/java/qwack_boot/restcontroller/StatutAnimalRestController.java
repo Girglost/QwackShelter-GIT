@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import qwack_boot.model.Statut;
 import qwack_boot.model.StatutAnimal;
 import qwack_boot.service.StatutAnimalService;
 
@@ -52,5 +53,15 @@ public class StatutAnimalRestController {
         hs.setId(id);
         saSrv.update(hs);
     }
+
+    @GetMapping("/{adoptant}")
+    public List<StatutAnimal> getByAdoptant(@RequestParam Integer idPersonne) {
+        return saSrv.getByAdoptant(idPersonne);
+    }
+    
+    @GetMapping("/{statut}")
+    public List<StatutAnimal> getByStatut(Statut statut) {
+		return saSrv.getByStatut(statut);
+	}
     
 }
