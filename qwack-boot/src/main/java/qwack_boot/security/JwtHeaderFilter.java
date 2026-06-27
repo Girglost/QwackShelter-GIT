@@ -36,6 +36,14 @@ public class JwtHeaderFilter extends OncePerRequestFilter {
             String login = JwtUtils.validate(token);
             Personne personne = this.service.getByLogin(login);
 
+            /*
+             * System.out.println(authHeader);
+             * 
+             * System.out.println(login);
+             * 
+             * System.out.println(personne);
+             */
+
             if (personne != null) {
                 List<GrantedAuthority> authorities = new ArrayList<>();
 
@@ -61,7 +69,7 @@ public class JwtHeaderFilter extends OncePerRequestFilter {
                     authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
                 }
 
-                Authentication auth = new UsernamePasswordAuthenticationToken(new CustomUserDetails(personne), null,
+                Authentication auth = new UsernamePasswordAuthenticationToken(personne.getLogin(), null,
                         authorities);
 
                 SecurityContextHolder.getContext().setAuthentication(auth);

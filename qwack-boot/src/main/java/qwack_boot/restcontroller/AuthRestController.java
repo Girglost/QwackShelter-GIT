@@ -11,13 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.dto.request.AuthRequest;
+import qwack_boot.model.Personne;
 import qwack_boot.security.JwtUtils;
+import qwack_boot.service.PersonneService;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthRestController {
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private PersonneService personneSrv;
 
     @PostMapping
     public String auth(@RequestBody AuthRequest request) {
@@ -32,8 +37,25 @@ public class AuthRestController {
         return JwtUtils.generate(request.login());
     }
 
+    /*
+     * @GetMapping("/me")
+     * public String me(@AuthenticationPrincipal CustomUserDetails user) {
+     * // ATTENTION 401 CAR NARRIVE PAS A CHARGER LA PERSONEN CAR LAZY
+     * // N'arrivera plus avec les DTO
+     * 
+     * System.err.println(user.getAuthorities());
+     * return user.getPersonne().getLogin() + " - " + user.getAuthorities();
+     * }
+     */
+
     @GetMapping("/me")
-    public String me(Authentication auth) {
-        return auth.getName();
+    public String me(Authentication authentication) {
+        String login = (String) authentication.getPrincipal();
+        Personne personne = personneSrv.getByLogin(login);
+
+        System.out.println(personne);
+
+        return "OK";
+        // return personneDTO;
     }
 }

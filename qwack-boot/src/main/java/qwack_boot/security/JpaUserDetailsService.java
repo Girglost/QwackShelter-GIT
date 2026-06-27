@@ -1,6 +1,7 @@
 package qwack_boot.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,13 +28,11 @@ public class JpaUserDetailsService implements UserDetailsService {
         // System.out.println("LA PERSONNE TROUVE a le mdp : " +
         // personne.getPassword());
 
-        /*
-         * return User.builder()
-         * .username(username)
-         * .password(personne.getPassword())
-         * .build();
-         */
+        return User.builder()
+                .username(username)
+                .password(personne.getPassword())
+                .build();
 
-        return new CustomUserDetails(personne);
+        // return new CustomUserDetails(personne);
     }
 }
