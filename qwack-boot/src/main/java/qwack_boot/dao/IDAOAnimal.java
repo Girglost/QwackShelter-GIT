@@ -17,13 +17,15 @@ public interface IDAOAnimal extends JpaRepository<Animal, Integer> {
 
 	public List<Animal> findByGenre(Genre genre);
 
-	@Query("SELECT a FROM Animal a WHERE " +
-			"(:classe IS NULL OR TYPE(a) = :classe) AND " +
-			"(:genre IS NULL OR a.genre = :genre) AND " +
-			"(:statut IS NULL OR a.statutAnimal.statut = :statut)")
-	List<Animal> rechercher(@Param("classe") Class<? extends Animal> classe, // donne-moi toutes les lignes dont la
-																				// classe réelle est celle que je te
-																				// passe en paramètre.
+	@Query("""
+			    SELECT a FROM Animal a
+			    LEFT JOIN a.statutAnimal sa
+			    WHERE (:classe IS NULL OR TYPE(a) = :classe)
+			    AND (:genre IS NULL OR a.genre = :genre)
+			    AND (:statut IS NULL OR sa.statut = :statut)
+			""")
+	List<Animal> rechercher(
+			@Param("classe") Class<? extends Animal> classe,
 			@Param("genre") Genre genre,
 			@Param("statut") Statut statut);
 
