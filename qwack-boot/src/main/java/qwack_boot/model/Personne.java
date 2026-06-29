@@ -44,7 +44,7 @@ public class Personne {
 	private boolean admin;
 
 	@ManyToOne
-	@JoinColumn(name = "quack_shelter_id")
+	@JoinColumn(name = "quack_shelter")
 	private QuackShelter quackShelter;
 
 	// Concerne un visiteur

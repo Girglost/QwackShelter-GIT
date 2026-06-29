@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import qwack_boot.model.Animal;
+import qwack_boot.model.Famille;
 import qwack_boot.model.Genre;
 import qwack_boot.model.Statut;
 
@@ -16,10 +17,20 @@ public interface IDAOAnimal extends JpaRepository<Animal, Integer> {
 
 	public List<Animal> findByGenre(Genre genre);
 
-	public List<Animal> findByFamille(String type);
+	@Query("""
+			    SELECT a FROM Animal a
+			    LEFT JOIN a.statutAnimal sa
+			    WHERE (:classe IS NULL OR TYPE(a) = :classe)
+			    AND (:genre IS NULL OR a.genre = :genre)
+			    AND (:statut IS NULL OR sa.statut = :statut)
+			""")
+	List<Animal> rechercher(
+			@Param("classe") Class<? extends Animal> classe,
+			@Param("genre") Genre genre,
+			@Param("statut") Statut statut);
 
 	@Query("SELECT a FROM Animal a LEFT JOIN FETCH a.caracteres WHERE a.statutAnimal.dateDepart is null")
-	public List<Animal> findByDispoWithCaracteres();
+	public List<Animal> PresentsAuRefugeWithCaracteres();
 
 	@Query("SELECT a FROM Animal a LEFT JOIN FETCH a.historiqueSante WHERE a.id=:id")
 	public Animal findByIdWithHistoriqueSante(@Param("id") Integer idAnimal);

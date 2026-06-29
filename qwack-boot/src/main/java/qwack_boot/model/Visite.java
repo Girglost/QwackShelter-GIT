@@ -28,7 +28,7 @@ public class Visite {
 	@JoinColumn(name = "quack_shelter", nullable = false)
 	private QuackShelter quackShelter;
 
-	@Column
+	@Column(name = "date_visite")
 	private LocalDateTime dateVisite;
 
 	public Visite() {
