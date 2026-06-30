@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import qwack_boot.model.Personne;
+import qwack_boot.dto.PersonneDTO;
 import qwack_boot.service.PersonneService;
 
 @RestController
@@ -19,15 +19,28 @@ public class VisiteurRestController {
     PersonneService personneSrv;
 
     @GetMapping
-    public List<Personne> chercherTous() {
-        List<Personne> visiteurs = personneSrv.getAll();
+    public List<PersonneDTO> chercherTous() {
+        List<PersonneDTO> visiteurs = personneSrv.getAll().stream().map(visiteur -> PersonneDTO.convert(visiteur))
+                .toList();
+        ;
         return visiteurs;
     }
 
     @GetMapping("/{id}")
-    public Personne chercherParId(@PathVariable Integer id) {
-        System.out.println("On rentre ici !");
-        Personne visiteur = personneSrv.getById(id);
+    public PersonneDTO chercherParId(@PathVariable Integer id) {
+        PersonneDTO visiteur = PersonneDTO.convert(personneSrv.getById(id));
+        return visiteur;
+    }
+
+    @GetMapping("/{id}/visites")
+    public PersonneDTO chercherParIdWithVisites(@PathVariable Integer id) {
+        PersonneDTO visiteur = PersonneDTO.convertWithVisites(personneSrv.getById(id));
+        return visiteur;
+    }
+
+    @GetMapping("/{id}/adoptions")
+    public PersonneDTO chercherParIdWithAdoptions(@PathVariable Integer id) {
+        PersonneDTO visiteur = PersonneDTO.convertWithAdoptions(personneSrv.getById(id));
         return visiteur;
     }
 
