@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import qwack_boot.dao.IDAOLieu;
+import qwack_boot.model.Adresse;
 import qwack_boot.model.Lieu;
 
 @Service
@@ -34,6 +35,10 @@ public class LieuService {
 
 	public void delete(Integer id) {
 		daoLieu.deleteById(id);
+	}
+
+	public Lieu getByAdresse(Adresse adresse) {
+		return daoLieu.findByAdresse(adresse);
 	}
 
 }

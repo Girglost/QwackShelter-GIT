@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
@@ -40,6 +42,8 @@ public class PersonneService {
 	IDAOVisite daoVisite;
 	@Autowired
 	StatutAnimalService statutAnimalSrv;
+	@Autowired
+	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 	public List<Personne> getAll() {
 		return daoPersonne.findAll();
@@ -65,8 +69,60 @@ public class PersonneService {
 		return daoPersonne.findById(id).orElse(null);
 	}
 
+	public Personne getPatronById(Integer id) {
+		return daoPersonne.findPatronById(id).orElse(null);
+	}
+
+	public Personne getBenevoleById(Integer id) {
+		return daoPersonne.findBenevoleById(id).orElse(null);
+	}
+
+	public Personne getEmployeById(Integer id) {
+		return daoPersonne.findEmployeById(id).orElse(null);
+	}
+
+	public Personne getVisiteurById(Integer id) {
+		return daoPersonne.findVisiteurById(id).orElse(null);
+	}
+
 	public Personne getByIdWithVisites(Integer idPersonne) {
-		return daoPersonne.findbyIdwithVisites(idPersonne);
+		return daoPersonne.findByIdwithVisites(idPersonne);
+	}
+
+	public Personne getByIdWithAdoptions(Integer idPersonne) {
+		return daoPersonne.findByIdwithAdoptions(idPersonne);
+	}
+
+	public Personne getVisiteurByIdWithVisites(Integer idPersonne) {
+		return daoPersonne.findVisiteurByIdwithVisites(idPersonne);
+	}
+
+	public Personne getVisiteurByIdWithAdoptions(Integer idPersonne) {
+		return daoPersonne.findVisiteurByIdwithAdoptions(idPersonne);
+	}
+
+	public Personne getPatronByIdWithVisites(Integer idPersonne) {
+		return daoPersonne.findPatronByIdwithVisites(idPersonne);
+	}
+
+	public Personne getPatronByIdWithAdoptions(Integer idPersonne) {
+		return daoPersonne.findPatronByIdwithAdoptions(idPersonne);
+	}
+
+	public Personne getEmployeByIdWithVisites(Integer idPersonne) {
+		return daoPersonne.findEmployeByIdwithVisites(idPersonne);
+	}
+
+	public Personne getEmployeByIdWithAdoptions(Integer idPersonne) {
+		return daoPersonne.findEmployeByIdwithAdoptions(idPersonne);
+	}
+
+	public Personne getBenevoleByIdWithVisites(Integer idPersonne) {
+		return daoPersonne.findBenevoleByIdwithVisites(idPersonne);
+	}
+
+	public Personne getBenevoleByIdWithAdoptions(Integer idPersonne) {
+		return daoPersonne.findBenevoleByIdwithAdoptions(idPersonne);
 	}
 
 	public Personne getByLoginAndPassword(String login, String password) {
@@ -77,7 +133,7 @@ public class PersonneService {
 		return daoPersonne.existsByLogin(login);
 	}
 
-	public void insert(Personne personne) {
+	public Personne insert(Personne personne) {
 		// Permet d'insert un Lieu en cascade si il n'est pas en bdd au moment de la
 		// creation de la personne
 		Lieu lieuPersonne = personne.getHabitation();
@@ -99,19 +155,27 @@ public class PersonneService {
 		if (loginExist(personne.getLogin())) {
 			throw new IllegalArgumentException("Login déjà utilisé");
 		}
-
+		System.out.println("PASSWORD AVANT ENCODE = " + personne.getPassword());
+		personne.setPassword(passwordEncoder.encode(personne.getPassword()));
+		System.out.println("ENCODED PASSWORD = " + personne.getPassword());
 		personne = daoPersonne.save(personne);
+		return personne;
 	}
 
-	public void update(Personne personne) {
+	public Personne update(Personne personne) {
+		System.out.println("///////////////////////////////////////");
+
 		// Permet d'insert un Lieu en cascade si il n'est pas en bdd au moment de la
 		// creation de la personne
-		Lieu lieuPersonne = personne.getHabitation();
+		Lieu lieuPersonne = lieuSrv.getById(personne.getHabitation().getId()); // on recuperre le lieu, dans le cas ou
+																				// on envoie juste l'id du lieu en json
+		// Lieu lieuPersonne = personne.getHabitation();
+		System.out.println(lieuPersonne);
 		// System.out.println("Adresse de la personne "+lieuPersonne);
-		TypeLieu typeLieu = personne.getHabitation().getType();
-		Adresse adresse = personne.getHabitation().getAdresse();
+		TypeLieu typeLieu = lieuPersonne.getType();
+		Adresse adresse = lieuPersonne.getAdresse();
 
-		Lieu lieu = daoLieu.findByAdresse(adresse);
+		Lieu lieu = lieuSrv.getByAdresse(adresse);
 		// System.out.println("Lieu trouvé "+lieu);
 		if (lieu == null) {
 
@@ -121,7 +185,12 @@ public class PersonneService {
 			personne.setHabitation(lieu);
 		}
 
+		System.out.println("PASSWORD AVANT ENCODE = " + personne.getPassword());
+		personne.setPassword(passwordEncoder.encode(personne.getPassword()));
+		System.out.println("ENCODED PASSWORD = " + personne.getPassword());
+
 		personne = daoPersonne.save(personne);
+		return personne;
 	}
 
 	public void delete(Personne personne) {
@@ -145,7 +214,7 @@ public class PersonneService {
 		Visite visite = new Visite(personne, animal, quackShelter, dateVisite);
 		visiteSrv.insert(visite);
 
-		personne = daoPersonne.findbyIdwithVisites(personne.getId());
+		personne = daoPersonne.findBenevoleByIdwithVisites(personne.getId());
 
 		personne.getVisites().add(visite);
 
@@ -182,7 +251,7 @@ public class PersonneService {
 
 			animalSrv.update(animalAdopted);
 
-			personne = daoPersonne.findbyIdwithAdoptions(personne.getId());
+			personne = daoPersonne.findBenevoleByIdwithAdoptions(personne.getId());
 
 			personne.getAdoptions().add(animalAdopted.getStatutAnimal());
 			daoPersonne.save(personne);
@@ -208,4 +277,5 @@ public class PersonneService {
 	public Personne getByLogin(String login) {
 		return daoPersonne.findByLogin(login);
 	}
+
 }

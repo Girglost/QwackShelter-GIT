@@ -1,6 +1,7 @@
 package qwack_boot.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -31,11 +32,47 @@ public interface IDAOPersonne extends JpaRepository<Personne, Integer> {
 	public Personne findByLoginAndPassword(String login, String password);
 
 	@Query("SELECT p FROM Personne p LEFT JOIN FETCH p.adoptions where p.id =:idPersonne")
-	public Personne findbyIdwithAdoptions(@Param("idPersonne") Integer idPersonne);
+	public Personne findByIdwithAdoptions(@Param("idPersonne") Integer idPersonne);
 
 	@Query("SELECT p FROM Personne p LEFT JOIN FETCH p.visites where p.id =:idPersonne")
-	public Personne findbyIdwithVisites(@Param("idPersonne") Integer idPersonne);
+	public Personne findByIdwithVisites(@Param("idPersonne") Integer idPersonne);
+
+	@Query("SELECT p FROM Personne p LEFT JOIN FETCH p.visites where p.id =:idPersonne and p.role='VISITEUR'")
+	public Personne findVisiteurByIdwithVisites(@Param("idPersonne") Integer idPersonne);
+
+	@Query("SELECT p FROM Personne p LEFT JOIN FETCH p.adoptions where p.id =:idPersonne and p.role='VISITEUR'")
+	public Personne findVisiteurByIdwithAdoptions(@Param("idPersonne") Integer idPersonne);
+
+	@Query("SELECT p FROM Personne p LEFT JOIN FETCH p.visites where p.id =:idPersonne and p.role='BENEVOLE'")
+	public Personne findBenevoleByIdwithVisites(@Param("idPersonne") Integer idPersonne);
+
+	@Query("SELECT p FROM Personne p LEFT JOIN FETCH p.adoptions where p.id =:idPersonne and p.role='BENEVOLE'")
+	public Personne findBenevoleByIdwithAdoptions(@Param("idPersonne") Integer idPersonne);
+
+	@Query("SELECT p FROM Personne p LEFT JOIN FETCH p.visites where p.id =:idPersonne and p.role='PATRON'")
+	public Personne findPatronByIdwithVisites(@Param("idPersonne") Integer idPersonne);
+
+	@Query("SELECT p FROM Personne p LEFT JOIN FETCH p.adoptions where p.id =:idPersonne and p.role='PATRON'")
+	public Personne findPatronByIdwithAdoptions(@Param("idPersonne") Integer idPersonne);
+
+	@Query("SELECT p FROM Personne p LEFT JOIN FETCH p.visites where p.id =:idPersonne and p.role='EMPLOYE'")
+	public Personne findEmployeByIdwithVisites(@Param("idPersonne") Integer idPersonne);
+
+	@Query("SELECT p FROM Personne p LEFT JOIN FETCH p.adoptions where p.id =:idPersonne and p.role='EMPLOYE'")
+	public Personne findEmployeByIdwithAdoptions(@Param("idPersonne") Integer idPersonne);
 
 	public Personne findByLogin(String login);
+
+	@Query("SELECT  p from Personne p where p.role='PATRON' and p.id=:idPersonne")
+	public Optional<Personne> findPatronById(@Param("idPersonne") Integer idPersonne);
+
+	@Query("SELECT  p from Personne p where p.role='EMPLOYE' and p.id=:idPersonne")
+	public Optional<Personne> findEmployeById(@Param("idPersonne") Integer idPersonne);
+
+	@Query("SELECT  p from Personne p where p.role='BENEVOLE' and p.id=:idPersonne")
+	public Optional<Personne> findBenevoleById(@Param("idPersonne") Integer idPersonne);
+
+	@Query("SELECT  p from Personne p where p.role='VISITEUR' and p.id=:idPersonne")
+	public Optional<Personne> findVisiteurById(@Param("idPersonne") Integer idPersonne);
 
 }

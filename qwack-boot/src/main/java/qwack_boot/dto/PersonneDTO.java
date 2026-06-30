@@ -19,15 +19,15 @@ public class PersonneDTO {
     private String password;
     private Role role;
     private boolean admin;
-    @JsonFormat(pattern = "yyyy-MM-DD")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateInscription;
-    @JsonFormat(pattern = "yyyy-MM-DD")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateEngagement;
     private double salaire;
-    @JsonFormat(pattern = "yyyy-MM-DD")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateEmbauche;
     // HABITATION
-    private LieuDTO lieu;
+    private LieuDTO habitation;
 
     // QuackShelter
     private QuackShelterDTO quackShelter;
@@ -42,7 +42,7 @@ public class PersonneDTO {
         BeanUtils.copyProperties(personne, p);
 
         // HABITATION
-        p.lieu = LieuDTO.convert(personne.getHabitation());
+        p.habitation = LieuDTO.convert(personne.getHabitation());
 
         // QuackShelter
         p.quackShelter = QuackShelterDTO.convert(personne.getQuackShelter());
@@ -152,11 +152,11 @@ public class PersonneDTO {
     }
 
     public LieuDTO getLieu() {
-        return lieu;
+        return habitation;
     }
 
-    public void setLieu(LieuDTO lieu) {
-        this.lieu = lieu;
+    public void setLieu(LieuDTO habitation) {
+        this.habitation = habitation;
     }
 
     public QuackShelterDTO getQuackShelter() {
