@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.dto.request.AuthRequest;
+import qwack_boot.dto.request.AuthTokenResponse;
 import qwack_boot.model.Personne;
 import qwack_boot.security.JwtUtils;
 import qwack_boot.service.PersonneService;
@@ -25,7 +26,7 @@ public class AuthRestController {
     private PersonneService personneSrv;
 
     @PostMapping
-    public String auth(@RequestBody AuthRequest request) {
+    public AuthTokenResponse auth(@RequestBody AuthRequest request) {
         Authentication auth = new UsernamePasswordAuthenticationToken(request.login(), request.password());
         // System.out.println("DONNEES ENVOYEES");
         // System.out.println(request.login() + " - " + request.password());
@@ -34,7 +35,9 @@ public class AuthRestController {
         this.authenticationManager.authenticate(auth);
         System.out.println("AUTH " + auth.getPrincipal());
         // Si on arrive ici, c'est que l'authentification est OK
-        return JwtUtils.generate(request.login());
+        // return JwtUtils.generate(request.login());
+        return new AuthTokenResponse(JwtUtils.generate(request.login()));
+
     }
 
     /*

@@ -17,14 +17,10 @@ import qwack_boot.model.Statut;
 import qwack_boot.model.StatutAnimal;
 import qwack_boot.service.StatutAnimalService;
 
-
-
-
-
 @RestController
-@RequestMapping("/api/hSante")
+@RequestMapping("/api/statutAnimal")
 public class StatutAnimalRestController {
-    
+
     @Autowired
     StatutAnimalService saSrv;
 
@@ -32,14 +28,14 @@ public class StatutAnimalRestController {
     public List<StatutAnimal> chercherTous() {
         return saSrv.getAll();
     }
-    
+
     @GetMapping("/{id}")
     public StatutAnimal chercherParId(@RequestParam Integer id) {
         return saSrv.getById(id);
     }
-    
+
     @DeleteMapping("/{id}")
-    public void supprimer(@PathVariable Integer id){
+    public void supprimer(@PathVariable Integer id) {
         saSrv.delete(id);
     }
 
@@ -54,14 +50,14 @@ public class StatutAnimalRestController {
         saSrv.update(hs);
     }
 
-    @GetMapping("/{adoptant}")
-    public List<StatutAnimal> getByAdoptant(@RequestParam Integer idPersonne) {
-        return saSrv.getByAdoptant(idPersonne);
+    @GetMapping("/{idAdoptant}")
+    public List<StatutAnimal> getByAdoptant(@RequestParam Integer idAdoptant) {
+        return saSrv.getByAdoptant(idAdoptant);
     }
-    
+
     @GetMapping("/{statut}")
     public List<StatutAnimal> getByStatut(Statut statut) {
-		return saSrv.getByStatut(statut);
-	}
-    
+        return saSrv.getByStatut(statut);
+    }
+
 }

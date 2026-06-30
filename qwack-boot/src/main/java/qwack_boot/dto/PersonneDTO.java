@@ -151,11 +151,11 @@ public class PersonneDTO {
         this.dateEmbauche = dateEmbauche;
     }
 
-    public LieuDTO getLieu() {
+    public LieuDTO getHabitation() {
         return habitation;
     }
 
-    public void setLieu(LieuDTO habitation) {
+    public void setHabitation(LieuDTO habitation) {
         this.habitation = habitation;
     }
 

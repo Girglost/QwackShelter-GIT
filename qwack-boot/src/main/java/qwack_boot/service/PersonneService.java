@@ -164,7 +164,7 @@ public class PersonneService {
 
 	public Personne update(Personne personne) {
 		System.out.println("///////////////////////////////////////");
-
+		System.out.println(personne.getHabitation());
 		// Permet d'insert un Lieu en cascade si il n'est pas en bdd au moment de la
 		// creation de la personne
 		Lieu lieuPersonne = lieuSrv.getById(personne.getHabitation().getId()); // on recuperre le lieu, dans le cas ou
