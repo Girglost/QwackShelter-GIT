@@ -1,4 +1,4 @@
-package qwack_boot.dto;
+package qwack_boot.dto.personne;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -7,6 +7,10 @@ import org.springframework.beans.BeanUtils;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import qwack_boot.dto.LieuDTO;
+import qwack_boot.dto.QuackShelterDTO;
+import qwack_boot.dto.StatutAnimalDTO;
+import qwack_boot.dto.VisiteDTO;
 import qwack_boot.model.Personne;
 import qwack_boot.model.Role;
 

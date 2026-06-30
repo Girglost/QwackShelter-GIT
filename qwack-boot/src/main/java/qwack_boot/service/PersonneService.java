@@ -14,6 +14,7 @@ import jakarta.transaction.Transactional;
 import qwack_boot.dao.IDAOLieu;
 import qwack_boot.dao.IDAOPersonne;
 import qwack_boot.dao.IDAOVisite;
+import qwack_boot.dto.personne.VisiteurUpdateDTO;
 import qwack_boot.model.Adresse;
 import qwack_boot.model.Animal;
 import qwack_boot.model.Lieu;
@@ -23,9 +24,11 @@ import qwack_boot.model.Role;
 import qwack_boot.model.Statut;
 import qwack_boot.model.TypeLieu;
 import qwack_boot.model.Visite;
+import qwack_boot.restcontroller.AnimalRestController;
 
 @Service
 public class PersonneService {
+	private final AnimalRestController animalRestController;
 	@Autowired
 	IDAOPersonne daoPersonne;
 	@Autowired
@@ -44,6 +47,10 @@ public class PersonneService {
 	StatutAnimalService statutAnimalSrv;
 	@Autowired
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+	PersonneService(AnimalRestController animalRestController) {
+		this.animalRestController = animalRestController;
+	}
 
 	public List<Personne> getAll() {
 		return daoPersonne.findAll();
@@ -134,23 +141,19 @@ public class PersonneService {
 	}
 
 	public Personne insert(Personne personne) {
-		// Permet d'insert un Lieu en cascade si il n'est pas en bdd au moment de la
-		// creation de la personne
-		Lieu lieuPersonne = personne.getHabitation();
-		// System.out.println("Adresse de la personne "+lieuPersonne);
+
 		TypeLieu typeLieu = personne.getHabitation().getType();
 		Adresse adresse = personne.getHabitation().getAdresse();
 
 		Lieu lieu = daoLieu.findByAdresse(adresse);
-		// System.out.println("Lieu trouvé "+lieu);
+		System.out.println("Lieu trouvé " + lieu);
 		if (lieu == null) {
 
 			lieu = new Lieu(typeLieu, adresse.getNumero(), adresse.getVoie(), adresse.getVille(), adresse.getCp());
-			daoLieu.save(lieu);
-			// System.out.println(lieu);
+			lieuSrv.insert(lieu);
+
 			personne.setHabitation(lieu);
 		}
-		// System.out.println(personne);
 
 		if (loginExist(personne.getLogin())) {
 			throw new IllegalArgumentException("Login déjà utilisé");
@@ -162,35 +165,23 @@ public class PersonneService {
 		return personne;
 	}
 
-	public Personne update(Personne personne) {
-		System.out.println("///////////////////////////////////////");
-		System.out.println(personne.getHabitation());
-		// Permet d'insert un Lieu en cascade si il n'est pas en bdd au moment de la
-		// creation de la personne
-		Lieu lieuPersonne = lieuSrv.getById(personne.getHabitation().getId()); // on recuperre le lieu, dans le cas ou
-																				// on envoie juste l'id du lieu en json
-		// Lieu lieuPersonne = personne.getHabitation();
-		System.out.println(lieuPersonne);
-		// System.out.println("Adresse de la personne "+lieuPersonne);
-		TypeLieu typeLieu = lieuPersonne.getType();
-		Adresse adresse = lieuPersonne.getAdresse();
+	@Transactional
+	public Personne update(Integer id, VisiteurUpdateDTO visiteurUpdateDTO) {
 
-		Lieu lieu = lieuSrv.getByAdresse(adresse);
-		// System.out.println("Lieu trouvé "+lieu);
-		if (lieu == null) {
+		Personne personne = daoPersonne.findById(id).orElse(null);
 
-			lieu = new Lieu(typeLieu, adresse.getNumero(), adresse.getVoie(), adresse.getVille(), adresse.getCp());
-			daoLieu.save(lieu);
-			// System.out.println(lieu);
-			personne.setHabitation(lieu);
-		}
+		// on modifie les champs que VISITEUR DTO a donné
 
-		System.out.println("PASSWORD AVANT ENCODE = " + personne.getPassword());
+		personne.setNom(visiteurUpdateDTO.getNom());
+		personne.setNom(visiteurUpdateDTO.getPrenom());
+
+		Lieu lieu = lieuSrv.findOrCreate(visiteurUpdateDTO.getHabitation());
+
+		personne.setHabitation(lieu);
+
 		personne.setPassword(passwordEncoder.encode(personne.getPassword()));
-		System.out.println("ENCODED PASSWORD = " + personne.getPassword());
 
-		personne = daoPersonne.save(personne);
-		return personne;
+		return daoPersonne.save(personne);
 	}
 
 	public void delete(Personne personne) {

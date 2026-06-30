@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import qwack_boot.dto.PersonneDTO;
+import qwack_boot.dto.personne.PersonneDTO;
+import qwack_boot.dto.personne.VisiteurUpdateDTO;
 import qwack_boot.model.Personne;
 import qwack_boot.service.PersonneService;
 
@@ -57,10 +58,9 @@ public class VisiteurRestController {
     }
 
     @PutMapping("/{id}")
-    public PersonneDTO modifierVisiteur(@PathVariable Integer id, @RequestBody Personne personne) {
-
-        personne.setId(id);
-        PersonneDTO personneDTO = PersonneDTO.convert(personneSrv.update(personne));
+    public PersonneDTO modifierVisiteur(@PathVariable Integer id, @RequestBody VisiteurUpdateDTO visiteur) {
+        Personne updatedPersonne = personneSrv.update(id, visiteur);
+        PersonneDTO personneDTO = PersonneDTO.convert(updatedPersonne);
         return personneDTO;
     }
 
