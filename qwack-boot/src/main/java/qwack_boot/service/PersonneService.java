@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,11 +26,10 @@ import qwack_boot.model.Role;
 import qwack_boot.model.Statut;
 import qwack_boot.model.TypeLieu;
 import qwack_boot.model.Visite;
-import qwack_boot.restcontroller.AnimalRestController;
 
 @Service
 public class PersonneService {
-	private final AnimalRestController animalRestController;
+	private static final Logger log = LoggerFactory.getLogger(PersonneService.class);
 	@Autowired
 	IDAOPersonne daoPersonne;
 	@Autowired
@@ -47,10 +48,6 @@ public class PersonneService {
 	StatutAnimalService statutAnimalSrv;
 	@Autowired
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-	PersonneService(AnimalRestController animalRestController) {
-		this.animalRestController = animalRestController;
-	}
 
 	public List<Personne> getAll() {
 		return daoPersonne.findAll();

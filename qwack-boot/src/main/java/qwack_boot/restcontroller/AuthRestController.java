@@ -40,17 +40,6 @@ public class AuthRestController {
 
     }
 
-    /*
-     * @GetMapping("/me")
-     * public String me(@AuthenticationPrincipal CustomUserDetails user) {
-     * // ATTENTION 401 CAR NARRIVE PAS A CHARGER LA PERSONEN CAR LAZY
-     * // N'arrivera plus avec les DTO
-     * 
-     * System.err.println(user.getAuthorities());
-     * return user.getPersonne().getLogin() + " - " + user.getAuthorities();
-     * }
-     */
-
     @GetMapping("/me")
     public String me(Authentication authentication) {
         String login = (String) authentication.getPrincipal();
@@ -59,6 +48,6 @@ public class AuthRestController {
         System.out.println(personne);
 
         return "OK";
-        // return personneDTO;
+
     }
 }

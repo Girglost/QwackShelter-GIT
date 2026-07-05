@@ -81,6 +81,7 @@ public class Personne {
 		this.password = password;
 		this.habitation = habitation;
 		this.quackShelter = quackShelter;
+		this.admin = false;
 	}
 
 	// SEPARER LES ROLES quand on instancie
