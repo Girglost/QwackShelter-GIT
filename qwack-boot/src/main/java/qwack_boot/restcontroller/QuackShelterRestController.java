@@ -9,12 +9,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.model.QuackShelter;
 import qwack_boot.service.QuackShelterService;
 
-public class QuackShelterRC {
+@RestController
+@RequestMapping("/quackshelter")
+public class QuackShelterRestController {
 
      @Autowired
     QuackShelterService QuackShelterSrv;
