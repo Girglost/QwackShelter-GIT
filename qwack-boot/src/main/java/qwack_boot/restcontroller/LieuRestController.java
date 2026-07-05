@@ -31,7 +31,7 @@ public class LieuRestController {
     }
     
     @GetMapping("/{id}")
-    public Lieu chercherParId(@RequestParam Integer id) {
+    public Lieu chercherParId(@PathVariable Integer id) {
         return LieuSrv.getById(id);
     }
     
