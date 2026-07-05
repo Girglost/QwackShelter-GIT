@@ -10,14 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.model.Emplacement;
+import qwack_boot.model.typeBox;
 import qwack_boot.service.EmplacementService;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
-
-
-
 
 
 @RestController
@@ -52,5 +50,23 @@ public class EmplacementRestController {
         emp.setId(id);
         EmpSrv.update(emp);
     }
+
+
+    @GetMapping("/complet")
+    public List<Emplacement> getByCompletTrue() {
+        return EmpSrv.getByCompletTrue();
+    }
+
+    @GetMapping("/dispo")
+    public List<Emplacement> getByCompletFalse() {
+        return EmpSrv.getByCompletFalse();
+    }
+
+    @GetMapping("/{box}")
+    public List<Emplacement> getByBox(@RequestParam typeBox box) {
+        return EmpSrv.getByBox(box);
+    }
+    
+    
     
 }

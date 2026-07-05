@@ -1,5 +1,7 @@
 package qwack_boot.model;
 
+import org.hibernate.annotations.Check;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -8,16 +10,18 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 
 @Entity
 @Table(name = "emplacement")
+@Check(constraints = "nb_place >= 1")
 public class Emplacement {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	// Je veux mettre une condition min=1
+	@Min(value=1)
 	@Column(name = "nb_place", nullable = false)
 	private int nbPlace;
 

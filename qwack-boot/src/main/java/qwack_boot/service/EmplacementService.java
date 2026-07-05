@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import qwack_boot.dao.IDAOEmplacement;
 import qwack_boot.model.Emplacement;
+import qwack_boot.model.typeBox;
 
 @Service
 public class EmplacementService {
@@ -36,4 +37,18 @@ public class EmplacementService {
 		daoEmplacement.deleteById(id);
 	}
 
+	// --------------- Perso ----------------
+
+	public List<Emplacement> getByCompletTrue(){
+		return daoEmplacement.findByCompletTrue();
+	}
+	
+	public List<Emplacement> getByCompletFalse(){
+		return daoEmplacement.findByCompletFalse();
+
+	}
+	
+	public List<Emplacement> getByBox(typeBox box){
+		return daoEmplacement.findByBox(box);
+	}
 }
