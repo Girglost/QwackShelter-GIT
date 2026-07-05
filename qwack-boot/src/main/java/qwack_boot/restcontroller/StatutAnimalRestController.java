@@ -57,12 +57,12 @@ public class StatutAnimalRestController {
         return saSrv.getByDispo();
     }
     
-    @GetMapping("/{idAdoptant}")
+    @GetMapping("/adoptant_{idAdoptant}")
     public List<StatutAnimal> getByAdoptant(@RequestParam Integer idAdoptant) {
         return saSrv.getByAdoptantId(idAdoptant);
     }
 
-    @GetMapping("/{idAnimal}")
+    @GetMapping("/animal_{idAnimal}")
     public StatutAnimal getByAnimal(@RequestParam Integer id) {
         return saSrv.getByAnimalId(id);
     }
