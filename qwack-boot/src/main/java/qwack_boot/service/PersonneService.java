@@ -24,6 +24,7 @@ import qwack_boot.model.Personne;
 import qwack_boot.model.QuackShelter;
 import qwack_boot.model.Role;
 import qwack_boot.model.Statut;
+import qwack_boot.model.StatutValidation;
 import qwack_boot.model.TypeLieu;
 import qwack_boot.model.Visite;
 
@@ -199,16 +200,19 @@ public class PersonneService {
 
 		LocalDateTime dateVisite = LocalDateTime.parse(date, formatter);
 
-		Visite visite = new Visite(personne, animal, quackShelter, dateVisite);
+		Visite visite = new Visite(personne, animal, quackShelter, dateVisite, StatutValidation.EN_ATTENTE);
 		visiteSrv.insert(visite);
 
-		personne = daoPersonne.findBenevoleByIdwithVisites(personne.getId());
-
-		personne.getVisites().add(visite);
-
-		daoPersonne.save(personne);
-
-		System.out.println("Votre visite est reservé le " + visite.getDateVisite());
+		/*
+		 * personne = daoPersonne.findBenevoleByIdwithVisites(personne.getId());
+		 * List<Visite> visites = personne.getVisites();
+		 * visites.add(visite);
+		 * personne.setVisites(visites);
+		 * 
+		 * // Pas besoin de ca, c'est géré coté visite
+		 * daoPersonne.save(personne);
+		 */
+		System.out.println("Votre demande de visite est en attente pour : " + visite.getDateVisite());
 	}
 
 	public void faireDon(int idQuackShelter, double don) {

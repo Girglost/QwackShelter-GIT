@@ -25,12 +25,12 @@ public class VisiteService {
 		return daoVisite.findById(id).orElse(null);
 	}
 
-	public void insert(Visite visite) {
-		daoVisite.save(visite);
+	public Visite insert(Visite visite) {
+		return daoVisite.save(visite);
 	}
 
-	public void update(Visite emp) {
-		daoVisite.save(emp);
+	public Visite update(Visite emp) {
+		return daoVisite.save(emp);
 	}
 
 	public void delete(Integer id) {

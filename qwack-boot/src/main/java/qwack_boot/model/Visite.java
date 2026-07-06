@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,14 +33,20 @@ public class Visite {
 	@Column(name = "date_visite")
 	private LocalDateTime dateVisite;
 
+	@Column(name = "statut", nullable = true)
+	@Enumerated(EnumType.STRING)
+	private StatutValidation statutVisite;
+
 	public Visite() {
 	}
 
-	public Visite(Personne personne, Animal animal, QuackShelter quackShelter, LocalDateTime dateVisite) {
+	public Visite(Personne personne, Animal animal, QuackShelter quackShelter, LocalDateTime dateVisite,
+			StatutValidation statutVisite) {
 		this.visiteur = personne;
 		this.animal = animal;
 		this.quackShelter = quackShelter;
 		this.dateVisite = dateVisite;
+		this.statutVisite = statutVisite;
 	}
 
 	public Animal getAnimal() {
@@ -81,10 +89,18 @@ public class Visite {
 		this.dateVisite = dateVisite;
 	}
 
+	public StatutValidation getStatutVisite() {
+		return statutVisite;
+	}
+
+	public void setStatutVisite(StatutValidation statutVisite) {
+		this.statutVisite = statutVisite;
+	}
+
 	@Override
 	public String toString() {
 		return "Visite [id=" + id + ", visiteur=" + visiteur + ", animal=" + animal + ", quackShelter=" + quackShelter
-				+ ", dateVisite=" + dateVisite + "]";
+				+ ", dateVisite=" + dateVisite + ", statutVisite=" + statutVisite + "]";
 	}
 
 }

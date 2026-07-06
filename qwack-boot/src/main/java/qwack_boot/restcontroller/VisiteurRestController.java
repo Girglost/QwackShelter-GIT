@@ -1,5 +1,6 @@
 package qwack_boot.restcontroller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import qwack_boot.api.requestDTO.personne.CreateVisiteurRequest;
 import qwack_boot.api.requestDTO.personne.UpdateVisiteurRequest;
 import qwack_boot.api.responseDTO.personne.VisiteurResponse;
+import qwack_boot.dto.QuackShelterDTO;
+import qwack_boot.dto.VisiteDTO;
 import qwack_boot.model.Personne;
+import qwack_boot.model.QuackShelter;
 import qwack_boot.service.PersonneService;
+import qwack_boot.service.QuackShelterService;
 import qwack_boot.service.VisiteurService;
 
 @RestController
@@ -27,6 +32,8 @@ public class VisiteurRestController {
     PersonneService personneSrv;
     @Autowired
     VisiteurService visiteurSrv;
+    @Autowired
+    QuackShelterService quackSrv;
 
     @GetMapping
     public List<VisiteurResponse> chercherTous() {
@@ -77,6 +84,32 @@ public class VisiteurRestController {
         personneSrv.deleteById(id);
 
         return VisiteurResponse.convert(deletedVisiteur);
+    }
+
+    @PostMapping("/{id}/don")
+    public QuackShelterDTO faireUnDon(@PathVariable Integer id, @RequestBody double don) {
+        Personne visiteur = visiteurSrv.getVisiteurById(id);
+        QuackShelter quackShelter = visiteur.getQuackShelter();
+        visiteurSrv.faireDon(quackShelter.getId(), don);
+
+        return QuackShelterDTO.convert(quackShelter);
+    }
+
+    @PostMapping("/{id}/engaged")
+    public Personne devenirBenevole(@PathVariable Integer id) {
+        Personne visiteur = visiteurSrv.getVisiteurById(id);
+        visiteurSrv.transformerEnBenevole(visiteur);
+        return visiteur;
+    }
+
+    @PostMapping("/visiter")
+    public VisiteDTO demanderVisite(@RequestBody VisiteDTO demandeVisite) {
+        System.out.println("DEMANDE DE VISITE");
+        int visiteurId = demandeVisite.getIdVisiteur();
+        int quackShelterId = demandeVisite.getIdQuackShelter();
+        int animalId = demandeVisite.getIdAnimal();
+        LocalDateTime dateVisite = demandeVisite.getDateVisite();
+        return VisiteDTO.convert(visiteurSrv.demanderVisite(visiteurId, quackShelterId, dateVisite, animalId));
     }
 
 }

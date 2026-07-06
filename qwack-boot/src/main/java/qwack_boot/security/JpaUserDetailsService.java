@@ -19,7 +19,7 @@ public class JpaUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         // System.out.println("USERNAME DANS DETAILSSERVICE : " + username);
-        Personne personne = this.personneSrv.getByLogin(username);
+        Personne personne = personneSrv.getByLogin(username);
 
         if (personne == null) {
             throw new UsernameNotFoundException("Username not found");
