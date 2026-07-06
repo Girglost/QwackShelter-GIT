@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import qwack_boot.dao.IDAOVisite;
+import qwack_boot.model.StatutValidation;
 import qwack_boot.model.Visite;
 
 @Service
@@ -56,16 +57,16 @@ public class VisiteService {
 		return daoVisite.findAllByDateVisiteBetween(dateDebut, dateFin);
 	}
 
-	public long NbVisitesByIdAnimalAndIdVisiteur(int idAnimal, int idVisiteur) {
-		return daoVisite.NbVisitesByIdAnimalAndIdVisiteur(idAnimal, idVisiteur);
+	public long NbVisitesByIdAnimalAndIdVisiteur(int idAnimal, int idVisiteur, StatutValidation statutVisite) {
+		return daoVisite.NbVisitesByIdAnimalAndIdVisiteur(idAnimal, idVisiteur, statutVisite);
 	}
 
-	public long NbVisitesByIdAnimal(int idAnimal) {
-		return daoVisite.NbVisitesByIdAnimal(idAnimal);
+	public long NbVisitesByIdAnimal(int idAnimal, StatutValidation statutVisite) {
+		return daoVisite.NbVisitesByIdAnimal(idAnimal, statutVisite);
 	}
 
-	public long NbVisitesByIdVisiteur(int idVisiteur) {
-		return daoVisite.NbVisitesByIdVisiteur(idVisiteur);
+	public long NbVisitesByIdVisiteur(int idVisiteur, StatutValidation statutVisite) {
+		return daoVisite.NbVisitesByIdVisiteur(idVisiteur, statutVisite);
 	}
 
 }

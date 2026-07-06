@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import qwack_boot.api.requestDTO.AdoptionRequest;
 import qwack_boot.api.requestDTO.personne.CreateVisiteurRequest;
 import qwack_boot.api.requestDTO.personne.UpdateVisiteurRequest;
 import qwack_boot.api.responseDTO.personne.VisiteurResponse;
@@ -110,6 +111,16 @@ public class VisiteurRestController {
         int animalId = demandeVisite.getIdAnimal();
         LocalDateTime dateVisite = demandeVisite.getDateVisite();
         return VisiteDTO.convert(visiteurSrv.demanderVisite(visiteurId, quackShelterId, dateVisite, animalId));
+    }
+
+    @PostMapping("/adopter")
+    public AdoptionRequest demanderAdoption(@RequestBody AdoptionRequest demandeAdoption) {
+        System.out.println("DEMANDE D'ADOPTION");
+        int visiteurId = demandeAdoption.getIdPersonne();
+        int quackShelterId = demandeAdoption.getIdQuackShelter();
+        int animalId = demandeAdoption.getIdAnimal();
+
+        return AdoptionRequest.convert(visiteurSrv.demanderAdoption(quackShelterId, visiteurId, animalId));
     }
 
 }

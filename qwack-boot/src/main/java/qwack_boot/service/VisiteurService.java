@@ -20,6 +20,8 @@ import qwack_boot.model.Lieu;
 import qwack_boot.model.Personne;
 import qwack_boot.model.QuackShelter;
 import qwack_boot.model.Role;
+import qwack_boot.model.Statut;
+import qwack_boot.model.StatutAnimal;
 import qwack_boot.model.StatutValidation;
 import qwack_boot.model.Visite;
 
@@ -32,6 +34,9 @@ public class VisiteurService {
 
     @Autowired
     PersonneService personneSrv;
+
+    @Autowired
+    StatutAnimalService statutAnimalSrv;
 
     @Autowired
     LieuService lieuSrv;
@@ -175,6 +180,33 @@ public class VisiteurService {
                 + " est en attente ");
 
         return visiteSrv.insert(visite);
+    }
+
+    @Transactional
+    public StatutAnimal demanderAdoption(int idQuackShelter, int idPersonne, int idAnimal) {
+
+        QuackShelter quackShelter = quackSrv.getById(idQuackShelter);
+        Animal animalAdopted = animalSrv.getById(idAnimal);
+        Personne personne = personneSrv.getById(idPersonne);
+
+        StatutAnimal statutAdopted = statutAnimalSrv.getByAnimalId(idAnimal);
+        long nbVisite = visiteSrv.NbVisitesByIdAnimalAndIdVisiteur(idAnimal, idPersonne, StatutValidation.ACCEPTE);
+
+        if (nbVisite >= 1) {
+
+            statutAdopted.setAdoptant(personne);
+            statutAdopted.setAnimal(animalAdopted);
+            statutAdopted.setStatut(Statut.Adopte);
+            statutAdopted.setDateDepart(LocalDate.now());
+
+            System.out.println("Adoption réussi ! ");
+            System.out.println(animalAdopted.getStatutAnimal());
+
+            System.out.println(animalAdopted + " a bien été adopté !");
+        } else {
+            System.out.println("Pour adopter un animal, vous devez lui rendre visite");
+        }
+        return statutAnimalSrv.update(statutAdopted);
     }
 
 }
