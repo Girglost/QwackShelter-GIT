@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import qwack_boot.api.requestDTO.AdoptionRequest;
 import qwack_boot.api.requestDTO.personne.CreateVisiteurRequest;
 import qwack_boot.api.requestDTO.personne.UpdateVisiteurRequest;
+import qwack_boot.api.responseDTO.StatutAnimalReponse;
 import qwack_boot.api.responseDTO.personne.VisiteurResponse;
 import qwack_boot.dto.QuackShelterDTO;
 import qwack_boot.dto.VisiteDTO;
@@ -23,6 +24,7 @@ import qwack_boot.model.Personne;
 import qwack_boot.model.QuackShelter;
 import qwack_boot.service.PersonneService;
 import qwack_boot.service.QuackShelterService;
+import qwack_boot.service.StatutAnimalService;
 import qwack_boot.service.VisiteurService;
 
 @RestController
@@ -35,6 +37,9 @@ public class VisiteurRestController {
     VisiteurService visiteurSrv;
     @Autowired
     QuackShelterService quackSrv;
+
+    @Autowired
+    StatutAnimalService statutAnimalSrv;
 
     @GetMapping
     public List<VisiteurResponse> chercherTous() {
@@ -72,9 +77,6 @@ public class VisiteurRestController {
     public VisiteurResponse modifierVisiteur(@PathVariable Integer id,
             @RequestBody UpdateVisiteurRequest visiteurRequest) {
         Personne visiteur = visiteurSrv.updateVisiteur(id, visiteurRequest);
-        System.out.println("APRES UPDATE ///////////////");
-        System.out.println(visiteur);
-        System.out.println("///////////////");
         return VisiteurResponse.convert(visiteur);
     }
 
@@ -114,13 +116,13 @@ public class VisiteurRestController {
     }
 
     @PostMapping("/adopter")
-    public String demanderAdoption(@RequestBody AdoptionRequest demandeAdoption) {
+    public StatutAnimalReponse demanderAdoption(@RequestBody AdoptionRequest demandeAdoption) {
         System.out.println("DEMANDE D'ADOPTION");
         int visiteurId = demandeAdoption.getIdPersonne();
         int quackShelterId = demandeAdoption.getIdQuackShelter();
         int animalId = demandeAdoption.getIdAnimal();
 
-        return " Demande d'adoption : " + animalId;
+        return StatutAnimalReponse.convert(visiteurSrv.demanderAdoption(quackShelterId, visiteurId, animalId));
     }
 
 }
