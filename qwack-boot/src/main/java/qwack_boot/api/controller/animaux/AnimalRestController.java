@@ -1,4 +1,4 @@
-package qwack_boot.api;
+package qwack_boot.api.controller.animaux;
 
 import java.util.List;
 

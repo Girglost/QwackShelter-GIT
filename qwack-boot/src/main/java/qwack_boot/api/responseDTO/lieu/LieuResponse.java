@@ -1,4 +1,4 @@
-package qwack_boot.dto.response;
+package qwack_boot.api.responseDTO.lieu;
 import qwack_boot.model.Lieu;
 import qwack_boot.model.TypeLieu;
 

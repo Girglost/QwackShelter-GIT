@@ -1,10 +1,10 @@
-package qwack_boot.dto.request;
+package qwack_boot.api.requestDTO.lieu;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import qwack_boot.model.TypeLieu;
 
-public class LieuUpdateRequest {
+public class UpdateLieuRequest {
 
     @NotNull
     private TypeLieu type;
@@ -21,7 +21,7 @@ public class LieuUpdateRequest {
     @NotBlank
     private String cp;
 
-    public LieuUpdateRequest() {
+    public UpdateLieuRequest() {
     }
 
     public TypeLieu getType() {

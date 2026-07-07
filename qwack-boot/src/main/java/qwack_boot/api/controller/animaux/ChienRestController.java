@@ -1,4 +1,4 @@
-package qwack_boot.api;
+package qwack_boot.api.controller.animaux;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;

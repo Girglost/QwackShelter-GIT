@@ -1,12 +1,12 @@
 package qwack_boot.api.requestDTO.personne;
 
-import qwack_boot.api.requestDTO.LieuRequest;
+import qwack_boot.api.requestDTO.lieu.CreateLieuRequest;
 
 public class UpdateVisiteurRequest {
     private String nom;
     private String prenom;
     private String password;
-    private LieuRequest habitation;
+    private CreateLieuRequest habitation;
     private Integer quackShelterId;
 
     public String getNom() {
@@ -33,11 +33,11 @@ public class UpdateVisiteurRequest {
         this.password = password;
     }
 
-    public LieuRequest getHabitation() {
+    public CreateLieuRequest getHabitation() {
         return habitation;
     }
 
-    public void setHabitation(LieuRequest habitation) {
+    public void setHabitation(CreateLieuRequest habitation) {
         this.habitation = habitation;
     }
 

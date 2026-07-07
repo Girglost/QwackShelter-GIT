@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import qwack_boot.api.requestDTO.LieuRequest;
+import qwack_boot.api.requestDTO.lieu.CreateLieuRequest;
 import qwack_boot.dao.IDAOLieu;
 import qwack_boot.model.Adresse;
 import qwack_boot.model.Lieu;
@@ -44,7 +44,7 @@ public class LieuService {
 
 	// Dans les cas ou on va modifier une personne, on va chercher si le Lieu
 	// existe, sinon créé un nouveau lieu
-	public Lieu findOrCreate(LieuRequest lieu) {
+	public Lieu findOrCreate(CreateLieuRequest lieu) {
 
 		System.out.println("RECHERCHE DU LIEU ////////////");
 		System.out.println(lieu.getAdresse());
