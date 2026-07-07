@@ -1,4 +1,4 @@
-package qwack_boot.restcontroller;
+package qwack_boot.api.controller.personne;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -46,19 +46,19 @@ public class VisiteurRestController {
 
     @GetMapping("/{id}")
     public VisiteurResponse chercherParId(@PathVariable Integer id) {
-        VisiteurResponse visiteur = VisiteurResponse.convert(personneSrv.getVisiteurById(id));
+        VisiteurResponse visiteur = VisiteurResponse.convert(visiteurSrv.getVisiteurById(id));
         return visiteur;
     }
 
     @GetMapping("/{id}/visites")
     public VisiteurResponse chercherParIdWithVisites(@PathVariable Integer id) {
-        VisiteurResponse visiteur = VisiteurResponse.convertWithVisites(personneSrv.getVisiteurByIdWithVisites(id));
+        VisiteurResponse visiteur = VisiteurResponse.convertWithVisites(visiteurSrv.getVisiteurByIdWithVisites(id));
         return visiteur;
     }
 
     @GetMapping("/{id}/adoptions")
     public VisiteurResponse chercherParIdWithAdoptions(@PathVariable Integer id) {
-        VisiteurResponse visiteur = VisiteurResponse.convertWithAdoptions(personneSrv.getVisiteurByIdWithAdoptions(id));
+        VisiteurResponse visiteur = VisiteurResponse.convertWithAdoptions(visiteurSrv.getVisiteurByIdWithAdoptions(id));
         return visiteur;
     }
 
@@ -81,7 +81,7 @@ public class VisiteurRestController {
     @DeleteMapping("/{id}")
     public VisiteurResponse deleteVisiteur(@PathVariable Integer id) {
 
-        Personne deletedVisiteur = personneSrv.getVisiteurById(id);
+        Personne deletedVisiteur = visiteurSrv.getVisiteurById(id);
         personneSrv.deleteById(id);
 
         return VisiteurResponse.convert(deletedVisiteur);
@@ -91,7 +91,7 @@ public class VisiteurRestController {
     public QuackShelterDTO faireUnDon(@PathVariable Integer id, @RequestBody double don) {
         Personne visiteur = visiteurSrv.getVisiteurById(id);
         QuackShelter quackShelter = visiteur.getQuackShelter();
-        visiteurSrv.faireDon(quackShelter.getId(), don);
+        personneSrv.faireDon(quackShelter.getId(), don);
 
         return QuackShelterDTO.convert(quackShelter);
     }
@@ -114,13 +114,13 @@ public class VisiteurRestController {
     }
 
     @PostMapping("/adopter")
-    public AdoptionRequest demanderAdoption(@RequestBody AdoptionRequest demandeAdoption) {
+    public String demanderAdoption(@RequestBody AdoptionRequest demandeAdoption) {
         System.out.println("DEMANDE D'ADOPTION");
         int visiteurId = demandeAdoption.getIdPersonne();
         int quackShelterId = demandeAdoption.getIdQuackShelter();
         int animalId = demandeAdoption.getIdAnimal();
 
-        return AdoptionRequest.convert(visiteurSrv.demanderAdoption(quackShelterId, visiteurId, animalId));
+        return " Demande d'adoption : " + animalId;
     }
 
 }

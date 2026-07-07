@@ -20,7 +20,6 @@ import qwack_boot.model.Lieu;
 import qwack_boot.model.Personne;
 import qwack_boot.model.QuackShelter;
 import qwack_boot.model.Role;
-import qwack_boot.model.Statut;
 import qwack_boot.model.StatutAnimal;
 import qwack_boot.model.StatutValidation;
 import qwack_boot.model.Visite;
@@ -131,14 +130,6 @@ public class VisiteurService {
     ///////////////////////////////////////////////////////////////////////////// *
     ///////////////////////////////////////////////////////////////////////////// */
 
-    public void faireDon(int idQuackShelter, double don) {
-        QuackShelter quackShelter = quackSrv.getById(idQuackShelter);
-        quackShelter.setTresorerie(quackShelter.getTresorerie() + don);
-        quackSrv.update(quackShelter);
-        System.out.println("La trésorerie du quackShelter s'élève maintenant a " + quackShelter.getTresorerie() + " €");
-
-    }
-
     @Transactional
     public Personne transformerEnBenevole(Personne personne) {
         personne.setRole(Role.BENEVOLE);
@@ -188,24 +179,31 @@ public class VisiteurService {
         QuackShelter quackShelter = quackSrv.getById(idQuackShelter);
         Animal animalAdopted = animalSrv.getById(idAnimal);
         Personne personne = personneSrv.getById(idPersonne);
+        System.out.println("Personne trouvé :" + personne);
 
         StatutAnimal statutAdopted = statutAnimalSrv.getByAnimalId(idAnimal);
+        System.out.println("StatutAnimal trouvé :" + statutAdopted);
         long nbVisite = visiteSrv.NbVisitesByIdAnimalAndIdVisiteur(idAnimal, idPersonne, StatutValidation.ACCEPTE);
 
-        if (nbVisite >= 1) {
+        /* if (nbVisite >= 1) { */
 
-            statutAdopted.setAdoptant(personne);
-            statutAdopted.setAnimal(animalAdopted);
-            statutAdopted.setStatut(Statut.Adopte);
-            statutAdopted.setDateDepart(LocalDate.now());
+        /*
+         * statutAdopted.setAdoptant(personne);
+         * statutAdopted.setAnimal(animalAdopted);
+         * statutAdopted.setStatut(Statut.Adopte);
+         * statutAdopted.setDateDepart(LocalDate.now());
+         */
 
-            System.out.println("Adoption réussi ! ");
-            System.out.println(animalAdopted.getStatutAnimal());
+        statutAdopted.setStatutAdoption(StatutValidation.EN_ATTENTE);
 
-            System.out.println(animalAdopted + " a bien été adopté !");
-        } else {
-            System.out.println("Pour adopter un animal, vous devez lui rendre visite");
-        }
+        System.out.println(animalAdopted.getStatutAnimal());
+        System.out.println("Adoption demandé, en attente de validation ! ");
+        // System.out.println(animalAdopted + " a bien été adopté !");
+        /*
+         * } else {
+         * System.out.println("Pour adopter un animal, vous devez lui rendre visite");
+         * }
+         */
         return statutAnimalSrv.update(statutAdopted);
     }
 
