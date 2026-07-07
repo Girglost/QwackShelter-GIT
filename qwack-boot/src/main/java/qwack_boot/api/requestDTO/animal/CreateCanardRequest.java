@@ -1,12 +1,14 @@
 package qwack_boot.api.requestDTO.animal;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
+import qwack_boot.model.Canard;
+import qwack_boot.model.Caractere;
 import qwack_boot.model.Famille;
 import qwack_boot.model.Genre;
-import qwack_boot.model.Canard;
 
 public class CreateCanardRequest {
 
@@ -17,6 +19,9 @@ public class CreateCanardRequest {
     private String traitement;
     private Famille famille;
     private Genre genre;
+
+    
+    private List<Caractere> caracteres;
 
     private Integer qwackShelterId;
 
@@ -31,7 +36,7 @@ public class CreateCanardRequest {
 
         BeanUtils.copyProperties(canard, p);
 
-        p.setqwackShelterId(canard.getQuackShelter().getId());
+        p.setQwackShelterId(canard.getQuackShelter().getId());
 
         return p;
     }
@@ -100,12 +105,12 @@ public class CreateCanardRequest {
         this.genre = genre;
     }
 
-    public Integer getqwackShelterId() {
+    public Integer getQwackShelterId() {
         return qwackShelterId;
     }
 
-    public void setqwackShelterId(Integer idQuackShelter) {
-        this.qwackShelterId = idQuackShelter;
+    public void setQwackShelterId(Integer qwackShelterId) {
+        this.qwackShelterId = qwackShelterId;
     }
 
     public boolean isCapaciteVol() {
@@ -130,5 +135,13 @@ public class CreateCanardRequest {
 
     public void setRace(String race) {
         this.race = race;
+    }
+
+    public List<Caractere> getCaracteres() {
+        return caracteres;
+    }
+
+    public void setCaracteres(List<Caractere> caracteres) {
+        this.caracteres = caracteres;
     }
 }

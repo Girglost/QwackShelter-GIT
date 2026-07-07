@@ -11,7 +11,6 @@ import qwack_boot.model.Genre;
 
 public class UpdateChatRequest {
     private String nomAnimal;
-    private LocalDate dateNaissance;
     private String couleur;
     private String regimeAlimentaire;
     private String traitement;
@@ -31,10 +30,6 @@ public class UpdateChatRequest {
 
     public void setNomAnimal(String nomAnimal) {
         this.nomAnimal = nomAnimal;
-    }
-
-    public void setDateNaissance(LocalDate dateNaissance) {
-        this.dateNaissance = dateNaissance;
     }
 
     public void setCouleur(String couleur) {
@@ -77,9 +72,6 @@ public class UpdateChatRequest {
         return nomAnimal;
     }
 
-    public LocalDate getDateNaissance() {
-        return dateNaissance;
-    }
 
     public String getCouleur() {
         return couleur;

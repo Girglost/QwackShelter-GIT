@@ -1,9 +1,11 @@
 package qwack_boot.api.requestDTO.animal;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
+import qwack_boot.model.Caractere;
 import qwack_boot.model.Famille;
 import qwack_boot.model.Genre;
 import qwack_boot.model.Poule;
@@ -18,6 +20,8 @@ public class CreatePouleRequest {
     private Famille famille;
     private Genre genre;
 
+    private List<Caractere> caracteres;
+
     private Integer qwackShelterId;
 
     private boolean capaciteVol;
@@ -30,12 +34,12 @@ public class CreatePouleRequest {
 
         BeanUtils.copyProperties(poule, p);
 
-        p.setqwackShelterId(poule.getQuackShelter().getId());
+        p.setQwackShelterId(poule.getQuackShelter().getId());
 
         return p;
     }
 
-
+    
 
     public String getNomAnimal() {
         return nomAnimal;
@@ -93,11 +97,11 @@ public class CreatePouleRequest {
         this.genre = genre;
     }
 
-    public Integer getqwackShelterId() {
+    public Integer getQwackShelterId() {
         return qwackShelterId;
     }
 
-    public void setqwackShelterId(Integer idQuackShelter) {
+    public void setQwackShelterId(Integer idQuackShelter) {
         this.qwackShelterId = idQuackShelter;
     }
 
@@ -123,5 +127,17 @@ public class CreatePouleRequest {
 
     public void setRace(String race) {
         this.race = race;
+    }
+
+
+
+    public List<Caractere> getCaracteres() {
+        return caracteres;
+    }
+
+
+
+    public void setCaracteres(List<Caractere> caracteres) {
+        this.caracteres = caracteres;
     }
 }

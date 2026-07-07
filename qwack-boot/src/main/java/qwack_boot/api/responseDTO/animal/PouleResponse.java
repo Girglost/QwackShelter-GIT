@@ -8,7 +8,7 @@ import qwack_boot.model.Famille;
 import qwack_boot.model.Genre;
 import qwack_boot.model.Poule;
 
-public class CreatePouleRequest {
+public class PouleResponse {
 
     private Integer id;
     private String nomAnimal;
@@ -26,8 +26,8 @@ public class CreatePouleRequest {
 
     private String race;
 
-    public static CreatePouleRequest convert(Poule poule) {
-        CreatePouleRequest p = new CreatePouleRequest();
+    public static PouleResponse convert(Poule poule) {
+        PouleResponse p = new PouleResponse();
 
         BeanUtils.copyProperties(poule, p);
 

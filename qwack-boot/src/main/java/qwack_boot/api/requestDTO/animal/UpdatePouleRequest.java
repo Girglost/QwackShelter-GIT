@@ -1,9 +1,10 @@
 package qwack_boot.api.requestDTO.animal;
 
-import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
+import qwack_boot.model.Caractere;
 import qwack_boot.model.Famille;
 import qwack_boot.model.Genre;
 import qwack_boot.model.Poule;
@@ -11,12 +12,13 @@ import qwack_boot.model.Poule;
 public class UpdatePouleRequest {
 
     private String nomAnimal;
-    private LocalDate dateNaissance;
     private String couleur;
     private String regimeAlimentaire;
     private String traitement;
     private Famille famille;
     private Genre genre;
+
+    private List<Caractere> caracteres;
 
     private Integer qwackShelterId;
 
@@ -37,20 +39,36 @@ public class UpdatePouleRequest {
 
 
 
+    public List<Caractere> getCaracteres() {
+        return caracteres;
+    }
+
+
+
+    public void setCaracteres(List<Caractere> caracteres) {
+        this.caracteres = caracteres;
+    }
+
+
+
+    public Integer getQwackShelterId() {
+        return qwackShelterId;
+    }
+
+
+
+    public void setQwackShelterId(Integer qwackShelterId) {
+        this.qwackShelterId = qwackShelterId;
+    }
+
+
+
     public String getNomAnimal() {
         return nomAnimal;
     }
 
     public void setNomAnimal(String nomAnimal) {
         this.nomAnimal = nomAnimal;
-    }
-
-    public LocalDate getDateNaissance() {
-        return dateNaissance;
-    }
-
-    public void setDateNaissance(LocalDate dateNaissance) {
-        this.dateNaissance = dateNaissance;
     }
 
     public String getCouleur() {

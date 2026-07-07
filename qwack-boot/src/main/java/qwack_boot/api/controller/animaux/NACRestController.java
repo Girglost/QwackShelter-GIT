@@ -10,25 +10,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.api.requestDTO.animal.CreateNACRequest;
 import qwack_boot.api.requestDTO.animal.UpdateNACRequest;
-import qwack_boot.dao.IDAOAnimal;
+
+import qwack_boot.api.responseDTO.animal.NACResponse;
+
 import qwack_boot.model.NAC;
+
+import qwack_boot.service.NACService;
 
 @RestController
 @RequestMapping("api/nac")
 public class NACRestController {
 
     @Autowired
-    private IDAOAnimal daoAnimal;
+    private NACService srvNAC;
 
     @PostMapping
-    public CreateNACRequest ajouter(@RequestBody NAC nac) {
-        return CreateNACRequest.convert((NAC) daoAnimal.save(nac));
+    public NACResponse ajouter(@RequestBody CreateNACRequest request) {
+        NAC nac = srvNAC.insert(request);
+        return NACResponse.convert(nac);
     }
 
     @PutMapping("/{id}")
-    public UpdateNACRequest modifier(@PathVariable Integer id, @RequestBody NAC nac) {
-        nac.setId(id);
-        return UpdateNACRequest.convert((NAC) daoAnimal.save(nac));
+    public NACResponse modifier(@PathVariable Integer id, @RequestBody UpdateNACRequest request) {
+        NAC nac = srvNAC.update(id, request);
+
+        return NACResponse.convert(nac);
+
     }
 
 }

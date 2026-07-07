@@ -12,7 +12,6 @@ import qwack_boot.model.NAC;
 public class UpdateNACRequest {
     
      private String nomAnimal;
-    private LocalDate dateNaissance;
     private String couleur;
     private String regimeAlimentaire;
     private String traitement;
@@ -32,10 +31,6 @@ public class UpdateNACRequest {
 
     public void setNomAnimal(String nomAnimal) {
         this.nomAnimal = nomAnimal;
-    }
-
-    public void setDateNaissance(LocalDate dateNaissance) {
-        this.dateNaissance = dateNaissance;
     }
 
     public void setCouleur(String couleur) {
@@ -76,10 +71,6 @@ public class UpdateNACRequest {
 
     public String getNomAnimal() {
         return nomAnimal;
-    }
-
-    public LocalDate getDateNaissance() {
-        return dateNaissance;
     }
 
     public String getCouleur() {

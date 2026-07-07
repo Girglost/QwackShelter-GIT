@@ -1,22 +1,24 @@
 package qwack_boot.api.requestDTO.animal;
 
-import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
+import qwack_boot.model.Canard;
+import qwack_boot.model.Caractere;
 import qwack_boot.model.Famille;
 import qwack_boot.model.Genre;
-import qwack_boot.model.Canard;
 
 public class UpdateCanardRequest {
 
     private String nomAnimal;
-    private LocalDate dateNaissance;
     private String couleur;
     private String regimeAlimentaire;
     private String traitement;
     private Famille famille;
     private Genre genre;
+
+    private List<Caractere> caracteres;
 
     private Integer qwackShelterId;
 
@@ -31,10 +33,36 @@ public class UpdateCanardRequest {
 
         BeanUtils.copyProperties(canard, p);
 
-        p.setqwackShelterId(canard.getQuackShelter().getId());
+        p.setQwackShelterId(canard.getQuackShelter().getId());
 
         return p;
     }
+
+
+    
+    public List<Caractere> getCaracteres() {
+        return caracteres;
+    }
+
+
+
+    public void setCaracteres(List<Caractere> caracteres) {
+        this.caracteres = caracteres;
+    }
+
+
+
+    public Integer getQwackShelterId() {
+        return qwackShelterId;
+    }
+
+
+
+    public void setQwackShelterId(Integer qwackShelterId) {
+        this.qwackShelterId = qwackShelterId;
+    }
+
+
 
     public void setEstSauvage(boolean estSauvage) {
         this.estSauvage = estSauvage;
@@ -51,15 +79,6 @@ public class UpdateCanardRequest {
     public void setNomAnimal(String nomAnimal) {
         this.nomAnimal = nomAnimal;
     }
-
-    public LocalDate getDateNaissance() {
-        return dateNaissance;
-    }
-
-    public void setDateNaissance(LocalDate dateNaissance) {
-        this.dateNaissance = dateNaissance;
-    }
-
     public String getCouleur() {
         return couleur;
     }
@@ -100,13 +119,6 @@ public class UpdateCanardRequest {
         this.genre = genre;
     }
 
-    public Integer getqwackShelterId() {
-        return qwackShelterId;
-    }
-
-    public void setqwackShelterId(Integer idQuackShelter) {
-        this.qwackShelterId = idQuackShelter;
-    }
 
     public boolean isCapaciteVol() {
         return capaciteVol;

@@ -7,29 +7,31 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
-public class NAC extends Animal {
+public class NAC extends Mamifere {
 
 	@Column(length = 50, nullable = true)
 	private String espece;
 
 	public NAC(String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter qwackShelter,
-			String espece) {
+			boolean sterilisation, boolean gestante, String espece) {
 		super(nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre, caracteres,
-				qwackShelter);
+				qwackShelter, sterilisation, gestante);
 		this.espece = espece;
 	}
 
-	public NAC(String nomAnimal, String couleur, Famille famille, Genre genre, QuackShelter qwackShelter,
-			String espece) {
+	public NAC(String nomAnimal, String couleur, Genre genre, QuackShelter qwackShelter, boolean sterilisation,
+			boolean gestante, String espece) {
 		super(nomAnimal,
 				LocalDate.now(),
 				couleur,
 				null,
 				null,
-				famille,
+				Famille.Felin,
 				genre,
-				qwackShelter);
+				qwackShelter,
+				sterilisation,
+				gestante);
 		this.espece = espece;
 	}
 
@@ -43,6 +45,7 @@ public class NAC extends Animal {
 	public void setEspece(String espece) {
 		this.espece = espece;
 	}
+	
 
 	@Override
 	public String toString() {

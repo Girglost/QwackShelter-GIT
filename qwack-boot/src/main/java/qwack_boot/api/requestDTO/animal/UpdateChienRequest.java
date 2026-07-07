@@ -12,7 +12,6 @@ import qwack_boot.model.Genre;
 public class UpdateChienRequest {
     
      private String nomAnimal;
-    private LocalDate dateNaissance;
     private String couleur;
     private String regimeAlimentaire;
     private String traitement;
@@ -34,9 +33,6 @@ public class UpdateChienRequest {
         this.nomAnimal = nomAnimal;
     }
 
-    public void setDateNaissance(LocalDate dateNaissance) {
-        this.dateNaissance = dateNaissance;
-    }
 
     public void setCouleur(String couleur) {
         this.couleur = couleur;
@@ -78,9 +74,6 @@ public class UpdateChienRequest {
         return nomAnimal;
     }
 
-    public LocalDate getDateNaissance() {
-        return dateNaissance;
-    }
 
     public String getCouleur() {
         return couleur;

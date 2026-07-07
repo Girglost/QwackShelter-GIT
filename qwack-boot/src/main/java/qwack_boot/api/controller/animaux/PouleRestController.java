@@ -10,24 +10,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.api.requestDTO.animal.CreatePouleRequest;
 import qwack_boot.api.requestDTO.animal.UpdatePouleRequest;
-import qwack_boot.dao.IDAOAnimal;
+import qwack_boot.api.responseDTO.animal.PouleResponse;
 import qwack_boot.model.Poule;
+import qwack_boot.service.PouleService;
 
 @RestController
 @RequestMapping("api/poule")
 public class PouleRestController {
 
     @Autowired
-    private IDAOAnimal daoAnimal;
+    private PouleService srvPoule;
 
     @PostMapping
-    public CreatePouleRequest ajouter(@RequestBody Poule poule) {
-        return CreatePouleRequest.convert((Poule) daoAnimal.save(poule));
+    public PouleResponse ajouter(@RequestBody CreatePouleRequest request) {
+        Poule poule = srvPoule.insert(request);
+        return PouleResponse.convert(poule);
     }
 
     @PutMapping("/{id}")
-    public UpdatePouleRequest modifier(@PathVariable Integer id, @RequestBody Poule poule) {
-        poule.setId(id);
-        return UpdatePouleRequest.convert((Poule) daoAnimal.save(poule));
-    }
+    public PouleResponse modifier(@PathVariable Integer id, @RequestBody UpdatePouleRequest request) {
+        Poule poule = srvPoule.update(id, request);
+
+        return PouleResponse.convert(poule);
+}
 }

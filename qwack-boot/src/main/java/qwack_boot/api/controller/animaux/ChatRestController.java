@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.api.requestDTO.animal.CreateChatRequest;
 import qwack_boot.api.requestDTO.animal.UpdateChatRequest;
+import qwack_boot.api.responseDTO.animal.ChatResponse;
 import qwack_boot.dao.IDAOAnimal;
 import qwack_boot.model.Chat;
+import qwack_boot.service.ChatService;
 
 @RestController
 @RequestMapping("api/chat")
@@ -20,14 +22,19 @@ public class ChatRestController {
     @Autowired
     private IDAOAnimal daoAnimal;
 
+    @Autowired
+    private ChatService srvChat;
+
     @PostMapping
-    public CreateChatRequest ajouter(@RequestBody Chat chat) {
-        return CreateChatRequest.convert((Chat) daoAnimal.save(chat));
+    public ChatResponse ajouter(@RequestBody CreateChatRequest request) {
+        Chat chat = srvChat.insert(request);
+        return ChatResponse.convert(chat);
     }
 
     @PutMapping("/{id}")
-    public UpdateChatRequest modifier(@PathVariable Integer id, @RequestBody Chat chat) {
-        chat.setId(id);
-        return UpdateChatRequest.convert((Chat) daoAnimal.save(chat));
+    public ChatResponse modifier(@PathVariable Integer id, @RequestBody UpdateChatRequest request) {
+        Chat chat = srvChat.update(id, request);
+
+        return ChatResponse.convert(chat);
     }
 }
