@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import qwack_boot.api.requestDTO.lieu.CreateLieuRequest;
+import qwack_boot.api.requestDTO.lieu.UpdateLieuRequest;
 import qwack_boot.dao.IDAOLieu;
 import qwack_boot.model.Adresse;
 import qwack_boot.model.Lieu;
@@ -26,11 +27,20 @@ public class LieuService {
 		return daoLieu.findById(id).orElse(null);
 	}
 
-	public void insert(Lieu lieu) {
-		daoLieu.save(lieu);
+	public Lieu insert(CreateLieuRequest lieuRequest) {
+		Lieu lieu = new Lieu();
+		lieu.setType(lieuRequest.getType());
+		lieu.setAdresse(lieuRequest.getAdresse());
+		return daoLieu.save(lieu);
 	}
 
-	public void update(Lieu lieu) {
+	public void update(Integer id, UpdateLieuRequest request) {
+		Lieu lieu = daoLieu.findById(id)
+				.orElseThrow(() -> new RuntimeException("Lieu introuvable"));
+
+		lieu.setType(request.getType());
+		lieu.setAdresse(request.getAdresse());
+
 		daoLieu.save(lieu);
 	}
 

@@ -11,6 +11,8 @@ import qwack_boot.model.Lieu;
 
 public class UpdateLieuRequest {
 
+private Integer id;
+
     @NotNull
     private TypeLieu type;
 
@@ -42,4 +44,15 @@ public class UpdateLieuRequest {
     public void setAdresse(Adresse adresse) {
         this.adresse = adresse;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    
+
 }
