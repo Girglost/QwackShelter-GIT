@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import qwack_boot.model.TypeLieu;
 
-public class LieuRequest {
+public class LieuUpdateRequest {
 
     @NotNull
     private TypeLieu type;
@@ -21,7 +21,7 @@ public class LieuRequest {
     @NotBlank
     private String cp;
 
-    public LieuRequest() {
+    public LieuUpdateRequest() {
     }
 
     public TypeLieu getType() {
