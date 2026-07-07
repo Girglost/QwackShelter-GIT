@@ -1,4 +1,4 @@
-package qwack_boot.dto;
+package qwack_boot.api.requestDTO.animal;
 
 import java.time.LocalDate;
 
@@ -8,9 +8,8 @@ import qwack_boot.model.Famille;
 import qwack_boot.model.Genre;
 import qwack_boot.model.Poule;
 
-public class PouleDTO {
+public class CreatePouleRequest {
 
-    private Integer id;
     private String nomAnimal;
     private LocalDate dateNaissance;
     private String couleur;
@@ -26,8 +25,8 @@ public class PouleDTO {
 
     private String race;
 
-    public static PouleDTO convert(Poule poule) {
-        PouleDTO p = new PouleDTO();
+    public static CreatePouleRequest convert(Poule poule) {
+        CreatePouleRequest p = new CreatePouleRequest();
 
         BeanUtils.copyProperties(poule, p);
 
@@ -37,13 +36,6 @@ public class PouleDTO {
     }
 
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getNomAnimal() {
         return nomAnimal;

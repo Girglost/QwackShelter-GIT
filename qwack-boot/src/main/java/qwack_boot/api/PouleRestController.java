@@ -1,4 +1,4 @@
-package qwack_boot.restcontroller;
+package qwack_boot.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,25 +8,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import qwack_boot.api.requestDTO.animal.CreatePouleRequest;
 import qwack_boot.dao.IDAOAnimal;
-import qwack_boot.dto.ChatDTO;
-import qwack_boot.model.Chat;
+import qwack_boot.model.Poule;
 
 @RestController
-@RequestMapping("api/chat")
-public class ChatRestController {
+@RequestMapping("api/poule")
+public class PouleRestController {
 
     @Autowired
     private IDAOAnimal daoAnimal;
 
     @PostMapping
-    public ChatDTO ajouter(@RequestBody Chat chat) {
-        return ChatDTO.convert((Chat) daoAnimal.save(chat));
+    public CreatePouleRequest ajouter(@RequestBody Poule poule) {
+        return CreatePouleRequest.convert((Poule) daoAnimal.save(poule));
     }
 
     @PutMapping("/{id}")
-    public ChatDTO modifier(@PathVariable Integer id, @RequestBody Chat chat) {
-        chat.setId(id);
-        return ChatDTO.convert((Chat) daoAnimal.save(chat));
+    public CreatePouleRequest modifier(@PathVariable Integer id, @RequestBody Poule poule) {
+        poule.setId(id);
+        return CreatePouleRequest.convert((Poule) daoAnimal.save(poule));
     }
 }

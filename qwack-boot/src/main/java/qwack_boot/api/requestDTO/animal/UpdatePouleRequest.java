@@ -1,4 +1,4 @@
-package qwack_boot.dto;
+package qwack_boot.api.requestDTO.animal;
 
 import java.time.LocalDate;
 
@@ -6,11 +6,10 @@ import org.springframework.beans.BeanUtils;
 
 import qwack_boot.model.Famille;
 import qwack_boot.model.Genre;
-import qwack_boot.model.Canard;
+import qwack_boot.model.Poule;
 
-public class CanardDTO {
+public class UpdatePouleRequest {
 
-    private Integer id;
     private String nomAnimal;
     private LocalDate dateNaissance;
     private String couleur;
@@ -25,33 +24,18 @@ public class CanardDTO {
     private boolean pondeuse;
 
     private String race;
-    private boolean estSauvage;
 
-    public static CanardDTO convert(Canard canard) {
-        CanardDTO p = new CanardDTO();
+    public static UpdatePouleRequest convert(Poule poule) {
+        UpdatePouleRequest p = new UpdatePouleRequest();
 
-        BeanUtils.copyProperties(canard, p);
+        BeanUtils.copyProperties(poule, p);
 
-        p.setqwackShelterId(canard.getQuackShelter().getId());
+        p.setqwackShelterId(poule.getQuackShelter().getId());
 
         return p;
     }
 
-    public void setEstSauvage(boolean estSauvage) {
-        this.estSauvage = estSauvage;
-    }
 
-    public boolean isEstSauvage() {
-        return estSauvage;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getNomAnimal() {
         return nomAnimal;
