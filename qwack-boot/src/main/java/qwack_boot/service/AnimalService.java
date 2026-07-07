@@ -10,14 +10,11 @@ import qwack_boot.dao.IDAOAnimal;
 import qwack_boot.dao.IDAOQuackShelter;
 import qwack_boot.model.Animal;
 import qwack_boot.model.Canard;
-import qwack_boot.model.Caractere;
 import qwack_boot.model.Chat;
 import qwack_boot.model.Chien;
-import qwack_boot.model.Famille;
 import qwack_boot.model.Genre;
 import qwack_boot.model.NAC;
 import qwack_boot.model.Poule;
-import qwack_boot.model.QuackShelter;
 import qwack_boot.model.Statut;
 
 @Service
@@ -39,12 +36,12 @@ public class AnimalService {
 		return daoAnimal.findById(id).orElse(null);
 	}
 
-	public void insert(Animal animal) {
-		daoAnimal.save(animal);
+	public Animal insert(Animal animal) {
+		return daoAnimal.save(animal);
 	}
 
-	public void update(Animal animal) {
-		daoAnimal.save(animal);
+	public Animal update(Animal animal) {
+		return daoAnimal.save(animal);
 	}
 
 	public void delete(Integer id) {
@@ -101,6 +98,5 @@ public class AnimalService {
 	public Animal getByIdWithVisite(int idAnimal) {
 		return daoAnimal.findByIdWithVisite(idAnimal);
 	}
-
 
 }

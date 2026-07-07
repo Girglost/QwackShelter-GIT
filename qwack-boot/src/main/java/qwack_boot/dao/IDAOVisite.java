@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import qwack_boot.model.StatutValidation;
 import qwack_boot.model.Visite;
 
 public interface IDAOVisite extends JpaRepository<Visite, Integer> {
@@ -22,13 +23,14 @@ public interface IDAOVisite extends JpaRepository<Visite, Integer> {
 
 	public List<Visite> findAllByDateVisiteBetween(LocalDateTime dateDebut, LocalDateTime dateFin);
 
-	@Query("SELECT count(v) from Visite v where v.animal.id=:idAnimal AND v.visiteur.id =:idVisiteur")
-	public long NbVisitesByIdAnimalAndIdVisiteur(@Param("idAnimal") int idAnimal, @Param("idVisiteur") int idVisiteur);
+	@Query("SELECT count(v) from Visite v where v.animal.id=:idAnimal AND v.visiteur.id =:idVisiteur AND v.statutVisite=:statut")
+	public long NbVisitesByIdAnimalAndIdVisiteur(@Param("idAnimal") int idAnimal, @Param("idVisiteur") int idVisiteur,
+			@Param("statut") StatutValidation statut);
 
-	@Query("SELECT count(v) from Visite v where v.animal.id=:idAnimal")
-	public long NbVisitesByIdAnimal(@Param("idAnimal") int idAnimal);
+	@Query("SELECT count(v) from Visite v where v.animal.id=:idAnimal AND v.statutVisite=:statut")
+	public long NbVisitesByIdAnimal(@Param("idAnimal") int idAnimal, @Param("statut") StatutValidation statut);
 
-	@Query("SELECT count(v) from Visite v where v.visiteur.id=:idVisiteur")
-	public long NbVisitesByIdVisiteur(@Param("idVisiteur") int idVisiteur);
+	@Query("SELECT count(v) from Visite v where v.visiteur.id=:idVisiteur AND v.statutVisite=:statut")
+	public long NbVisitesByIdVisiteur(@Param("idVisiteur") int idVisiteur, @Param("statut") StatutValidation statut);
 
 }

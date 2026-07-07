@@ -4,11 +4,15 @@ import java.time.LocalDateTime;
 
 import org.springframework.beans.BeanUtils;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import qwack_boot.model.StatutValidation;
 import qwack_boot.model.Visite;
 
 public class VisiteDTO {
 
     private Integer id;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime dateVisite;
 
     private Integer idVisiteur;
@@ -18,6 +22,8 @@ public class VisiteDTO {
     private String nomAnimal;
 
     private Integer idQuackShelter;
+
+    private StatutValidation statutVisite;
 
     public static VisiteDTO convert(Visite visite) {
         VisiteDTO dto = new VisiteDTO();
@@ -30,6 +36,8 @@ public class VisiteDTO {
         dto.nomAnimal = visite.getAnimal().getNomAnimal();
 
         dto.idQuackShelter = visite.getQuackShelter().getId();
+
+        dto.statutVisite = visite.getStatutVisite();
 
         return dto;
     }
@@ -89,4 +97,13 @@ public class VisiteDTO {
     public void setIdQuackShelter(Integer idQuackShelter) {
         this.idQuackShelter = idQuackShelter;
     }
+
+    public StatutValidation getStatutVisite() {
+        return statutVisite;
+    }
+
+    public void setStatutVisite(StatutValidation statutVisite) {
+        this.statutVisite = statutVisite;
+    }
+
 }
