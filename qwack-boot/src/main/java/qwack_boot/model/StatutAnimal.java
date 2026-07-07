@@ -75,6 +75,20 @@ public class StatutAnimal {
 		this.animal = animal;
 	}
 
+
+	
+	public void setEmplacement(Emplacement emplacement) {
+		this.emplacement = emplacement;
+	}
+
+	public StatutValidation getStatutAdoption() {
+		return statutAdoption;
+	}
+
+	public void setStatutAdoption(StatutValidation statutAdoption) {
+		this.statutAdoption = statutAdoption;
+	}
+
 	public StatutAnimal() {
 	}
 
