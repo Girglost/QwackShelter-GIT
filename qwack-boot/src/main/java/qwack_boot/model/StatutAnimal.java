@@ -65,6 +65,13 @@ public class StatutAnimal {
 		this.animal = animal;
 	}
 
+	public StatutAnimal(Emplacement emplacement, Animal animal){
+		this.dateArrivee = LocalDate.now();
+		this.statut = Statut.Present;
+		this.emplacement = emplacement;
+		this.animal = animal;
+	}
+
 	public StatutAnimal() {
 	}
 
