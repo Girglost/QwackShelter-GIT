@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.api.requestDTO.animal.CreateChatRequest;
+import qwack_boot.api.requestDTO.animal.UpdateChatRequest;
 import qwack_boot.dao.IDAOAnimal;
 import qwack_boot.model.Chat;
 
@@ -25,8 +26,8 @@ public class ChatRestController {
     }
 
     @PutMapping("/{id}")
-    public CreateChatRequest modifier(@PathVariable Integer id, @RequestBody Chat chat) {
+    public UpdateChatRequest modifier(@PathVariable Integer id, @RequestBody Chat chat) {
         chat.setId(id);
-        return CreateChatRequest.convert((Chat) daoAnimal.save(chat));
+        return UpdateChatRequest.convert((Chat) daoAnimal.save(chat));
     }
 }

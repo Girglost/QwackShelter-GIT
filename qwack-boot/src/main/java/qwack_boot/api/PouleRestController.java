@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.api.requestDTO.animal.CreatePouleRequest;
+import qwack_boot.api.requestDTO.animal.UpdatePouleRequest;
 import qwack_boot.dao.IDAOAnimal;
 import qwack_boot.model.Poule;
 
@@ -25,8 +26,8 @@ public class PouleRestController {
     }
 
     @PutMapping("/{id}")
-    public CreatePouleRequest modifier(@PathVariable Integer id, @RequestBody Poule poule) {
+    public UpdatePouleRequest modifier(@PathVariable Integer id, @RequestBody Poule poule) {
         poule.setId(id);
-        return CreatePouleRequest.convert((Poule) daoAnimal.save(poule));
+        return UpdatePouleRequest.convert((Poule) daoAnimal.save(poule));
     }
 }

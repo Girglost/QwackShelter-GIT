@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.api.requestDTO.animal.CreateCanardRequest;
+import qwack_boot.api.requestDTO.animal.UpdateCanardRequest;
 import qwack_boot.dao.IDAOAnimal;
 import qwack_boot.model.Canard;
 
@@ -25,9 +26,9 @@ public class CanardRestController {
     }
 
     @PutMapping("/{id}")
-    public CreateCanardRequest modifier(@PathVariable Integer id, @RequestBody Canard canard) {
+    public UpdateCanardRequest modifier(@PathVariable Integer id, @RequestBody Canard canard) {
         canard.setId(id);
-        return CreateCanardRequest.convert((Canard) daoAnimal.save(canard));
+        return UpdateCanardRequest.convert((Canard) daoAnimal.save(canard));
     }
 
 }

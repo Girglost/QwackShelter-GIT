@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.api.requestDTO.animal.CreateNACRequest;
+import qwack_boot.api.requestDTO.animal.UpdateNACRequest;
 import qwack_boot.dao.IDAOAnimal;
 import qwack_boot.model.NAC;
 
@@ -25,9 +26,9 @@ public class NACRestController {
     }
 
     @PutMapping("/{id}")
-    public CreateNACRequest modifier(@PathVariable Integer id, @RequestBody NAC nac) {
+    public UpdateNACRequest modifier(@PathVariable Integer id, @RequestBody NAC nac) {
         nac.setId(id);
-        return CreateNACRequest.convert((NAC) daoAnimal.save(nac));
+        return UpdateNACRequest.convert((NAC) daoAnimal.save(nac));
     }
 
 }
