@@ -1,9 +1,13 @@
 package qwack_boot.api.requestDTO.lieu;
 
 import jakarta.validation.constraints.NotNull;
+
+import org.springframework.beans.BeanUtils;
+
 import jakarta.validation.Valid;
 import qwack_boot.model.TypeLieu;
 import qwack_boot.model.Adresse;
+import qwack_boot.model.Lieu;
 
 public class UpdateLieuRequest {
 
@@ -13,6 +17,12 @@ public class UpdateLieuRequest {
     @Valid
     @NotNull
     private Adresse adresse;
+
+    public static UpdateLieuRequest convert(Lieu lieu) {
+        UpdateLieuRequest l = new UpdateLieuRequest();
+        BeanUtils.copyProperties(lieu, l);
+        return l;
+    }
 
     public UpdateLieuRequest() {
     }
@@ -33,4 +43,3 @@ public class UpdateLieuRequest {
         this.adresse = adresse;
     }
 }
-
