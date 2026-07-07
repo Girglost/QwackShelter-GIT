@@ -1,4 +1,4 @@
-package qwack_boot.restcontroller;
+package qwack_boot.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,25 +8,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import qwack_boot.api.requestDTO.animal.CreateNACRequest;
 import qwack_boot.dao.IDAOAnimal;
-import qwack_boot.dto.PouleDTO;
-import qwack_boot.model.Poule;
+import qwack_boot.model.NAC;
 
 @RestController
-@RequestMapping("api/poule")
-public class PouleRestController {
+@RequestMapping("api/nac")
+public class NACRestController {
 
     @Autowired
     private IDAOAnimal daoAnimal;
 
     @PostMapping
-    public PouleDTO ajouter(@RequestBody Poule poule) {
-        return PouleDTO.convert((Poule) daoAnimal.save(poule));
+    public CreateNACRequest ajouter(@RequestBody NAC nac) {
+        return CreateNACRequest.convert((NAC) daoAnimal.save(nac));
     }
 
     @PutMapping("/{id}")
-    public PouleDTO modifier(@PathVariable Integer id, @RequestBody Poule poule) {
-        poule.setId(id);
-        return PouleDTO.convert((Poule) daoAnimal.save(poule));
+    public CreateNACRequest modifier(@PathVariable Integer id, @RequestBody NAC nac) {
+        nac.setId(id);
+        return CreateNACRequest.convert((NAC) daoAnimal.save(nac));
     }
+
 }

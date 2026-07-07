@@ -1,17 +1,19 @@
-package qwack_boot.dto;
+package qwack_boot.api.responseDTO.animal;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
+import qwack_boot.dto.HistoriqueSanteDTO;
+import qwack_boot.dto.VisiteDTO;
 import qwack_boot.model.Animal;
 import qwack_boot.model.Caractere;
 import qwack_boot.model.Famille;
 import qwack_boot.model.Genre;
 import qwack_boot.model.HistoriqueSante;
 
-public class AnimalDTO {
+public class AnimalResponse {
 
 	private Integer id;
 	private String nomAnimal;
@@ -26,15 +28,15 @@ public class AnimalDTO {
 	private List<VisiteDTO> visites;
 	private List<HistoriqueSanteDTO> historiqueSantes;
 
-	public static AnimalDTO convert(Animal animal) {
-		AnimalDTO a = new AnimalDTO();
+	public static AnimalResponse convert(Animal animal) {
+		AnimalResponse a = new AnimalResponse();
 		BeanUtils.copyProperties(animal, a);
 		a.idQuackShelter = animal.getQuackShelter().getId();
 		return a;
 	}
 
-	public static AnimalDTO convertWithHistoriqueSante(Animal animal) {
-		AnimalDTO a = convert(animal);
+	public static AnimalResponse convertWithHistoriqueSante(Animal animal) {
+		AnimalResponse a = convert(animal);
 
 		a.setHistoriqueSantes(
 				animal.getHistoriqueSante()
@@ -45,8 +47,8 @@ public class AnimalDTO {
 		return a;
 	}
 
-	public static AnimalDTO convertWithVisites(Animal animal) {
-		AnimalDTO a = convert(animal);
+	public static AnimalResponse convertWithVisites(Animal animal) {
+		AnimalResponse a = convert(animal);
 
 		a.setVisites(
 				animal.getVisites()

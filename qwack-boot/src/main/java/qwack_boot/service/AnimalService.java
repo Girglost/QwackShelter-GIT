@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import qwack_boot.api.requestDTO.animal.CreateChatRequest;
 import qwack_boot.dao.IDAOAnimal;
 import qwack_boot.dao.IDAOQuackShelter;
-import qwack_boot.dto.ChatDTO;
 import qwack_boot.model.Animal;
 import qwack_boot.model.Canard;
 import qwack_boot.model.Caractere;

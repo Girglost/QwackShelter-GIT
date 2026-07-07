@@ -1,4 +1,4 @@
-package qwack_boot.dto;
+package qwack_boot.api.requestDTO.animal;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 
 import qwack_boot.model.Caractere;
+import qwack_boot.model.Chien;
 import qwack_boot.model.Genre;
-import qwack_boot.model.NAC;
 
-public class NACDTO {
+public class UpdateChienRequest {
     
      private String nomAnimal;
     private LocalDate dateNaissance;
@@ -19,15 +19,15 @@ public class NACDTO {
     private Genre genre;
     private boolean sterilisation;
     private boolean gestante;
-    private String espece;
+    private String race;
     private List<Caractere> caracteres;
     private Integer qwackShelterId;
 
-    public static NACDTO convert(NAC nac) {
-        NACDTO n = new NACDTO();
-        BeanUtils.copyProperties(nac, n);
-        n.qwackShelterId = nac.getQuackShelter().getId();
-        return n;
+    public static UpdateChienRequest convert(Chien chien) {
+        UpdateChienRequest c = new UpdateChienRequest();
+        BeanUtils.copyProperties(chien, c);
+        c.qwackShelterId = chien.getQuackShelter().getId();
+        return c;
     }
 
     public void setNomAnimal(String nomAnimal) {
@@ -62,8 +62,8 @@ public class NACDTO {
         this.gestante = gestante;
     }
 
-    public void setEspece(String espece) {
-        this.espece = espece;
+    public void setRace(String race) {
+        this.race = race;
     }
 
     public void setCaracteres(List<Caractere> caracteres) {
@@ -106,8 +106,8 @@ public class NACDTO {
         return gestante;
     }
 
-    public String getEspece() {
-        return espece;
+    public String getRace() {
+        return race;
     }
 
     public List<Caractere> getCaracteres() {
