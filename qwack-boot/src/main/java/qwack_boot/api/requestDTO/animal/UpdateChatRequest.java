@@ -1,4 +1,4 @@
-package qwack_boot.dto;
+package qwack_boot.api.requestDTO.animal;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -6,12 +6,11 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 
 import qwack_boot.model.Caractere;
-import qwack_boot.model.Chien;
+import qwack_boot.model.Chat;
 import qwack_boot.model.Genre;
 
-public class ChienDTO {
-    
-     private String nomAnimal;
+public class UpdateChatRequest {
+    private String nomAnimal;
     private LocalDate dateNaissance;
     private String couleur;
     private String regimeAlimentaire;
@@ -23,10 +22,10 @@ public class ChienDTO {
     private List<Caractere> caracteres;
     private Integer qwackShelterId;
 
-    public static ChienDTO convert(Chien chien) {
-        ChienDTO c = new ChienDTO();
-        BeanUtils.copyProperties(chien, c);
-        c.qwackShelterId = chien.getQuackShelter().getId();
+    public static UpdateChatRequest convert(Chat chat) {
+        UpdateChatRequest c = new UpdateChatRequest();
+        BeanUtils.copyProperties(chat, c);
+        c.qwackShelterId = chat.getQuackShelter().getId();
         return c;
     }
 

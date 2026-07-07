@@ -1,4 +1,4 @@
-package qwack_boot.restcontroller;
+package qwack_boot.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,26 +8,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import qwack_boot.api.requestDTO.animal.CreateCanardRequest;
 import qwack_boot.dao.IDAOAnimal;
-import qwack_boot.dto.NACDTO;
-import qwack_boot.model.NAC;
+import qwack_boot.model.Canard;
 
 @RestController
-@RequestMapping("api/nac")
-public class NACRestController {
+@RequestMapping("api/canard")
+public class CanardRestController {
 
     @Autowired
     private IDAOAnimal daoAnimal;
 
     @PostMapping
-    public NACDTO ajouter(@RequestBody NAC nac) {
-        return NACDTO.convert((NAC) daoAnimal.save(nac));
+    public CreateCanardRequest ajouter(@RequestBody Canard canard) {
+        return CreateCanardRequest.convert((Canard) daoAnimal.save(canard));
     }
 
     @PutMapping("/{id}")
-    public NACDTO modifier(@PathVariable Integer id, @RequestBody NAC nac) {
-        nac.setId(id);
-        return NACDTO.convert((NAC) daoAnimal.save(nac));
+    public CreateCanardRequest modifier(@PathVariable Integer id, @RequestBody Canard canard) {
+        canard.setId(id);
+        return CreateCanardRequest.convert((Canard) daoAnimal.save(canard));
     }
 
 }

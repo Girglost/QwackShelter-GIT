@@ -1,4 +1,4 @@
-package qwack_boot.restcontroller;
+package qwack_boot.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import qwack_boot.api.requestDTO.animal.CreateChienRequest;
 import qwack_boot.dao.IDAOAnimal;
-import qwack_boot.dto.ChienDTO;
 import qwack_boot.model.Chien;
 
 
@@ -22,13 +22,13 @@ public class ChienRestController {
     private IDAOAnimal daoAnimal;
 
     @PostMapping
-    public ChienDTO ajouter(@RequestBody Chien chien) {
-        return ChienDTO.convert((Chien) daoAnimal.save(chien));
+    public CreateChienRequest ajouter(@RequestBody Chien chien) {
+        return CreateChienRequest.convert((Chien) daoAnimal.save(chien));
     }
 
     @PutMapping("/{id}")
-    public ChienDTO modifier(@PathVariable Integer id, @RequestBody Chien chien) {
+    public CreateChienRequest modifier(@PathVariable Integer id, @RequestBody Chien chien) {
         chien.setId(id);
-        return ChienDTO.convert((Chien) daoAnimal.save(chien));
+        return CreateChienRequest.convert((Chien) daoAnimal.save(chien));
     }
 }
