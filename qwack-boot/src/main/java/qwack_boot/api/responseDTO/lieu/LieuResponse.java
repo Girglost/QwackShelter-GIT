@@ -23,10 +23,13 @@ public class LieuResponse {
 
         response.setId(lieu.getId());
         response.setType(lieu.getType());
-        response.setNumero(lieu.getAdresse().getNumero());
-        response.setVoie(lieu.getAdresse().getVoie());
-        response.setVille(lieu.getAdresse().getVille());
-        response.setCp(lieu.getAdresse().getCp());
+
+          if (lieu.getAdresse() != null) {
+            response.setNumero(lieu.getAdresse().getNumero());
+            response.setVoie(lieu.getAdresse().getVoie());
+            response.setVille(lieu.getAdresse().getVille());
+            response.setCp(lieu.getAdresse().getCp());
+        }
 
         return response;
     }
