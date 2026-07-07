@@ -1,27 +1,42 @@
-package qwack_boot.dto.request;
-
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+package qwack_boot.dto.response;
+import qwack_boot.model.Lieu;
 import qwack_boot.model.TypeLieu;
 
-public class LieuRequest {
+public class LieuResponse {
 
-    @NotNull
+    private Integer id;
     private TypeLieu type;
-
-    @NotBlank
     private String numero;
-
-    @NotBlank
     private String voie;
-
-    @NotBlank
     private String ville;
-
-    @NotBlank
     private String cp;
 
-    public LieuRequest() {
+    public LieuResponse() {
+    }
+
+       public static LieuResponse convert(Lieu lieu) {
+       
+        if (lieu == null) {
+        return null;
+    }
+        LieuResponse response = new LieuResponse();
+
+        response.setId(lieu.getId());
+        response.setType(lieu.getType());
+        response.setNumero(lieu.getAdresse().getNumero());
+        response.setVoie(lieu.getAdresse().getVoie());
+        response.setVille(lieu.getAdresse().getVille());
+        response.setCp(lieu.getAdresse().getCp());
+
+        return response;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public TypeLieu getType() {
@@ -64,4 +79,3 @@ public class LieuRequest {
         this.cp = cp;
     }
 }
-
