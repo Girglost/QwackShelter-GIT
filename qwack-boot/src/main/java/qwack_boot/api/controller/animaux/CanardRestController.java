@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import qwack_boot.api.requestDTO.animal.CreateCanardRequest;
 import qwack_boot.api.requestDTO.animal.UpdateCanardRequest;
 import qwack_boot.api.responseDTO.animal.CanardResponse;
-import qwack_boot.dao.IDAOAnimal;
 import qwack_boot.model.Canard;
 import qwack_boot.service.CanardService;
 
