@@ -2,12 +2,16 @@ package qwack_boot.api.responseDTO;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import qwack_boot.model.Statut;
 import qwack_boot.model.StatutAnimal;
 
 public class StatutAnimalReponse {
     private Integer id;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateArrivee;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateDepart;
     private Statut statut;
     private Integer emplacementId;
