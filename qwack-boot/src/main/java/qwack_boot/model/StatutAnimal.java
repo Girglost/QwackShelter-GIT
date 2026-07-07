@@ -31,6 +31,9 @@ public class StatutAnimal {
 	@ManyToOne
 	@JoinColumn(name = "emplacement")
 	private Emplacement emplacement;
+	@Enumerated(EnumType.STRING)
+	@Column(name="statut_adoption")
+	private StatutValidation statutAdoption;
 	@ManyToOne
 	@JoinColumn(name = "adoptant", nullable = true)
 	private Personne adoptant;
