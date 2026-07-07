@@ -1,6 +1,7 @@
 package qwack_boot.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import qwack_boot.api.requestDTO.animal.CreateChienRequest;
 import qwack_boot.api.requestDTO.animal.UpdateChienRequest;
@@ -8,6 +9,7 @@ import qwack_boot.dao.IDAOQuackShelter;
 import qwack_boot.model.Chien;
 import qwack_boot.model.QuackShelter;
 
+@Service
 public class ChienService {
 
      @Autowired
