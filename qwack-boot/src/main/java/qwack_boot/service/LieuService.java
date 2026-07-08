@@ -58,13 +58,14 @@ public class LieuService {
 
 		System.out.println("RECHERCHE DU LIEU ////////////");
 		System.out.println(lieu.getAdresse());
-
+		System.out.println("FIND BY ADRESSE ???");
 		Lieu existing = daoLieu.findByAdresse(lieu.getAdresse());
-
+		System.out.println("EXISTING ?? " + existing);
 		if (existing != null) {
+			System.out.println("LIEU TROUVE : " + existing);
 			return existing;
 		}
-
+		System.out.println("LIEU INEXISTANT creation du lieu : ");
 		Lieu l = new Lieu(
 				lieu.getType(),
 				lieu.getAdresse().getNumero(),
@@ -72,7 +73,9 @@ public class LieuService {
 				lieu.getAdresse().getVille(),
 				lieu.getAdresse().getCp());
 
-		return daoLieu.save(l);
+		Lieu persistLieu = daoLieu.save(l);
+		System.out.println(l.getId());
+		return persistLieu;
 	}
 
 }

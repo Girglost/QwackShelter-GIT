@@ -268,7 +268,7 @@ public class Personne {
 				+ password + ", habitation=" + habitation + ", role=" + role + ", admin=" + admin + ", statutActivite="
 				+ statutActivite + ", quackShelter=" + quackShelter + ", dateInscription=" + dateInscription
 				+ ", dateEngagement=" + dateEngagement + ", salaire=" + salaire + ", dateEmbauche=" + dateEmbauche
-				+ ", adoptions=" + adoptions + ", visites=" + visites + "]";
+				+ "]";
 	}
 
 }
