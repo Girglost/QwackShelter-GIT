@@ -2,11 +2,9 @@ package qwack_boot.api.requestDTO.animal;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import qwack_boot.model.Caractere;
-import qwack_boot.model.Famille;
 import qwack_boot.model.Genre;
 
 public class UpdateAnimalRequest {

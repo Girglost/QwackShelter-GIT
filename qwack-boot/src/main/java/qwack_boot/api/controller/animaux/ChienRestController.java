@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import qwack_boot.api.requestDTO.animal.CreateChienRequest;
+import qwack_boot.api.requestDTO.animal.CreateAnimalRequest;
 import qwack_boot.api.requestDTO.animal.UpdateAnimalRequest;
 import qwack_boot.api.responseDTO.animal.ChienResponse;
 import qwack_boot.model.Chien;
@@ -30,7 +30,7 @@ public class ChienRestController {
     }
 
     @PostMapping
-    public ChienResponse ajouter(@RequestBody CreateChienRequest request) {
+    public ChienResponse ajouter(@RequestBody CreateAnimalRequest request) {
         Chien chien = new Chien();
 
         chien.setNomAnimal(request.getNomAnimal());
