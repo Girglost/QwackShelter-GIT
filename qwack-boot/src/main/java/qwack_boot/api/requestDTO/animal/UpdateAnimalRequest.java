@@ -17,8 +17,8 @@ public class UpdateAnimalRequest {
     private String couleur;
     private String regimeAlimentaire;
     private String traitement;
+
     @NotBlank
-    private Famille famille;
     private Genre genre;
 
     private List<Caractere> caracteres;
@@ -107,13 +107,6 @@ public class UpdateAnimalRequest {
         this.traitement = traitement;
     }
 
-    public Famille getFamille() {
-        return famille;
-    }
-
-    public void setFamille(Famille famille) {
-        this.famille = famille;
-    }
 
     public Genre getGenre() {
         return genre;

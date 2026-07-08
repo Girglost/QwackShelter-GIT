@@ -20,6 +20,7 @@ public class CreateAnimalRequest {
     private String traitement;
     @NotBlank
     private Famille famille;
+    @NotBlank
     private Genre genre;
 
     private List<Caractere> caracteres;

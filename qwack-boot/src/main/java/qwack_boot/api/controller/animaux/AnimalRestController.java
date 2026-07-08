@@ -2,7 +2,6 @@ package qwack_boot.api.controller.animaux;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +20,11 @@ import qwack_boot.service.AnimalService;
 @RequestMapping("api/animal")
 public class AnimalRestController {
 
-	@Autowired
-	AnimalService srvAnimal;
+	final AnimalService srvAnimal;
+
+	AnimalRestController(AnimalService srvAnimal) {
+		this.srvAnimal = srvAnimal;
+	}
 
 	@GetMapping
 	public List<AnimalResponse> chercherTous() {
