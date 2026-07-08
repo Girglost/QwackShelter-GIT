@@ -17,6 +17,7 @@ import qwack_boot.api.requestDTO.UpdateHistoriqueSanteRequest;
 import qwack_boot.api.responseDTO.HistoriqueSanteReponse;
 import qwack_boot.model.Cause;
 import qwack_boot.model.HistoriqueSante;
+import qwack_boot.service.AnimalService;
 import qwack_boot.service.HistoriqueSanteService;
 
 
@@ -25,9 +26,11 @@ import qwack_boot.service.HistoriqueSanteService;
 public class HistoriqueSanteRestController {
     
     final HistoriqueSanteService hsSrv;
+    final AnimalService animalSrv;
 
-    HistoriqueSanteRestController(HistoriqueSanteService hsSrv) {
+    HistoriqueSanteRestController(HistoriqueSanteService hsSrv, AnimalService animalSrv) {
         this.hsSrv = hsSrv;
+        this.animalSrv = animalSrv;
     }
 
     @GetMapping
@@ -48,15 +51,33 @@ public class HistoriqueSanteRestController {
 
     @PostMapping
     public HistoriqueSanteReponse ajouter(@RequestBody CreateHistoriqueSanteRequest request) {
-        
-        HistoriqueSante hs = hsSrv.insert(request);
+        HistoriqueSante hs = new HistoriqueSante();
+
+        hs.setCommentaire(request.commentaire());
+        hs.setCause(request.cause());
+        hs.setAnimal(animalSrv.getById(request.animalId()));
+        hs.setPoids(request.poids());
+
+
+        hsSrv.insert(hs);
         return HistoriqueSanteReponse.convert(hs);
 
         
     }
 
     @PutMapping("/{id}")
-    public void modifier(@PathVariable Integer id, @RequestBody UpdateHistoriqueSanteRequest hs) {
+    public void modifier(@PathVariable Integer id, @RequestBody UpdateHistoriqueSanteRequest request) {
+        HistoriqueSante hs = new HistoriqueSante();
+
+        hs.setCause(request.cause());
+        hs.setCommentaire(request.commentaire());
+        hs.setAnimal(animalSrv.getById(request.animalId()));
+        hs.setDate(request.date());
+        hs.setDuree(request.duree());
+        hs.setHeure(request.heure());
+        hs.setPoids(request.poids());
+
+        
         hsSrv.update(id,hs);
     }
 
