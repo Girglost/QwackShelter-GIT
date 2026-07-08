@@ -3,9 +3,10 @@ package qwack_boot.service;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import qwack_boot.api.requestDTO.CreateHistoriqueSanteRequest;
+import qwack_boot.api.requestDTO.UpdateHistoriqueSanteRequest;
 import qwack_boot.dao.IDAOHistoriqueSante;
 import qwack_boot.model.Cause;
 import qwack_boot.model.HistoriqueSante;
@@ -13,8 +14,14 @@ import qwack_boot.model.HistoriqueSante;
 @Service
 public class HistoriqueSanteService {
 
-	@Autowired
-	IDAOHistoriqueSante daoHistoriqueSante;
+	final IDAOHistoriqueSante daoHistoriqueSante;
+	final AnimalService animalSrv;
+
+
+	HistoriqueSanteService(IDAOHistoriqueSante daoHistoriqueSante, AnimalService animalSrv) {
+		this.daoHistoriqueSante = daoHistoriqueSante;
+		this.animalSrv = animalSrv;
+	}
 
 	// --------------- CRUD ----------------
 
@@ -26,12 +33,30 @@ public class HistoriqueSanteService {
 		return daoHistoriqueSante.findById(id).orElse(null);
 	}
 
-	public void insert(HistoriqueSante sante) {
-		daoHistoriqueSante.save(sante);
+	public HistoriqueSante insert(CreateHistoriqueSanteRequest sante) {
+		HistoriqueSante hs = new HistoriqueSante();
+
+		hs.setCommentaire(sante.commentaire());
+		hs.setCause(sante.cause());
+		hs.setPoids(sante.poids());
+		hs.setAnimal(animalSrv.getById(sante.animalId()));
+
+		return daoHistoriqueSante.save(hs);
 	}
 
-	public void update(HistoriqueSante sante) {
-		daoHistoriqueSante.save(sante);
+	public HistoriqueSante update(Integer id, UpdateHistoriqueSanteRequest sante) {
+		HistoriqueSante hs = daoHistoriqueSante.findById(id).orElse(null);
+
+		hs.setCommentaire(sante.commentaire());
+		hs.setPoids(sante.poids());
+		hs.setDate(sante.date());
+		hs.setHeure(sante.heure());
+		hs.setDuree(sante.duree());
+		hs.setCause(sante.cause());
+		hs.setAnimal(animalSrv.getById(sante.animalId()));
+
+
+		return daoHistoriqueSante.save(hs);
 	}
 
 	public void delete(Integer id) {

@@ -8,3 +8,4 @@ public record CreateStatutAnimalRequest
         @NotNull Integer emplacementId
     )    
 {}
+

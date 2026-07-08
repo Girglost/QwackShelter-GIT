@@ -1,9 +1,8 @@
-package qwack_boot.restcontroller;
+package qwack_boot.api.controller;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import qwack_boot.model.Animal;
+import qwack_boot.api.requestDTO.statutAnimal.CreateStatutAnimalRequest;
+import qwack_boot.api.requestDTO.statutAnimal.UpdateStatutAnimalRequest;
+import qwack_boot.api.responseDTO.StatutAnimalReponse;
+import qwack_boot.api.responseDTO.animal.AnimalResponse;
 import qwack_boot.model.Statut;
 import qwack_boot.model.StatutAnimal;
 import qwack_boot.service.StatutAnimalService;
@@ -23,17 +25,21 @@ import qwack_boot.service.StatutAnimalService;
 @RequestMapping("/api/statutAnimal")
 public class StatutAnimalRestController {
 
-    @Autowired
-    StatutAnimalService saSrv;
+    final StatutAnimalService saSrv;
+
+    StatutAnimalRestController(StatutAnimalService saSrv) {
+        this.saSrv = saSrv;
+    }
 
     @GetMapping
-    public List<StatutAnimal> chercherTous() {
-        return saSrv.getAll();
+    public List<StatutAnimalReponse> chercherTous() {
+        return saSrv.getAll().stream().map(a -> StatutAnimalReponse.convert(a)).toList();
     }
 
     @GetMapping("/{id}")
-    public StatutAnimal chercherParId(@RequestParam Integer id) {
-        return saSrv.getById(id);
+    public StatutAnimalReponse chercherParId(@RequestParam Integer id) {
+        StatutAnimal sa = saSrv.getById(id);
+        return StatutAnimalReponse.convert(sa);
     }
 
     @DeleteMapping("/{id}")
@@ -42,62 +48,65 @@ public class StatutAnimalRestController {
     }
 
     @PostMapping
-    public void ajouter(@RequestBody StatutAnimal hs) {
-        saSrv.insert(hs);
+    public StatutAnimalReponse ajouter(@RequestBody CreateStatutAnimalRequest sar) {
+        StatutAnimal sa = saSrv.insert(sar);
+        return StatutAnimalReponse.convert(sa);
     }
 
     @PutMapping("/{id}")
-    public void modifier(@PathVariable Integer id, @RequestBody StatutAnimal hs) {
-        hs.setId(id);
-        saSrv.update(hs);
+    public void modifier(@PathVariable Integer id, @RequestBody UpdateStatutAnimalRequest sar) {
+        saSrv.update(id,sar);
     }
 
+
+
+
     @GetMapping("/dispo")
-    public List<Animal> dispo() {
+    public List<AnimalResponse> dispo() {
         return saSrv.getByDispo();
     }
     
-    @GetMapping("/adoptant_{idAdoptant}")
+    @GetMapping("/adoptant/{idAdoptant}")
     public List<StatutAnimal> getByAdoptant(@RequestParam Integer idAdoptant) {
         return saSrv.getByAdoptantId(idAdoptant);
     }
 
-    @GetMapping("/animal_{idAnimal}")
+    @GetMapping("/animal/{idAnimal}")
     public StatutAnimal getByAnimal(@RequestParam Integer id) {
         return saSrv.getByAnimalId(id);
     }
     
-    @GetMapping("/{statut}")
+    @GetMapping("/statut/{statut}")
     public List<StatutAnimal> getByStatut(Statut statut) {
         return saSrv.getByStatut(statut);
     }
 
-    @GetMapping("/arrivee/{date1}_{date2}")
+    @GetMapping("/arrivee/{date1}/{date2}")
     public List<StatutAnimal> getByArriveeBetween(@RequestParam LocalDate date1,@RequestParam LocalDate date2) {
         return saSrv.getByDateArriveeBetween(date1, date2);
     }
 
-    @GetMapping("/arrivee/before_{date}")
+    @GetMapping("/arrivee/before/{date}")
     public List<StatutAnimal> getByArriveeBefore(@RequestParam LocalDate date) {
         return saSrv.getByDateArriveeBefore(date);
     }
     
-    @GetMapping("/arrivee/after_{date}")
+    @GetMapping("/arrivee/after/{date}")
     public List<StatutAnimal> getByArriveeAfter(@RequestParam LocalDate date) {
         return saSrv.getByDateArriveeAfter(date);
     }
 
-    @GetMapping("/depart/{date1}_{date2}")
+    @GetMapping("/depart/{date1}/{date2}")
     public List<StatutAnimal> getByDepartBetween(@RequestParam LocalDate date1,@RequestParam LocalDate date2) {
         return saSrv.getByDateDepartBetween(date1, date2);
     }
 
-    @GetMapping("/depart/before_{date}")
+    @GetMapping("/depart/before/{date}")
     public List<StatutAnimal> getByDepartBefore(@RequestParam LocalDate date) {
         return saSrv.getByDateDepartBefore(date);
     }
     
-    @GetMapping("/depart/after_{date}")
+    @GetMapping("/depart/after/{date}")
     public List<StatutAnimal> getByDepartAfter(@RequestParam LocalDate date) {
         return saSrv.getByDateDepartAfter(date);
     }

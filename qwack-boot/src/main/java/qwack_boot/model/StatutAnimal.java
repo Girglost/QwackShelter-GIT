@@ -128,10 +128,6 @@ public class StatutAnimal {
 		return emplacement;
 	}
 
-	public void setEmplecement(Emplacement emplacement) {
-		this.emplacement = emplacement;
-	}
-
 	public Personne getAdoptant() {
 		return adoptant;
 	}
