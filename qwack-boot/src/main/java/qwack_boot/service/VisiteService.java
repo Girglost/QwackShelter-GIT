@@ -30,8 +30,8 @@ public class VisiteService {
 		return daoVisite.save(visite);
 	}
 
-	public Visite update(Visite emp) {
-		return daoVisite.save(emp);
+	public Visite update(Visite visite) {
+		return daoVisite.save(visite);
 	}
 
 	public void delete(Integer id) {

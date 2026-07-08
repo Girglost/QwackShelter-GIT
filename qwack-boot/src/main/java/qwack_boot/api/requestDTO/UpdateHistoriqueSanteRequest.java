@@ -8,12 +8,12 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import qwack_boot.model.Cause;
 
-public record UpdateHistoriqueSanteRequest (@NotBlank String commentaire,
+public record UpdateHistoriqueSanteRequest (
+    @NotBlank String commentaire,
     @Positive double poids,
     @NotNull LocalDate date,
     @NotNull LocalTime heure,
     @Positive int duree,
     @NotNull Cause cause,
-    @NotNull Integer animalId){
-
-}
+    @NotNull Integer animalId
+){}

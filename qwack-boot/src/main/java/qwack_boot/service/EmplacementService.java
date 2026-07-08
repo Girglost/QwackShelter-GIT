@@ -2,7 +2,6 @@ package qwack_boot.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import qwack_boot.dao.IDAOEmplacement;
@@ -12,8 +11,11 @@ import qwack_boot.model.typeBox;
 @Service
 public class EmplacementService {
 
-	@Autowired
-	IDAOEmplacement daoEmplacement;
+	final IDAOEmplacement daoEmplacement;
+
+	EmplacementService(IDAOEmplacement daoEmplacement) {
+		this.daoEmplacement = daoEmplacement;
+	}
 
 	// --------------- CRUD ----------------
 
@@ -25,12 +27,25 @@ public class EmplacementService {
 		return daoEmplacement.findById(id).orElse(null);
 	}
 
-	public void insert(Emplacement emplacement) {
-		daoEmplacement.save(emplacement);
+	public Emplacement insert(Emplacement emplacement) {
+		// Emplacement emp = new Emplacement();
+
+		// emp.setBox(emplacement.box());
+		// emp.setComplet(emplacement.complet());
+		// emp.setNbPlace(emplacement.nb_place());
+
+		return daoEmplacement.save(emplacement);
 	}
 
-	public void update(Emplacement emp) {
-		daoEmplacement.save(emp);
+	public Emplacement update(Integer id, Emplacement emplacement) {
+		// Emplacement emp = daoEmplacement.findById(id).orElse(null);
+
+		// emp.setBox(emplacement.box());
+		// emp.setComplet(emplacement.complet());
+		// emp.setNbPlace(emplacement.nb_place());
+		emplacement.setId(id);
+
+		return daoEmplacement.save(emplacement);
 	}
 
 	public void delete(Integer id) {

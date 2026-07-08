@@ -7,14 +7,15 @@ import jakarta.validation.constraints.NotNull;
 import qwack_boot.model.Statut;
 import qwack_boot.model.StatutValidation;
 
-public record UpdateStatutAnimal 
+public record UpdateStatutAnimalRequest 
     (
         @NotBlank LocalDate dateArrivee,
         LocalDate dateDepart,
         @NotNull Statut statut,
         StatutValidation statutAdoption,
         @NotNull Integer emplacementId,
-        Integer adoptantId
+        Integer adoptantId,
+        @NotNull Integer animalId
 )
 
 

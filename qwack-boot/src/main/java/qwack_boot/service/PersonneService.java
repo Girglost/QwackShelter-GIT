@@ -42,10 +42,6 @@ public class PersonneService {
 		return daoPersonne.findAll();
 	}
 
-	public List<Personne> getAllBenevole() {
-		return daoPersonne.findAllBenevole();
-	}
-
 	public List<Personne> getAllEmploye() {
 		return daoPersonne.findAllEmploye();
 	}
@@ -60,10 +56,6 @@ public class PersonneService {
 
 	public Personne getPatronById(Integer id) {
 		return daoPersonne.findPatronById(id).orElse(null);
-	}
-
-	public Personne getBenevoleById(Integer id) {
-		return daoPersonne.findBenevoleById(id).orElse(null);
 	}
 
 	public Personne getEmployeById(Integer id) {
@@ -92,14 +84,6 @@ public class PersonneService {
 
 	public Personne getEmployeByIdWithAdoptions(Integer idPersonne) {
 		return daoPersonne.findEmployeByIdwithAdoptions(idPersonne);
-	}
-
-	public Personne getBenevoleByIdWithVisites(Integer idPersonne) {
-		return daoPersonne.findBenevoleByIdwithVisites(idPersonne);
-	}
-
-	public Personne getBenevoleByIdWithAdoptions(Integer idPersonne) {
-		return daoPersonne.findBenevoleByIdwithAdoptions(idPersonne);
 	}
 
 	public Personne getByLoginAndPassword(String login, String password) {

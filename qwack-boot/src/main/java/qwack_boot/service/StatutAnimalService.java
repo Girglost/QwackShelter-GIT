@@ -3,20 +3,24 @@ package qwack_boot.service;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import qwack_boot.api.responseDTO.animal.AnimalResponse;
 import qwack_boot.dao.IDAOStatutAnimal;
-import qwack_boot.model.Animal;
 import qwack_boot.model.Statut;
 import qwack_boot.model.StatutAnimal;
 
 @Service
 public class StatutAnimalService {
 
-	@Autowired
-	IDAOStatutAnimal daoStatutAnimal;
+	final IDAOStatutAnimal daoStatutAnimal;
+
+
+	StatutAnimalService(IDAOStatutAnimal daoStatutAnimal) {
+		this.daoStatutAnimal = daoStatutAnimal;
+
+	}
 
 	// --------------- CRUD ----------------
 
@@ -28,12 +32,36 @@ public class StatutAnimalService {
 		return daoStatutAnimal.findById(id).orElse(null);
 	}
 
-	public StatutAnimal insert(StatutAnimal statut) {
-		return daoStatutAnimal.save(statut);
+	public StatutAnimal insert(StatutAnimal sar) {
+		return daoStatutAnimal.save(sar);
 	}
 
-	public StatutAnimal update(StatutAnimal statut) {
+	public StatutAnimal update(Integer id, StatutAnimal statut) {
+		statut.setId(id);
 		return daoStatutAnimal.save(statut);
+
+		/*StatutAnimal sa = daoStatutAnimal.findById(id).orElse(null);
+
+		if (sa == null) {
+			log.debug("StatutAnimal {} introuvable", id);
+			throw new IllegalArgumentException("StatutAnimal introuvable");
+
+		}
+
+		sa.setDateArrivee(statut.dateArrivee());
+		sa.setDateDepart(statut.dateDepart());
+		sa.setEmplacement(daoEmplacement.getById(statut.emplacementId()));
+		sa.setAnimal(animalSrv.getById(statut.animalId()));
+
+		sa.setAdoptant(
+				statut.adoptantId() != null
+						? pSrv.getById(statut.adoptantId())
+						: null);
+
+		sa.setStatut(statut.statut());
+		sa.setStatutAdoption(statut.statutAdoption());
+
+ */
 	}
 
 	public void delete(Integer id) {
@@ -42,7 +70,7 @@ public class StatutAnimalService {
 
 	// --------------- Special ----------------
 
-	public List<Animal> getByDispo() {
+	public List<AnimalResponse> getByDispo() {
 		return daoStatutAnimal.findByDispo();
 	}
 

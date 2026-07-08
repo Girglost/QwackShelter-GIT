@@ -54,7 +54,7 @@ public class LieuService {
 
 	// Dans les cas ou on va modifier une personne, on va chercher si le Lieu
 	// existe, sinon créé un nouveau lieu
-	public Lieu findOrCreate(CreateLieuRequest lieu) {
+	public Lieu findOrCreate(Lieu lieu) {
 
 		System.out.println("RECHERCHE DU LIEU ////////////");
 		System.out.println(lieu.getAdresse());

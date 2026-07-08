@@ -43,6 +43,10 @@ public class Personne {
 	@Column
 	private boolean admin;
 
+	@Column
+	@Enumerated(EnumType.STRING)
+	private StatutActivite statutActivite;
+
 	@ManyToOne
 	@JoinColumn(name = "quack_shelter")
 	private QuackShelter quackShelter;
@@ -82,6 +86,7 @@ public class Personne {
 		this.habitation = habitation;
 		this.quackShelter = quackShelter;
 		this.admin = false;
+		this.statutActivite = StatutActivite.DISPO;
 	}
 
 	// SEPARER LES ROLES quand on instancie
@@ -249,13 +254,21 @@ public class Personne {
 		this.visites = visites;
 	}
 
+	public StatutActivite getStatutActivite() {
+		return statutActivite;
+	}
+
+	public void setStatutActivite(StatutActivite statutActivite) {
+		this.statutActivite = statutActivite;
+	}
+
 	@Override
 	public String toString() {
-
 		return "Personne [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", login=" + login + ", password="
-				+ password + ", habitation=" + habitation + ", role=" + role + ", admin=" + admin + ", quackShelter="
-				+ quackShelter + ", dateInscription=" + dateInscription + ", dateEngagement=" + dateEngagement
-				+ ", salaire=" + salaire + ", dateEmbauche=" + dateEmbauche + "]";
+				+ password + ", habitation=" + habitation + ", role=" + role + ", admin=" + admin + ", statutActivite="
+				+ statutActivite + ", quackShelter=" + quackShelter + ", dateInscription=" + dateInscription
+				+ ", dateEngagement=" + dateEngagement + ", salaire=" + salaire + ", dateEmbauche=" + dateEmbauche
+				+ ", adoptions=" + adoptions + ", visites=" + visites + "]";
 	}
 
 }
