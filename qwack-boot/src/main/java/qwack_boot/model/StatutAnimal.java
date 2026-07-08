@@ -41,31 +41,7 @@ public class StatutAnimal {
 	@JoinColumn(nullable = false, name = "animal")
 	private Animal animal;
 
-	public StatutAnimal(LocalDate dateArrivee, LocalDate dateDepart, Statut statut, Emplacement emplacement,
-			Personne adoptant, Animal animal) {
-		this.dateArrivee = dateArrivee;
-		this.dateDepart = dateDepart;
-		this.statut = statut;
-		this.emplacement = emplacement;
-		this.adoptant = adoptant;
-		this.animal = animal;
-	}
-
-	public StatutAnimal(LocalDate dateArrivee, Statut statut, Emplacement emplacement, Personne adoptant,
-			Animal animal) {
-		this.dateArrivee = dateArrivee;
-		this.statut = statut;
-		this.emplacement = emplacement;
-		this.adoptant = adoptant;
-		this.animal = animal;
-	}
-
-	public StatutAnimal(Statut statut, Emplacement emplacement, Personne adoptant, Animal animal) {
-		this.dateArrivee = LocalDate.now();
-		this.statut = statut;
-		this.emplacement = emplacement;
-		this.adoptant = adoptant;
-		this.animal = animal;
+	public StatutAnimal() {
 	}
 
 	public StatutAnimal(Emplacement emplacement, Animal animal){
@@ -76,7 +52,6 @@ public class StatutAnimal {
 	}
 
 
-	
 	public void setEmplacement(Emplacement emplacement) {
 		this.emplacement = emplacement;
 	}
@@ -87,9 +62,6 @@ public class StatutAnimal {
 
 	public void setStatutAdoption(StatutValidation statutAdoption) {
 		this.statutAdoption = statutAdoption;
-	}
-
-	public StatutAnimal() {
 	}
 
 	public Integer getId() {

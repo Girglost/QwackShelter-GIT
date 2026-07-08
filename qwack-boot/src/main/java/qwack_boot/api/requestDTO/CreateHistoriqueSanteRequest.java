@@ -11,6 +11,4 @@ public record CreateHistoriqueSanteRequest (
     @NotNull Cause cause,
     @NotNull Integer animalId
 
-)
-
-{}
+){}

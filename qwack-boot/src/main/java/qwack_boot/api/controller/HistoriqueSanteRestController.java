@@ -51,13 +51,12 @@ public class HistoriqueSanteRestController {
 
     @PostMapping
     public HistoriqueSanteReponse ajouter(@RequestBody CreateHistoriqueSanteRequest request) {
-        HistoriqueSante hs = new HistoriqueSante();
-
-        hs.setCommentaire(request.commentaire());
-        hs.setCause(request.cause());
-        hs.setAnimal(animalSrv.getById(request.animalId()));
-        hs.setPoids(request.poids());
-
+        HistoriqueSante hs = new HistoriqueSante(
+            request.commentaire(),
+            request.poids(),
+            request.cause(),
+            animalSrv.getById(request.animalId())
+        );
 
         hsSrv.insert(hs);
         return HistoriqueSanteReponse.convert(hs);

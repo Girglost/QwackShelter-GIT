@@ -58,12 +58,11 @@ public class StatutAnimalRestController {
 
     @PostMapping
     public StatutAnimalReponse ajouter(@RequestBody CreateStatutAnimalRequest sar) {
-        StatutAnimal sa = new StatutAnimal();
+        
+        StatutAnimal sa = new StatutAnimal(
+            empsSrv.getById(sar.emplacementId()),
+            animalSrv.getById(sar.animalId()));
 
-        sa.setAnimal(animalSrv.getById(sar.animalId()));
-        sa.setEmplacement(empsSrv.getById(sar.emplacementId()));
-        
-        
         saSrv.insert(sa);
         return StatutAnimalReponse.convert(sa);
     }
