@@ -47,13 +47,25 @@ public class EmplacementRestController {
 
     @PostMapping
     public EmplacementReponse ajouter(@RequestBody CreateOrUpdateEmplacementRequest emp) {
-        Emplacement e = EmpSrv.insert(emp);
+        Emplacement e = new Emplacement();
+
+        e.setBox(emp.box());
+        e.setComplet(emp.complet());
+        e.setNbPlace(emp.nb_place());
+
+        EmpSrv.insert(e);
         return EmplacementReponse.convert(e);
     }
 
     @PutMapping("/{id}")
     public void modifier(@PathVariable Integer id, @RequestBody CreateOrUpdateEmplacementRequest emp) {
-        EmpSrv.update(id,emp);
+        Emplacement e = new Emplacement();
+
+        e.setBox(emp.box());
+        e.setComplet(emp.complet());
+        e.setNbPlace(emp.nb_place());
+
+        EmpSrv.update(id,e);
     }
 
 
