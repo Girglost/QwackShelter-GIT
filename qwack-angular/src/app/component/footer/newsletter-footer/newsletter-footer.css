@@ -1,0 +1,62 @@
+.newsletter{
+  background-color: #23411d;
+  display:flex;
+  padding: 3rem 0;
+}
+
+h1{
+font-family: 'Montagu Slab';
+font-style: normal;
+font-size: 56px ;
+font-weight: 600;
+color: #fafaf7;
+margin-bottom: 0.5rem;
+}
+
+
+p{
+  color: #fafaf7;
+  font-family:'Montserrat', sans-serif;
+  font-size: 24px ;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  margin-left: 2rem;
+}
+
+.text{
+  margin-left:5%;
+}
+
+.input-mail{
+  display: flex;
+  background-color: rgb(165, 52, 8);
+  align-items: center;
+  width: 30%;
+  margin-left:10rem;
+  background: #B1B2B580;
+  border-start-start-radius: 45px;
+  border-start-end-radius: 45px;
+  border-end-start-radius: 45px;
+  border-end-end-radius: 45px;
+}
+.cadre input{
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  height: 30%;
+  width: 100%;
+  justify-content: center;
+    border-start-start-radius: 22.5px;
+  border-start-end-radius: 22.5px;
+  border-end-start-radius: 22.5px;
+  border-end-end-radius: 22.5px;
+}
+
+.valider{
+  background-color: #d88b3a;
+  border-radius: 90px;
+  width: 10%;
+  height: 10%;
+}
+
+
+
