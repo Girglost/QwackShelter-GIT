@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './actualites.html',
   styleUrl: './actualites.css',
 })
+
+
 export class Actualite implements OnInit{
 
   actualites = [
