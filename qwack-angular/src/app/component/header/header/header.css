@@ -1,0 +1,20 @@
+.header{
+  display: flex;
+  flex-direction: row;
+  background-color: #60733e;
+
+}
+
+.header-blazon{
+
+  width: 35%;
+}
+
+.header-navigation{
+
+  width: 50%;
+}
+
+.header-boutons{
+  width: 15%;
+}

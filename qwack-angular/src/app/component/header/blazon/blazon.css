@@ -1,0 +1,28 @@
+.header-gauche{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.header-logo {
+  height: 75%;
+  justify-self: flex-start;
+  align-self: center;
+  margin: 15px;
+}
+
+.header-text-logo {
+  display: flex;
+  flex-direction: column;
+}
+
+#nom-shelter {
+  font-size: 50px;
+}
+
+#slogan-shelter {
+  color : white;
+  font-size: 18px;
+}
+
+

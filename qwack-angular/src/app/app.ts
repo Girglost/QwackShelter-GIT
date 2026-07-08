@@ -4,12 +4,16 @@ import { Header } from './component/header/header/header';
 import { Footer } from './component/footer/footer/footer';
 import { Actualite } from './page/actualites/actualites';
 import { Accueil } from './page/accueil/accueil/accueil';
-//import { Accueil } from './page/accueil/accueil/accueil';
-//import { Actualite } from './page/actualites/actualites';
+import { Header } from "./component/header/header/header";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,Accueil,Actualite],
+  imports: [
+    RouterOutlet,
+    Accueil,
+    Header,
+    Actualite,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
