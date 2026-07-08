@@ -1,6 +1,7 @@
 package qwack_boot.api.requestDTO.personne;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import qwack_boot.api.requestDTO.lieu.CreateLieuRequest;
 
 public class CreateVisiteurRequest {
@@ -12,9 +13,9 @@ public class CreateVisiteurRequest {
     String login;
     @NotBlank
     String password;
-    @NotBlank
+    @NotNull
     CreateLieuRequest habitation;
-    @NotBlank
+    @NotNull
     Integer quackShelterId;
 
     public String getNom() {
