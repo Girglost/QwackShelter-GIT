@@ -5,13 +5,14 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
-
+import qwack_boot.dto.HistoriqueSanteDTO;
+import qwack_boot.dto.VisiteDTO;
 import qwack_boot.model.Animal;
 import qwack_boot.model.Caractere;
 import qwack_boot.model.Famille;
 import qwack_boot.model.Genre;
 
-public class AnimalResponse {
+public class AnimalResponseAdmin {
 
 	private Integer id;
 	private String nomAnimal;
@@ -21,12 +22,56 @@ public class AnimalResponse {
 	private String traitement;
 	private Famille famille;
 	private Genre genre;
+	private Integer idQuackShelter;
 	private List<Caractere> caracteres;
+	private List<VisiteDTO> visites;
+	private List<HistoriqueSanteDTO> historiqueSantes;
 
-	public static AnimalResponse convert(Animal animal) {
-		AnimalResponse a = new AnimalResponse();
+	public static AnimalResponseAdmin convert(Animal animal) {
+		AnimalResponseAdmin a = new AnimalResponseAdmin();
 		BeanUtils.copyProperties(animal, a);
+		a.idQuackShelter = animal.getQuackShelter().getId();
 		return a;
+	}
+
+	public static AnimalResponseAdmin convertWithHistoriqueSante(Animal animal) {
+		AnimalResponseAdmin a = convert(animal);
+
+		a.setHistoriqueSantes(
+				animal.getHistoriqueSante()
+						.stream()
+						.map(HistoriqueSanteDTO::convert)
+						.toList());
+
+		return a;
+	}
+
+	public static AnimalResponseAdmin convertWithVisites(Animal animal) {
+		AnimalResponseAdmin a = convert(animal);
+
+		a.setVisites(
+				animal.getVisites()
+						.stream()
+						.map(VisiteDTO::convert)
+						.toList());
+
+		return a;
+	}
+
+	public List<VisiteDTO> getVisites() {
+		return visites;
+	}
+
+	public void setVisites(List<VisiteDTO> visites) {
+		this.visites = visites;
+	}
+
+	public List<HistoriqueSanteDTO> getHistoriqueSantes() {
+		return historiqueSantes;
+	}
+
+	public void setHistoriqueSantes(List<HistoriqueSanteDTO> historiqueSantes) {
+		this.historiqueSantes = historiqueSantes;
 	}
 
 	public Integer getId() {
@@ -99,6 +144,14 @@ public class AnimalResponse {
 
 	public void setCaracteres(List<Caractere> caracteres) {
 		this.caracteres = caracteres;
+	}
+
+	public Integer getIdQuackShelter() {
+		return idQuackShelter;
+	}
+
+	public void setIdQuackShelter(Integer idQuackShelter) {
+		this.idQuackShelter = idQuackShelter;
 	}
 
 }

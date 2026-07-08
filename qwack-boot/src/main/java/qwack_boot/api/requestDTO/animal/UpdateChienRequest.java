@@ -22,12 +22,6 @@ public class UpdateChienRequest {
     private List<Caractere> caracteres;
     private Integer qwackShelterId;
 
-    public static UpdateChienRequest convert(Chien chien) {
-        UpdateChienRequest c = new UpdateChienRequest();
-        BeanUtils.copyProperties(chien, c);
-        c.qwackShelterId = chien.getQuackShelter().getId();
-        return c;
-    }
 
     public void setNomAnimal(String nomAnimal) {
         this.nomAnimal = nomAnimal;

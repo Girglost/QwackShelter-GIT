@@ -27,16 +27,6 @@ public class UpdatePouleRequest {
 
     private String race;
 
-    public static UpdatePouleRequest convert(Poule poule) {
-        UpdatePouleRequest p = new UpdatePouleRequest();
-
-        BeanUtils.copyProperties(poule, p);
-
-        p.setqwackShelterId(poule.getQuackShelter().getId());
-
-        return p;
-    }
-
 
 
     public List<Caractere> getCaracteres() {

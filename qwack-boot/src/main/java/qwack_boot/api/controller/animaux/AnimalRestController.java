@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.api.responseDTO.animal.AnimalResponse;
+import qwack_boot.api.responseDTO.animal.AnimalResponseAdmin;
 import qwack_boot.model.Animal;
 import qwack_boot.model.Genre;
 import qwack_boot.model.Statut;
@@ -35,13 +36,13 @@ public class AnimalRestController {
 	}
 
 	@GetMapping("/{id}/historique-sante")
-	public AnimalResponse chercherParIdAvecHistoriqueSante(@PathVariable Integer id) {
-		return AnimalResponse.convertWithHistoriqueSante(srvAnimal.getByIdWithHistoriqueSante(id));
+	public AnimalResponseAdmin chercherParIdAvecHistoriqueSante(@PathVariable Integer id) {
+		return AnimalResponseAdmin.convertWithHistoriqueSante(srvAnimal.getByIdWithHistoriqueSante(id));
 	}
 
 	@GetMapping("/{id}/visites")
-	public AnimalResponse chercherParIdAvecVisites(@PathVariable Integer id) {
-		return AnimalResponse.convertWithVisites(srvAnimal.getByIdWithVisite(id));
+	public AnimalResponseAdmin chercherParIdAvecVisites(@PathVariable Integer id) {
+		return AnimalResponseAdmin.convertWithVisites(srvAnimal.getByIdWithVisite(id));
 	}
 
 	@DeleteMapping("/{id}")

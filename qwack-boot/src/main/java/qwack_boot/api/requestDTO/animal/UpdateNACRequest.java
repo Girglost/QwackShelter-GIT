@@ -22,12 +22,6 @@ public class UpdateNACRequest {
     private List<Caractere> caracteres;
     private Integer qwackShelterId;
 
-    public static UpdateNACRequest convert(NAC nac) {
-        UpdateNACRequest n = new UpdateNACRequest();
-        BeanUtils.copyProperties(nac, n);
-        n.qwackShelterId = nac.getQuackShelter().getId();
-        return n;
-    }
 
     public void setNomAnimal(String nomAnimal) {
         this.nomAnimal = nomAnimal;

@@ -23,13 +23,6 @@ public class CreateChienRequest {
     private List<Caractere> caracteres;
     private Integer qwackShelterId;
 
-    public static CreateChienRequest convert(Chien chien) {
-        CreateChienRequest c = new CreateChienRequest();
-        BeanUtils.copyProperties(chien, c);
-        c.qwackShelterId = chien.getQuackShelter().getId();
-        return c;
-    }
-
     public void setNomAnimal(String nomAnimal) {
         this.nomAnimal = nomAnimal;
     }

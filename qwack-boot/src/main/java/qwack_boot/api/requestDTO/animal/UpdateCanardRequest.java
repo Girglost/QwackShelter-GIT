@@ -28,16 +28,6 @@ public class UpdateCanardRequest {
     private String race;
     private boolean estSauvage;
 
-    public static UpdateCanardRequest convert(Canard canard) {
-        UpdateCanardRequest p = new UpdateCanardRequest();
-
-        BeanUtils.copyProperties(canard, p);
-
-        p.setQwackShelterId(canard.getQuackShelter().getId());
-
-        return p;
-    }
-
 
     
     public List<Caractere> getCaracteres() {

@@ -29,17 +29,6 @@ public class CreatePouleRequest {
 
     private String race;
 
-    public static CreatePouleRequest convert(Poule poule) {
-        CreatePouleRequest p = new CreatePouleRequest();
-
-        BeanUtils.copyProperties(poule, p);
-
-        p.setQwackShelterId(poule.getQuackShelter().getId());
-
-        return p;
-    }
-
-    
 
     public String getNomAnimal() {
         return nomAnimal;

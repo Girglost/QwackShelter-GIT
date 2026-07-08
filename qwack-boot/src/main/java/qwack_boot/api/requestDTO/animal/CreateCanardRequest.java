@@ -31,16 +31,6 @@ public class CreateCanardRequest {
     private String race;
     private boolean estSauvage;
 
-    public static CreateCanardRequest convert(Canard canard) {
-        CreateCanardRequest p = new CreateCanardRequest();
-
-        BeanUtils.copyProperties(canard, p);
-
-        p.setQwackShelterId(canard.getQuackShelter().getId());
-
-        return p;
-    }
-
     public void setEstSauvage(boolean estSauvage) {
         this.estSauvage = estSauvage;
     }

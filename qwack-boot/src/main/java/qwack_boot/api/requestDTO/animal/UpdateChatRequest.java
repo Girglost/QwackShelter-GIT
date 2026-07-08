@@ -21,12 +21,6 @@ public class UpdateChatRequest {
     private List<Caractere> caracteres;
     private Integer qwackShelterId;
 
-    public static UpdateChatRequest convert(Chat chat) {
-        UpdateChatRequest c = new UpdateChatRequest();
-        BeanUtils.copyProperties(chat, c);
-        c.qwackShelterId = chat.getQuackShelter().getId();
-        return c;
-    }
 
     public void setNomAnimal(String nomAnimal) {
         this.nomAnimal = nomAnimal;
