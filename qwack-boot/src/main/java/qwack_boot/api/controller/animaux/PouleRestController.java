@@ -10,6 +10,7 @@ import qwack_boot.api.requestDTO.animal.CreateAnimalRequest;
 import qwack_boot.api.requestDTO.animal.UpdateAnimalRequest;
 import qwack_boot.api.responseDTO.animal.PouleResponse;
 import qwack_boot.dao.IDAOQuackShelter;
+import qwack_boot.model.Famille;
 import qwack_boot.model.Poule;
 import qwack_boot.model.QuackShelter;
 import qwack_boot.service.AnimalService;
@@ -45,6 +46,8 @@ public class PouleRestController {
         poule.setCouleur(request.getCouleur());
         poule.setGenre(request.getGenre());
         poule.setCaracteres(request.getCaracteres());
+
+        poule.setFamille(Famille.Galide);
 
         poule.setQuackShelter(refuge);
 

@@ -12,6 +12,7 @@ import qwack_boot.api.requestDTO.animal.UpdateAnimalRequest;
 import qwack_boot.api.responseDTO.animal.CanardResponse;
 import qwack_boot.dao.IDAOQuackShelter;
 import qwack_boot.model.Canard;
+import qwack_boot.model.Famille;
 import qwack_boot.model.QuackShelter;
 import qwack_boot.service.AnimalService;
 import qwack_boot.service.CanardService;
@@ -47,6 +48,8 @@ public class CanardRestController {
         canard.setGenre(request.getGenre());
         canard.setCaracteres(request.getCaracteres());
         canard.setestSauvage(request.isEstSauvage());
+
+        canard.setFamille(Famille.Galide);
 
         canard.setQuackShelter(refuge);
 

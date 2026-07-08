@@ -1,6 +1,5 @@
 package qwack_boot.api.controller.animaux;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -8,9 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import qwack_boot.api.requestDTO.animal.CreateNACRequest;
-import qwack_boot.api.requestDTO.animal.UpdateNACRequest;
-import qwack_boot.api.responseDTO.animal.CanardResponse;
+import qwack_boot.api.requestDTO.animal.CreateAnimalRequest;
+import qwack_boot.api.requestDTO.animal.UpdateAnimalRequest;
 import qwack_boot.api.responseDTO.animal.NACResponse;
 import qwack_boot.dao.IDAOQuackShelter;
 import qwack_boot.model.NAC;
@@ -22,17 +20,20 @@ import qwack_boot.service.NACService;
 @RequestMapping("api/nac")
 public class NACRestController {
 
-    @Autowired
-    private NACService srvNAC;
+    private final NACService srvNAC;
 
-    @Autowired
-    private IDAOQuackShelter daoQuackShelter;
+    private final IDAOQuackShelter daoQuackShelter;
 
-    @Autowired
-    private AnimalService animalService;
+    private final AnimalService animalService;
+
+    NACRestController(NACService srvNAC, IDAOQuackShelter daoQuackShelter, AnimalService animalService) {
+        this.srvNAC = srvNAC;
+        this.daoQuackShelter = daoQuackShelter;
+        this.animalService = animalService;
+    }
 
     @PostMapping
-    public NACResponse ajouter(@RequestBody CreateNACRequest request) {
+    public NACResponse ajouter(@RequestBody CreateAnimalRequest request) {
 
         QuackShelter refuge = daoQuackShelter
                 .findById(request.getQwackShelterId())
@@ -49,6 +50,8 @@ public class NACRestController {
         nac.setCaracteres(request.getCaracteres());
         nac.setEspece(request.getEspece());
 
+        nac.setFamille(request.getFamille());
+
         nac.setQuackShelter(refuge);
 
         srvNAC.insert(nac);
@@ -56,7 +59,7 @@ public class NACRestController {
     }
 
     @PutMapping("/{id}")
-    public NACResponse modifier(@PathVariable Integer id, @RequestBody UpdateNACRequest request) {
+    public NACResponse modifier(@PathVariable Integer id, @RequestBody UpdateAnimalRequest request) {
         
         NAC nac = (NAC) animalService.getById(id);
 
