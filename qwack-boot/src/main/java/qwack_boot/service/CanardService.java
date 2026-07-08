@@ -3,6 +3,7 @@ package qwack_boot.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 import qwack_boot.api.requestDTO.animal.CreateCanardRequest;
 import qwack_boot.api.requestDTO.animal.UpdateCanardRequest;
 import qwack_boot.dao.IDAOQuackShelter;
@@ -19,50 +20,13 @@ public class CanardService {
     @Autowired
     private IDAOQuackShelter daoQuackShelter;
 
-    public Canard insert(CreateCanardRequest request) {
-
-        QuackShelter refuge = daoQuackShelter
-                .findById(request.getQwackShelterId())
-                .orElseThrow();
-
-        Canard canard = new Canard();
-
-        canard.setNomAnimal(request.getNomAnimal());
-        canard.setDateNaissance(request.getDateNaissance());
-        canard.setCouleur(request.getCouleur());
-        canard.setGenre(request.getGenre());
-        canard.setCaracteres(request.getCaracteres());
-        canard.setestSauvage(request.isEstSauvage());
-
-        canard.setQuackShelter(refuge);
-
-        canard.setPondeuse(request.isPondeuse());
+    public Canard insert(Canard canard) {
 
         return (Canard) animalService.insert(canard);
     }
 
-    public Canard update(Integer id, UpdateCanardRequest request) {
-
-        Canard canard = (Canard) animalService.getById(id);
-
-        if (canard == null) {
-            throw new RuntimeException("Canard introuvable");
-        }
-
-        canard.setNomAnimal(request.getNomAnimal());
-        canard.setCouleur(request.getCouleur());
-        canard.setGenre(request.getGenre());
-        canard.setCaracteres(request.getCaracteres());
-        canard.setPondeuse(request.isPondeuse());
-        canard.setestSauvage(request.isEstSauvage());
-
-        if (request.getQwackShelterId() != null) {
-            QuackShelter refuge = daoQuackShelter
-                    .findById(request.getQwackShelterId())
-                    .orElseThrow(() -> new RuntimeException("Refuge introuvable"));
-
-            canard.setQuackShelter(refuge);
-        }
+    @Transactional
+    public Canard update(Canard canard) {
 
         return (Canard) animalService.update(canard);
     }
