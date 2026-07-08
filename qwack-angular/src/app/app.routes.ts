@@ -10,4 +10,5 @@ export const routes: Routes = [
   {path : "footer", component: Footer},
   {path : "accueil", component: Accueil},
   {path : "actualites", component: Actualite}
+
 ];
