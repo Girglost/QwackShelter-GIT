@@ -3,13 +3,9 @@ package qwack_boot.service;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
-import qwack_boot.api.requestDTO.statutAnimal.CreateStatutAnimalRequest;
-import qwack_boot.api.requestDTO.statutAnimal.UpdateStatutAnimalRequest;
 import qwack_boot.api.responseDTO.animal.AnimalResponse;
 import qwack_boot.dao.IDAOStatutAnimal;
 import qwack_boot.model.Statut;
@@ -17,18 +13,13 @@ import qwack_boot.model.StatutAnimal;
 
 @Service
 public class StatutAnimalService {
-    private static final Logger log = LoggerFactory.getLogger(VisiteurService.class);
 
 	final IDAOStatutAnimal daoStatutAnimal;
-	final EmplacementService daoEmplacement;
-	final AnimalService animalSrv;
-	final PersonneService pSrv;
 
-	StatutAnimalService(PersonneService pSrv, IDAOStatutAnimal daoStatutAnimal, EmplacementService daoEmplacement,AnimalService animalSrv) {
+
+	StatutAnimalService(IDAOStatutAnimal daoStatutAnimal) {
 		this.daoStatutAnimal = daoStatutAnimal;
-		this.daoEmplacement = daoEmplacement;
-		this.animalSrv = animalSrv;
-		this.pSrv = pSrv;
+
 	}
 
 	// --------------- CRUD ----------------
@@ -41,15 +32,14 @@ public class StatutAnimalService {
 		return daoStatutAnimal.findById(id).orElse(null);
 	}
 
-	public StatutAnimal insert(CreateStatutAnimalRequest sar) {
-		StatutAnimal sa = new StatutAnimal();
-		sa.setEmplacement(daoEmplacement.getById(sar.emplacementId()));
-		sa.setAnimal(animalSrv.getById(sar.animalId()));
-		return daoStatutAnimal.save(sa);
+	public StatutAnimal insert(StatutAnimal sar) {
+		return daoStatutAnimal.save(sar);
 	}
 
-	public StatutAnimal update(Integer id, UpdateStatutAnimalRequest statut) {
-		StatutAnimal sa = daoStatutAnimal.findById(id).orElse(null);
+	public StatutAnimal update(Integer id, StatutAnimal statut) {
+		return daoStatutAnimal.save(statut);
+
+		/*StatutAnimal sa = daoStatutAnimal.findById(id).orElse(null);
 
 		if (sa == null) {
             log.debug("StatutAnimal {} introuvable", id);
@@ -71,8 +61,7 @@ public class StatutAnimalService {
 		sa.setStatut(statut.statut());
 		sa.setStatutAdoption(statut.statutAdoption());
 
-
-		return daoStatutAnimal.save(sa);
+ */
 	}
 
 	public void delete(Integer id) {
