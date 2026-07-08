@@ -1,6 +1,5 @@
 package qwack_boot.api.controller.animaux;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -8,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import qwack_boot.api.requestDTO.animal.CreateCanardRequest;
-import qwack_boot.api.requestDTO.animal.UpdateCanardRequest;
+import qwack_boot.api.requestDTO.animal.CreateAnimalRequest;
+import qwack_boot.api.requestDTO.animal.UpdateAnimalRequest;
 import qwack_boot.api.responseDTO.animal.CanardResponse;
 import qwack_boot.dao.IDAOQuackShelter;
 import qwack_boot.model.Canard;
@@ -21,21 +20,22 @@ import qwack_boot.service.CanardService;
 @RequestMapping("api/canard")
 public class CanardRestController {
 
+    private final CanardService srvCanard;
 
-    @Autowired
-    private CanardService srvCanard;
+    private final IDAOQuackShelter daoQuackShelter;
 
-        @Autowired
-    private IDAOQuackShelter daoQuackShelter;
+    private final AnimalService animalService;
 
-    
-     @Autowired
-    private AnimalService animalService;
+    CanardRestController(CanardService srvCanard, IDAOQuackShelter daoQuackShelter, AnimalService animalService) {
+        this.srvCanard = srvCanard;
+        this.daoQuackShelter = daoQuackShelter;
+        this.animalService = animalService;
+    }
 
     @PostMapping
-    public CanardResponse ajouter(@RequestBody CreateCanardRequest request) {
+    public CanardResponse ajouter(@RequestBody CreateAnimalRequest request) {
 
-          QuackShelter refuge = daoQuackShelter
+        QuackShelter refuge = daoQuackShelter
                 .findById(request.getQwackShelterId())
                 .orElseThrow();
 
@@ -51,15 +51,15 @@ public class CanardRestController {
         canard.setQuackShelter(refuge);
 
         canard.setPondeuse(request.isPondeuse());
-        
+
         srvCanard.insert(canard);
         return CanardResponse.convert(canard);
     }
 
     @PutMapping("/{id}")
-    public CanardResponse modifier(@PathVariable Integer id, @RequestBody UpdateCanardRequest request) {
+    public CanardResponse modifier(@PathVariable Integer id, @RequestBody UpdateAnimalRequest request) {
 
-                Canard canard = (Canard) animalService.getById(id);
+        Canard canard = (Canard) animalService.getById(id);
 
         if (canard == null) {
             throw new RuntimeException("Canard introuvable");
@@ -84,5 +84,5 @@ public class CanardRestController {
 
         return CanardResponse.convert(canard);
 
-}
+    }
 }

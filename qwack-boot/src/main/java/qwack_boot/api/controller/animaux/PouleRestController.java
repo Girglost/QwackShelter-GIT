@@ -1,6 +1,4 @@
 package qwack_boot.api.controller.animaux;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -8,14 +6,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import qwack_boot.api.requestDTO.animal.CreatePouleRequest;
-import qwack_boot.api.requestDTO.animal.CreatePouleRequest;
-import qwack_boot.api.requestDTO.animal.UpdatePouleRequest;
-import qwack_boot.api.requestDTO.animal.UpdatePouleRequest;
+import qwack_boot.api.requestDTO.animal.CreateAnimalRequest;
+import qwack_boot.api.requestDTO.animal.UpdateAnimalRequest;
 import qwack_boot.api.responseDTO.animal.PouleResponse;
 import qwack_boot.dao.IDAOQuackShelter;
-import qwack_boot.api.responseDTO.animal.PouleResponse;
-import qwack_boot.model.Poule;
 import qwack_boot.model.Poule;
 import qwack_boot.model.QuackShelter;
 import qwack_boot.service.AnimalService;
@@ -25,17 +19,20 @@ import qwack_boot.service.PouleService;
 @RequestMapping("api/poule")
 public class PouleRestController {
 
-    @Autowired
-    private PouleService srvPoule;
+    private final PouleService srvPoule;
 
-    @Autowired
-    private IDAOQuackShelter daoQuackShelter;
+    private final IDAOQuackShelter daoQuackShelter;
 
-    @Autowired
-    private AnimalService animalService;
+    private final AnimalService animalService;
+
+    PouleRestController(PouleService srvPoule, IDAOQuackShelter daoQuackShelter, AnimalService animalService) {
+        this.srvPoule = srvPoule;
+        this.daoQuackShelter = daoQuackShelter;
+        this.animalService = animalService;
+    }
 
     @PostMapping
-    public PouleResponse ajouter(@RequestBody CreatePouleRequest request) {
+    public PouleResponse ajouter(@RequestBody CreateAnimalRequest request) {
 
         QuackShelter refuge = daoQuackShelter
                 .findById(request.getQwackShelterId())
@@ -58,7 +55,7 @@ public class PouleRestController {
     }
 
     @PutMapping("/{id}")
-    public PouleResponse modifier(@PathVariable Integer id, @RequestBody UpdatePouleRequest request) {
+    public PouleResponse modifier(@PathVariable Integer id, @RequestBody UpdateAnimalRequest request) {
 
         Poule poule = (Poule) animalService.getById(id);
 
