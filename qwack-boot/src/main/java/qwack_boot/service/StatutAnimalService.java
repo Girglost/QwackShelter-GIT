@@ -37,6 +37,7 @@ public class StatutAnimalService {
 	}
 
 	public StatutAnimal update(Integer id, StatutAnimal statut) {
+		statut.setId(id);
 		return daoStatutAnimal.save(statut);
 
 		/*StatutAnimal sa = daoStatutAnimal.findById(id).orElse(null);
