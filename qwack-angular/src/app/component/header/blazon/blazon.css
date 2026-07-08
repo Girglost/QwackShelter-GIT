@@ -12,8 +12,17 @@
 }
 
 .header-text-logo {
-  flex-direction: row;
-  align-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#nom-shelter {
+  font-size: 50px;
+}
+
+#slogan-shelter {
+  color : white;
+  font-size: 18px;
 }
 
 
