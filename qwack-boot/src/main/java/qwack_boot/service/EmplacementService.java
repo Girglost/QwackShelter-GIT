@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import qwack_boot.api.requestDTO.CreateOrUpdateEmplacementRequest;
 import qwack_boot.dao.IDAOEmplacement;
 import qwack_boot.model.Emplacement;
 import qwack_boot.model.typeBox;
@@ -28,24 +27,25 @@ public class EmplacementService {
 		return daoEmplacement.findById(id).orElse(null);
 	}
 
-	public Emplacement insert(CreateOrUpdateEmplacementRequest emplacement) {
-		Emplacement emp = new Emplacement();
+	public Emplacement insert(Emplacement emplacement) {
+		// Emplacement emp = new Emplacement();
 
-		emp.setBox(emplacement.box());
-		emp.setComplet(emplacement.complet());
-		emp.setNbPlace(emplacement.nb_place());
+		// emp.setBox(emplacement.box());
+		// emp.setComplet(emplacement.complet());
+		// emp.setNbPlace(emplacement.nb_place());
 
-		return daoEmplacement.save(emp);
+		return daoEmplacement.save(emplacement);
 	}
 
-	public Emplacement update(Integer id, CreateOrUpdateEmplacementRequest emplacement) {
-		Emplacement emp = daoEmplacement.findById(id).orElse(null);
+	public Emplacement update(Integer id, Emplacement emplacement) {
+		// Emplacement emp = daoEmplacement.findById(id).orElse(null);
 
-		emp.setBox(emplacement.box());
-		emp.setComplet(emplacement.complet());
-		emp.setNbPlace(emplacement.nb_place());
+		// emp.setBox(emplacement.box());
+		// emp.setComplet(emplacement.complet());
+		// emp.setNbPlace(emplacement.nb_place());
+		emplacement.setId(id);
 
-		return daoEmplacement.save(emp);
+		return daoEmplacement.save(emplacement);
 	}
 
 	public void delete(Integer id) {
