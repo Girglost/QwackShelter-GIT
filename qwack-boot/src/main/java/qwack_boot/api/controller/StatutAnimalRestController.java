@@ -19,6 +19,9 @@ import qwack_boot.api.responseDTO.StatutAnimalReponse;
 import qwack_boot.api.responseDTO.animal.AnimalResponse;
 import qwack_boot.model.Statut;
 import qwack_boot.model.StatutAnimal;
+import qwack_boot.service.AnimalService;
+import qwack_boot.service.EmplacementService;
+import qwack_boot.service.PersonneService;
 import qwack_boot.service.StatutAnimalService;
 
 @RestController
@@ -26,9 +29,15 @@ import qwack_boot.service.StatutAnimalService;
 public class StatutAnimalRestController {
 
     final StatutAnimalService saSrv;
+    final AnimalService animalSrv;
+    final EmplacementService empsSrv;
+    final PersonneService pSrv;
 
-    StatutAnimalRestController(StatutAnimalService saSrv) {
+    StatutAnimalRestController(StatutAnimalService saSrv, AnimalService animalSrv, EmplacementService empsSrv, PersonneService pSrv) {
         this.saSrv = saSrv;
+        this.animalSrv = animalSrv;
+        this.empsSrv = empsSrv;
+        this.pSrv = pSrv;
     }
 
     @GetMapping
@@ -49,13 +58,32 @@ public class StatutAnimalRestController {
 
     @PostMapping
     public StatutAnimalReponse ajouter(@RequestBody CreateStatutAnimalRequest sar) {
-        StatutAnimal sa = saSrv.insert(sar);
+        StatutAnimal sa = new StatutAnimal();
+
+        sa.setAnimal(animalSrv.getById(sar.animalId()));
+        sa.setEmplacement(empsSrv.getById(sar.emplacementId()));
+        
+        
+        saSrv.insert(sa);
         return StatutAnimalReponse.convert(sa);
     }
 
     @PutMapping("/{id}")
     public void modifier(@PathVariable Integer id, @RequestBody UpdateStatutAnimalRequest sar) {
-        saSrv.update(id,sar);
+       StatutAnimal sa = new StatutAnimal();
+
+        sa.setAnimal(animalSrv.getById(sar.animalId()));
+        sa.setDateArrivee(sar.dateArrivee());
+        sa.setDateDepart(sar.dateDepart());
+        sa.setEmplacement(empsSrv.getById(sar.emplacementId()));
+        sa.setStatutAdoption(sar.statutAdoption());
+        sa.setAdoptant(
+				sar.adoptantId() != null
+						? pSrv.getById(sar.adoptantId())
+						: null);
+        
+
+        saSrv.update(id,sa);
     }
 
 
