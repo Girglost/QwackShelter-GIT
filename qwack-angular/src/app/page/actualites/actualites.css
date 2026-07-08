@@ -1,0 +1,215 @@
+.actualites-container{
+
+    max-width:1200px;
+    margin:auto;
+    padding:40px 20px;
+}
+
+h1{
+
+    text-align:center;
+    margin-bottom:40px;
+
+    color:#2f522d;
+
+    font-size:34px;
+}
+
+.grid-actualites{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+
+    gap:35px;
+}
+
+.card{
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.12);
+
+    transition:.3s;
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 10px 30px rgba(0,0,0,.18);
+
+}
+
+.card img{
+
+    width:100%;
+
+    height:260px;
+
+    object-fit:cover;
+}
+
+.card-content{
+
+    padding:20px;
+}
+
+.date{
+
+    display:block;
+
+    color:#d5913c;
+
+    font-weight:bold;
+
+    margin-bottom:8px;
+
+    text-align:center;
+}
+
+.card h2{
+
+    text-align:center;
+
+    color:#4c7b44;
+
+    margin-bottom:12px;
+
+    font-size:24px;
+}
+
+.card p{
+
+    color:#555;
+
+    text-align:center;
+
+    line-height:1.6;
+}
+
+/************ FOOTER ************/
+
+footer{
+
+    background:#1f461d;
+
+    margin-top:60px;
+
+    padding:35px;
+}
+
+.newsletter{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    max-width:1200px;
+
+    margin:auto;
+
+    flex-wrap:wrap;
+
+    gap:30px;
+}
+
+.texte h2{
+
+    color:white;
+
+    margin-bottom:10px;
+}
+
+.texte p{
+
+    color:white;
+}
+
+.form-news{
+
+    display:flex;
+
+    align-items:center;
+
+    background:#708857;
+
+    padding:6px;
+
+    border-radius:50px;
+}
+
+.form-news input{
+
+    width:280px;
+
+    border:none;
+
+    padding:14px 18px;
+
+    border-radius:50px;
+
+    outline:none;
+
+    font-size:16px;
+}
+
+.form-news button{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:50%;
+
+    border:none;
+
+    margin-left:10px;
+
+    background:#c68438;
+
+    color:white;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.form-news button:hover{
+
+    transform:scale(1.1);
+}
+
+@media(max-width:900px){
+
+    .grid-actualites{
+
+        grid-template-columns:1fr;
+    }
+
+    .newsletter{
+
+        flex-direction:column;
+
+        text-align:center;
+    }
+
+    .form-news{
+
+        width:100%;
+    }
+
+    .form-news input{
+
+        width:100%;
+    }
+
+}
