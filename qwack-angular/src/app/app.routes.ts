@@ -4,5 +4,7 @@ import { Footer } from './component/footer/footer/footer';
 import { Accueil } from './page/accueil/accueil/accueil';
 
 export const routes: Routes = [
-  {path : "header", component: Header},{path : "footer", component: Footer},{path : "accueil", component: Accueil}
+  {path : "header", component: Header},
+  {path : "footer", component: Footer},
+  {path : "accueil", component: Accueil}
 ];

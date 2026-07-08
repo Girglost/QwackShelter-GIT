@@ -1,0 +1,19 @@
+.header-gauche{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.header-logo {
+  height: 75%;
+  justify-self: flex-start;
+  align-self: center;
+  margin: 15px;
+}
+
+.header-text-logo {
+  flex-direction: row;
+  align-content: center;
+}
+
+

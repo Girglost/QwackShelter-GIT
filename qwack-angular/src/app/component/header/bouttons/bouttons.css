@@ -1,0 +1,26 @@
+
+.header-boutons{
+  display: inline-block;
+  gap: 15px;                 /* Espace entre les deux boutons */
+}
+
+
+.btn-connexion {
+  justify-self: end;
+  width: 50px;
+  height: 50px;
+  background: #4749454D;
+}
+
+.header_don_bouton {
+  color: white;
+  font-size: 22px;
+  justify-self: end;
+  background: #b77f38FF;
+  border-start-start-radius: 22.5px;
+  border-start-end-radius: 22.5px;
+  border-end-start-radius: 22.5px;
+  border-end-end-radius: 22.5px;
+}
+
+
