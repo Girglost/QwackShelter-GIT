@@ -26,6 +26,35 @@ public class BenevoleResponse {
 
     private List<StatutAnimalDTO> adoptions;
 
+    public static BenevoleResponse convert(Personne benevole) {
+        BenevoleResponse b = new BenevoleResponse();
+
+        System.out.println(benevole);
+
+        b.id = benevole.getId();
+        b.nom = benevole.getNom();
+        b.prenom = benevole.getPrenom();
+        b.login = benevole.getLogin();
+        b.role = benevole.getRole();
+        b.admin = benevole.isAdmin();
+        b.dateEngagement = benevole.getDateEngagement();
+        b.setStatutActivite(benevole.getStatutActivite());
+
+        // HABITATION
+        // b.habitation = CreateLieuRequest.convert(benevole.getHabitation());
+
+        // QuackShelter
+        b.quackShelterId = benevole.getQuackShelter().getId();
+        System.out.println(b);
+        return b;
+    }
+
+    public static BenevoleResponse convertWithAdoptions(Personne benevole) {
+        BenevoleResponse b = BenevoleResponse.convert(benevole);
+        b.adoptions = benevole.getAdoptions().stream().map(a -> StatutAnimalDTO.convert(a)).toList();
+        return b;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -111,35 +140,6 @@ public class BenevoleResponse {
         return "BenevoleResponse [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", login=" + login + ", role="
                 + role + ", admin=" + admin + ", statutActivite=" + statutActivite + ", dateEngagement="
                 + dateEngagement + ", quackShelterId=" + quackShelterId + ", adoptions=" + adoptions + "]";
-    }
-
-    public static BenevoleResponse convert(Personne benevole) {
-        BenevoleResponse b = new BenevoleResponse();
-
-        System.out.println(benevole);
-
-        b.id = benevole.getId();
-        b.nom = benevole.getNom();
-        b.prenom = benevole.getPrenom();
-        b.login = benevole.getLogin();
-        b.role = benevole.getRole();
-        b.admin = benevole.isAdmin();
-        b.dateEngagement = benevole.getDateEngagement();
-        b.setStatutActivite(benevole.getStatutActivite());
-
-        // HABITATION
-        // b.habitation = CreateLieuRequest.convert(benevole.getHabitation());
-
-        // QuackShelter
-        b.quackShelterId = benevole.getQuackShelter().getId();
-        System.out.println(b);
-        return b;
-    }
-
-    public static BenevoleResponse convertWithAdoptions(Personne benevole) {
-        BenevoleResponse b = BenevoleResponse.convert(benevole);
-        b.adoptions = benevole.getAdoptions().stream().map(a -> StatutAnimalDTO.convert(a)).toList();
-        return b;
     }
 
 }

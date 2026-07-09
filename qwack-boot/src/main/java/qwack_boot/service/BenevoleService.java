@@ -12,12 +12,14 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 import qwack_boot.api.responseDTO.personne.BenevoleResponse;
 import qwack_boot.dao.IDAOPersonne;
+import qwack_boot.model.Animal;
 import qwack_boot.model.Lieu;
 import qwack_boot.model.Personne;
 import qwack_boot.model.QuackShelter;
 import qwack_boot.model.Statut;
 import qwack_boot.model.StatutActivite;
 import qwack_boot.model.StatutAnimal;
+import qwack_boot.model.StatutValidation;
 
 @Service
 public class BenevoleService {
@@ -68,23 +70,13 @@ public class BenevoleService {
             log.debug("login {} déja utilisé", benevole.getLogin());
             throw new IllegalArgumentException("Login déjà utilisé");
         }
-        String login = benevole.getLogin();
-
-        String passwordEncoded = passwordEncoder.encode(benevole.getPassword());
-        String nom = benevole.getNom();
-        String prenom = benevole.getPrenom();
 
         // On cherche le Lieu, si il existe ok, sinon on le créé
         Lieu habitation = lieuSrv.findOrCreate(benevole.getHabitation());
+        benevole.setHabitation(habitation);
+        benevole.setPassword(passwordEncoder.encode(benevole.getPassword()));
 
-        QuackShelter quackShelter = benevole.getQuackShelter();
-        Personne newBenevole = Personne.createBenevole(nom, prenom, login, passwordEncoded, habitation,
-                quackShelter);
-
-        System.out.println("Password avant encode : " + newBenevole.getPassword());
-        System.out.println("Password APRES encode : " + passwordEncoded);
-
-        return daoPersonne.save(newBenevole);
+        return daoPersonne.save(benevole);
     }
 
     @Transactional
@@ -96,7 +88,7 @@ public class BenevoleService {
             log.debug("Benevole {} introuvable", id);
             throw new IllegalArgumentException("Benevole introuvable");
         }
-        // on modifie les champs que VISITEUR DTO a donné
+        // on modifie les champs que BENEVOLE DTO a donné
         benevoleUpdate.setNom(benevole.getNom());
         benevoleUpdate.setPrenom(benevole.getPrenom());
         benevoleUpdate.setStatutActivite(benevole.getStatutActivite());
@@ -119,5 +111,39 @@ public class BenevoleService {
         statutAnimalSrv.update(id, statutAnimal);
 
         return BenevoleResponse.convert(daoPersonne.save(benevole));
+    }
+
+    @Transactional
+    public StatutAnimal demanderAdoption(int idQuackShelter, int idPersonne, int idAnimal) {
+
+        Animal animalAdopted = animalSrv.getById(idAnimal);
+        Personne personne = personneSrv.getById(idPersonne);
+        System.out.println("Personne trouvé :" + personne);
+
+        StatutAnimal statutAdopted = statutAnimalSrv.getByAnimalId(idAnimal);
+        System.out.println("StatutAnimal trouvé :" + statutAdopted);
+        // long nbVisite = visiteSrv.NbVisitesByIdAnimalAndIdVisiteur(idAnimal,
+        // idPersonne, StatutValidation.ACCEPTE);
+
+        /* if (nbVisite >= 1) { */
+
+        /*
+         * statutAdopted.setAdoptant(personne);
+         * statutAdopted.setAnimal(animalAdopted);
+         * statutAdopted.setStatut(Statut.Adopte);
+         * statutAdopted.setDateDepart(LocalDate.now());
+         */
+
+        statutAdopted.setStatutAdoption(StatutValidation.EN_ATTENTE);
+
+        System.out.println(animalAdopted.getStatutAnimal());
+        System.out.println("Adoption demandé, en attente de validation ! ");
+        // System.out.println(animalAdopted + " a bien été adopté !");
+        /*
+         * } else {
+         * System.out.println("Pour adopter un animal, vous devez lui rendre visite");
+         * }
+         */
+        return statutAnimalSrv.update(statutAdopted.getId(), statutAdopted);
     }
 }

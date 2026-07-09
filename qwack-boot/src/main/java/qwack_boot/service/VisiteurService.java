@@ -72,22 +72,12 @@ public class VisiteurService {
             log.debug("login {} déja utilisé", visiteur.getLogin());
             throw new IllegalArgumentException("Login déjà utilisé");
         }
-        String login = visiteur.getLogin();
-
-        String passwordEncoded = passwordEncoder.encode(visiteur.getPassword());
-        String nom = visiteur.getNom();
-        String prenom = visiteur.getPrenom();
 
         // On cherche le Lieu, si il existe ok, sinon on le créé
         Lieu habitation = lieuSrv.findOrCreate(visiteur.getHabitation());
-        System.out.println(visiteur.getHabitation());
-        QuackShelter quackShelter = visiteur.getQuackShelter();
-        Personne newVisiteur = Personne.createVisiteur(nom, prenom, login, passwordEncoded, habitation, quackShelter);
-
-        System.out.println("Password avant encode : " + visiteur.getPassword());
-        System.out.println("Password APRES encode : " + passwordEncoded);
-
-        return daoPersonne.save(newVisiteur);
+        visiteur.setHabitation(habitation);
+        visiteur.setPassword(passwordEncoder.encode(visiteur.getPassword()));
+        return daoPersonne.save(visiteur);
     }
 
     @Transactional
@@ -104,14 +94,15 @@ public class VisiteurService {
 
         visiteurUpdate.setNom(visiteur.getNom());
         visiteurUpdate.setPrenom(visiteur.getPrenom());
-        Lieu lieu = lieuSrv.findOrCreate(visiteur.getHabitation());
 
+        Lieu lieu = lieuSrv.findOrCreate(visiteur.getHabitation());
         visiteurUpdate.setHabitation(lieu);
 
         visiteurUpdate.setPassword(passwordEncoder.encode(visiteurUpdate.getPassword()));
 
         QuackShelter quackShelter = visiteur.getQuackShelter();
         visiteurUpdate.setQuackShelter(quackShelter);
+
         return daoPersonne.save(visiteurUpdate);
     }
 
@@ -141,8 +132,6 @@ public class VisiteurService {
 
         if (visiteur == null) {
             System.out.println("VISITEUR INTROUVABLE");
-        } else {
-
         }
         Visite visite = new Visite(visiteur, animal, quackShelter, dateVisite, StatutValidation.EN_ATTENTE);
         System.out.println("La demande de visite  pour " + visiteur.getLogin() + ", le " + visite.getDateVisite()

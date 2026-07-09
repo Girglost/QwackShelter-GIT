@@ -78,14 +78,6 @@ public class PersonneService {
 		return daoPersonne.findPatronByIdwithAdoptions(idPersonne);
 	}
 
-	public Personne getEmployeByIdWithVisites(Integer idPersonne) {
-		return daoPersonne.findEmployeByIdwithVisites(idPersonne);
-	}
-
-	public Personne getEmployeByIdWithAdoptions(Integer idPersonne) {
-		return daoPersonne.findEmployeByIdwithAdoptions(idPersonne);
-	}
-
 	public Personne getByLoginAndPassword(String login, String password) {
 		return daoPersonne.findByLoginAndPassword(login, password);
 	}

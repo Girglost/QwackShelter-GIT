@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import qwack_boot.api.requestDTO.AdoptionRequest;
 import qwack_boot.api.requestDTO.personne.CreateBenevoleRequest;
 import qwack_boot.api.requestDTO.personne.UpdateBenevoleRequest;
 import qwack_boot.api.requestDTO.statutAnimal.CreateStatutAnimalRequest;
+import qwack_boot.api.responseDTO.StatutAnimalReponse;
 import qwack_boot.api.responseDTO.personne.BenevoleResponse;
 import qwack_boot.dto.QuackShelterDTO;
 import qwack_boot.model.Lieu;
@@ -156,6 +158,20 @@ public class BenevoleRestController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(Map.of("Don au quackShelter", QuackShelterDTO.convert(quackShelter)));
 
+    }
+
+    @PostMapping("/adopter")
+    public ResponseEntity<Map<String, StatutAnimalReponse>> demanderAdoption(
+            @RequestBody AdoptionRequest demandeAdoption) {
+        System.out.println("DEMANDE D'ADOPTION");
+        int benevoleId = demandeAdoption.getIdPersonne();
+        int quackShelterId = demandeAdoption.getIdQuackShelter();
+        int animalId = demandeAdoption.getIdAnimal();
+
+        StatutAnimalReponse adoptionDemanded = StatutAnimalReponse
+                .convert(benevoleSrv.demanderAdoption(quackShelterId, benevoleId, animalId));
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(Map.of("Adoption en attente", adoptionDemanded));
     }
 
 }
