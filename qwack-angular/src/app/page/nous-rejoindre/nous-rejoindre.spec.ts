@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NousRejoindre, atLeastOneChecked, optionalPhoneValidator } from './nous-rejoindre';
 import { FormArray, FormBuilder } from '@angular/forms';
 
+declare function spyOn(obj: any, method: string): any;
+
 describe('NousRejoindre', () => {
   let component: NousRejoindre;
   let fixture: ComponentFixture<NousRejoindre>;

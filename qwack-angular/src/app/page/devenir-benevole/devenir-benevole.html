@@ -1,0 +1,211 @@
+<div class="benevole-container">
+
+  <h1>Devenir bénévole</h1>
+
+  <div class="intro card">
+    <div class="card-body">
+      <h2>Rejoignez notre équipe ❤️</h2>
+
+      <p class="description">
+        Chaque année, nos bénévoles offrent de leur temps pour améliorer le quotidien
+        des animaux accueillis au refuge. Promenades, soins, jeux,
+        événements ou communication : chacun peut contribuer selon ses disponibilités.
+      </p>
+
+      <p class="description">
+        Aucune compétence particulière n'est nécessaire. Votre motivation, votre
+        bienveillance et votre amour des animaux sont les qualités les plus importantes.
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <div class="card-body">
+
+      <h2>Formulaire d'inscription</h2>
+
+      <form [formGroup]="benevoleForm" (ngSubmit)="onSubmit()">
+
+        <div class="grid-2">
+
+          <div class="field">
+            <label>Nom *</label>
+            <input type="text" formControlName="lastName">
+
+            @if(isInvalid('lastName')){
+              <small>Veuillez renseigner votre nom.</small>
+            }
+          </div>
+
+          <div class="field">
+            <label>Prénom *</label>
+            <input type="text" formControlName="firstName">
+
+            @if(isInvalid('firstName')){
+              <small>Veuillez renseigner votre prénom.</small>
+            }
+          </div>
+
+          <div class="field">
+            <label>Email *</label>
+            <input type="email" formControlName="email">
+
+            @if(isInvalid('email')){
+              <small>Adresse e-mail invalide.</small>
+            }
+          </div>
+
+          <div class="field">
+            <label>Téléphone (facultatif)</label>
+            <input type="text" formControlName="phone">
+
+            @if(benevoleForm.get('phone')?.hasError('invalidPhone')){
+              <small>Numéro invalide.</small>
+            }
+          </div>
+
+          <div class="field">
+            <label>Âge *</label>
+            <input type="number" formControlName="age">
+
+            @if(isInvalid('age')){
+              <small>Vous devez avoir au minimum 16 ans.</small>
+            }
+          </div>
+
+        </div>
+
+        <div class="section">
+
+          <h3>Quand êtes-vous disponible ?</h3>
+
+          <div class="checkbox-grid" formArrayName="availability">
+
+            @for(option of availabilityOptions; track option; let i = $index){
+
+              <label class="checkbox">
+
+                <input
+                  type="checkbox"
+                  [formControlName]="i">
+
+                {{ option }}
+
+              </label>
+
+            }
+
+          </div>
+
+        </div>
+
+
+
+        <div class="section">
+
+          <h3>Quelles missions vous intéressent ?</h3>
+
+          <div class="checkbox-grid" formArrayName="missions">
+
+            @for(mission of missions; track mission.title; let i = $index){
+
+              <label class="checkbox">
+
+                <input
+                  type="checkbox"
+                  [formControlName]="i">
+
+                <span>
+
+                  <strong>{{ mission.title }}</strong>
+
+                  <br>
+
+                  {{ mission.description }}
+
+                </span>
+
+              </label>
+
+            }
+
+          </div>
+
+        </div>
+        
+        <br/>
+
+        <div class="field">
+
+          <label>Pourquoi souhaitez-vous devenir bénévole ? *</label>
+
+          <textarea
+            rows="6"
+            formControlName="motivation">
+          </textarea>
+
+          @if(isInvalid('motivation')){
+            <small>Merci de nous expliquer votre motivation (20 caractères minimum).</small>
+          }
+
+        </div>
+
+        <div class="engagement">
+
+          <h3>Nos engagements</h3>
+
+          <ul>
+
+            @for(item of engagement; track item){
+
+              <li>{{ item }}</li>
+
+            }
+
+          </ul>
+
+        </div>
+
+        <label class="checkbox accept">
+
+          <input
+            type="checkbox"
+            formControlName="acceptRules">
+
+          J'accepte le règlement du refuge et les conditions de bénévolat.
+
+        </label>
+
+        @if(isInvalid('acceptRules')){
+          <small>Vous devez accepter les conditions.</small>
+        }
+
+        <button
+          class="btn-submit"
+          type="submit">
+
+          Envoyer ma candidature
+
+        </button>
+
+        @if(submitted){
+
+          <div class="success">
+
+            ✅ Merci !
+            Votre demande de bénévolat a bien été enregistrée.
+            Nous reviendrons vers vous rapidement.
+
+          </div>
+
+        }
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+

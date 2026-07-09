@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   AbstractControl,
   FormArray,
@@ -31,7 +32,7 @@ export interface BenevoleFormValue {
 
 @Component({
   selector: 'app-nous-rejoindre',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './nous-rejoindre.html',
   styleUrl: './nous-rejoindre.css',
 })

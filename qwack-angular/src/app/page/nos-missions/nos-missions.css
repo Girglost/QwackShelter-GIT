@@ -1,0 +1,212 @@
+:host {
+
+  --forest: #2f522d;
+  --forest-dark: #1f461d;
+  --gold: #b77f38;
+  --ink: #555;
+
+  --font-display: 'Pacifico', cursive;
+  --font-body: 'Montserrat', sans-serif;
+
+  display: block;
+  font-family: var(--font-body);
+
+}
+
+
+
+.missions-container {
+
+  max-width: 1200px;
+
+  margin: auto;
+
+  padding: 40px 20px;
+
+}
+
+
+
+h1 {
+
+  text-align: center;
+
+  font-family: var(--font-display);
+
+  color: var(--forest);
+
+  font-size: 42px;
+
+  margin-top: 0;
+
+  margin-bottom: 40px;
+
+}
+
+
+
+h2 {
+
+  font-family: var(--font-display);
+
+  color: var(--gold);
+
+  font-size: 32px;
+
+  margin-top: 0;
+
+  margin-bottom: 20px;
+
+}
+
+
+
+h3 {
+
+  color: var(--forest);
+
+  font-size: 21px;
+
+  margin-top: 0;
+
+  margin-bottom: 15px;
+
+}
+
+
+
+.card {
+
+  background: white;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  box-shadow:
+
+    0 4px 15px rgba(0,0,0,0.12);
+
+  transition: 0.3s;
+
+}
+
+
+
+.card:hover {
+
+  transform: translateY(-6px);
+
+  box-shadow:
+
+    0 10px 30px rgba(0,0,0,0.18);
+
+}
+
+
+
+.card-body {
+
+  padding: 25px;
+
+}
+
+
+
+.intro {
+
+  margin-bottom: 40px;
+
+}
+
+
+
+.description {
+
+  color: var(--ink);
+
+  line-height: 1.7;
+
+  margin: 0;
+
+}
+
+
+
+.details {
+
+  color: #777;
+
+  line-height: 1.6;
+
+  margin-top: 15px;
+
+  font-size: 14px;
+
+}
+
+
+
+.grid-missions {
+
+  display: grid;
+
+  grid-template-columns:
+
+    repeat(auto-fit, minmax(280px, 1fr));
+
+  gap: 35px;
+
+  margin-bottom: 45px;
+
+}
+
+
+
+.mission-icon {
+
+  height: 120px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: #f5f1e8;
+
+  font-size: 55px;
+
+}
+
+
+
+.texte {
+
+  margin-top: 30px;
+
+  text-align: center;
+
+}
+
+
+
+@media(max-width: 900px) {
+
+
+  h1 {
+
+    font-size: 35px;
+
+  }
+
+
+  .grid-missions {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+}
+

@@ -1,10 +1,11 @@
-
 .actualites-container{
 
     max-width:1200px;
     margin:auto;
     padding:40px 20px;
+
 }
+
 
 h1{
 
@@ -43,6 +44,8 @@ h1{
     text-align:center;
 
     font-family: 'Montserrat', sans-serif;
+
+
 }
 
 .card:hover{
@@ -64,7 +67,7 @@ h1{
 
 .card-content{
 
-    padding:20px;
+    padding:16px 20px;
 }
 
 .card .date{
@@ -105,135 +108,18 @@ h1{
 
     text-align:center;
 
-    line-height:1.6;
+    line-height:1.4;
 
     text-align:center;
 
     --font-body: 'Montserrat', sans-serif;
 
     font-size:20px;
-}
-
-
-
-/************ FOOTER ************/
-
-footer{
-
-    background:#1f461d;
-
-    margin-top:60px;
-
-    padding:35px;
-}
-
-.newsletter{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    max-width:1200px;
-
-    margin:auto;
-
-    flex-wrap:wrap;
-
-    gap:30px;
-}
-
-.texte h2{
-
-    color:white;
-
-    margin-bottom:10px;
-}
-
-.texte p{
-
-    color:white;
-}
-
-.form-news{
-
-    display:flex;
-
-    align-items:center;
-
-    background:#708857;
-
-    padding:6px;
-
-    border-radius:50px;
-}
-
-.form-news input{
-
-    width:280px;
-
-    border:none;
-
-    padding:14px 18px;
-
-    border-radius:50px;
-
-    outline:none;
-
-    font-size:16px;
-}
-
-.form-news button{
-
-    width:48px;
-
-    height:48px;
-
-    border-radius:50%;
-
-    border:none;
 
     margin-left:10px;
+    margin-right:10px;
 
-    background:#c68438;
-
-    color:white;
-
-    font-size:22px;
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-.form-news button:hover{
-
-    transform:scale(1.1);
-}
-
-@media(max-width:900px){
-
-    .grid-actualites{
-
-        grid-template-columns:1fr;
-    }
-
-    .newsletter{
-
-        flex-direction:column;
-
-        text-align:center;
-    }
-
-    .form-news{
-
-        width:100%;
-    }
-
-    .form-news input{
-
-        width:100%;
-    }
 
 }
+
+

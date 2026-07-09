@@ -1,0 +1,104 @@
+```html
+<div class="missions-container">
+
+  <h1>Nos missions</h1>
+
+
+  <div class="intro card">
+
+    <div class="card-body">
+
+      <h2>Ensemble pour protéger les animaux ❤️</h2>
+
+      <p class="description">
+        Notre association agit chaque jour pour améliorer la vie des animaux
+        abandonnés ou en difficulté. Découvrez les différentes missions qui
+        permettent au refuge de fonctionner et d'accompagner les animaux vers
+        une nouvelle vie.
+      </p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="grid-missions">
+
+
+    @for(mission of missions; track mission.title) {
+
+
+      <div class="card">
+
+
+        <div class="mission-icon">
+
+          {{ mission.icon }}
+
+        </div>
+
+
+        <div class="card-body">
+
+
+          <h3>
+            {{ mission.title }}
+          </h3>
+
+
+          <p class="description">
+
+            {{ mission.description }}
+
+          </p>
+
+
+          <p class="details">
+
+            {{ mission.details }}
+
+          </p>
+
+
+        </div>
+
+
+      </div>
+
+
+    }
+
+
+  </div>
+
+
+
+  <div class="texte card">
+
+
+    <div class="card-body">
+
+
+      <h2>
+        Chaque aide compte
+      </h2>
+
+
+      <p class="description">
+
+        Que vous soyez bénévole quelques heures par semaine, famille d'accueil
+        ou simplement un soutien de l'association, votre engagement contribue
+        directement au bien-être des animaux.
+
+      </p>
+
+
+    </div>
+
+
+  </div>
+
+
+</div>
+```
