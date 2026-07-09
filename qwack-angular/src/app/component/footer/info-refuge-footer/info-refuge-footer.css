@@ -1,75 +1,93 @@
 .tout{
-  background-color: #60733e ;
-  padding : 3rem 3rem 0 3rem;
+  background-color: #60733e;
+  padding: 3rem 3rem 0 3rem;
   display: flex;
+  flex-wrap: wrap;        /* AJOUTÉ : permet à .nav de passer en dessous de .info sur petit écran */
 }
 
 .info{
   display: flex;
   flex-direction: column;
-  width:20%;
-  margin-left: 4rem;;
+  width: 20%;
+  min-width: 250px;        /* AJOUTÉ : évite que .info s'écrase trop sur petit écran */
+  margin-left: 4rem;
 }
 
 #logo{
-  width:100px;
-  margin-top:2rem;
-  margin-left:2rem;
+  width: 100px;
+  margin-top: 2rem;
+  margin-left: 2rem;
 }
 
 .info-refuge{
   line-height: normal;
-
   font-family: 'Montagu Slab';
   font-style: normal;
   font-weight: 400;
-  font-display: block;
-  font-size:24px;
+  font-size: 24px;
   color: #fafaf7;
 }
 
 .contact-info{
   line-height: normal;
-
   font-family: 'Montagu Slab';
   font-style: normal;
   font-weight: 400;
-  font-display: block;
-  font-size:16px;
+  font-size: 16px;
   color: #fafaf7;
 }
 
 .nav{
   display: flex;
-  margin-left:50rem;
+  flex-wrap: wrap;         /* AJOUTÉ : les colonnes internes passent à la ligne si besoin */
+  flex: 1 1 500px;         /* MODIFIÉ : remplace margin-left:50rem, prend l'espace restant naturellement */
   justify-content: center;
   align-items: flex-start;
-  gap: 6rem;
-  padding : 5rem 0;
+  gap: 3rem;               /* MODIFIÉ : réduit de 6rem à 3rem pour mieux respirer sur petit écran */
+  padding: 5rem 0;
 }
 
 .nav h2{
   font-family: 'Montagu Slab';
   font-weight: 600;
-  font-size:32px;
+  font-size: 32px;
   color: #fafaf7;
 }
 
 .nav p{
   font-family: 'Montserrat';
   font-weight: 600;
-  font-size:24px;
+  font-size: 24px;
   color: #24421d;
 }
 
-
 .footer-reseau-content{
-  display:flex;
+  display: flex;
   justify-content: center;
 }
+
 .footer-reseau-content img{
-  width:50px;
-  margin : 0 1rem;
+  width: 50px;
+  margin: 0 1rem;
 }
 
-
+/* AJOUTÉ : sur petit écran, tout s'empile proprement et se centre */
+@media (max-width: 700px) {
+  .tout{
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+  }
+  .info{
+    width: 100%;
+    margin-left: 0;
+    text-align: center;
+    align-items: center;
+  }
+  .nav{
+    justify-content: center;
+    text-align: center;
+    gap: 2rem;
+    padding: 2rem 0;
+  }
+}

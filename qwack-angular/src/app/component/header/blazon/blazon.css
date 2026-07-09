@@ -16,12 +16,15 @@
 }
 
 #nom-shelter {
-  font-size: 50px;
+  font-size: 80px;
+  font-family : 'Pacifico'
 }
 
 #slogan-shelter {
-  color : white;
-  font-size: 18px;
+  color : #f7f4ee;
+  font-family:'Montserrat';
+  font-size: 24px;
+  font-weight: 500;
 }
 
 

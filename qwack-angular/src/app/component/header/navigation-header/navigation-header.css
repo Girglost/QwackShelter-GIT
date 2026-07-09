@@ -14,8 +14,9 @@
 .nav li a {
   color: white;
   text-decoration: none;
-  font-family: "Times New Roman", serif;
-  font-size: 20px;
+  font-family: "Montagu Slab";
+  font-size: 24px;
+  font-weight: 400;
 }
 
 
