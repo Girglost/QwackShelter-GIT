@@ -6,7 +6,6 @@
   </h2>
 
   <form (submit)="addOrUpdate()" [formGroup]="formEmplacement" class="form-emplacement">
-
     <div class="form-group">
       <label for="nbPlace">Nombre de Places :</label>
       <div class="input-container">
@@ -52,6 +51,40 @@
 </div>
 
 <hr />
+
+<!-- Barre de filtres -->
+<div class="filter-bar">
+  <button
+    class="filter-btn"
+    [class.active]="filtreActif === 'tous' && !typeSelectionne"
+    (click)="filtrerPar('tous')">
+    Tous
+  </button>
+
+  <button
+    class="filter-btn"
+    [class.active]="filtreActif === 'complet'"
+    (click)="filtrerPar('complet')">
+    Complet
+  </button>
+
+  <button
+    class="filter-btn"
+    [class.active]="filtreActif === 'disponible'"
+    (click)="filtrerPar('disponible')">
+    Disponible
+  </button>
+
+  <select
+    class="filter-select"
+    [(ngModel)]="typeSelectionne"
+    (ngModelChange)="filtrerParType($event)">
+    <option [ngValue]="null">-- Filtrer par type --</option>
+    @for (type of typeDeBox$; track type) {
+      <option [ngValue]="type">{{ type }}</option>
+    }
+  </select>
+</div>
 
 <table class="Liste">
   <thead>

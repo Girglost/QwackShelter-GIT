@@ -92,7 +92,7 @@ public class BenevoleService {
         benevoleUpdate.setNom(benevole.getNom());
         benevoleUpdate.setPrenom(benevole.getPrenom());
         benevoleUpdate.setStatutActivite(benevole.getStatutActivite());
-        benevoleUpdate.setPassword(passwordEncoder.encode(benevoleUpdate.getPassword()));
+        benevoleUpdate.setPassword(passwordEncoder.encode(benevole.getPassword()));
 
         Lieu lieu = lieuSrv.findOrCreate(benevole.getHabitation());
         benevoleUpdate.setHabitation(lieu);

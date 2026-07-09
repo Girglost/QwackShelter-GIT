@@ -6,7 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import qwack_boot.api.requestDTO.lieu.CreateLieuRequest;
-import qwack_boot.dto.StatutAnimalDTO;
+import qwack_boot.api.responseDTO.StatutAnimalReponse;
 import qwack_boot.dto.VisiteDTO;
 import qwack_boot.model.Personne;
 import qwack_boot.model.Role;
@@ -25,7 +25,7 @@ public class VisiteurResponse {
     private Integer quackShelterId;
 
     private List<VisiteDTO> visites;
-    private List<StatutAnimalDTO> adoptions;
+    private List<StatutAnimalReponse> adoptions;
 
     public static VisiteurResponse convert(Personne visiteur) {
         VisiteurResponse v = new VisiteurResponse();
@@ -57,7 +57,7 @@ public class VisiteurResponse {
 
     public static VisiteurResponse convertWithAdoptions(Personne visiteur) {
         VisiteurResponse v = VisiteurResponse.convert(visiteur);
-        v.adoptions = visiteur.getAdoptions().stream().map(a -> StatutAnimalDTO.convert(a)).toList();
+        v.adoptions = visiteur.getAdoptions().stream().map(a -> StatutAnimalReponse.convert(a)).toList();
         return v;
     }
 
@@ -141,11 +141,11 @@ public class VisiteurResponse {
         this.visites = visites;
     }
 
-    public List<StatutAnimalDTO> getAdoptions() {
+    public List<StatutAnimalReponse> getAdoptions() {
         return adoptions;
     }
 
-    public void setAdoptions(List<StatutAnimalDTO> adoptions) {
+    public void setAdoptions(List<StatutAnimalReponse> adoptions) {
         this.adoptions = adoptions;
     }
 
