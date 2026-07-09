@@ -47,6 +47,15 @@
   padding: 5rem 0;
 }
 
+.footer-refuge-content,
+.footer-aide-content,
+.footer-decouvrir-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  cursor:pointer;
+}
+
 .nav h2{
   font-family: 'Montagu Slab';
   font-weight: 600;
@@ -54,7 +63,7 @@
   color: #fafaf7;
 }
 
-.nav p{
+.nav a{
   font-family: 'Montserrat';
   font-weight: 600;
   font-size: 24px;
@@ -70,6 +79,8 @@
   width: 50px;
   margin: 0 1rem;
 }
+
+
 
 /* AJOUTÉ : sur petit écran, tout s'empile proprement et se centre */
 @media (max-width: 700px) {

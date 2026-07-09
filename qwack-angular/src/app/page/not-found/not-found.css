@@ -1,0 +1,47 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 60vh;
+  padding: 3rem 1rem;
+  background-color: #60733e;
+  color: #fafaf7;
+}
+
+.not-found h1 {
+  font-family: 'Montagu Slab';
+  font-size: clamp(60px, 10vw, 120px);
+  font-weight: 600;
+  margin: 0;
+}
+
+.not-found p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  margin: 0.5rem 0;
+}
+
+.sous-texte {
+  color: #d1d4c9;
+  font-size: 16px;
+}
+
+.btn-retour {
+  margin-top: 2rem;
+  background-color: #b77f38;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 12px 28px;
+  border-radius: 22.5px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-retour:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}

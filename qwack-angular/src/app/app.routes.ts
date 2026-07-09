@@ -1,24 +1,20 @@
-import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
-import { Header } from './component/header/header/header';
 import { Footer } from './component/footer/footer/footer';
+import { Header } from './component/header/header/header';
 import { Accueil } from './page/accueil/accueil/accueil';
-import { NosAnimaux } from './page/nos-animaux/nos-animaux';
 import { Actualites } from './page/actualites/actualites';
 import { Contact } from './page/contact/contact';
 import { EmplacementPage } from './page/emplacement-page/emplacement-page';
 import { NousRejoindre } from './page/nous-rejoindre/nous-rejoindre';
+import { NotFound } from './page/not-found/not-found';
 
 
 export const routes: Routes = [
-  {path : "header", component: Header},
-  {path : "footer", component: Footer},
   {path : "accueil", component: Accueil},
   {path : "actualites", component: Actualites},
   {path : "contact", component: Contact},
   {path : "nous-rejoindre", component: NousRejoindre},
 
+  { path: '**', component: NotFound }
   {path : "emplacement", component : EmplacementPage},
-  {path : "nos-animaux", component : NosAnimaux},
-
 ];

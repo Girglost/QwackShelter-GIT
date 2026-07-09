@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { Footer } from '../../../component/footer/footer/footer';
-import { Header } from '../../../component/header/header/header';
+import { Adoption } from '../adoption/adoption';
+import { Hero } from '../hero/hero';
+import { Events } from '../events/events';
 
 @Component({
   selector: 'app-accueil',
-  imports: [Footer,Header],
+  imports: [Hero,Events,Adoption],
   templateUrl: './accueil.html',
   styleUrl: './accueil.css',
 })
