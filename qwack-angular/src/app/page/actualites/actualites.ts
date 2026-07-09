@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 })
 
 
-export class Actualite implements OnInit{
+export class Actualites implements OnInit{
 
   actualites = [
     {
