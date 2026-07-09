@@ -9,7 +9,7 @@ import { Footer } from './component/footer/footer/footer';
   imports: [
     RouterOutlet,
     Header,
-    Footer
+    Footer,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
