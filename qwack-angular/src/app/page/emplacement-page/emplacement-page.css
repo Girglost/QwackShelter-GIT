@@ -203,3 +203,73 @@ h1 {
     transform: scale(1.005);
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05), 0 4px 8px rgba(0, 0, 0, 0.05);
 }
+
+
+/* ===== Barre de filtres ===== */
+
+.filter-bar {
+    width: 75%; /* Aligné sur formulaire et tableau */
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-family: sans-serif;
+}
+
+.filter-btn {
+    background-color: rgba(255, 255, 255, 0.75);
+    color: #23411d;
+    border: 1px solid rgba(35, 65, 29, 0.3);
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.filter-btn:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-color: rgba(216, 139, 58, 0.7);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Bouton actif */
+.filter-btn.active {
+    background-color: rgba(35, 65, 29, 0.85);
+    color: white;
+    border-color: rgba(35, 65, 29, 1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.filter-btn.active:hover {
+    background-color: rgba(35, 65, 29, 1);
+}
+
+/* Select de filtre par type */
+.filter-select {
+    margin-left: auto; /* pousse le select à droite de la barre */
+    padding: 10px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #2c3e50;
+    font-size: 0.9rem;
+    min-width: 220px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: rgba(216, 139, 58, 0.7);
+    box-shadow: 0 0 0 3px rgba(216, 139, 58, 0.15);
+}
+
+/* Quand un type est sélectionné, on peut le signaler visuellement */
+.filter-select:not([value=""]):not(:has(option[value=""]:checked)) {
+    border-color: rgba(216, 139, 58, 0.7);
+}
