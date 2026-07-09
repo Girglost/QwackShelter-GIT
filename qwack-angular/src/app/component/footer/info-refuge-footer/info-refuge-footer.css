@@ -1,0 +1,75 @@
+.tout{
+  background-color: #60733e ;
+  padding : 3rem 3rem 0 3rem;
+  display: flex;
+}
+
+.info{
+  display: flex;
+  flex-direction: column;
+  width:20%;
+  margin-left: 4rem;;
+}
+
+#logo{
+  width:100px;
+  margin-top:2rem;
+  margin-left:2rem;
+}
+
+.info-refuge{
+  line-height: normal;
+
+  font-family: 'Montagu Slab';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  font-size:24px;
+  color: #fafaf7;
+}
+
+.contact-info{
+  line-height: normal;
+
+  font-family: 'Montagu Slab';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  font-size:16px;
+  color: #fafaf7;
+}
+
+.nav{
+  display: flex;
+  margin-left:50rem;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 6rem;
+  padding : 5rem 0;
+}
+
+.nav h2{
+  font-family: 'Montagu Slab';
+  font-weight: 600;
+  font-size:32px;
+  color: #fafaf7;
+}
+
+.nav p{
+  font-family: 'Montserrat';
+  font-weight: 600;
+  font-size:24px;
+  color: #24421d;
+}
+
+
+.footer-reseau-content{
+  display:flex;
+  justify-content: center;
+}
+.footer-reseau-content img{
+  width:50px;
+  margin : 0 1rem;
+}
+
+

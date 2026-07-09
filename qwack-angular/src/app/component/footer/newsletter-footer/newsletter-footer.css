@@ -1,62 +1,100 @@
-.newsletter{
+.newsletter {
   background-color: #23411d;
-  display:flex;
-  padding: 3rem 0;
+  display: flex;
+  padding: 3rem 8rem;
 }
 
-h1{
-font-family: 'Montagu Slab';
-font-style: normal;
-font-size: 56px ;
-font-weight: 600;
-color: #fafaf7;
-margin-bottom: 0.5rem;
-}
-
-
-p{
+h1 {
+  font-family: 'Montagu Slab';
+  font-style: normal;
+  font-size: 56px;
+  font-weight: 600;
   color: #fafaf7;
-  font-family:'Montserrat', sans-serif;
-  font-size: 24px ;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  color: #fafaf7;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
   font-weight: 600;
   margin-top: 0.5rem;
   margin-left: 2rem;
 }
 
-.text{
-  margin-left:5%;
+.text {
+  margin-left: 1%;
 }
 
-.input-mail{
+.input-mail {
   display: flex;
   background-color: rgb(165, 52, 8);
+  align-self:center;
   align-items: center;
+  justify-content: center;
+  height : 5rem;
   width: 30%;
-  margin-left:10rem;
-  background: #B1B2B580;
+  margin-left: 20rem;
+  background: #b1b2b580;
   border-start-start-radius: 45px;
   border-start-end-radius: 45px;
   border-end-start-radius: 45px;
   border-end-end-radius: 45px;
+  padding: 15px 10px;
 }
-.cadre input{
-  display: flex;
+
+.input {
+  flex: 1 1 auto;
+  margin-left:1rem;
+}
+
+.input input {
   background-color: rgb(255, 255, 255);
-  height: 30%;
   width: 100%;
+  border: none;
+  outline: none;
+  padding: 20px 20px;
+
+  border-start-start-radius: 45px;
+  border-start-end-radius: 45px;
+  border-end-start-radius: 45px;
+  border-end-end-radius: 45px;
+  font-family: 'Montserrat regular';
+  font-size: 24px;;
+}
+
+.cadre {
+  display: flex;
   justify-content: center;
-    border-start-start-radius: 22.5px;
-  border-start-end-radius: 22.5px;
-  border-end-start-radius: 22.5px;
-  border-end-end-radius: 22.5px;
+  align-items: center;
+  width: 100%;
+  gap: 60px; ;
 }
 
-.valider{
+.valider {
   background-color: #d88b3a;
+  cursor: pointer;
   border-radius: 90px;
-  width: 10%;
-  height: 10%;
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+#lettre {
+  align-self: center;
+  width: 60px;
+  height: 40px;
+  margin-left: 5%;
+}
+
+#valid {
+  align-self: center;
+  width: 25px;
+  height: 25px;
+  margin-left: 5%;
+}
 
 
