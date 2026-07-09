@@ -1,49 +1,103 @@
-<h1>Liste des Emplacements</h1>
+<h1>Liste des Statuts Animaux</h1>
 
 <div class="form-container">
   <h2 class="form-title">
-    {{ editingEmplacmeentId ? 'Modifier l\'sAnimal' : 'Ajouter un sAnimal' }}
+    {{ editingStatutAnimalId ? 'Modifier le statut animal' : 'Ajouter un statut animal' }}
   </h2>
 
-  <form (submit)="addOrUpdate()" [formGroup]="formEmplacement" class="form-sAnimal">
-    <div class="form-group">
-      <label for="nbPlace">Nombre de Places :</label>
-      <div class="input-container">
-        <input id="nbPlace" type="number" formControlName="nbPlace" placeholder="Ex: 5" />
-        <div class="error-message" *ngIf="CtrlNbPlace.dirty && CtrlNbPlace.hasError('required')">
-          * Indiquer le nombre de places *
-        </div>
-      </div>
-    </div>
+  <form (submit)="addOrUpdate()" [formGroup]="formStatutAnimal" class="form-emplacement">
 
+    <!-- Toujours visible : emplacement + animal -->
     <div class="form-group">
-      <label for="typeBox">Type d'sAnimal :</label>
+      <label for="emplacement">Emplacement :</label>
       <div class="input-container">
-        <select id="typeBox" formControlName="box">
-          <option value="">-- Sélectionner un type --</option>
-          @for (type of typeDeBox$; track type) {
-            <option [value]="type">{{ type }}</option>
+        <select id="emplacement" formControlName="emplacement">
+          <option [ngValue]="''">-- Sélectionner un emplacement --</option>
+          @for (emp of emplacements$ | async; track emp.id) {
+            <option [ngValue]="emp">Emplacement #{{ emp.id }} ({{ emp.box }})</option>
           }
         </select>
-        <div class="error-message" *ngIf="CtrlBox.dirty && CtrlBox.hasError('required')">
-          * Indiquer le type d'sAnimal *
+        <div class="error-message" *ngIf="CtrlEmplacement.dirty && CtrlEmplacement.hasError('required')">
+          * Sélectionner un emplacement *
         </div>
       </div>
     </div>
 
-    <div class="form-group checkbox-group">
-      <label for="complet" class="checkbox-label">
-        <input id="complet" type="checkbox" formControlName="complet" />
-        <span class="custom-checkbox"></span>
-        Cet sAnimal est complet
-      </label>
+    <div class="form-group">
+      <label for="animal">Animal :</label>
+      <div class="input-container">
+        <select id="animal" formControlName="animal">
+          <option [ngValue]="''">-- Sélectionner un animal --</option>
+          @for (a of animaux$ | async; track a.id) {
+            <option [ngValue]="a">{{ a.nom }}</option>
+          }
+        </select>
+        <div class="error-message" *ngIf="CtrlAnimal.dirty && CtrlAnimal.hasError('required')">
+          * Sélectionner un animal *
+        </div>
+      </div>
     </div>
 
+    <!-- Uniquement en mode modification -->
+    @if (editingStatutAnimalId) {
+      <div class="form-section-title">Informations complémentaires</div>
+
+      <div class="form-group">
+        <label for="dateArrivee">Date d'arrivée :</label>
+        <div class="input-container">
+          <input id="dateArrivee" type="date" formControlName="dateArrivee" />
+          <div class="error-message" *ngIf="CtrlDateArrivee.dirty && CtrlDateArrivee.hasError('required')">
+            * Indiquer la date d'arrivée *
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dateDepart">Date de départ :</label>
+        <div class="input-container">
+          <input id="dateDepart" type="date" formControlName="dateDepart" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="statut">Statut :</label>
+        <div class="input-container">
+          <select id="statut" formControlName="statut">
+            <option value="">-- Sélectionner un statut --</option>
+            @for (s of statutValues; track s) {
+              <option [value]="s">{{ s }}</option>
+            }
+          </select>
+          <div class="error-message" *ngIf="CtrlStatut.dirty && CtrlStatut.hasError('required')">
+            * Indiquer le statut *
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="statutAdoption">Statut d'adoption :</label>
+        <div class="input-container">
+          <select id="statutAdoption" formControlName="statutAdoption">
+            <option value="">-- Sélectionner un statut d'adoption --</option>
+            @for (sv of statutAdoptionValues; track sv) {
+              <option [value]="sv">{{ sv }}</option>
+            }
+          </select>
+          <div class="error-message" *ngIf="CtrlStatutAdoption.dirty && CtrlStatutAdoption.hasError('required')">
+            * Indiquer le statut d'adoption *
+          </div>
+        </div>
+      </div>
+    }
+
     <div class="form-actions">
+      @if (editingStatutAnimalId) {
+        <button type="button" class="btn-cancel" (click)="annulerEdition()">Annuler</button>
+      }
       <input
-        [disabled]="formEmplacement.invalid"
+        [disabled]="formStatutAnimal.invalid"
         type="submit"
-        [value]="editingEmplacmeentId ? 'Modifier' : 'Ajouter'"
+        [value]="editingStatutAnimalId ? 'Modifier' : 'Ajouter'"
         class="btn-submit"
       />
     </div>
@@ -56,56 +110,48 @@
 <div class="filter-bar">
   <button
     class="filter-btn"
-    [class.active]="filtreActif === 'tous' && !typeSelectionne"
-    (click)="filtrerPar('tous')">
+    [class.active]="!statutFiltre"
+    (click)="filtrerParStatut(null)">
     Tous
   </button>
 
-  <button
-    class="filter-btn"
-    [class.active]="filtreActif === 'complet'"
-    (click)="filtrerPar('complet')">
-    Complet
-  </button>
+  @for (s of statutValues; track s) {
+    <button
+      class="filter-btn"
+      [class.active]="statutFiltre === s"
+      (click)="filtrerParStatut(s)">
+      {{ s }}
+    </button>
+  }
 
-  <button
-    class="filter-btn"
-    [class.active]="filtreActif === 'disponible'"
-    (click)="filtrerPar('disponible')">
-    Disponible
-  </button>
-
-  <select
-    class="filter-select"
-    [(ngModel)]="typeSelectionne"
-    (ngModelChange)="filtrerParType($event)">
-    <option [ngValue]="null">-- Filtrer par type --</option>
-    @for (type of typeDeBox$; track type) {
-      <option [ngValue]="type">{{ type }}</option>
-    }
-  </select>
 </div>
 
 <table class="Liste">
   <thead>
     <tr>
       <th>ID</th>
-      <th>Nombre de Place</th>
-      <th>Complet</th>
-      <th>Type d'emplacment</th>
+      <th>Animal</th>
+      <th>Emplacement</th>
+      <th>Date d'arrivée</th>
+      <th>Date de départ</th>
+      <th>Statut</th>
+      <th>Statut d'adoption</th>
       <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
-    <tr *ngFor="let sAnimal of sAnimals$ | async">
-      <td>{{ sAnimal.id }}</td>
-      <td>{{ sAnimal.nbPlace }}</td>
-      <td>{{ sAnimal.complet }}</td>
-      <td>{{ sAnimal.box }}</td>
+    <tr *ngFor="let sa of sAnimals$ | async">
+      <td>{{ sa.id }}</td>
+      <td>{{ sa.animal?.nom }}</td>
+      <td>#{{ sa.emplacement?.id }}</td>
+      <td>{{ sa.dateArrivee }}</td>
+      <td>{{ sa.dateDepart }}</td>
+      <td>{{ sa.statut }}</td>
+      <td>{{ sa.statutAdoption }}</td>
       <td>
-        <button (click)="edit(sAnimal)">MODIFIER</button>
-        <button (click)="remove(sAnimal)">SUPPRIMER</button>
+        <button (click)="edit(sa)">MODIFIER</button>
+        <button (click)="remove(sa)">SUPPRIMER</button>
       </td>
     </tr>
   </tbody>

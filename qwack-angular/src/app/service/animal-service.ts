@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, Service } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Statut } from '../model/statut';
 import { Animal } from '../model/statut-animal';
 
 @Injectable({
@@ -25,10 +24,6 @@ export class AnimalService {
 
   public remove(animal: Animal): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${animal.id}`);
-  }
-
-  public findByStatut(statut: Statut): Observable<Animal[]> {
-    return this.http.get<Animal[]>(`${this.apiUrl}/statut/${statut}`);
   }
 
 

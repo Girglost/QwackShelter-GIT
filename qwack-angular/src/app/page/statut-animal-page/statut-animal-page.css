@@ -273,3 +273,36 @@ h1 {
 .filter-select:not([value=""]):not(:has(option[value=""]:checked)) {
     border-color: rgba(216, 139, 58, 0.7);
 }
+
+/* Séparateur visuel pour la section "modification uniquement" */
+.form-section-title {
+    color: #23411d;
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 20px 0 15px;
+    padding-top: 15px;
+    border-top: 1px dashed rgba(35, 65, 29, 0.3);
+}
+
+/* Bouton Annuler à côté du bouton Modifier */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-cancel {
+    background-color: transparent;
+    color: #7f8c8d;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-cancel:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.3);
+}

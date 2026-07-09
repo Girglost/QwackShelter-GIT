@@ -37,18 +37,23 @@ export class StatutAnimalPage implements OnInit {
   protected emplacements$!: Observable<Emplacement[]>;
   protected animaux$!: Observable<Animal[]>;
 
-  // --- Filtre par statut (seul endpoint disponible côté backend) ---
+  // --- Filtre par statut ---
   protected statutFiltre: string | null = null;
   private filtreChange$ = new Subject<void>();
 
   private formBuilder: FormBuilder = inject(FormBuilder);
   protected formStatutAnimal!: FormGroup;
+
+  // Toujours présents (ajout + modification)
+  protected CtrlEmplacement!: FormControl;
+  protected CtrlAnimal!: FormControl;
+
+  // Uniquement en modification
   protected CtrlDateArrivee!: FormControl;
   protected CtrlDateDepart!: FormControl;
   protected CtrlStatut!: FormControl;
   protected CtrlStatutAdoption!: FormControl;
-  protected CtrlEmplacement!: FormControl;
-  protected CtrlAnimal!: FormControl;
+
   protected editingStatutAnimalId: number | undefined = 0;
 
   ngOnInit(): void {
@@ -62,20 +67,21 @@ export class StatutAnimalPage implements OnInit {
     this.emplacements$ = this.emplacementSrv.findAll();
     this.animaux$ = this.animalSrv.findAll();
 
-    this.CtrlDateArrivee = this.formBuilder.control('', Validators.required);
-    this.CtrlDateDepart = this.formBuilder.control('');
-    this.CtrlStatut = this.formBuilder.control('', Validators.required);
-    this.CtrlStatutAdoption = this.formBuilder.control('');
     this.CtrlEmplacement = this.formBuilder.control('', Validators.required);
     this.CtrlAnimal = this.formBuilder.control('', Validators.required);
 
+    this.CtrlDateArrivee = this.formBuilder.control('');
+    this.CtrlDateDepart = this.formBuilder.control('');
+    this.CtrlStatut = this.formBuilder.control('');
+    this.CtrlStatutAdoption = this.formBuilder.control('');
+
     this.formStatutAnimal = this.formBuilder.group({
+      emplacement: this.CtrlEmplacement,
+      animal: this.CtrlAnimal,
       dateArrivee: this.CtrlDateArrivee,
       dateDepart: this.CtrlDateDepart,
       statut: this.CtrlStatut,
       statutAdoption: this.CtrlStatutAdoption,
-      emplacement: this.CtrlEmplacement,
-      animal: this.CtrlAnimal,
     });
   }
 
@@ -96,30 +102,66 @@ export class StatutAnimalPage implements OnInit {
   }
 
   protected addOrUpdate() {
-    const sa: StatutAnimal = this.formStatutAnimal.getRawValue();
+    const valeurs = this.formStatutAnimal.getRawValue();
 
     if (this.editingStatutAnimalId) {
-      sa.id = this.editingStatutAnimalId;
+      const sa: StatutAnimal = {
+        id: this.editingStatutAnimalId,
+        emplacement: valeurs.emplacement,
+        animal: valeurs.animal,
+        dateArrivee: valeurs.dateArrivee,
+        dateDepart: valeurs.dateDepart,
+        statut: valeurs.statut,
+        statutAdoption: valeurs.statutAdoption,
+      };
       this.sAnimalSrv.update(sa).subscribe(() => this.reload());
     } else {
+      const sa: StatutAnimal = {
+        emplacement: valeurs.emplacement,
+        animal: valeurs.animal,
+      } as StatutAnimal;
       this.sAnimalSrv.add(sa).subscribe(() => this.reload());
     }
 
-    this.formStatutAnimal.reset();
-    this.editingStatutAnimalId = 0;
+    this.annulerEdition();
   }
 
   protected edit(sa: StatutAnimal) {
     this.editingStatutAnimalId = sa.id;
+    this.CtrlEmplacement.setValue(sa.emplacement);
+    this.CtrlAnimal.setValue(sa.animal);
     this.CtrlDateArrivee.setValue(sa.dateArrivee);
     this.CtrlDateDepart.setValue(sa.dateDepart);
     this.CtrlStatut.setValue(sa.statut);
     this.CtrlStatutAdoption.setValue(sa.statutAdoption);
-    this.CtrlEmplacement.setValue(sa.emplacement);
-    this.CtrlAnimal.setValue(sa.animal);
+    this.activerValidationModification();
+  }
+
+  protected annulerEdition(): void {
+    this.editingStatutAnimalId = 0;
+    this.formStatutAnimal.reset();
+    this.desactiverValidationModification();
   }
 
   protected remove(sa: StatutAnimal) {
     this.sAnimalSrv.remove(sa).subscribe(() => this.reload());
+  }
+
+  private activerValidationModification(): void {
+    this.CtrlDateArrivee.setValidators(Validators.required);
+    this.CtrlStatut.setValidators(Validators.required);
+    this.CtrlStatutAdoption.setValidators(Validators.required);
+    this.CtrlDateArrivee.updateValueAndValidity();
+    this.CtrlStatut.updateValueAndValidity();
+    this.CtrlStatutAdoption.updateValueAndValidity();
+  }
+
+  private desactiverValidationModification(): void {
+    this.CtrlDateArrivee.clearValidators();
+    this.CtrlStatut.clearValidators();
+    this.CtrlStatutAdoption.clearValidators();
+    this.CtrlDateArrivee.updateValueAndValidity();
+    this.CtrlStatut.updateValueAndValidity();
+    this.CtrlStatutAdoption.updateValueAndValidity();
   }
 }
