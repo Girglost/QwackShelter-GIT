@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
-import qwack_boot.api.responseDTO.animal.AnimalResponse;
 import qwack_boot.dao.IDAOStatutAnimal;
+import qwack_boot.model.Animal;
 import qwack_boot.model.Statut;
 import qwack_boot.model.StatutAnimal;
 
@@ -70,7 +70,7 @@ public class StatutAnimalService {
 
 	// --------------- Special ----------------
 
-	public List<AnimalResponse> getByDispo() {
+	public List<Animal> getByDispo() {
 		return daoStatutAnimal.findByDispo();
 	}
 

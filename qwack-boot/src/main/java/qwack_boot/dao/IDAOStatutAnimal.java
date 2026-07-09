@@ -9,13 +9,13 @@ import org.springframework.data.repository.query.Param;
 
 import qwack_boot.api.requestDTO.statutAnimal.CreateStatutAnimalRequest;
 import qwack_boot.api.requestDTO.statutAnimal.UpdateStatutAnimalRequest;
-import qwack_boot.api.responseDTO.animal.AnimalResponse;
+import qwack_boot.model.Animal;
 import qwack_boot.model.Statut;
 import qwack_boot.model.StatutAnimal;
 
 public interface IDAOStatutAnimal extends JpaRepository<StatutAnimal, Integer> {
 	@Query("SELECT s.animal FROM StatutAnimal s WHERE s.dateDepart is null")
-	public List<AnimalResponse> findByDispo();
+	public List<Animal> findByDispo();
 
 	@Query("SELECT s FROM StatutAnimal s WHERE s.adoptant.id =:idPersonne")
 	public List<StatutAnimal> findByAdoptantId(@Param("idPersonne") Integer idPersonne);
