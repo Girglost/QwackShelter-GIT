@@ -1,0 +1,476 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    --font-display: 'Pacifico', cursive;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+
+body {
+    font-family: var(--font-body);
+}
+
+
+.histoire {
+
+    width:100%;
+    min-height:430px;
+
+
+    position:relative;
+
+    background-image:url("/assets/image/a-propos/chien.png");
+    background-size:cover;
+    background-position:center;
+
+    overflow:hidden;
+}
+
+
+.overlay {
+
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+        90deg,
+        rgba(170,190,110,0.45),
+        rgba(25,35,30,0.85)
+    );
+
+}
+
+
+
+.container {
+
+    position:relative;
+
+    display:flex;
+
+    gap:75px;
+
+    padding:32px 45px;
+
+    height:100%;
+
+}
+
+
+
+/* IMAGE GAUCHE */
+
+.image-box {
+
+    width:40%;
+
+    height:400px;
+
+    overflow:hidden;
+
+    z-index:2;
+
+    margin-top:20px;
+
+}
+
+
+.image-box img {
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+
+/* TEXTE */
+
+.content {
+
+    flex:1;
+
+    color:white;
+
+    padding-top:18px;
+
+    z-index:2;
+
+    font-family: var(--font-body)
+
+}
+
+
+
+.content h1 {
+
+    color:#c9873c;
+
+    font-family: var(--font-body);
+
+    font-size:26px;
+
+    letter-spacing:1px;
+
+    margin-bottom:45px;
+
+    text-align:left;
+
+}
+
+
+
+.content p {
+
+    font-size:15px;
+
+    line-height:1.25;
+
+    font-weight:600;
+
+    max-width:990px;
+
+    margin-bottom:22px;
+
+}
+
+
+/* NOS INFRASTRUCTURES */
+
+.a-propos-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 20px;
+  width: 100%;
+}
+
+
+.section {
+  margin-bottom: 60px;
+}
+
+.grid-actualites{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+
+    gap:35px;
+}
+
+
+
+.grid-a-propos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  color: var(--forest);
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+
+.content-card p {
+  color: var(--ink);
+  line-height: 1.8;
+  text-align: center;
+}
+
+
+.infra-card {
+
+  background: white;
+  border-radius: 20px;
+
+  padding: 30px;
+
+  box-shadow:
+  0 4px 15px rgba(0,0,0,0.12);
+
+}
+
+.infra-card img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+.content-card p {
+
+  color: var(--ink);
+  line-height: 1.8;
+  text-align: justify;
+
+}
+
+
+.infra-grid {
+
+  display: flex;
+  gap:30px;
+  justify-content: center;
+  width: 100%;
+}
+
+
+
+.infra-card {
+
+  text-align:center;
+
+  transition:0.3s;
+
+}
+
+
+
+
+.emoji {
+
+  font-size:45px;
+
+  margin-bottom:15px;
+
+}
+
+
+
+.infra-card h2 {
+
+  font-family:'Pacifico', cursive;
+
+  color:var(--gold);
+
+  font-size:26px;
+
+}
+
+
+
+.infra-card p {
+
+  color:var(--ink);
+
+  line-height:1.6;
+
+}
+
+/* Chiffres clefs */
+
+
+.chiffres-cles {
+
+  width: 100%;
+
+  background: #ffffff;
+
+  border: 1px solid #3c8c70;
+
+  padding: 30px 40px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 50px;
+
+  box-sizing: border-box;
+
+}
+
+
+
+.titre-chiffres {
+
+  flex: 1;
+
+}
+
+
+
+.titre-chiffres h2 {
+
+  font-family: 'Pacifico', cursive;
+
+  color: #2f522d;
+
+  font-size: 32px;
+
+  margin: 0;
+
+}
+
+
+
+.statistiques {
+
+  flex: 3;
+
+  display: flex;
+
+  justify-content: space-around;
+
+  gap: 40px;
+
+}
+
+
+
+.stat-card {
+
+  width: 190px;
+
+  height: 85px;
+
+  border: 3px solid #2f522d;
+
+  border-radius: 25px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  text-align: center;
+
+}
+
+
+
+.nombre {
+
+  font-family: 'Montserrat', sans-serif;
+
+  font-size: 32px;
+
+  font-weight: 800;
+
+  color: #2f522d;
+
+}
+
+
+
+.texte {
+
+  font-family: 'Montserrat', sans-serif;
+
+  font-weight: 700;
+
+  font-size: 18px;
+
+  line-height: 1.1;
+
+  color: #b77f38;
+
+}
+
+
+/* EQUIPE */
+
+.equipe-section {
+
+  background: #b4bea8;
+
+  padding: 50px 40px;
+
+}
+
+
+
+.equipe-section h1 {
+
+  text-align:center;
+
+  text-transform:uppercase;
+
+  font-family:'Pacifico', cursive;
+
+  color:#2f522d;
+
+  font-size:42px;
+
+  margin-bottom:40px;
+
+}
+
+
+
+.equipe-container {
+
+  max-width:1100px;
+
+  margin:auto;
+
+  background:#f8f5ed;
+
+  border-radius:20px;
+
+  padding:30px;
+
+}
+
+
+
+.image-equipe img {
+
+  width:100%;
+
+  height:450px;
+
+  object-fit:contain;
+
+  display:block;
+
+}
+
+
+
+.equipe-description {
+
+  text-align:center;
+
+  margin-top:30px;
+
+}
+
+
+
+.equipe-description h2 {
+
+  color:#b77f38;
+
+  font-family:'Pacifico', cursive;
+
+  font-size:30px;
+
+}
+
+
+
+.equipe-description p {
+
+  color:#555;
+
+  line-height:1.7;
+
+  max-width:850px;
+
+  margin:15px auto;
+
+}
