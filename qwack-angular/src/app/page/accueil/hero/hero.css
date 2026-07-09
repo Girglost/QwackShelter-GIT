@@ -156,7 +156,7 @@ font-size: 24px;
 }
 
 .btn-adopter:hover{
-  background-color: #c17e3b;
+  background-color: #916327;
   cursor: pointer;
 }
 
@@ -173,6 +173,12 @@ color: #f5f1e8;
 font-family: 'Montagu Slab';
 font-weight: 600;
 font-size: 24px;
+}
+
+.btn-quizz:hover{
+  background-color: #f5f1e8ad;
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .btn-profil{
@@ -206,5 +212,10 @@ font-family: 'Montagu Slab';
 font-weight: 600;
 font-size: 24px;
 border-radius: 0 0 22.5px 22.5px;
+}
+
+.btn-animaux:hover{
+  background-color: #916327;
+  cursor: pointer;
 }
 
