@@ -41,7 +41,7 @@ export class EmplacementPage implements OnInit{
 
     this.CtrlBox = this.formBuilder.control('', Validators.required);
     this.CtrlNbPlace = this.formBuilder.control('1', [Validators.required, Validators.min(1)]);
-    this.CtrlComplet = this.formBuilder.control('false', Validators.required);
+    this.CtrlComplet = this.formBuilder.control('');
 
     this.formEmplacement = this.formBuilder.group({
       complet: this.CtrlComplet,
@@ -65,7 +65,9 @@ export class EmplacementPage implements OnInit{
       this.emplacementSrv.add(emp).subscribe(()=> this.reload())
     }
 
-    this.formEmplacement.reset();
+    this.formEmplacement.reset({
+      box: ""
+    });
     this.editingEmplacmeentId = 0;
   }
 

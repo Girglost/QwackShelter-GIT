@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, Service } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Emplacement } from '../model/emplacement';
 
@@ -8,7 +8,7 @@ import { Emplacement } from '../model/emplacement';
 })
 export class EmplacementService {
   private http: HttpClient = inject(HttpClient);
-  private apiUrl: string = "emplacement";
+  private apiUrl: string = "localhost:8080/api/emplacement";
 
   public findAll(): Observable<Emplacement[]> {
     return this.http.get<Emplacement[]>(this.apiUrl);

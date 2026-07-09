@@ -1,59 +1,66 @@
 <h1>Liste des Emplacements</h1>
 
-<form (submit)="addOrUpdate()" [formGroup]="formEmplacement">
-  <table>
-    <tr>
-      <td>Nombre de Place :</td>
-      <td>
-        <input type="number" formControlName="nbPlace" />
-        <div *ngIf="CtrlNbPlace.dirty && CtrlNbPlace.hasError('required')">
-          * Indiquer le nombre de place *
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Type d'emplacement :
-      </td>
-      <td>
-        <select>
-      <option value="">-- Type d'emplacment --</option>
-      @for (type of typeDeBox$; track type) {
-        <option [value]="type">{{ type }}</option>
-      }
-    </select>
-    <div *ngIf="CtrlBox.dirty && CtrlBox.hasError('required')">
-      * Indiquer le type d'emplacement *
-    </div>
-      </td>
-    </tr>
-    <tr>
-      <td>Complet ?</td>
-      <td>
-        <input type="checkbox" formControlName="complet" />
-      </td>
-    </tr>
-  </table>
+<div class="form-container">
+  <h2 class="form-title">
+    {{ editingEmplacmeentId ? 'Modifier l\'emplacement' : 'Ajouter un emplacement' }}
+  </h2>
 
-  <div>
-    <input
-      [disabled]="formEmplacement.invalid"
-      type="submit"
-      [value]="editingEmplacmeentId ? 'Modifier' : 'Ajouter'"
-    />
-  </div>
-</form>
+  <form (submit)="addOrUpdate()" [formGroup]="formEmplacement" class="form-emplacement">
+
+    <div class="form-group">
+      <label for="nbPlace">Nombre de Places :</label>
+      <div class="input-container">
+        <input id="nbPlace" type="number" formControlName="nbPlace" placeholder="Ex: 5" />
+        <div class="error-message" *ngIf="CtrlNbPlace.dirty && CtrlNbPlace.hasError('required')">
+          * Indiquer le nombre de places *
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="typeBox">Type d'emplacement :</label>
+      <div class="input-container">
+        <select id="typeBox" formControlName="box">
+          <option value="">-- Sélectionner un type --</option>
+          @for (type of typeDeBox$; track type) {
+            <option [value]="type">{{ type }}</option>
+          }
+        </select>
+        <div class="error-message" *ngIf="CtrlBox.dirty && CtrlBox.hasError('required')">
+          * Indiquer le type d'emplacement *
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label for="complet" class="checkbox-label">
+        <input id="complet" type="checkbox" formControlName="complet" />
+        <span class="custom-checkbox"></span>
+        Cet emplacement est complet
+      </label>
+    </div>
+
+    <div class="form-actions">
+      <input
+        [disabled]="formEmplacement.invalid"
+        type="submit"
+        [value]="editingEmplacmeentId ? 'Modifier' : 'Ajouter'"
+        class="btn-submit"
+      />
+    </div>
+  </form>
+</div>
 
 <hr />
 
-<table>
+<table class="Liste">
   <thead>
     <tr>
       <th>ID</th>
       <th>Nombre de Place</th>
       <th>Complet</th>
       <th>Type d'emplacment</th>
-      <th></th>
+      <th>Actions</th>
     </tr>
   </thead>
 
