@@ -79,8 +79,8 @@ public class EmplacementRestController {
         return EmpSrv.getByCompletFalse();
     }
 
-    @GetMapping("/{box}")
-    public List<Emplacement> getByBox(@RequestParam typeBox box) {
+    @GetMapping("/box/{box}")
+    public List<Emplacement> getByBox(@PathVariable typeBox box) {
         return EmpSrv.getByBox(box);
     }
     
