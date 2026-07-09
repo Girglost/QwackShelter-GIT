@@ -7,6 +7,7 @@ import { NosAnimaux } from './page/nos-animaux/nos-animaux';
 import { Actualites } from './page/actualites/actualites';
 import { Contact } from './page/contact/contact';
 import { EmplacementPage } from './page/emplacement-page/emplacement-page';
+import { NousRejoindre } from './page/nous-rejoindre/nous-rejoindre';
 
 
 export const routes: Routes = [
@@ -15,6 +16,7 @@ export const routes: Routes = [
   {path : "accueil", component: Accueil},
   {path : "actualites", component: Actualites},
   {path : "contact", component: Contact},
+  {path : "nous-rejoindre", component: NousRejoindre},
 
   {path : "emplacement", component : EmplacementPage},
   {path : "nos-animaux", component : NosAnimaux},

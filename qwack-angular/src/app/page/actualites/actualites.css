@@ -1,3 +1,4 @@
+
 .actualites-container{
 
     max-width:1200px;
@@ -8,11 +9,14 @@
 h1{
 
     text-align:center;
+
+    font-family: 'Pacifico', cursive;
+
     margin-bottom:40px;
 
     color:#2f522d;
 
-    font-size:34px;
+    font-size: 45px;
 }
 
 .grid-actualites{
@@ -37,6 +41,8 @@ h1{
     transition:.3s;
 
     text-align:center;
+
+    font-family: 'Montserrat', sans-serif;
 }
 
 .card:hover{
@@ -61,9 +67,11 @@ h1{
     padding:20px;
 }
 
-.date{
+.card .date{
 
     display:block;
+
+    font-family: 'Montserrat', sans-serif;
 
     color:#d5913c;
 
@@ -72,17 +80,23 @@ h1{
     margin-bottom:8px;
 
     text-align:center;
+
+    font-size:25px;
 }
 
-.card h2{
+.card h3{
 
     text-align:center;
 
     color:#4c7b44;
 
+    margin-top:1;
+
     margin-bottom:12px;
 
-    font-size:24px;
+    font-size: 27px;
+
+    font-family: 'Montserrat', sans-serif;
 }
 
 .card p{
@@ -92,7 +106,15 @@ h1{
     text-align:center;
 
     line-height:1.6;
+
+    text-align:center;
+
+    --font-body: 'Montserrat', sans-serif;
+
+    font-size:20px;
 }
+
+
 
 /************ FOOTER ************/
 

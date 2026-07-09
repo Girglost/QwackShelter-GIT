@@ -1,0 +1,244 @@
+:host {
+  --forest: #3f4d2e;
+  --forest-dark: #2c3820;
+  --cream: #faf8f2;
+  --panel-bg: rgba(255, 255, 255, 0.9);
+  --ink: #2b2b26;
+  --font-display: 'Pacifico', cursive;
+  --font-body: 'Montserrat', sans-serif;
+  display: block;
+  font-family: var(--font-body);
+  color: var(--ink);
+}
+
+.benevole-page_bar {
+  height: 6px;
+  background: var(--forest);
+}
+
+/* --- Hero --- */
+
+.hero {
+  position: relative;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-image: url('/assets/images/benevole-hero.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 32px 16px;
+}
+
+.hero_overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(30, 36, 20, 0.55), rgba(30, 36, 20, 0.55));
+}
+
+.hero_content {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  color: #fff;
+}
+
+.hero_title {
+  font-family: var(--font-title);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  margin: 0 0 12px;
+  font-weight: 400;
+}
+
+.hero_subtitle {
+  font-size: 1.1rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* --- Generic section --- */
+
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px clamp(16px, 4vw, 48px);
+}
+
+.section_title {
+  --font-body: 'Montserrat', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--forest);
+  margin: 0 0 24px;
+  text-align: center;
+}
+
+/* --- Missions --- */
+
+.missions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.mission-card {
+  background: var(--cream);
+  border: 1px solid rgba(63, 77, 46, 0.15);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.mission-card_title {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--forest);
+}
+
+.mission-card_text {
+  margin: 0;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+/* --- Engagement --- */
+
+.section--engagement {
+  background: var(--cream);
+}
+
+.engagement-list {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.engagement-list li {
+  position: relative;
+  padding-left: 28px;
+  line-height: 1.5;
+}
+
+.engagement-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--forest);
+  font-weight: 700;
+}
+
+/* --- Form --- */
+
+.section--form {
+  max-width: 720px;
+}
+
+.benevole-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.field label,
+.field_group-label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.field input:not([type='checkbox']),
+.field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  padding: 8px 10px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: #fff;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--forest);
+  box-shadow: 0 0 0 2px rgba(63, 77, 46, 0.25);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.field--narrow input {
+  max-width: 140px;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.checkbox input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--forest);
+}
+
+.field_error {
+  margin: 6px 0 0;
+  font-size: 0.8rem;
+  color: #b3261e;
+}
+
+.submit-btn {
+  align-self: center;
+  margin-top: 6px;
+  padding: 10px 32px;
+  background: var(--forest);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: var(--forest-dark);
+}
+
+.submit-btn:disabled {
+  background: #9aa38c;
+  cursor: not-allowed;
+}
+
+.form-success {
+  text-align: center;
+  margin: 4px 0 0;
+  color: var(--forest-dark);
+  font-weight: 600;
+}
+
