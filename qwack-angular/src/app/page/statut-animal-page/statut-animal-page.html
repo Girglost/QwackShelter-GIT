@@ -1,0 +1,112 @@
+<h1>Liste des Emplacements</h1>
+
+<div class="form-container">
+  <h2 class="form-title">
+    {{ editingEmplacmeentId ? 'Modifier l\'sAnimal' : 'Ajouter un sAnimal' }}
+  </h2>
+
+  <form (submit)="addOrUpdate()" [formGroup]="formEmplacement" class="form-sAnimal">
+    <div class="form-group">
+      <label for="nbPlace">Nombre de Places :</label>
+      <div class="input-container">
+        <input id="nbPlace" type="number" formControlName="nbPlace" placeholder="Ex: 5" />
+        <div class="error-message" *ngIf="CtrlNbPlace.dirty && CtrlNbPlace.hasError('required')">
+          * Indiquer le nombre de places *
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="typeBox">Type d'sAnimal :</label>
+      <div class="input-container">
+        <select id="typeBox" formControlName="box">
+          <option value="">-- Sélectionner un type --</option>
+          @for (type of typeDeBox$; track type) {
+            <option [value]="type">{{ type }}</option>
+          }
+        </select>
+        <div class="error-message" *ngIf="CtrlBox.dirty && CtrlBox.hasError('required')">
+          * Indiquer le type d'sAnimal *
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label for="complet" class="checkbox-label">
+        <input id="complet" type="checkbox" formControlName="complet" />
+        <span class="custom-checkbox"></span>
+        Cet sAnimal est complet
+      </label>
+    </div>
+
+    <div class="form-actions">
+      <input
+        [disabled]="formEmplacement.invalid"
+        type="submit"
+        [value]="editingEmplacmeentId ? 'Modifier' : 'Ajouter'"
+        class="btn-submit"
+      />
+    </div>
+  </form>
+</div>
+
+<hr />
+
+<!-- Barre de filtres -->
+<div class="filter-bar">
+  <button
+    class="filter-btn"
+    [class.active]="filtreActif === 'tous' && !typeSelectionne"
+    (click)="filtrerPar('tous')">
+    Tous
+  </button>
+
+  <button
+    class="filter-btn"
+    [class.active]="filtreActif === 'complet'"
+    (click)="filtrerPar('complet')">
+    Complet
+  </button>
+
+  <button
+    class="filter-btn"
+    [class.active]="filtreActif === 'disponible'"
+    (click)="filtrerPar('disponible')">
+    Disponible
+  </button>
+
+  <select
+    class="filter-select"
+    [(ngModel)]="typeSelectionne"
+    (ngModelChange)="filtrerParType($event)">
+    <option [ngValue]="null">-- Filtrer par type --</option>
+    @for (type of typeDeBox$; track type) {
+      <option [ngValue]="type">{{ type }}</option>
+    }
+  </select>
+</div>
+
+<table class="Liste">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre de Place</th>
+      <th>Complet</th>
+      <th>Type d'emplacment</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let sAnimal of sAnimals$ | async">
+      <td>{{ sAnimal.id }}</td>
+      <td>{{ sAnimal.nbPlace }}</td>
+      <td>{{ sAnimal.complet }}</td>
+      <td>{{ sAnimal.box }}</td>
+      <td>
+        <button (click)="edit(sAnimal)">MODIFIER</button>
+        <button (click)="remove(sAnimal)">SUPPRIMER</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
