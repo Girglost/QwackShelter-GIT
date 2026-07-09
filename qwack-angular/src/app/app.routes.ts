@@ -5,6 +5,7 @@ import { Footer } from './component/footer/footer/footer';
 import { Accueil } from './page/accueil/accueil/accueil';
 import { NosAnimaux } from './page/nos-animaux/nos-animaux';
 import { Actualites } from './page/actualites/actualites';
+import { Contact } from './page/contact/contact';
 
 
 export const routes: Routes = [
@@ -13,5 +14,6 @@ export const routes: Routes = [
   {path : "accueil", component: Accueil},
   {path : "nous-animaux", component : NosAnimaux},
   {path : "actualites", component: Actualites},
+  {path : "contact", component: Contact},
 
 ];
