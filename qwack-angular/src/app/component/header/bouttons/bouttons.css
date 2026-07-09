@@ -1,68 +1,82 @@
-
-.header-boutons{
+.header-boutons {
   display: inline;
   justify-content: end;
   align-items: end;
 }
 
-
 .btn-connexion {
+  display:flex;
   justify-self: end;
-  width: 45px;
-  height: 45px;
-  opacity: 0.6;
-  border-radius: 50%;
-
+  align-items: center;
   margin-top: 15px;
   margin-bottom: 5px;
   margin-right: 10px;
 }
 
+.btn-connexion p {
+font-family: 'Montagu Slab';
+font-size: 24px;
+font-weight: 400;
+color: #504e4c;
+}
+
+.btn-connexion img {
+  width: 45px;
+  height: 45px;
+  opacity: 0.6;
+  border-radius: 50%;
+  margin-left:1rem;
+}
+
 /* Le conteneur principal */
 .header_don_bouton {
-    display: flex; /* Permet au bouton de s'adapter à la taille de son contenu */
-    justify-content: flex-end;
+  display: flex; /* Permet au bouton de s'adapter à la taille de son contenu */
+  justify-content: flex-end;
 }
 
 /* Le lien stylisé en bouton */
 .header_don_bouton a {
-    margin-right: 13px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px; /* Espace entre le cœur et le texte */
+  margin-right: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Espace entre le cœur et le texte */
 
-    /* Couleurs et bordures */
-    background-color: #b9873d; /* Marron/doré du fond */
-    color: #ffffff; /* Texte blanc */
-    border-radius: 40px; /* Coins très arrondis */
+  width: 276px; /* AJOUTÉ */
+  height: 69px; /* AJOUTÉ */
+  box-sizing: border-box; /* AJOUTÉ */
+  justify-content: center; /* AJOUTÉ */
 
-    /* Espacement interne (Padding) */
-    padding: 3px 8px 3px 5px;
+  /* Couleurs et bordures */
+  background-color: #b77f38; /* Marron/doré du fond */
+  color: #f5f1e8;
+  border-radius: 22.5px; /* Coins très arrondis */
 
-    /* Typographie */
-    font-family: 'Georgia', 'Times New Roman', serif; /* Police à empattement comme sur l'image */
-    font-weight: bold;
-    font-size: 20px;
-    text-decoration: none; /* Enlève le soulignement du lien */
-    letter-spacing: 1px; /* Léger espacement des lettres */
+  /* Espacement interne (Padding) */
+  padding: 3px 8px 3px 5px;
 
-    cursor: pointer;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+  /* Typographie */
+  font-family: 'Montagu Slab';
+  font-weight: 600;
+  font-size: 24px;
+  text-decoration: none; /* Enlève le soulignement du lien */
+  letter-spacing: 1.2px; /* Léger espacement des lettres */
+
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
 }
 
 /* Alignement de l'image du cœur */
 .header_don_bouton img {
-    height: auto;
-    display: block;
-    /* Si vous voulez ajuster précisément la taille du cœur via CSS plutôt que le HTML : */
-    width: 40px;
+  height: auto;
+  display: block;
+  /* Si vous voulez ajuster précisément la taille du cœur via CSS plutôt que le HTML : */
+  width: 40px;
 }
 
 /* Petit effet au survol pour améliorer l'expérience utilisateur */
 .header_don_bouton a:hover {
-    opacity: 0.9;
-    transform: scale(1.02);
+  opacity: 0.9;
+  transform: scale(1.02);
 }
-
-
-

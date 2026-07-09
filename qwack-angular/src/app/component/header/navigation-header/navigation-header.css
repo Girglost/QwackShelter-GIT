@@ -1,14 +1,20 @@
+:host {
+  display: flex;
+  width: auto;           /* MODIFIÉ : plus 100%, puisque .header-navigation gère sa taille au contenu maintenant */
+}
+
 .nav {
   display: flex;
-  justify-content: space-around;
-  align-items: center; /* Centre verticalement */
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3rem;
 
   list-style: none;
   margin: 0;
   padding: 0;
 
   background-color: #60733e;
-  height: 130px; /* hauteur du menu */
+  height: 130px;
 }
 
 .nav li a {
@@ -17,6 +23,15 @@
   font-family: "Montagu Slab";
   font-size: 24px;
   font-weight: 400;
+  white-space: nowrap;
 }
+
+/* Corrigé : cible .nav li a, pas .nav h2/p qui n'existent pas ici */
+@media (min-width: 1920px) {
+  .nav li a{
+    font-size: 28px;
+  }
+}
+
 
 

@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   background-color: #60733e;
+  padding: 0 1rem 2rem 0
 
 }
 
@@ -11,10 +12,30 @@
 }
 
 .header-navigation{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 1 1 auto;           /* prend l'espace dispo mais peut rétrécir */
 
   width: 54%;
 }
 
 .header-boutons{
   width: 18%;
+}
+
+@media (max-width: 900px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav {
+    gap: 1rem;
+  }
+
+  .nav li a {
+    font-size: 18px;      /* un peu plus petit sur mobile */
+  }
 }

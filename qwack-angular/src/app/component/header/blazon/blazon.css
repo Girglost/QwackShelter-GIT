@@ -10,6 +10,11 @@
   margin: 15px;
 }
 
+.header-logo img {
+width: 131px;
+height: 158px;
+}
+
 .header-text-logo {
   display: flex;
   flex-direction: column;
