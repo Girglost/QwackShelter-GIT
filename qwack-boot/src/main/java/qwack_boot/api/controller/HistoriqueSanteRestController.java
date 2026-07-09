@@ -82,28 +82,28 @@ public class HistoriqueSanteRestController {
 
 
     @GetMapping("/cause/{cause}")
-    public List<HistoriqueSante> getByCause(@PathVariable Cause cause) {
-        return hsSrv.getByCause(cause);
+    public List<HistoriqueSanteReponse> getByCause(@PathVariable Cause cause) {
+        return hsSrv.getByCause(cause).stream().map(h -> HistoriqueSanteReponse.convert(h)).toList();
     }
     @GetMapping("/comment")
-    public List<HistoriqueSante> getByCommentaireNotNull() {
-        return hsSrv.getByCommentaireNotNull();
+    public List<HistoriqueSanteReponse> getByCommentaireNotNull() {
+        return hsSrv.getByCommentaireNotNull().stream().map(h -> HistoriqueSanteReponse.convert(h)).toList();
     }
     @GetMapping("/between/{date1}/{date2}")
-    public List<HistoriqueSante> getByDateBetween(@PathVariable LocalDate date1, @PathVariable LocalDate date2) {
-        return hsSrv.getByDateBetween(date1, date2);
+    public List<HistoriqueSanteReponse> getByDateBetween(@PathVariable LocalDate date1, @PathVariable LocalDate date2) {
+        return hsSrv.getByDateBetween(date1, date2).stream().map(h -> HistoriqueSanteReponse.convert(h)).toList();
     }
     @GetMapping("/after/{date}")
-    public List<HistoriqueSante> getByDateAfter(@PathVariable LocalDate date) {
-        return hsSrv.getByDateAfter(date);
+    public List<HistoriqueSanteReponse> getByDateAfter(@PathVariable LocalDate date) {
+        return hsSrv.getByDateAfter(date).stream().map(h -> HistoriqueSanteReponse.convert(h)).toList();
     }
     @GetMapping("/before/{date}")
-    public List<HistoriqueSante> getByDateBefore(@PathVariable LocalDate date) {
-        return hsSrv.getByDateBefore(date);
+    public List<HistoriqueSanteReponse> getByDateBefore(@PathVariable LocalDate date) {
+        return hsSrv.getByDateBefore(date).stream().map(h -> HistoriqueSanteReponse.convert(h)).toList();
     }
     @GetMapping("/animal/{AnimalId}")
-    public List<HistoriqueSante> getByAnimalId(@PathVariable Integer id) {
-        return hsSrv.getByAnimalId(id);
+    public List<HistoriqueSanteReponse> getByAnimalId(@PathVariable Integer AnimalId) {
+        return hsSrv.getByAnimalId(AnimalId).stream().map(h -> HistoriqueSanteReponse.convert(h)).toList();
     }
 
     
