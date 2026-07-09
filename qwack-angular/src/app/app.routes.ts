@@ -7,6 +7,7 @@ import { NousRejoindre } from './page/nous-rejoindre/nous-rejoindre';
 import { NotFound } from './page/not-found/not-found';
 import { DevenirBenevole } from './page/devenir-benevole/devenir-benevole';
 import { NosMissions } from './page/nos-missions/nos-missions';
+import { SwipeCompagnon } from './page/swipe-compagnon/swipe-compagnon';
 
 export const routes: Routes = [
   { path: 'accueil', component: Accueil },
@@ -17,6 +18,7 @@ export const routes: Routes = [
   { path: 'emplacement', component: EmplacementPage },
   { path: 'devenir-benevole', component: DevenirBenevole },
   { path: 'nos-missions', component: NosMissions },
+  { path: 'swipe-compagnon', component: SwipeCompagnon },
 
   { path: '**', component: NotFound }, // a mettre a la fin de toutes les routes pour gérer les pages non trouvées
 ];
