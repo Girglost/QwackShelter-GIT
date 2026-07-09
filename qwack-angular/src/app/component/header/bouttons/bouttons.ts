@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 export class Bouttons {
 
   public faireDon(){
-
+    alert("Merci pour le Don de 50 € !")
   }
 
 }
