@@ -4,7 +4,7 @@ import { Header } from './component/header/header/header';
 import { Footer } from './component/footer/footer/footer';
 import { Accueil } from './page/accueil/accueil/accueil';
 import { NosAnimaux } from './page/nos-animaux/nos-animaux';
-import { Actualite } from './page/actualites/actualites';
+import { Actualites } from './page/actualites/actualites';
 
 
 export const routes: Routes = [
@@ -12,6 +12,6 @@ export const routes: Routes = [
   {path : "footer", component: Footer},
   {path : "accueil", component: Accueil},
   {path : "nous-animaux", component : NosAnimaux},
-  {path : "actualites", component: Actualite},
+  {path : "actualites", component: Actualites},
 
 ];
