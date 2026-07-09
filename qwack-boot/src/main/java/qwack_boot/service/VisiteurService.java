@@ -98,7 +98,7 @@ public class VisiteurService {
         Lieu lieu = lieuSrv.findOrCreate(visiteur.getHabitation());
         visiteurUpdate.setHabitation(lieu);
 
-        visiteurUpdate.setPassword(passwordEncoder.encode(visiteurUpdate.getPassword()));
+        visiteurUpdate.setPassword(passwordEncoder.encode(visiteur.getPassword()));
 
         QuackShelter quackShelter = visiteur.getQuackShelter();
         visiteurUpdate.setQuackShelter(quackShelter);

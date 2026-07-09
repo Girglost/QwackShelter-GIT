@@ -69,4 +69,12 @@ public class UpdateEmployeRequest {
         this.salaire = salaire;
     }
 
+    public StatutActivite getStatutActivite() {
+        return statutActivite;
+    }
+
+    public void setStatutActivite(StatutActivite statutActivite) {
+        this.statutActivite = statutActivite;
+    }
+
 }

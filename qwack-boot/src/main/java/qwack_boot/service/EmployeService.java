@@ -8,19 +8,28 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import qwack_boot.api.controller.animaux.AnimalRestController;
 import qwack_boot.dao.IDAOPersonne;
 import qwack_boot.model.Animal;
+import qwack_boot.model.HistoriqueSante;
 import qwack_boot.model.Lieu;
 import qwack_boot.model.Personne;
 import qwack_boot.model.QuackShelter;
 import qwack_boot.model.Statut;
+import qwack_boot.model.StatutActivite;
 import qwack_boot.model.StatutAnimal;
 import qwack_boot.model.StatutValidation;
 import qwack_boot.model.Visite;
 
+@Service
 public class EmployeService {
+    private final BenevoleService benevoleService;
+
+    private final AnimalRestController animalRestController;
+
     private static final Logger log = LoggerFactory.getLogger(VisiteurService.class);
 
     @Autowired
@@ -37,13 +46,23 @@ public class EmployeService {
     @Autowired
     VisiteService visiteSrv;
     @Autowired
+    VisiteurService visiteurSrv;
+    @Autowired
     AnimalService animalSrv;
 
     @Autowired
     QuackShelterService quackSrv;
 
     @Autowired
+    HistoriqueSanteService historiqueSanteSrv;
+
+    @Autowired
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    EmployeService(AnimalRestController animalRestController, BenevoleService benevoleService) {
+        this.animalRestController = animalRestController;
+        this.benevoleService = benevoleService;
+    }
 
     public List<Personne> getAllEmploye() {
         return daoPersonne.findAllEmploye();
@@ -62,14 +81,14 @@ public class EmployeService {
 
         // On cherche le Lieu, si il existe ok, sinon on le créé
         Lieu habitation = lieuSrv.findOrCreate(employe.getHabitation());
-        employe.setHabitation(employe.getHabitation());
+        employe.setHabitation(habitation);
 
         employe.setPassword(passwordEncoder.encode(employe.getPassword()));
         return daoPersonne.save(employe);
     }
 
     @Transactional
-    public Personne updateVisiteur(Integer id, Personne employe) {
+    public Personne updateEmploye(Integer id, Personne employe) {
 
         Personne employeUpdate = daoPersonne.findById(id).orElse(null);
 
@@ -82,17 +101,20 @@ public class EmployeService {
 
         employeUpdate.setNom(employe.getNom());
         employeUpdate.setPrenom(employe.getPrenom());
-
         employeUpdate.setStatutActivite(employe.getStatutActivite());
 
         Lieu lieu = lieuSrv.findOrCreate(employe.getHabitation());
         employeUpdate.setHabitation(lieu);
 
-        employeUpdate.setPassword(passwordEncoder.encode(employeUpdate.getPassword()));
+        employeUpdate.setPassword(passwordEncoder.encode(employe.getPassword()));
 
         QuackShelter quackShelter = employe.getQuackShelter();
         employeUpdate.setQuackShelter(quackShelter);
 
+        employeUpdate.setAdmin(employe.isAdmin());
+
+        System.out.println(employe);
+        System.out.println(employeUpdate);
         return daoPersonne.save(employeUpdate);
     }
 
@@ -109,20 +131,26 @@ public class EmployeService {
         statutAdopted.setStatut(Statut.Adopte);
         statutAdopted.setDateDepart(LocalDate.now());
 
-        statutAdopted.setStatutAdoption(StatutValidation.EN_ATTENTE);
-
-        System.out.println(animalAdopted.getStatutAnimal());
-        System.out.println("Adoption Réussie ! ");
+        statutAdopted.setStatutAdoption(StatutValidation.ACCEPTE);
 
         return statutAnimalSrv.update(statutAdopted.getId(), statutAdopted);
     }
 
     @Transactional
-    public Visite accepterStatut(int idVisite) {
+    public Visite accepterVisite(int idVisite) {
         Visite visite = visiteSrv.getById(idVisite);
+        Personne visiteur = visite.getVisiteur();
+        visiteur.setStatutActivite(StatutActivite.VISITE);
+        visiteurSrv.updateVisiteur(visiteur.getId(), visiteur);
         visite.setStatutVisite(StatutValidation.ACCEPTE);
         System.out.println("Visite acceptée ! ");
 
         return visiteSrv.update(visite);
+    }
+
+    public HistoriqueSante partirEnSoin(int idEmploye, HistoriqueSante soin) {
+        Personne soigneur = personneSrv.getById(idEmploye);
+        soigneur.setStatutActivite(StatutActivite.SOIN);
+        return historiqueSanteSrv.insert(soin);
     }
 }
