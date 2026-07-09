@@ -1,0 +1,189 @@
+:host {
+  --forest: #3f4d2e;
+  --forest-dark: #2c3820;
+  --panel-bg: rgba(255, 255, 255, 0.86);
+  --ink: #2b2b26;
+  display: block;
+}
+
+.contact-page {
+  font-family: var(--font-body);
+  color: var(--ink);
+}
+
+.contact-page_bar {
+  height: 6px;
+  background: var(--forest);
+}
+
+.contact-page_hero {
+  position: relative;
+  min-height: 460px;
+  background-size: cover;
+  background-position: center 30%;
+  background-color: #f5f1e8;
+  padding: 32px clamp(16px, 4vw, 48px);
+  display: flex;
+  align-items: center;
+}
+
+.contact-page_grid {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.panel {
+  background: var(--panel-bg);
+  border-radius: 6px;
+  padding: 28px 32px;
+  backdrop-filter: blur(2px);
+}
+
+.panel_title {
+  margin: 0 0 20px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--forest);
+}
+
+/* --- Coordonnées infos --- */
+
+.info-group {
+  margin-bottom: 22px;
+}
+
+.info-group p {
+  margin: 4px 0;
+  line-height: 1.5;
+}
+
+.info-group_label {
+  font-weight: 600;
+}
+
+.social-group_title {
+  margin: 0 0 14px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--forest);
+}
+
+.social-group_icons {
+  display: flex;
+  gap: 16px;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.social-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.social-icon:hover,
+.social-icon:focus-visible {
+  color: var(--forest);
+  transform: translateY(-2px);
+}
+
+.social-icon:focus-visible {
+  outline: 2px solid var(--forest);
+  outline-offset: 3px;
+}
+
+/* --- Formulaire --- */
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  padding: 8px 10px;
+  font-size: 0.95rem;
+  background: #fff;
+  font-family: inherit;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--forest);
+  box-shadow: 0 0 0 2px rgba(63, 77, 46, 0.25);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.field_error {
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  color: #b3261e;
+}
+
+.submit-btn {
+  align-self: flex-start;
+  margin-top: 6px;
+  padding: 10px 28px;
+  background: var(--forest);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: var(--forest-dark);
+}
+
+.submit-btn:disabled {
+  background: #9aa38c;
+  cursor: not-allowed;
+}
+
+.form-success {
+  margin: 4px 0 0;
+  color: var(--forest-dark);
+  font-weight: 600;
+}
+
+

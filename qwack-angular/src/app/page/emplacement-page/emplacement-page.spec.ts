@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Contact } from './contact';
+import { EmplacementPage } from './emplacement-page';
 
-describe('Contact', () => {
-  let component: Contact;
-  let fixture: ComponentFixture<Contact>;
+describe('EmplacementPage', () => {
+  let component: EmplacementPage;
+  let fixture: ComponentFixture<EmplacementPage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Contact],
+      imports: [EmplacementPage],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Contact);
+    fixture = TestBed.createComponent(EmplacementPage);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
@@ -20,5 +20,3 @@ describe('Contact', () => {
     expect(component).toBeTruthy();
   });
 });
-
-

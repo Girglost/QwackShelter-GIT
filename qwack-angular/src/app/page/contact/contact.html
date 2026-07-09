@@ -1,0 +1,113 @@
+<div class="contact-page">
+  <div class="contact-page_bar contact-page_bar--top" aria-hidden="true"></div>
+
+  <div class="contact-page_hero">
+
+    <div class="contact-page_grid">
+
+      <!-- Gauche : Coordonnées contact -->
+      <section class="panel panel--info" aria-labelledby="contact-info-heading">
+        <h2 id="contact-info-heading" class="panel_title">Contact</h2>
+
+        <div class="info-group">
+          <p><span class="info-group_label">Mail :</span> qwackshelter@gmail.com</p>
+          <p><span class="info-group_label">Téléphone :</span> +33 2 34 56 78 90</p>
+        </div>
+
+        <div class="info-group">
+          <p class="info-group_label">Horaires d'ouverture :</p>
+          <p>Lundi - Samedi : 10h - 18h</p>
+        </div>
+
+        <hr/>
+
+        <!-- Gauche : Réseaux Soaciaux -->
+
+        <div class="social-group">
+          <h3 class="social-group_title">Suivez-nous</h3>
+          <div class="social-group_icons">
+            <a href="#" class="social-icon" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <rect x="3" y="3" width="18" height="18" rx="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/>
+              </svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M15 8h2V4h-2c-2.2 0-4 1.8-4 4v2H9v4h2v8h4v-8h2.5l.5-4H15V8z"/>
+              </svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="X">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M4 4l16 16M20 4L4 20"/>
+              </svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <rect x="3" y="6" width="18" height="12" rx="3"/>
+                <path d="M11 10l4 2-4 2v-4z" fill="currentColor" stroke="none"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Droite : formulaire -->
+      <section class="panel panel--form" aria-labelledby="contact-form-heading">
+        <h2 id="contact-form-heading" class="panel_title">Contactez-nous</h2>
+
+        <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+          <div class="field">
+            <label for="subject">Sujet</label>
+            <input id="subject" type="text" formControlName="subject" />
+            <p class="field_error" *ngIf="isInvalid('subject')">Merci d'indiquer un sujet.</p>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="firstName">Prénom</label>
+              <input id="firstName" type="text" formControlName="firstName" />
+              <p class="field_error" *ngIf="isInvalid('firstName')">Prénom requis.</p>
+            </div>
+            <div class="field">
+              <label for="lastName">Nom</label>
+              <input id="lastName" type="text" formControlName="lastName" />
+              <p class="field_error" *ngIf="isInvalid('lastName')">Nom requis.</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" formControlName="email" />
+            <p class="field_error" *ngIf="isInvalid('email')">Merci d'indiquer un email valide.</p>
+          </div>
+
+          <div class="field">
+            <label for="password">Mot de passe</label>
+            <input id="password" type="password" formControlName="password" />
+            <p class="field_error" *ngIf="isInvalid('password')">8 caractères minimum.</p>
+          </div>
+
+          <div class="field">
+            <label for="phone">Téléphone (facultatif)</label>
+            <input id="phone" type="tel" formControlName="phone" />
+            <p class="field_error" *ngIf="isInvalid('phone')">Format de téléphone invalide.</p>
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" rows="5" formControlName="message"></textarea>
+            <p class="field_error" *ngIf="isInvalid('message')">Merci d'écrire un message.</p>
+          </div>
+
+          <button type="submit" class="submit-btn" [disabled]="contactForm.invalid">
+            Envoyer
+          </button>
+
+          <p class="form-success" *ngIf="submitted">Votre message a bien été envoyé.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>
