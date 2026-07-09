@@ -1,4 +1,30 @@
-import { Service } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable, Service } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Emplacement } from '../model/emplacement';
 
-@Service()
-export class EmplacementService {}
+@Injectable({
+  providedIn: 'root',
+})
+export class EmplacementService {
+  private http: HttpClient = inject(HttpClient);
+  private apiUrl: string = "emplacement";
+
+  public findAll(): Observable<Emplacement[]> {
+    return this.http.get<Emplacement[]>(this.apiUrl);
+  }
+
+  public add(emplacement: Emplacement): Observable<Emplacement> {
+    return this.http.post<Emplacement>(this.apiUrl, emplacement);
+  }
+
+  public update(emplacement: Emplacement): Observable<Emplacement> {
+    return this.http.put<Emplacement>(`${ this.apiUrl }/${ emplacement.id }`, emplacement);
+  }
+
+  public remove(emplacement: Emplacement): Observable<void> {
+    return this.http.delete<void>(`${ this.apiUrl }/${ emplacement.id }`);
+  }
+
+
+}

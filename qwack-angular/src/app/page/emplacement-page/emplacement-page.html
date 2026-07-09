@@ -1,1 +1,72 @@
-<p>emplacement-page works!</p>
+<h1>Liste des Emplacements</h1>
+
+<form (submit)="addOrUpdate()" [formGroup]="formEmplacement">
+  <table>
+    <tr>
+      <td>Nombre de Place :</td>
+      <td>
+        <input type="number" formControlName="nbPlace" />
+        <div *ngIf="CtrlNbPlace.dirty && CtrlNbPlace.hasError('required')">
+          * Indiquer le nombre de place *
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Type d'emplacement :
+      </td>
+      <td>
+        <select>
+      <option value="">-- Type d'emplacment --</option>
+      @for (type of typeDeBox$; track type) {
+        <option [value]="type">{{ type }}</option>
+      }
+    </select>
+    <div *ngIf="CtrlBox.dirty && CtrlBox.hasError('required')">
+      * Indiquer le type d'emplacement *
+    </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Complet ?</td>
+      <td>
+        <input type="checkbox" formControlName="complet" />
+      </td>
+    </tr>
+  </table>
+
+  <div>
+    <input
+      [disabled]="formEmplacement.invalid"
+      type="submit"
+      [value]="editingEmplacmeentId ? 'Modifier' : 'Ajouter'"
+    />
+  </div>
+</form>
+
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre de Place</th>
+      <th>Complet</th>
+      <th>Type d'emplacment</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let emplacement of emplacements$ | async">
+      <td>{{ emplacement.id }}</td>
+      <td>{{ emplacement.nbPlace }}</td>
+      <td>{{ emplacement.complet }}</td>
+      <td>{{ emplacement.box }}</td>
+      <td>
+        <button (click)="edit(emplacement)">MODIFIER</button>
+        <button (click)="remove(emplacement)">SUPPRIMER</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
