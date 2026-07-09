@@ -10,8 +10,6 @@ public class UpdateBenevoleRequest {
     String nom;
     @NotBlank
     String prenom;
-    @NotBlank
-    String password;
     @NotNull
     CreateLieuRequest habitation;
     @NotNull
@@ -43,14 +41,6 @@ public class UpdateBenevoleRequest {
         this.prenom = prenom;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public CreateLieuRequest getHabitation() {
         return habitation;
     }
@@ -69,7 +59,7 @@ public class UpdateBenevoleRequest {
 
     @Override
     public String toString() {
-        return "UpdateBenevoleRequest [nom=" + nom + ", prenom=" + prenom + ", password=" + password + ", habitation="
+        return "UpdateBenevoleRequest [nom=" + nom + ", prenom=" + prenom + ", habitation="
                 + habitation + ", quackShelterId=" + quackShelterId + "]";
     }
 }

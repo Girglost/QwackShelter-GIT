@@ -82,6 +82,15 @@ public class PersonneService {
 		return daoPersonne.findByLoginAndPassword(login, password);
 	}
 
+	public List<Personne> getByRoleIn(List<Role> roles) {
+
+		return daoPersonne.findByRoleIn(roles);
+	}
+
+	public Personne getByLogin(String login) {
+		return daoPersonne.findByLogin(login);
+	}
+
 	public boolean loginExist(String login) {
 		return daoPersonne.existsByLogin(login);
 	}
@@ -95,21 +104,16 @@ public class PersonneService {
 		daoPersonne.deleteById(id);
 	}
 
+	public Personne changePassword(Personne personne) {
+		return daoPersonne.save(personne);
+	}
+
 	public void faireDon(int idQuackShelter, double don) {
 		QuackShelter quackShelter = quackSrv.getById(idQuackShelter);
 		quackShelter.setTresorerie(quackShelter.getTresorerie() + don);
 		quackSrv.update(quackShelter);
 		System.out.println("La trésorerie du quackShelter s'élève maintenant a " + quackShelter.getTresorerie() + " €");
 
-	}
-
-	public List<Personne> getByRoleIn(List<Role> roles) {
-
-		return daoPersonne.findByRoleIn(roles);
-	}
-
-	public Personne getByLogin(String login) {
-		return daoPersonne.findByLogin(login);
 	}
 
 }

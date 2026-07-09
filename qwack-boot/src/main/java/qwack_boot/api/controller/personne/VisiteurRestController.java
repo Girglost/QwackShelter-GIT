@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.api.requestDTO.AdoptionRequest;
+import qwack_boot.api.requestDTO.personne.ChangePasswordRequest;
 import qwack_boot.api.requestDTO.personne.CreateVisiteurRequest;
 import qwack_boot.api.requestDTO.personne.UpdateVisiteurRequest;
 import qwack_boot.api.responseDTO.StatutAnimalReponse;
@@ -38,6 +40,7 @@ import qwack_boot.service.VisiteurService;
 @RequestMapping("/api/visiteur")
 public class VisiteurRestController {
 
+        private final PasswordEncoder passwordEncoder;
         private final EmplacementService emplacementService;
         @Autowired
         PersonneService personneSrv;
@@ -51,8 +54,9 @@ public class VisiteurRestController {
         @Autowired
         StatutAnimalService statutAnimalSrv;
 
-        VisiteurRestController(EmplacementService emplacementService) {
+        VisiteurRestController(EmplacementService emplacementService, PasswordEncoder passwordEncoder) {
                 this.emplacementService = emplacementService;
+                this.passwordEncoder = passwordEncoder;
         }
 
         @GetMapping
@@ -115,7 +119,7 @@ public class VisiteurRestController {
 
                 // On lui donne les champs qu'on a donné dans la updateRequest
                 Personne visiteur = Personne.createVisiteur(visiteurRequest.getNom(), visiteurRequest.getPrenom(), null,
-                                visiteurRequest.getPassword(), habitation,
+                                null, habitation,
                                 quackShelter);
                 // !!! ATTENTION, Ce n'est pas l'objet persister en base, on passe par le
                 // service et c'est le service qui va faire le bon update !!
@@ -123,6 +127,28 @@ public class VisiteurRestController {
                 VisiteurResponse visiteurUpdated = VisiteurResponse.convert(visiteurSrv.updateVisiteur(id, visiteur));
                 return ResponseEntity.status(HttpStatus.OK)
                                 .body(Map.of("Visiteur Modifié", visiteurUpdated));
+        }
+
+        @PutMapping("/{id}/change-password")
+        public ResponseEntity<Map<String, String>> changerMdp(@PathVariable Integer id,
+                        @RequestBody ChangePasswordRequest passwordRequest) {
+                Personne personne = personneSrv.getById(id);
+
+                String ancienPassword = passwordRequest.getAncienPassword();
+                // On compare l'ancien password donner par le DTO et encodée, avec le passwrod
+                // encodé en bdd
+                if (passwordEncoder.matches(ancienPassword, personne.getPassword())) {
+                        // On recupere le new password et on l'encode
+                        personne.setPassword(passwordEncoder.encode(passwordRequest.getNouveauPassword()));
+                        personneSrv.changePassword(personne);
+                        return ResponseEntity.status(HttpStatus.OK)
+                                        .body(Map.of("Password Modifié ! ", personne.getPassword()));
+
+                } else {
+                        return ResponseEntity.status(HttpStatus.NOT_MODIFIED)
+                                        .body(Map.of("Ancien password incorrect", ancienPassword));
+                }
+
         }
 
         @DeleteMapping("/{id}")

@@ -106,8 +106,6 @@ public class EmployeService {
         Lieu lieu = lieuSrv.findOrCreate(employe.getHabitation());
         employeUpdate.setHabitation(lieu);
 
-        employeUpdate.setPassword(passwordEncoder.encode(employe.getPassword()));
-
         QuackShelter quackShelter = employe.getQuackShelter();
         employeUpdate.setQuackShelter(quackShelter);
 
@@ -152,5 +150,9 @@ public class EmployeService {
         Personne soigneur = personneSrv.getById(idEmploye);
         soigneur.setStatutActivite(StatutActivite.SOIN);
         return historiqueSanteSrv.insert(soin);
+    }
+
+    public Animal accueilAnimal(Animal animal) {
+        return animalSrv.insert(animal);
     }
 }

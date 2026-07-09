@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,12 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.api.requestDTO.AdoptionRequest;
 import qwack_boot.api.requestDTO.CreateHistoriqueSanteRequest;
+import qwack_boot.api.requestDTO.animal.CreateAnimalRequest;
+import qwack_boot.api.requestDTO.personne.ChangePasswordRequest;
 import qwack_boot.api.requestDTO.personne.CreateEmployeRequest;
 import qwack_boot.api.requestDTO.personne.UpdateEmployeRequest;
 import qwack_boot.api.responseDTO.HistoriqueSanteReponse;
 import qwack_boot.api.responseDTO.StatutAnimalReponse;
 import qwack_boot.api.responseDTO.personne.EmployeResponse;
 import qwack_boot.dto.VisiteDTO;
+import qwack_boot.model.Chat;
 import qwack_boot.model.HistoriqueSante;
 import qwack_boot.model.Lieu;
 import qwack_boot.model.Personne;
@@ -42,6 +46,7 @@ import qwack_boot.service.VisiteurService;
 public class EmployeRestController {
 
         private final EmplacementService emplacementService;
+        private final PasswordEncoder passwordEncoder;
         @Autowired
         PersonneService personneSrv;
         @Autowired
@@ -61,8 +66,9 @@ public class EmployeRestController {
         @Autowired
         HistoriqueSanteService historiqueSanteSrv;
 
-        EmployeRestController(EmplacementService emplacementService) {
+        EmployeRestController(EmplacementService emplacementService, PasswordEncoder passwordEncoder) {
                 this.emplacementService = emplacementService;
+                this.passwordEncoder = passwordEncoder;
         }
 
         @GetMapping
@@ -111,7 +117,7 @@ public class EmployeRestController {
 
                 // On lui donne les champs qu'on a donné dans la updateRequest
                 Personne employe = Personne.createEmploye(employeRequest.getNom(), employeRequest.getPrenom(), null,
-                                employeRequest.getPassword(), habitation,
+                                null, habitation,
                                 quackShelter, employeRequest.isAdmin(), employeRequest.getSalaire());
 
                 employe.setStatutActivite(employeRequest.getStatutActivite());
@@ -132,6 +138,27 @@ public class EmployeRestController {
                 EmployeResponse employeDeleted = EmployeResponse.convert(deletedEmploye);
                 return ResponseEntity.status(HttpStatus.OK)
                                 .body(Map.of("Employe DELETED", employeDeleted));
+        }
+
+        @PutMapping("/{id}/change-password")
+        public ResponseEntity<Map<String, String>> changerMdp(@PathVariable Integer id,
+                        @RequestBody ChangePasswordRequest passwordRequest) {
+                Personne personne = personneSrv.getById(id);
+
+                String ancienPassword = passwordRequest.getAncienPassword();
+                // On compare l'ancien password donner par le DTO et encodée, avec le passwrod
+                // encodé en bdd
+                if (passwordEncoder.encode(ancienPassword) == personne.getPassword()) {
+                        // On recupere le new password et on l'encode
+                        personne.setPassword(passwordEncoder.encode(passwordRequest.getNouveauPassword()));
+                        return ResponseEntity.status(HttpStatus.OK)
+                                        .body(Map.of("Password Modifié ! ", personne.getPassword()));
+
+                } else {
+                        return ResponseEntity.status(HttpStatus.NOT_MODIFIED)
+                                        .body(Map.of("Ancien password incorrect", ancienPassword));
+                }
+
         }
 
         @PutMapping("/accepter-adoption/{id}")
@@ -174,6 +201,18 @@ public class EmployeRestController {
                                 .convert(employeSrv.partirEnSoin(idEmploye, soin));
                 return ResponseEntity.status(HttpStatus.OK)
                                 .body(Map.of("Soin effectué", soinEffectue));
+        }
+
+        @PostMapping("/accueillir-animal")
+        public ResponseEntity<Map<String, String>> accueillirAnimal(
+                        @RequestBody CreateAnimalRequest animalRequest) {
+                Chat chat = new Chat();
+                String typeAnimal = chat.getClass().getSimpleName();
+
+                // A partir du dto de l'animal, on reconstruit un objet pour l'envoyer au
+                // service
+                return ResponseEntity.status(HttpStatus.OK)
+                                .body(Map.of("Animal accueillit ", typeAnimal));
         }
 
 }

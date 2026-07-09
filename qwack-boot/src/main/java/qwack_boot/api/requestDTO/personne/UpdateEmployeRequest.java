@@ -6,7 +6,7 @@ import qwack_boot.model.StatutActivite;
 public class UpdateEmployeRequest {
     String nom;
     String prenom;
-    String password;
+
     CreateLieuRequest habitation;
     Integer quackShelterId;
     boolean admin;
@@ -27,14 +27,6 @@ public class UpdateEmployeRequest {
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public CreateLieuRequest getHabitation() {

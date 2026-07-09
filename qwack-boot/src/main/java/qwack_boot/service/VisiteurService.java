@@ -76,6 +76,7 @@ public class VisiteurService {
         // On cherche le Lieu, si il existe ok, sinon on le créé
         Lieu habitation = lieuSrv.findOrCreate(visiteur.getHabitation());
         visiteur.setHabitation(habitation);
+
         visiteur.setPassword(passwordEncoder.encode(visiteur.getPassword()));
         return daoPersonne.save(visiteur);
     }
@@ -97,8 +98,6 @@ public class VisiteurService {
 
         Lieu lieu = lieuSrv.findOrCreate(visiteur.getHabitation());
         visiteurUpdate.setHabitation(lieu);
-
-        visiteurUpdate.setPassword(passwordEncoder.encode(visiteur.getPassword()));
 
         QuackShelter quackShelter = visiteur.getQuackShelter();
         visiteurUpdate.setQuackShelter(quackShelter);

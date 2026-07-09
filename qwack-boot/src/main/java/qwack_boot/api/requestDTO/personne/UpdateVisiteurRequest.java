@@ -5,7 +5,7 @@ import qwack_boot.api.requestDTO.lieu.CreateLieuRequest;
 public class UpdateVisiteurRequest {
     private String nom;
     private String prenom;
-    private String password;
+
     private CreateLieuRequest habitation;
     private Integer quackShelterId;
 
@@ -23,14 +23,6 @@ public class UpdateVisiteurRequest {
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public CreateLieuRequest getHabitation() {
