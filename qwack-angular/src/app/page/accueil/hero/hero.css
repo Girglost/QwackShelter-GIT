@@ -56,6 +56,77 @@ background: linear-gradient(
   width: 70%;
 }
 
+.carte {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 10%;
+  right: 15%;
+  height: 80%;
+  width: 25%;
+
+  background-color:rgba(237, 227, 205, 0.8);; /*transparence*/
+
+  border-radius: 22.5px;
+}
+
+#titre-carte{
+  font-size: 24px;
+  font-family: 'Montaigu Slab';
+  font-weight: 700;
+  color: #3e7034;
+  margin-bottom: 2%;
+}
+
+.info-animal{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4%;
+}
+
+.info-animal p:first-child{
+  font-size: 32px;
+  font-family: 'Montaigu Slab';
+  font-weight: 400;
+  color: #3e7034;
+}
+
+.info-animal p:last-child{
+  font-size: 24px;
+  font-family: 'Montaigu Slab';
+  font-weight: 400;
+  color: #3e7034;
+}
+
+
+
+.trait{
+  background-color: #3e7034;
+  width:10%;
+  height: 3px;
+  margin-bottom: 4%;
+}
+
+/*img*/
+
+#animal{
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  border: 5px solid #ffffff;
+  object-fit: cover;
+}
+
+/* #coeur {
+  width: 50px;
+  height: 45px;
+  object-fit: cover;
+
+} */
+
 /*Bouton*/
 
 .btns{
@@ -104,5 +175,36 @@ font-weight: 600;
 font-size: 24px;
 }
 
+.btn-profil{
+  display: flex;
+background: #60733e;
+width: 382px;
+height:66px;
+border-radius:45px;
+justify-content: center;
+align-items: center;
+color: #f5f1e8;
+font-family: 'Montagu Slab';
+font-weight: 600;
+font-size: 24px;
+}
 
+.btn-profil:hover{
+  background-color: #4b5d33;
+  cursor: pointer;
+}
+.btn-animaux{
+display: flex;
+margin-top: auto;
+background: #b77f38;
+width: 100%;
+height:66px;
+justify-content: center;
+align-items: center;
+color: #f5f1e8;
+font-family: 'Montagu Slab';
+font-weight: 600;
+font-size: 24px;
+border-radius: 0 0 22.5px 22.5px;
+}
 
