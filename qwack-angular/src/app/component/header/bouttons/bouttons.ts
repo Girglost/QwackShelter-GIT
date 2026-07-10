@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 export class Bouttons {
 
   public faireDon(){
-    const son = new Audio('../../../../../public/assets/son/qwack_jordan.m4a')
+    const son = new Audio('assets/son/qwack_jordan.m4a')
     son.play();
     alert("Merci pour le Don de 50 € !")
   }
