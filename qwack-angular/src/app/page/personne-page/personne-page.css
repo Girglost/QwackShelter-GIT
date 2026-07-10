@@ -1,0 +1,315 @@
+html, body {
+  overflow-x: hidden; /* Empêche le scroll horizontal */
+  max-width: 100%;
+}
+
+h1 {
+  text-align: center;
+}
+
+/* ===== Formulaire ===== */
+
+/* Conteneur principal du formulaire */
+.form-container {
+    width: 75%; /* Aligné sur la même largeur que votre tableau */
+    margin: 30px auto; /* Centré sur l'écran */
+    background-color: rgba(255, 255, 255, 0.75); /* Fond blanc transparent */
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    font-family: sans-serif;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Titre du formulaire */
+.form-title {
+    color: #23411d; /* Votre vert foncé d'origine */
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.3rem;
+    border-bottom: 2px solid rgba(35, 65, 29, 0.2);
+    padding-bottom: 10px;
+}
+
+/* Structure de chaque ligne de champ */
+.form-group {
+    margin-bottom: 20px;
+    display: table; /* Simule un alignement propre sans les défauts du tableau HTML */
+    width: 100%;
+}
+
+/* Alignement des labels et des inputs */
+.form-group label {
+    display: table-cell;
+    width: 30%;
+    vertical-align: top;
+    padding-top: 10px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.form-group .input-container {
+    display: table-cell;
+    width: 70%;
+}
+
+/* Style des champs de saisie (Inputs numériques et Select) */
+.form-group input[type="number"],
+.form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #2c3e50;
+    font-size: 0.95rem;
+    transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+}
+
+/* Effet au clic/focus sur un champ (Utilise votre couleur orange) */
+.form-group input[type="number"]:focus,
+.form-group select :focus {
+    outline: none;
+    border-color: rgba(216, 139, 58, 0.7);
+    box-shadow: 0 0 0 3px rgba(216, 139, 58, 0.15);
+}
+
+/* Cas spécifique du groupe Checkbox */
+.checkbox-group {
+    display: block;
+    margin-top: 10px;
+    padding-left: 30%; /* Aligne le texte avec les autres champs */
+    box-sizing: border-box;
+}
+
+.checkbox-label {
+    display: flex !important;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    font-weight: normal !important;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+    accent-color: #60733e; /* Utilise votre couleur verte pour cocher */
+    cursor: pointer;
+}
+
+/* Messages d'erreur Angular (Orange pastel) */
+.error-message {
+    color: #b86014; /* Version plus sombre et lisible de votre orange */
+    font-size: 0.85rem;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+/* Zone du bouton de validation */
+.form-actions {
+    text-align: right;
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Bouton Soumettre */
+.btn-submit {
+    background-color: rgba(35, 65, 29, 0.85); /* Vert foncé transparent de l'en-tête */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover sur le bouton actif */
+.btn-submit:not(:disabled):hover {
+    background-color: rgba(35, 65, 29, 1); /* Devient opaque au survol */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Style du bouton lorsqu'il est désactivé (formulaire invalide) */
+.btn-submit:disabled {
+    background-color: #bdc3c7;
+    color: #7f8c8d;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+
+/* ===== Liste ===== */
+
+
+/* Classe principale appliquée au tableau */
+.Liste {
+    width: 75%; /* Limite la taille à 75% de la largeur de l'écran */
+    margin: 30px auto; /* Centre le tableau horizontalement sur l'écran */
+    border-collapse: collapse;
+    font-family: sans-serif;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Style de l'en-tête (thead) - Vert foncé pastel transparent */
+.Liste thead {
+    background-color: rgba(35, 65, 29, 0.85);
+    color: #ffffff;
+    /* Ajout d'une bordure visible en bas du thead */
+    border-bottom: 3px solid rgba(35, 65, 29, 1);
+}
+
+/* Style spécifique aux cellules de l'en-tête (th) */
+.Liste th {
+    text-align: center; /* Centre le texte horizontalement */
+    vertical-align: middle; /* Centre le texte verticalement */
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Ajoute des bordures claires et visibles à l'intérieur du thead */
+    padding: 14px 15px; /* Un peu plus d'espace pour l'en-tête */
+}
+
+/* Style de base pour les cellules du corps (td) */
+.Liste td {
+    padding: 12px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    color: #2c3e50;
+}
+
+/* --- Alternance des couleurs des lignes (Pastel + Transparence) --- */
+
+/* Lignes impaires : Orange/Saumon pastel transparent */
+.Liste tbody tr {
+    background-color: rgba(216, 139, 58, 0.25);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Lignes paires : Vert sauge pastel transparent */
+.Liste tbody tr:nth-child(even) {
+    background-color: rgba(96, 115, 62, 0.25);
+}
+
+/* --- Effet au passage de la souris (Hover) --- */
+.Liste tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transform: scale(1.005);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05), 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+
+/* ===== Barre de filtres ===== */
+
+.filter-bar {
+    width: 75%; /* Aligné sur formulaire et tableau */
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-family: sans-serif;
+}
+
+.filter-btn {
+    background-color: rgba(255, 255, 255, 0.75);
+    color: #23411d;
+    border: 1px solid rgba(35, 65, 29, 0.3);
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.filter-btn:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-color: rgba(216, 139, 58, 0.7);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Bouton actif */
+.filter-btn.active {
+    background-color: rgba(35, 65, 29, 0.85);
+    color: white;
+    border-color: rgba(35, 65, 29, 1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.filter-btn.active:hover {
+    background-color: rgba(35, 65, 29, 1);
+}
+
+/* Select de filtre par type */
+.filter-select {
+    margin-left: auto; /* pousse le select à droite de la barre */
+    padding: 10px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #2c3e50;
+    font-size: 0.9rem;
+    min-width: 220px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: rgba(216, 139, 58, 0.7);
+    box-shadow: 0 0 0 3px rgba(216, 139, 58, 0.15);
+}
+
+/* Quand un type est sélectionné, on peut le signaler visuellement */
+.filter-select:not([value=""]):not(:has(option[value=""]:checked)) {
+    border-color: rgba(216, 139, 58, 0.7);
+}
+
+/* Séparateur visuel pour la section "modification uniquement" */
+.form-section-title {
+    color: #23411d;
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 20px 0 15px;
+    padding-top: 15px;
+    border-top: 1px dashed rgba(35, 65, 29, 0.3);
+}
+
+/* Bouton Annuler à côté du bouton Modifier */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-cancel {
+    background-color: transparent;
+    color: #7f8c8d;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-cancel:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.3);
+}
+
+
+
+.form-emplacement ng-container[formgroupname] .form-group {
+    padding-left: 15px;
+    border-left: 2px solid rgba(96, 115, 62, 0.2);
+}
