@@ -10,15 +10,22 @@ import { NosMissions } from './page/nos-missions/nos-missions';
 import { SwipeCompagnon } from './page/swipe-compagnon/swipe-compagnon';
 import { StatutAnimalPage } from './page/statut-animal-page/statut-animal-page';
 import { HistoriqueSantePage } from './page/historique-sante-page/historique-sante-page';
+import { APropos } from './page/a-propos/a-propos';
+
+
+
 
 export const routes: Routes = [
   { path: 'accueil', component: Accueil },
   { path: 'actualites', component: Actualites },
   { path: 'contact', component: Contact },
   { path: 'nous-rejoindre', component: NousRejoindre },
+  { path: 'emplacement', component: EmplacementPage },
   { path: 'devenir-benevole', component: DevenirBenevole },
   { path: 'nos-missions', component: NosMissions },
   { path: 'swipe-compagnon', component: SwipeCompagnon },
+  { path: 'a-propos', component: APropos },
+
 
   // ====== Routes vers les CRUD des classes ======
   { path: 'emplacement', component: EmplacementPage },
