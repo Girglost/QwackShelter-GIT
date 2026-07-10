@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.api.requestDTO.AdoptionRequest;
+import qwack_boot.api.requestDTO.QuackShelterDTO;
+import qwack_boot.api.requestDTO.VisiteDTO;
 import qwack_boot.api.requestDTO.personne.ChangePasswordRequest;
 import qwack_boot.api.requestDTO.personne.CreateVisiteurRequest;
 import qwack_boot.api.requestDTO.personne.UpdateVisiteurRequest;
 import qwack_boot.api.responseDTO.StatutAnimalReponse;
 import qwack_boot.api.responseDTO.personne.BenevoleResponse;
 import qwack_boot.api.responseDTO.personne.VisiteurResponse;
-import qwack_boot.dto.QuackShelterDTO;
-import qwack_boot.dto.VisiteDTO;
 import qwack_boot.model.Lieu;
 import qwack_boot.model.Personne;
 import qwack_boot.model.QuackShelter;
@@ -34,7 +34,6 @@ import qwack_boot.service.LieuService;
 import qwack_boot.service.PersonneService;
 import qwack_boot.service.QuackShelterService;
 import qwack_boot.service.StatutAnimalService;
-import qwack_boot.service.VisiteurService;
 
 @RestController
 @RequestMapping("/api/visiteur")
@@ -44,8 +43,7 @@ public class VisiteurRestController {
         private final EmplacementService emplacementService;
         @Autowired
         PersonneService personneSrv;
-        @Autowired
-        VisiteurService visiteurSrv;
+
         @Autowired
         QuackShelterService quackSrv;
         @Autowired
@@ -61,7 +59,7 @@ public class VisiteurRestController {
 
         @GetMapping
         public List<VisiteurResponse> chercherTous() {
-                List<VisiteurResponse> visiteurs = visiteurSrv.getAllVisiteur().stream()
+                List<VisiteurResponse> visiteurs = personneSrv.getAllVisiteur().stream()
                                 .map(visiteur -> VisiteurResponse.convert(visiteur))
                                 .toList();
                 return visiteurs;
@@ -69,21 +67,21 @@ public class VisiteurRestController {
 
         @GetMapping("/{id}")
         public VisiteurResponse chercherParId(@PathVariable Integer id) {
-                VisiteurResponse visiteur = VisiteurResponse.convert(visiteurSrv.getVisiteurById(id));
+                VisiteurResponse visiteur = VisiteurResponse.convert(personneSrv.getVisiteurById(id));
                 return visiteur;
         }
 
         @GetMapping("/{id}/visites")
         public VisiteurResponse chercherParIdWithVisites(@PathVariable Integer id) {
                 VisiteurResponse visiteur = VisiteurResponse
-                                .convertWithVisites(visiteurSrv.getVisiteurByIdWithVisites(id));
+                                .convertWithVisites(personneSrv.getVisiteurByIdWithVisites(id));
                 return visiteur;
         }
 
         @GetMapping("/{id}/adoptions")
         public VisiteurResponse chercherParIdWithAdoptions(@PathVariable Integer id) {
                 VisiteurResponse visiteur = VisiteurResponse
-                                .convertWithAdoptions(visiteurSrv.getVisiteurByIdWithAdoptions(id));
+                                .convertWithAdoptions(personneSrv.getVisiteurByIdWithAdoptions(id));
                 return visiteur;
         }
 
@@ -101,7 +99,7 @@ public class VisiteurRestController {
                                 visiteurRequest.getLogin(), visiteurRequest.getPassword(), habitation,
                                 quackShelter);
 
-                VisiteurResponse visiteurCreated = VisiteurResponse.convert(visiteurSrv.insertVisiteur(visiteur));
+                VisiteurResponse visiteurCreated = VisiteurResponse.convert(personneSrv.insert(visiteur));
                 return ResponseEntity.status(HttpStatus.CREATED)
                                 .body(Map.of("Visiteur Créé", visiteurCreated));
         }
@@ -124,7 +122,7 @@ public class VisiteurRestController {
                 // !!! ATTENTION, Ce n'est pas l'objet persister en base, on passe par le
                 // service et c'est le service qui va faire le bon update !!
                 System.out.println("CONTROLLER : visiteur recréé " + visiteur);
-                VisiteurResponse visiteurUpdated = VisiteurResponse.convert(visiteurSrv.updateVisiteur(id, visiteur));
+                VisiteurResponse visiteurUpdated = VisiteurResponse.convert(personneSrv.update(id, visiteur));
                 return ResponseEntity.status(HttpStatus.OK)
                                 .body(Map.of("Visiteur Modifié", visiteurUpdated));
         }
@@ -133,6 +131,15 @@ public class VisiteurRestController {
         public ResponseEntity<Map<String, String>> changerMdp(@PathVariable Integer id,
                         @RequestBody ChangePasswordRequest passwordRequest) {
                 Personne personne = personneSrv.getById(id);
+                System.out.println("LOGIN EGAUX ???");
+                System.out.println(personne.getLogin().equals(passwordRequest.getLogin()));
+                System.out.println(passwordRequest.getLogin());
+
+                if (!personne.getLogin().equals(passwordRequest.getLogin())) {
+                        System.out.println("Login incorrect");
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                        .body(Map.of("Login incorrect", passwordRequest.getLogin()));
+                }
 
                 String ancienPassword = passwordRequest.getAncienPassword();
                 // On compare l'ancien password donner par le DTO et encodée, avec le passwrod
@@ -145,7 +152,8 @@ public class VisiteurRestController {
                                         .body(Map.of("Password Modifié ! ", personne.getPassword()));
 
                 } else {
-                        return ResponseEntity.status(HttpStatus.NOT_MODIFIED)
+                        System.out.println("MDP INCORRECT");
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                                         .body(Map.of("Ancien password incorrect", ancienPassword));
                 }
 
@@ -154,7 +162,7 @@ public class VisiteurRestController {
         @DeleteMapping("/{id}")
         public ResponseEntity<Map<String, VisiteurResponse>> deleteVisiteur(@PathVariable Integer id) {
 
-                Personne deletedVisiteur = visiteurSrv.getVisiteurById(id);
+                Personne deletedVisiteur = personneSrv.getVisiteurById(id);
                 personneSrv.deleteById(id);
 
                 VisiteurResponse benevoleDeleted = VisiteurResponse.convert(deletedVisiteur);
@@ -165,7 +173,7 @@ public class VisiteurRestController {
         @PostMapping("/{id}/don")
         public ResponseEntity<Map<String, QuackShelterDTO>> faireUnDon(@PathVariable Integer id,
                         @RequestBody double don) {
-                Personne visiteur = visiteurSrv.getVisiteurById(id);
+                Personne visiteur = personneSrv.getVisiteurById(id);
                 QuackShelter quackShelter = visiteur.getQuackShelter();
                 personneSrv.faireDon(quackShelter.getId(), don);
                 return ResponseEntity.status(HttpStatus.OK)
@@ -175,39 +183,40 @@ public class VisiteurRestController {
 
         @PostMapping("/{id}/engaged")
         public ResponseEntity<Map<String, BenevoleResponse>> devenirBenevole(@PathVariable Integer id) {
-                Personne visiteur = visiteurSrv.getVisiteurById(id);
+                Personne visiteur = personneSrv.getVisiteurById(id);
                 BenevoleResponse visiteurDevientBenevole = BenevoleResponse
-                                .convert(visiteurSrv.transformerEnBenevole(visiteur));
+                                .convert(personneSrv.transformerEnBenevole(visiteur));
                 return ResponseEntity.status(HttpStatus.OK)
                                 .body(Map.of("Visiteur devenu Benevole", visiteurDevientBenevole));
         }
 
-        @PostMapping("/visiter")
-        public ResponseEntity<Map<String, VisiteDTO>> demanderVisite(@RequestBody VisiteDTO demandeVisite) {
+        @PostMapping("{id}/visiter")
+        public ResponseEntity<Map<String, VisiteDTO>> demanderVisite(@PathVariable Integer id,
+                        @RequestBody VisiteDTO demandeVisite) {
                 System.out.println("DEMANDE DE VISITE");
-                int visiteurId = demandeVisite.getIdVisiteur();
+                int visiteurId = id;
                 int quackShelterId = demandeVisite.getIdQuackShelter();
                 int animalId = demandeVisite.getIdAnimal();
                 LocalDateTime dateVisite = demandeVisite.getDateVisite();
 
                 VisiteDTO visiteDemanded = VisiteDTO
-                                .convert(visiteurSrv.demanderVisite(visiteurId, quackShelterId, dateVisite, animalId));
+                                .convert(personneSrv.demanderVisite(visiteurId, quackShelterId, dateVisite, animalId));
 
                 return ResponseEntity.status(HttpStatus.OK)
                                 .body(Map.of("Visite demandée", visiteDemanded));
 
         }
 
-        @PostMapping("/adopter")
-        public ResponseEntity<Map<String, StatutAnimalReponse>> demanderAdoption(
+        @PostMapping("{id}/adopter")
+        public ResponseEntity<Map<String, StatutAnimalReponse>> demanderAdoption(@PathVariable Integer id,
                         @RequestBody AdoptionRequest demandeAdoption) {
                 System.out.println("DEMANDE D'ADOPTION");
-                int visiteurId = demandeAdoption.getIdPersonne();
+                int visiteurId = id;
                 int quackShelterId = demandeAdoption.getIdQuackShelter();
                 int animalId = demandeAdoption.getIdAnimal();
 
                 StatutAnimalReponse adoptionDemanded = StatutAnimalReponse
-                                .convert(visiteurSrv.demanderAdoption(quackShelterId, visiteurId, animalId));
+                                .convert(personneSrv.demanderAdoption(quackShelterId, visiteurId, animalId));
                 return ResponseEntity.status(HttpStatus.OK)
                                 .body(Map.of("Adoption en attente", adoptionDemanded));
         }

@@ -1,4 +1,4 @@
-package qwack_boot.restcontroller;
+package qwack_boot.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

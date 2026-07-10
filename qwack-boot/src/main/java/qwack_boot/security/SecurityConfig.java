@@ -21,7 +21,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth -> {
             // On commence toujours par le plus spécifique, pour terminer par le plus
             // général
-            auth.requestMatchers("/api/auth", "/api/home").permitAll();
+            auth.requestMatchers("/api/auth", "/api/inscription").permitAll();
             // Les utilisateurs doivent être authentifiés pour accéder à /quelquechose
             auth.requestMatchers("/**").authenticated();
         });

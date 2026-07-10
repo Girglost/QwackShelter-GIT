@@ -1,4 +1,4 @@
-package qwack_boot.dto;
+package qwack_boot.api.requestDTO;
 
 import java.time.LocalDateTime;
 

@@ -34,9 +34,6 @@ public class EmployeResponse {
         e.dateEmbauche = employe.getDateEmbauche();
         e.setStatutActivite(employe.getStatutActivite());
 
-        // HABITATION
-        // b.habitation = CreateLieuRequest.convert(benevole.getHabitation());
-
         // QuackShelter
         e.quackShelterId = employe.getQuackShelter().getId();
         System.out.println(e);

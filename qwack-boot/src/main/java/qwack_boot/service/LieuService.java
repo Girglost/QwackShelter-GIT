@@ -10,10 +10,10 @@ import qwack_boot.api.requestDTO.lieu.UpdateLieuRequest;
 import qwack_boot.dao.IDAOLieu;
 import qwack_boot.model.Adresse;
 import qwack_boot.model.Lieu;
+import qwack_boot.model.TypeLieu;
 
 @Service
 public class LieuService {
-
 	@Autowired
 	IDAOLieu daoLieu;
 
@@ -52,17 +52,27 @@ public class LieuService {
 		return daoLieu.findByAdresse(adresse);
 	}
 
+	public Lieu getByType(TypeLieu type) {
+		return daoLieu.findByType(type);
+	}
+
+	public Lieu getByAdresseAndTypeLieu(Adresse adresse, TypeLieu type) {
+		return daoLieu.findByAdresseAndType(adresse, type);
+	}
+
 	// Dans les cas ou on va modifier une personne, on va chercher si le Lieu
 	// existe, sinon créé un nouveau lieu
 	public Lieu findOrCreate(Lieu lieu) {
 
 		System.out.println("RECHERCHE DU LIEU ////////////");
 		System.out.println(lieu.getAdresse());
-		System.out.println("FIND BY ADRESSE ???");
+		System.out.println("FIND BY ADRESSE  et TYPE LIEU???");
 		Lieu existing = daoLieu.findByAdresse(lieu.getAdresse());
 		System.out.println("EXISTING ?? " + existing);
 		if (existing != null) {
 			System.out.println("LIEU TROUVE : " + existing);
+			// Si le type a changé, on set le type
+			existing.setType(lieu.getType());
 			return existing;
 		}
 		System.out.println("LIEU INEXISTANT creation du lieu : ");

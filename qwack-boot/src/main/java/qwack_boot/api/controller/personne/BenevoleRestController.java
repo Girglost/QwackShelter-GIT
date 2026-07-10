@@ -17,17 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.api.requestDTO.AdoptionRequest;
+import qwack_boot.api.requestDTO.QuackShelterDTO;
 import qwack_boot.api.requestDTO.personne.CreateBenevoleRequest;
 import qwack_boot.api.requestDTO.personne.UpdateBenevoleRequest;
 import qwack_boot.api.requestDTO.statutAnimal.CreateStatutAnimalRequest;
 import qwack_boot.api.responseDTO.StatutAnimalReponse;
 import qwack_boot.api.responseDTO.personne.BenevoleResponse;
-import qwack_boot.dto.QuackShelterDTO;
 import qwack_boot.model.Lieu;
 import qwack_boot.model.Personne;
 import qwack_boot.model.QuackShelter;
 import qwack_boot.model.StatutAnimal;
-import qwack_boot.service.BenevoleService;
 import qwack_boot.service.PersonneService;
 import qwack_boot.service.QuackShelterService;
 import qwack_boot.service.StatutAnimalService;
@@ -37,10 +36,6 @@ import qwack_boot.service.StatutAnimalService;
 public class BenevoleRestController {
 
         private PasswordEncoder passwordEncoder;
-
-        @Autowired
-        BenevoleService benevoleSrv;
-
         @Autowired
         PersonneService personneSrv;
         @Autowired
@@ -51,7 +46,7 @@ public class BenevoleRestController {
 
         @GetMapping
         public List<BenevoleResponse> chercherTous() {
-                List<BenevoleResponse> visiteurs = benevoleSrv.getAllBenevole().stream()
+                List<BenevoleResponse> visiteurs = personneSrv.getAllBenevole().stream()
                                 .map(visiteur -> BenevoleResponse.convert(visiteur))
                                 .toList();
                 return visiteurs;
@@ -59,14 +54,14 @@ public class BenevoleRestController {
 
         @GetMapping("/{id}")
         public BenevoleResponse chercherParId(@PathVariable Integer id) {
-                BenevoleResponse benevole = BenevoleResponse.convert(benevoleSrv.getBenevoleById(id));
+                BenevoleResponse benevole = BenevoleResponse.convert(personneSrv.getBenevoleById(id));
                 return benevole;
         }
 
         @GetMapping("/{id}/adoptions")
         public BenevoleResponse chercherParIdWithAdoptions(@PathVariable Integer id) {
                 BenevoleResponse benevole = BenevoleResponse
-                                .convertWithAdoptions(benevoleSrv.getBenevoleByIdWithAdoptions(id));
+                                .convertWithAdoptions(personneSrv.getBenevoleByIdWithAdoptions(id));
                 return benevole;
         }
 
@@ -89,7 +84,7 @@ public class BenevoleRestController {
                                 quackShelter);
                 System.out.println("BENEVOLE QUI VA ETRE INSERT " + benevole);
 
-                BenevoleResponse benevoleCreated = BenevoleResponse.convert(benevoleSrv.insertBenevole(benevole));
+                BenevoleResponse benevoleCreated = BenevoleResponse.convert(personneSrv.insert(benevole));
 
                 return ResponseEntity.status(HttpStatus.CREATED)
                                 .body(Map.of("Benevole Créé", benevoleCreated));
@@ -119,7 +114,7 @@ public class BenevoleRestController {
 
                 System.out.println("CONTROLLER : benevole recréé " + benevole);
 
-                BenevoleResponse benevoleUpdated = BenevoleResponse.convert(benevoleSrv.updateBenevole(id, benevole));
+                BenevoleResponse benevoleUpdated = BenevoleResponse.convert(personneSrv.update(id, benevole));
                 return ResponseEntity.status(HttpStatus.OK)
                                 .body(Map.of("Benevole Modifié", benevoleUpdated));
 
@@ -128,7 +123,7 @@ public class BenevoleRestController {
         @DeleteMapping("/{id}")
         public ResponseEntity<Map<String, BenevoleResponse>> deleteBenevole(@PathVariable Integer id) {
 
-                Personne deletedBenevole = benevoleSrv.getBenevoleById(id);
+                Personne deletedBenevole = personneSrv.getBenevoleById(id);
                 personneSrv.deleteById(id);
 
                 BenevoleResponse benevoleDeleted = BenevoleResponse.convert(deletedBenevole);
@@ -137,27 +132,37 @@ public class BenevoleRestController {
         }
 
         @PutMapping("/{id}/balade")
-        public ResponseEntity<Map<String, BenevoleResponse>> partirEnBalade(@PathVariable Integer id,
+        public ResponseEntity<Map<String, ?>> partirEnBalade(@PathVariable Integer id,
                         @RequestBody CreateStatutAnimalRequest statutAnimalRequest) {
                 System.out.println("BALADER CONTROLER");
-                Personne benevole = benevoleSrv.getBenevoleById(id);
+                Personne benevole = personneSrv.getBenevoleById(id);
+                // System.out.println("BENEVOLE ??" + benevole);
                 if (benevole != null) {
                         System.out.println(benevole);
                         StatutAnimal statutAnimal = statutAnimalSrv.getByAnimalId(statutAnimalRequest.animalId());
-                        BenevoleResponse benevoleEnBalade = benevoleSrv.partirEnBalade(statutAnimal, benevole);
-                        return ResponseEntity.status(HttpStatus.OK)
-                                        .body(Map.of("Benevole en balade", benevoleEnBalade));
+                        // On ne peut pas partir en balade si on a pas fait un statut de l'animal
+                        System.out.println("STATUT ANIMAL NULL ??" + statutAnimal);
+                        if (statutAnimal == null) {
+                                return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED)
+                                                .body(Map.of("Statut Inexistant pour l'animal",
+                                                                statutAnimalRequest.animalId()));
+                        } else {
+                                BenevoleResponse benevoleEnBalade = personneSrv.partirEnBalade(statutAnimal, benevole);
+                                return ResponseEntity.status(HttpStatus.OK)
+                                                .body(Map.of("Benevole en balade", benevoleEnBalade));
+                        }
+
                 } else {
-                        BenevoleResponse erreurBenevole = BenevoleResponse.convert(benevole);
                         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED)
-                                        .body(Map.of("RESERVE AUX BENEVOLES", erreurBenevole));
+                                        .body(Map.of("Cette personne n'existe pas ou n'est pas benevole",
+                                                        id));
                 }
         }
 
         @PostMapping("/{id}/don")
         public ResponseEntity<Map<String, QuackShelterDTO>> faireUnDon(@PathVariable Integer id,
                         @RequestBody double don) {
-                Personne benevole = benevoleSrv.getBenevoleById(id);
+                Personne benevole = personneSrv.getBenevoleById(id);
                 QuackShelter quackShelter = benevole.getQuackShelter();
                 personneSrv.faireDon(quackShelter.getId(), don);
                 return ResponseEntity.status(HttpStatus.OK)
@@ -174,7 +179,7 @@ public class BenevoleRestController {
                 int animalId = demandeAdoption.getIdAnimal();
 
                 StatutAnimalReponse adoptionDemanded = StatutAnimalReponse
-                                .convert(benevoleSrv.demanderAdoption(quackShelterId, benevoleId, animalId));
+                                .convert(personneSrv.demanderAdoption(quackShelterId, benevoleId, animalId));
                 return ResponseEntity.status(HttpStatus.OK)
                                 .body(Map.of("Adoption en attente", adoptionDemanded));
         }

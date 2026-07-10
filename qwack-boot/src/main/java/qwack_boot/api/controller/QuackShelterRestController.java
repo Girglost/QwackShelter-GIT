@@ -1,4 +1,4 @@
-package qwack_boot.restcontroller;
+package qwack_boot.api.controller;
 
 import java.util.List;
 
@@ -20,21 +20,21 @@ import qwack_boot.service.QuackShelterService;
 @RequestMapping("/quackshelter")
 public class QuackShelterRestController {
 
-     @Autowired
+    @Autowired
     QuackShelterService QuackShelterSrv;
 
     @GetMapping
     public List<QuackShelter> chercherTous() {
         return QuackShelterSrv.getAll();
     }
-    
+
     @GetMapping("/{id}")
     public QuackShelter chercherParId(@RequestParam Integer id) {
         return QuackShelterSrv.getById(id);
     }
-    
+
     @DeleteMapping("/{id}")
-    public void supprimer(@PathVariable Integer id){
+    public void supprimer(@PathVariable Integer id) {
         QuackShelterSrv.delete(id);
     }
 
@@ -48,6 +48,5 @@ public class QuackShelterRestController {
         emp.setId(id);
         QuackShelterSrv.update(emp);
     }
-    
-    
+
 }

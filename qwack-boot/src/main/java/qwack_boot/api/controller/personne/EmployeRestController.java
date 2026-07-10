@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import qwack_boot.api.requestDTO.AdoptionRequest;
 import qwack_boot.api.requestDTO.CreateHistoriqueSanteRequest;
+import qwack_boot.api.requestDTO.VisiteDTO;
 import qwack_boot.api.requestDTO.animal.CreateAnimalRequest;
 import qwack_boot.api.requestDTO.personne.ChangePasswordRequest;
 import qwack_boot.api.requestDTO.personne.CreateEmployeRequest;
@@ -26,21 +26,21 @@ import qwack_boot.api.responseDTO.HistoriqueSanteReponse;
 import qwack_boot.api.responseDTO.StatutAnimalReponse;
 import qwack_boot.api.responseDTO.animal.AnimalResponse;
 import qwack_boot.api.responseDTO.personne.EmployeResponse;
-import qwack_boot.dto.VisiteDTO;
 import qwack_boot.model.Animal;
 import qwack_boot.model.HistoriqueSante;
 import qwack_boot.model.Lieu;
 import qwack_boot.model.Personne;
 import qwack_boot.model.QuackShelter;
+import qwack_boot.model.StatutAnimal;
+import qwack_boot.model.StatutValidation;
+import qwack_boot.model.Visite;
 import qwack_boot.service.AnimalService;
 import qwack_boot.service.EmplacementService;
-import qwack_boot.service.EmployeService;
 import qwack_boot.service.HistoriqueSanteService;
 import qwack_boot.service.LieuService;
 import qwack_boot.service.PersonneService;
 import qwack_boot.service.QuackShelterService;
 import qwack_boot.service.StatutAnimalService;
-import qwack_boot.service.VisiteurService;
 
 @RestController
 @RequestMapping("/api/employe")
@@ -50,10 +50,7 @@ public class EmployeRestController {
         private final PasswordEncoder passwordEncoder;
         @Autowired
         PersonneService personneSrv;
-        @Autowired
-        VisiteurService visiteurSrv;
-        @Autowired
-        EmployeService employeSrv;
+
         @Autowired
         QuackShelterService quackSrv;
         @Autowired
@@ -74,7 +71,7 @@ public class EmployeRestController {
 
         @GetMapping
         public List<EmployeResponse> chercherTous() {
-                List<EmployeResponse> employes = employeSrv.getAllEmploye().stream()
+                List<EmployeResponse> employes = personneSrv.getAllEmploye().stream()
                                 .map(employe -> EmployeResponse.convert(employe))
                                 .toList();
                 return employes;
@@ -82,7 +79,7 @@ public class EmployeRestController {
 
         @GetMapping("/{id}")
         public EmployeResponse chercherParId(@PathVariable Integer id) {
-                EmployeResponse employe = EmployeResponse.convert(employeSrv.getEmployeById(id));
+                EmployeResponse employe = EmployeResponse.convert(personneSrv.getEmployeById(id));
                 return employe;
         }
 
@@ -100,7 +97,7 @@ public class EmployeRestController {
                                 employeRequest.getLogin(), employeRequest.getPassword(), habitation,
                                 quackShelter, employeRequest.isAdmin(), employeRequest.getSalaire());
 
-                EmployeResponse employeCreated = EmployeResponse.convert(employeSrv.insertEmploye(employe));
+                EmployeResponse employeCreated = EmployeResponse.convert(personneSrv.insert(employe));
                 return ResponseEntity.status(HttpStatus.CREATED)
                                 .body(Map.of("EMPLOYE Créé", employeCreated));
         }
@@ -125,7 +122,7 @@ public class EmployeRestController {
                 // !!! ATTENTION, Ce n'est pas l'objet persister en base, on passe par le
                 // service et c'est le service qui va faire le bon update !!
                 System.out.println("CONTROLLER : Employe recréé " + employe);
-                EmployeResponse employeUpdated = EmployeResponse.convert(employeSrv.updateEmploye(id, employe));
+                EmployeResponse employeUpdated = EmployeResponse.convert(personneSrv.update(id, employe));
                 return ResponseEntity.status(HttpStatus.OK)
                                 .body(Map.of("EMPLOYE Modifié", employeUpdated));
         }
@@ -133,7 +130,7 @@ public class EmployeRestController {
         @DeleteMapping("/{id}")
         public ResponseEntity<Map<String, EmployeResponse>> deleteEmploye(@PathVariable Integer id) {
 
-                Personne deletedEmploye = employeSrv.getEmployeById(id);
+                Personne deletedEmploye = personneSrv.getEmployeById(id);
                 personneSrv.deleteById(id);
 
                 EmployeResponse employeDeleted = EmployeResponse.convert(deletedEmploye);
@@ -146,6 +143,16 @@ public class EmployeRestController {
                         @RequestBody ChangePasswordRequest passwordRequest) {
                 Personne personne = personneSrv.getById(id);
 
+                System.out.println("LOGIN EGAUX ???");
+                System.out.println(personne.getLogin().equals(passwordRequest.getLogin()));
+                System.out.println(passwordRequest.getLogin());
+
+                if (!personne.getLogin().equals(passwordRequest.getLogin())) {
+                        System.out.println("Login incorrect");
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                        .body(Map.of("Login incorrect", passwordRequest.getLogin()));
+                }
+
                 String ancienPassword = passwordRequest.getAncienPassword();
                 // On compare l'ancien password donner par le DTO et encodée, avec le passwrod
                 // encodé en bdd
@@ -156,32 +163,58 @@ public class EmployeRestController {
                                         .body(Map.of("Password Modifié ! ", personne.getPassword()));
 
                 } else {
-                        return ResponseEntity.status(HttpStatus.NOT_MODIFIED)
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                                         .body(Map.of("Ancien password incorrect", ancienPassword));
                 }
 
         }
 
         @PutMapping("/accepter-adoption/{id}")
-        public ResponseEntity<Map<String, StatutAnimalReponse>> accepterAdoption(
-                        @RequestBody AdoptionRequest adoptionRequest,
+        public ResponseEntity<Map<String, ?>> accepterAdoption(
                         @PathVariable Integer id) {
-                int idAdoptant = adoptionRequest.getIdPersonne();
-                int idAdoption = id;
-                int idAnimal = adoptionRequest.getIdAnimal();
+
+                StatutAnimal adoption = personneSrv.accepterAdoption(id);
+                if (adoption == null) {
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                        .body(Map.of("Statut animal inexistant", id));
+                }
 
                 StatutAnimalReponse adoptionAccepted = StatutAnimalReponse
-                                .convert(employeSrv.accepterAdoption(idAdoptant, idAdoption, idAnimal));
+                                .convert(adoption);
+
+                if (adoptionAccepted.getAdoptantId() == null
+                                || adoptionAccepted.getStatutAdoption() == null) {
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                        .body(Map.of("Pas de demande d'adoption pour l'animal", adoptionAccepted));
+                }
+                if (adoptionAccepted.getStatutAdoption() == StatutValidation.ACCEPTE) {
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                        .body(Map.of("Animal Deja adopté", adoptionAccepted));
+                }
 
                 return ResponseEntity.status(HttpStatus.OK)
                                 .body(Map.of("Adoption ACCEPTE", adoptionAccepted));
         }
 
         @PutMapping("/accepter-visite/{id}")
-        public ResponseEntity<Map<String, VisiteDTO>> accepterVisite(
+        public ResponseEntity<Map<String, ?>> accepterVisite(
                         @PathVariable Integer id) {
+
+                Visite visite = personneSrv.accepterVisite(id);
+
+                if (visite == null) {
+                        return ResponseEntity.status(HttpStatus.OK)
+                                        .body(Map.of("Visite inexistante", id));
+                }
+
+                if (visite.getStatutVisite() == StatutValidation.ACCEPTE) {
+                        return ResponseEntity.status(HttpStatus.OK)
+                                        .body(Map.of("Visite deja acceptée", VisiteDTO
+                                                        .convert(visite)));
+                }
                 VisiteDTO visiteAccepted = VisiteDTO
-                                .convert(employeSrv.accepterVisite(id));
+                                .convert(visite);
+
                 return ResponseEntity.status(HttpStatus.OK)
                                 .body(Map.of("Visite ACCEPTE", visiteAccepted));
         }
@@ -199,7 +232,7 @@ public class EmployeRestController {
                                 animalSrv.getById(soinRequest.animalId()));
 
                 HistoriqueSanteReponse soinEffectue = HistoriqueSanteReponse
-                                .convert(employeSrv.partirEnSoin(idEmploye, soin));
+                                .convert(personneSrv.partirEnSoin(idEmploye, soin));
                 return ResponseEntity.status(HttpStatus.OK)
                                 .body(Map.of("Soin effectué", soinEffectue));
         }
@@ -210,7 +243,7 @@ public class EmployeRestController {
 
                 Animal animal = animalSrv.createFromRequest(animalRequest);
 
-                AnimalResponse animalAccueillit = AnimalResponse.convert(employeSrv.accueilAnimal(animal));
+                AnimalResponse animalAccueillit = AnimalResponse.convert(personneSrv.accueilAnimal(animal));
                 // A partir du dto de l'animal, on reconstruit un objet pour l'envoyer au
                 // service
                 return ResponseEntity.status(HttpStatus.OK)

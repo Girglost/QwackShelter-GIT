@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import qwack_boot.dto.StatutAnimalDTO;
+import qwack_boot.api.responseDTO.AdoptionResponse;
 import qwack_boot.model.Personne;
 import qwack_boot.model.Role;
 import qwack_boot.model.StatutActivite;
@@ -24,7 +24,7 @@ public class BenevoleResponse {
 
     private Integer quackShelterId;
 
-    private List<StatutAnimalDTO> adoptions;
+    private List<AdoptionResponse> adoptions;
 
     public static BenevoleResponse convert(Personne benevole) {
         BenevoleResponse b = new BenevoleResponse();
@@ -40,9 +40,6 @@ public class BenevoleResponse {
         b.dateEngagement = benevole.getDateEngagement();
         b.setStatutActivite(benevole.getStatutActivite());
 
-        // HABITATION
-        // b.habitation = CreateLieuRequest.convert(benevole.getHabitation());
-
         // QuackShelter
         b.quackShelterId = benevole.getQuackShelter().getId();
         System.out.println(b);
@@ -51,7 +48,7 @@ public class BenevoleResponse {
 
     public static BenevoleResponse convertWithAdoptions(Personne benevole) {
         BenevoleResponse b = BenevoleResponse.convert(benevole);
-        b.adoptions = benevole.getAdoptions().stream().map(a -> StatutAnimalDTO.convert(a)).toList();
+        b.adoptions = benevole.getAdoptions().stream().map(a -> AdoptionResponse.convert(a)).toList();
         return b;
     }
 
@@ -127,11 +124,11 @@ public class BenevoleResponse {
         this.quackShelterId = quackShelterId;
     }
 
-    public List<StatutAnimalDTO> getAdoptions() {
+    public List<AdoptionResponse> getAdoptions() {
         return adoptions;
     }
 
-    public void setAdoptions(List<StatutAnimalDTO> adoptions) {
+    public void setAdoptions(List<AdoptionResponse> adoptions) {
         this.adoptions = adoptions;
     }
 

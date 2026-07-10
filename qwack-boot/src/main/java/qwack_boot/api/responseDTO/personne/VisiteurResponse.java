@@ -5,9 +5,9 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import qwack_boot.api.requestDTO.lieu.CreateLieuRequest;
+import qwack_boot.api.requestDTO.VisiteDTO;
 import qwack_boot.api.responseDTO.StatutAnimalReponse;
-import qwack_boot.dto.VisiteDTO;
+import qwack_boot.api.responseDTO.lieu.LieuResponse;
 import qwack_boot.model.Personne;
 import qwack_boot.model.Role;
 
@@ -20,7 +20,7 @@ public class VisiteurResponse {
     private boolean admin;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateInscription;
-    private CreateLieuRequest habitation;
+    private LieuResponse habitation;
 
     private Integer quackShelterId;
 
@@ -41,7 +41,7 @@ public class VisiteurResponse {
         v.dateInscription = visiteur.getDateInscription();
 
         // HABITATION
-        v.habitation = CreateLieuRequest.convert(visiteur.getHabitation());
+        v.habitation = LieuResponse.convert(visiteur.getHabitation());
 
         // QuackShelter
         v.quackShelterId = visiteur.getQuackShelter().getId();
@@ -117,11 +117,11 @@ public class VisiteurResponse {
         this.dateInscription = dateInscription;
     }
 
-    public CreateLieuRequest getHabitation() {
+    public LieuResponse getHabitation() {
         return habitation;
     }
 
-    public void setHabitation(CreateLieuRequest habitation) {
+    public void setHabitation(LieuResponse habitation) {
         this.habitation = habitation;
     }
 

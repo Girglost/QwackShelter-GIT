@@ -16,7 +16,6 @@ public class StatutAnimalService {
 
 	final IDAOStatutAnimal daoStatutAnimal;
 
-
 	StatutAnimalService(IDAOStatutAnimal daoStatutAnimal) {
 		this.daoStatutAnimal = daoStatutAnimal;
 
@@ -40,28 +39,29 @@ public class StatutAnimalService {
 		statut.setId(id);
 		return daoStatutAnimal.save(statut);
 
-		/*StatutAnimal sa = daoStatutAnimal.findById(id).orElse(null);
-
-		if (sa == null) {
-			log.debug("StatutAnimal {} introuvable", id);
-			throw new IllegalArgumentException("StatutAnimal introuvable");
-
-		}
-
-		sa.setDateArrivee(statut.dateArrivee());
-		sa.setDateDepart(statut.dateDepart());
-		sa.setEmplacement(daoEmplacement.getById(statut.emplacementId()));
-		sa.setAnimal(animalSrv.getById(statut.animalId()));
-
-		sa.setAdoptant(
-				statut.adoptantId() != null
-						? pSrv.getById(statut.adoptantId())
-						: null);
-
-		sa.setStatut(statut.statut());
-		sa.setStatutAdoption(statut.statutAdoption());
-
- */
+		/*
+		 * StatutAnimal sa = daoStatutAnimal.findById(id).orElse(null);
+		 * 
+		 * if (sa == null) {
+		 * log.debug("StatutAnimal {} introuvable", id);
+		 * throw new IllegalArgumentException("StatutAnimal introuvable");
+		 * 
+		 * }
+		 * 
+		 * sa.setDateArrivee(statut.dateArrivee());
+		 * sa.setDateDepart(statut.dateDepart());
+		 * sa.setEmplacement(daoEmplacement.getById(statut.emplacementId()));
+		 * sa.setAnimal(animalSrv.getById(statut.animalId()));
+		 * 
+		 * sa.setAdoptant(
+		 * statut.adoptantId() != null
+		 * ? pSrv.getById(statut.adoptantId())
+		 * : null);
+		 * 
+		 * sa.setStatut(statut.statut());
+		 * sa.setStatutAdoption(statut.statutAdoption());
+		 * 
+		 */
 	}
 
 	public void delete(Integer id) {

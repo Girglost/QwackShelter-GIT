@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
-import qwack_boot.dto.HistoriqueSanteDTO;
-import qwack_boot.dto.VisiteDTO;
+import qwack_boot.api.requestDTO.VisiteDTO;
+import qwack_boot.api.responseDTO.HistoriqueSanteReponse;
 import qwack_boot.model.Animal;
 import qwack_boot.model.Caractere;
 import qwack_boot.model.Famille;
@@ -25,7 +25,7 @@ public class AnimalResponseAdmin {
 	private Integer idQuackShelter;
 	private List<Caractere> caracteres;
 	private List<VisiteDTO> visites;
-	private List<HistoriqueSanteDTO> historiqueSantes;
+	private List<HistoriqueSanteReponse> historiqueSantes;
 	private String description;
 
 	public String getDescription() {
@@ -49,7 +49,7 @@ public class AnimalResponseAdmin {
 		a.setHistoriqueSantes(
 				animal.getHistoriqueSante()
 						.stream()
-						.map(HistoriqueSanteDTO::convert)
+						.map(HistoriqueSanteReponse::convert)
 						.toList());
 
 		return a;
@@ -75,11 +75,11 @@ public class AnimalResponseAdmin {
 		this.visites = visites;
 	}
 
-	public List<HistoriqueSanteDTO> getHistoriqueSantes() {
+	public List<HistoriqueSanteReponse> getHistoriqueSantes() {
 		return historiqueSantes;
 	}
 
-	public void setHistoriqueSantes(List<HistoriqueSanteDTO> historiqueSantes) {
+	public void setHistoriqueSantes(List<HistoriqueSanteReponse> historiqueSantes) {
 		this.historiqueSantes = historiqueSantes;
 	}
 

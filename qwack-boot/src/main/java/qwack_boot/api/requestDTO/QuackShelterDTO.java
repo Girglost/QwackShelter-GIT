@@ -1,17 +1,18 @@
-package qwack_boot.dto;
+package qwack_boot.api.requestDTO;
 
 import org.springframework.beans.BeanUtils;
 
+import qwack_boot.api.responseDTO.lieu.LieuResponse;
 import qwack_boot.model.QuackShelter;
 
 public class QuackShelterDTO {
     private Integer id;
-    private LieuDTO lieu;
+    private LieuResponse lieu;
 
     public static QuackShelterDTO convert(QuackShelter quackShelter) {
         QuackShelterDTO q = new QuackShelterDTO();
         BeanUtils.copyProperties(quackShelter, q);
-        q.lieu = LieuDTO.convert(quackShelter.getLieu());
+        q.lieu = LieuResponse.convert(quackShelter.getLieu());
         return q;
     }
 
@@ -23,11 +24,11 @@ public class QuackShelterDTO {
         this.id = id;
     }
 
-    public LieuDTO getLieu() {
+    public LieuResponse getLieu() {
         return lieu;
     }
 
-    public void setLieu(LieuDTO lieu) {
+    public void setLieu(LieuResponse lieu) {
         this.lieu = lieu;
     }
 
