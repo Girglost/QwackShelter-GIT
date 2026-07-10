@@ -7,21 +7,21 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 3rem;
+  gap: 2.1rem;
 
   list-style: none;
   margin: 0;
   padding: 0;
 
   background-color: #60733e;
-  height: 130px;
+  height: 91px;
 }
 
 .nav li a {
   color: white;
   text-decoration: none;
   font-family: "Montagu Slab";
-  font-size: 24px;
+  font-size: clamp(14px, 1.4vw, 17px);
   font-weight: 400;
   white-space: nowrap;
 }
@@ -29,9 +29,17 @@
 /* Corrigé : cible .nav li a, pas .nav h2/p qui n'existent pas ici */
 @media (min-width: 1920px) {
   .nav li a{
-    font-size: 28px;
+    font-size: 20px;
   }
 }
 
-
-
+/* RESPONSIVE : sur petit écran, la nav passe en colonne pour rester lisible */
+@media (max-width: 700px) {
+  .nav {
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+  }
+}

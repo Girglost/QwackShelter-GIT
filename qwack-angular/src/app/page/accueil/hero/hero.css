@@ -1,7 +1,7 @@
 .hero {
   position: relative;
   width: 100%;
-  height: 80vh;
+  min-height: 80vh;
   overflow: hidden;
 }
 
@@ -15,39 +15,34 @@
   position: absolute;
   inset: 0;
   width: 60%;
-
-background: linear-gradient(
-  to right,
-  rgba(71, 73, 69, 0.8) 0%,
-  rgba(71, 73, 69, 0.6) 35%,
-  rgba(71, 73, 69, 0.35) 65%,
-  rgba(71, 73, 69, 0.15) 85%,
-  rgba(71, 73, 69, 0) 100%
-);
+  background: linear-gradient(
+    to right,
+    rgba(71, 73, 69, 0.8) 0%,
+    rgba(71, 73, 69, 0.6) 35%,
+    rgba(71, 73, 69, 0.35) 65%,
+    rgba(71, 73, 69, 0.15) 85%,
+    rgba(71, 73, 69, 0) 100%
+  );
 }
 
 .text {
   position: absolute;
-
   top: 40%;
   left: 6%;
-
   transform: translateY(-50%);
-
   width: 50%;
   max-width: 80%;
-
   color: white;
 }
 
 .titre span {
-  font-size: 96px;
-  font-family: 'Montaigu Slab';
+  font-size: clamp(40px, 4.5vw, 67px);
+  font-family: 'Montagu Slab';
   font-weight: 600;
 }
 
 .text p {
-  font-size: 24px;
+  font-size: clamp(14px, 1.2vw, 17px);
   font-family: 'Montserrat';
   font-weight: 500;
 }
@@ -61,161 +56,179 @@ background: linear-gradient(
   display: flex;
   flex-direction: column;
   align-items: center;
-  top: 10%;
+  top: 18%;
   right: 15%;
-  height: 80%;
   width: 25%;
-
-  background-color:rgba(237, 227, 205, 0.8);; /*transparence*/
-
+  min-width: 260px;
+  background-color: rgba(237, 227, 205, 0.8);
   border-radius: 22.5px;
 }
 
-#titre-carte{
-  font-size: 24px;
-  font-family: 'Montaigu Slab';
+#titre-carte {
+  font-size: clamp(15px, 1.2vw, 17px);
+  font-family: 'Montagu Slab';
   font-weight: 700;
   color: #3e7034;
   margin-bottom: 2%;
 }
 
-.info-animal{
+.info-animal {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 4%;
 }
 
-.info-animal p:first-child{
-  font-size: 32px;
-  font-family: 'Montaigu Slab';
+.info-animal p:first-child {
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-family: 'Montagu Slab';
   font-weight: 400;
   color: #3e7034;
 }
 
-.info-animal p:last-child{
-  font-size: 24px;
-  font-family: 'Montaigu Slab';
+.info-animal p:last-child {
+  font-size: clamp(15px, 1.2vw, 17px);
+  font-family: 'Montagu Slab';
   font-weight: 400;
   color: #3e7034;
 }
 
-
-
-.trait{
+.trait {
   background-color: #3e7034;
-  width:10%;
-  height: 3px;
+  width: 10%;
+  height: 2px;
   margin-bottom: 4%;
 }
 
-/*img*/
-
-#animal{
-  width: 400px;
-  height: 400px;
+#animal {
+  width: clamp(180px, 20vw, 280px);
+  height: clamp(180px, 20vw, 280px);
   border-radius: 50%;
-  border: 5px solid #ffffff;
+  border: 4px solid #ffffff;
   object-fit: cover;
 }
 
-/* #coeur {
-  width: 50px;
-  height: 45px;
-  object-fit: cover;
+/* Boutons */
 
-} */
-
-/*Bouton*/
-
-.btns{
-  display:flex;
-  gap:4rem;
-  margin-top:10%;
+.btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 10%;
 }
 
-.btn-adopter{
-display: flex;
-width: 424px;
-height:92px;
-background-color: #b77f38;
-border-radius:45px;
-justify-content: center;
-align-items: center;
-color: #f5f1e8;
-font-family: 'Montagu Slab';
-font-weight: 600;
-font-size: 24px;
+.btn-adopter {
+  display: flex;
+  width: clamp(240px, 20vw, 297px);
+  height: clamp(50px, 5vw, 64px);
+  background-color: #b77f38;
+  border-radius: 45px;
+  justify-content: center;
+  align-items: center;
+  color: #f5f1e8;
+  font-family: 'Montagu Slab';
+  font-weight: 600;
+  font-size: clamp(15px, 1.2vw, 17px);
 }
 
-.btn-adopter img{
-  width: 50px;
-  height: 45px;
-  margin-right:2%;
+.btn-adopter img {
+  width: clamp(28px, 2.5vw, 35px);
+  height: clamp(24px, 2.2vw, 31px);
+  margin-right: 2%;
 }
 
-.btn-adopter:hover{
+.btn-adopter:hover {
   background-color: #916327;
   cursor: pointer;
 }
 
-.btn-quizz{
-display: flex;
-border: 5px solid #f5f1e8;
-background: transparent;
-width: 361px;
-height:92px;
-border-radius:45px;
-justify-content: center;
-align-items: center;
-color: #f5f1e8;
-font-family: 'Montagu Slab';
-font-weight: 600;
-font-size: 24px;
+.btn-quizz {
+  display: flex;
+  border: 4px solid #f5f1e8;
+  background: transparent;
+  width: clamp(200px, 18vw, 253px);
+  height: clamp(50px, 5vw, 64px);
+  border-radius: 45px;
+  justify-content: center;
+  align-items: center;
+  color: #f5f1e8;
+  font-family: 'Montagu Slab';
+  font-weight: 600;
+  font-size: clamp(15px, 1.2vw, 17px);
 }
 
-.btn-quizz:hover{
+.btn-quizz:hover {
   background-color: #f5f1e8ad;
   opacity: 0.8;
   cursor: pointer;
 }
 
-.btn-profil{
+.btn-profil {
   display: flex;
-background: #60733e;
-width: 382px;
-height:66px;
-border-radius:45px;
-justify-content: center;
-align-items: center;
-color: #f5f1e8;
-font-family: 'Montagu Slab';
-font-weight: 600;
-font-size: 24px;
+  background: #60733e;
+  width: clamp(220px, 20vw, 267px);
+  height: clamp(45px, 4.5vw, 46px);
+  border-radius: 45px;
+  justify-content: center;
+  align-items: center;
+  color: #f5f1e8;
+  font-family: 'Montagu Slab';
+  font-weight: 600;
+  font-size: clamp(15px, 1.2vw, 17px);
+  margin-bottom: 10%;
+
 }
 
-.btn-profil:hover{
+.btn-profil:hover {
   background-color: #4b5d33;
   cursor: pointer;
 }
-.btn-animaux{
-display: flex;
-margin-top: auto;
-background: #b77f38;
-width: 100%;
-height:66px;
-justify-content: center;
-align-items: center;
-color: #f5f1e8;
-font-family: 'Montagu Slab';
-font-weight: 600;
-font-size: 24px;
-border-radius: 0 0 22.5px 22.5px;
+
+.btn-animaux {
+  display: flex;
+  margin-top: auto;
+  background: #b77f38;
+  width: 100%;
+  height: clamp(40px, 4.5vw, 46px);
+  justify-content: center;
+  align-items: center;
+  color: #f5f1e8;
+  font-family: 'Montagu Slab';
+  font-weight: 600;
+  font-size: clamp(15px, 1.2vw, 17px);
+  border-radius: 0 0 22.5px 22.5px;
 }
 
-.btn-animaux:hover{
+.btn-animaux:hover {
   background-color: #916327;
   cursor: pointer;
 }
 
+/*RESPONSIVE*/
+
+@media (max-width: 900px) {
+  .hero {
+    height: auto;
+    min-height: auto;
+  }
+  .text {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    padding: 2rem 1.5rem;
+  }
+  .carte {
+    position: relative;
+    top: 0;
+    right: 0;
+    width: 90%;
+    height: auto;
+    margin: 1.5rem auto;
+  }
+  .btns {
+    justify-content: center;
+  }
+}

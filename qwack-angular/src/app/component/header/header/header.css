@@ -3,10 +3,10 @@
   flex-direction: row;
   background-color: #60733e;
   padding: 0 1rem 2rem 0;
-  box-shadow: 0 5px 10px #4b5d33;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);   /* MODIFIÉ : plus courte et plus foncée */
 
   /* pour l'ombre*/
-   position: relative;
+  position: relative;
   z-index: 10;
 }
 
@@ -19,6 +19,7 @@
   display:flex;
   align-items: center;
   justify-content: center;
+  margin-top: 2rem;
 
   flex: 1 1 auto;           /* prend l'espace dispo mais peut rétrécir */
 

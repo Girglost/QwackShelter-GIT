@@ -1,13 +1,13 @@
 .newsletter {
   background-color: #23411d;
   display: flex;
-  padding: 3rem 8rem;
+  padding: 2.1rem 5.6rem;
 }
 
 h1 {
   font-family: 'Montagu Slab';
   font-style: normal;
-  font-size: 56px;
+  font-size: clamp(28px, 3.9vw, 39px);
   font-weight: 600;
   color: #fafaf7;
   margin-bottom: 0.5rem;
@@ -16,7 +16,7 @@ h1 {
 p {
   color: #fafaf7;
   font-family: 'Montserrat', sans-serif;
-  font-size: 24px;
+  font-size: clamp(14px, 1.7vw, 17px);
   font-weight: 600;
   margin-top: 0.5rem;
   margin-left: 2rem;
@@ -29,23 +29,23 @@ p {
 .input-mail {
   display: flex;
   background-color: rgb(165, 52, 8);
-  align-self:center;
+  align-self: center;
   align-items: center;
   justify-content: center;
-  height : 5rem;
+  height: 3.5rem;
   width: 30%;
-  margin-left: 20rem;
+  margin-left: 14rem;
   background: #b1b2b580;
-  border-start-start-radius: 45px;
-  border-start-end-radius: 45px;
-  border-end-start-radius: 45px;
-  border-end-end-radius: 45px;
-  padding: 15px 10px;
+  border-start-start-radius: 32px;
+  border-start-end-radius: 32px;
+  border-end-start-radius: 32px;
+  border-end-end-radius: 32px;
+  padding: 10px 7px;
 }
 
 .input {
   flex: 1 1 auto;
-  margin-left:1rem;
+  margin-left: 0.7rem;
 }
 
 .input input {
@@ -53,14 +53,14 @@ p {
   width: 100%;
   border: none;
   outline: none;
-  padding: 20px 20px;
+  padding: 14px 14px;
 
-  border-start-start-radius: 45px;
-  border-start-end-radius: 45px;
-  border-end-start-radius: 45px;
-  border-end-end-radius: 45px;
-  font-family: 'Montserrat regular';
-  font-size: 24px;;
+  border-start-start-radius: 32px;
+  border-start-end-radius: 32px;
+  border-end-start-radius: 32px;
+  border-end-end-radius: 32px;
+  font-family: 'Montserrat';
+  font-size: clamp(14px, 1.7vw, 17px);
 }
 
 .cadre {
@@ -68,15 +68,15 @@ p {
   justify-content: center;
   align-items: center;
   width: 100%;
-  gap: 60px; ;
+  gap: 42px;
 }
 
 .valider {
   background-color: #d88b3a;
   cursor: pointer;
   border-radius: 90px;
-  width: 45px;
-  height: 45px;
+  width: 32px;
+  height: 32px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -85,16 +85,14 @@ p {
 
 #lettre {
   align-self: center;
-  width: 60px;
-  height: 40px;
+  width: 42px;
+  height: 28px;
   margin-left: 5%;
 }
 
 #valid {
   align-self: center;
-  width: 25px;
-  height: 25px;
+  width: 18px;
+  height: 18px;
   margin-left: 5%;
 }
-
-

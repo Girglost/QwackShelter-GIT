@@ -7,12 +7,12 @@
 .header-logo {
   justify-self: flex-start;
   align-self: center;
-  margin: 15px;
+  margin: 10px;
 }
 
 .header-logo img {
-width: 131px;
-height: 158px;
+  width: 92px;
+  height: 111px;
 }
 
 .header-text-logo {
@@ -21,15 +21,34 @@ height: 158px;
 }
 
 #nom-shelter {
-  font-size: 80px;
-  font-family : 'Pacifico'
+  font-size: clamp(32px, 4.6vw, 56px);
+  font-family: 'Pacifico';
 }
 
 #slogan-shelter {
-  color : #f7f4ee;
-  font-family:'Montserrat';
-  font-size: 24px;
+  color: #f7f4ee;
+  font-family: 'Montserrat';
+  font-size: clamp(14px, 1.4vw, 17px);
   font-weight: 500;
 }
 
+/* RESPONSIVE : sur petit écran, réduit encore le logo et le texte */
+@media (max-width: 700px) {
+  .header-gauche {
+    justify-content: flex-start;
+    gap: 0.75rem;
+  }
 
+  .header-logo img {
+    width: 60px;
+    height: 72px;
+  }
+
+  #nom-shelter {
+    font-size: 26px;
+  }
+
+  #slogan-shelter {
+    font-size: 12px;
+  }
+}

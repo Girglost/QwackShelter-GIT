@@ -1,22 +1,22 @@
 .tout{
   background-color: #60733e;
-  padding: 3rem 3rem 0 3rem;
+  padding: 2.1rem 2.1rem 0 2.1rem;
   display: flex;
-  flex-wrap: wrap;        /* AJOUTÉ : permet à .nav de passer en dessous de .info sur petit écran */
+  flex-wrap: wrap;
 }
 
 .info{
   display: flex;
   flex-direction: column;
   width: 20%;
-  min-width: 250px;        /* AJOUTÉ : évite que .info s'écrase trop sur petit écran */
-  margin-left: 4rem;
+  min-width: 250px;
+  margin-left: 2.8rem;
 }
 
 #logo{
-  width: 100px;
-  margin-top: 2rem;
-  margin-left: 2rem;
+  width: 70px;
+  margin-top: 1.4rem;
+  margin-left: 1.4rem;
 }
 
 .info-refuge{
@@ -24,7 +24,7 @@
   font-family: 'Montagu Slab';
   font-style: normal;
   font-weight: 400;
-  font-size: 24px;
+  font-size: clamp(14px, 1.4vw, 17px);
   color: #fafaf7;
 }
 
@@ -33,18 +33,18 @@
   font-family: 'Montagu Slab';
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: clamp(11px, 1vw, 11px);
   color: #fafaf7;
 }
 
 .nav{
   display: flex;
-  flex-wrap: wrap;         /* AJOUTÉ : les colonnes internes passent à la ligne si besoin */
-  flex: 1 1 500px;         /* MODIFIÉ : remplace margin-left:50rem, prend l'espace restant naturellement */
+  flex-wrap: wrap;
+  flex: 1 1 500px;
   justify-content: center;
   align-items: flex-start;
-  gap: 3rem;               /* MODIFIÉ : réduit de 6rem à 3rem pour mieux respirer sur petit écran */
-  padding: 5rem 0;
+  gap: 2.1rem;
+  padding: 3.5rem 0;
 }
 
 .footer-refuge-content,
@@ -52,21 +52,21 @@
 .footer-decouvrir-content {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  cursor:pointer;
+  gap: 0.5rem;
+  cursor: pointer;
 }
 
 .nav h2{
   font-family: 'Montagu Slab';
   font-weight: 600;
-  font-size: 32px;
+  font-size: clamp(18px, 1.8vw, 22px);
   color: #fafaf7;
 }
 
 .nav a{
   font-family: 'Montserrat';
   font-weight: 600;
-  font-size: 24px;
+  font-size: clamp(14px, 1.4vw, 17px);
   color: #24421d;
 }
 
@@ -76,18 +76,15 @@
 }
 
 .footer-reseau-content img{
-  width: 50px;
-  margin: 0 1rem;
+  width: 35px;
+  margin: 0 0.7rem;
 }
 
-
-
-/* AJOUTÉ : sur petit écran, tout s'empile proprement et se centre */
 @media (max-width: 700px) {
   .tout{
     flex-direction: column;
     align-items: center;
-    padding: 2rem 1rem;
+    padding: 1.4rem 0.7rem;
   }
   .info{
     width: 100%;
@@ -98,7 +95,7 @@
   .nav{
     justify-content: center;
     text-align: center;
-    gap: 2rem;
-    padding: 2rem 0;
+    gap: 1.4rem;
+    padding: 1.4rem 0;
   }
 }
