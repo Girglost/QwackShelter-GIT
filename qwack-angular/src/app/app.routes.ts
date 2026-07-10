@@ -12,6 +12,7 @@ import { StatutAnimalPage } from './page/statut-animal-page/statut-animal-page';
 import { HistoriqueSantePage } from './page/historique-sante-page/historique-sante-page';
 import { APropos } from './page/a-propos/a-propos';
 import { PersonnePage } from './page/personne-page/personne-page';
+import { LieuPage } from './page/lieu-page/lieu-page';
 
 
 
@@ -28,11 +29,12 @@ export const routes: Routes = [
   { path: 'a-propos', component: APropos },
 
 
-  // ====== Routes vers les CRUD des classes ======
+  // ====== Routes vers le CRUD des classes ======
   { path: 'emplacement', component: EmplacementPage },
   { path: 'sAnimal', component: StatutAnimalPage},
   { path: 'hSante', component: HistoriqueSantePage},
   { path: 'personne', component: PersonnePage},
+  { path : 'lieu', component: LieuPage},
 
 
   { path: '**', component: NotFound }, // a mettre a la fin de toutes les routes pour gérer les pages non trouvées

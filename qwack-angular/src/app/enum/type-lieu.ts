@@ -1,1 +1,5 @@
-export enum TypeLieu {}
+export enum TypeLieu {
+  MAISON = "MAISON",
+  APPARTEMENT = "APPARTEMENT",
+  SHELTER = "SHELTER"
+}
