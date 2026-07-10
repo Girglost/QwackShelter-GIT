@@ -2,16 +2,18 @@ import { Routes } from '@angular/router';
 import { Accueil } from './page/accueil/accueil/accueil';
 import { Actualites } from './page/actualites/actualites';
 import { Contact } from './page/contact/contact';
-import { EmplacementPage } from './page/emplacement-page/emplacement-page';
-import { NousRejoindre } from './page/nous-rejoindre/nous-rejoindre';
-import { NotFound } from './page/not-found/not-found';
 import { DevenirBenevole } from './page/devenir-benevole/devenir-benevole';
-import { NosMissions } from './page/nos-missions/nos-missions';
-import { SwipeCompagnon } from './page/swipe-compagnon/swipe-compagnon';
-import { StatutAnimalPage } from './page/statut-animal-page/statut-animal-page';
+import { EmplacementPage } from './page/emplacement-page/emplacement-page';
 import { HistoriqueSantePage } from './page/historique-sante-page/historique-sante-page';
+import { NosMissions } from './page/nos-missions/nos-missions';
+import { NotFound } from './page/not-found/not-found';
+import { NousRejoindre } from './page/nous-rejoindre/nous-rejoindre';
+import { StatutAnimalPage } from './page/statut-animal-page/statut-animal-page';
+import { SwipeCompagnon } from './page/swipe-compagnon/swipe-compagnon';
+
 import { APropos } from './page/a-propos/a-propos';
 import { PersonnePage } from './page/personne-page/personne-page';
+import { ProfilAnimal } from './page/profil-animal/profil-animal';
 
 
 
@@ -26,6 +28,8 @@ export const routes: Routes = [
   { path: 'nos-missions', component: NosMissions },
   { path: 'swipe-compagnon', component: SwipeCompagnon },
   { path: 'a-propos', component: APropos },
+
+  { path: 'animal/:id', component: ProfilAnimal },
 
 
   // ====== Routes vers les CRUD des classes ======

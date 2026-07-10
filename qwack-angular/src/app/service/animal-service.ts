@@ -14,6 +14,10 @@ export class AnimalService {
     return this.http.get<Animal[]>(this.apiUrl);
   }
 
+  public findById(id: number): Observable<Animal> {
+    return this.http.get<Animal>(`${this.apiUrl}/${id}`);
+  }
+
   public add(animal: Animal): Observable<Animal> {
     return this.http.post<Animal>(this.apiUrl, animal);
   }
