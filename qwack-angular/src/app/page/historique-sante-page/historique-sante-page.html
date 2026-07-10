@@ -1,1 +1,154 @@
-<p>historique-sante-page works!</p>
+<h1>Historique de Santé</h1>
+
+<div class="form-container">
+  <h2 class="form-title">
+    {{ editingHistoriqueId ? 'Modifier l\'historique' : 'Ajouter un historique' }}
+  </h2>
+
+  <form (submit)="addOrUpdate()" [formGroup]="formHistorique" class="form-emplacement">
+
+    <div class="form-group">
+      <label for="animal">Animal :</label>
+      <div class="input-container">
+        <select id="animal" formControlName="animal">
+          <option [ngValue]="''">-- Sélectionner un animal --</option>
+          @for (a of animaux$ | async; track a.id) {
+            <option [ngValue]="a">{{ a.nom }}</option>
+          }
+        </select>
+        <div class="error-message" *ngIf="CtrlAnimal.dirty && CtrlAnimal.hasError('required')">
+          * Sélectionner un animal *
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="cause">Cause :</label>
+      <div class="input-container">
+        <select id="cause" formControlName="cause">
+          <option value="">-- Sélectionner une cause --</option>
+          @for (c of causeValues; track c) {
+            <option [value]="c">{{ c }}</option>
+          }
+        </select>
+        <div class="error-message" *ngIf="CtrlCause.dirty && CtrlCause.hasError('required')">
+          * Indiquer la cause *
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="date">Date :</label>
+      <div class="input-container">
+        <input id="date" type="date" formControlName="date" />
+        <div class="error-message" *ngIf="CtrlDate.dirty && CtrlDate.hasError('required')">
+          * Indiquer la date *
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="heure">Heure :</label>
+      <div class="input-container">
+        <input id="heure" type="time" formControlName="heure" />
+        <div class="error-message" *ngIf="CtrlHeure.dirty && CtrlHeure.hasError('required')">
+          * Indiquer l'heure *
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="poids">Poids (kg) :</label>
+      <div class="input-container">
+        <input id="poids" type="number" step="0.1" formControlName="poids" placeholder="Ex: 4.5" />
+        <div class="error-message" *ngIf="CtrlPoids.dirty && CtrlPoids.hasError('required')">
+          * Indiquer le poids *
+        </div>
+        <div class="error-message" *ngIf="CtrlPoids.dirty && CtrlPoids.hasError('min')">
+          * Le poids doit être positif *
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="commentaire">Commentaire :</label>
+      <div class="input-container">
+        <textarea id="commentaire" formControlName="commentaire" placeholder="Observations..." rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      @if (editingHistoriqueId) {
+        <button type="button" class="btn-cancel" (click)="annulerEdition()">Annuler</button>
+      }
+      <input
+        [disabled]="formHistorique.invalid"
+        type="submit"
+        [value]="editingHistoriqueId ? 'Modifier' : 'Ajouter'"
+        class="btn-submit"
+      />
+    </div>
+  </form>
+</div>
+
+<hr />
+
+<!-- Barre de filtres -->
+<div class="filter-bar">
+  <button
+    class="filter-btn"
+    [class.active]="!causeFiltre && !animalFiltre"
+    (click)="filtrerParCause(null)">
+    Tous
+  </button>
+
+  @for (c of causeValues; track c) {
+    <button
+      class="filter-btn"
+      [class.active]="causeFiltre === c"
+      (click)="filtrerParCause(c)">
+      {{ c }}
+    </button>
+  }
+
+  <select
+    class="filter-select"
+    [(ngModel)]="animalFiltre"
+    (ngModelChange)="filtrerParAnimal($event)">
+    <option [ngValue]="null">-- Filtrer par animal --</option>
+    @for (a of animaux$ | async; track a.id) {
+      <option [ngValue]="a">{{ a.nom }}</option>
+    }
+  </select>
+</div>
+
+<table class="Liste">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Animal</th>
+      <th>Cause</th>
+      <th>Date</th>
+      <th>Heure</th>
+      <th>Poids</th>
+      <th>Commentaire</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let h of historiques$ | async">
+      <td>{{ h.id }}</td>
+      <td>{{ h.animal?.nom }}</td>
+      <td>{{ h.cause }}</td>
+      <td>{{ h.date }}</td>
+      <td>{{ h.heure }}</td>
+      <td>{{ h.poids }}</td>
+      <td>{{ h.commentaire }}</td>
+      <td>
+        <button (click)="edit(h)">MODIFIER</button>
+        <button (click)="remove(h)">SUPPRIMER</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

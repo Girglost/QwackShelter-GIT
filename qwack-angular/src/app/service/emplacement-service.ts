@@ -1,4 +1,4 @@
-import { TypeBox } from './../model/type-box';
+import { TypeBox } from '../enum/type-box';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';

@@ -1,4 +1,4 @@
-import { TypeBox } from "./type-box";
+import { TypeBox } from "../enum/type-box";
 
 export interface Emplacement {
   id?: number;

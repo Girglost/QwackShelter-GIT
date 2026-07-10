@@ -5,7 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { BehaviorSubject, combineLatest, Observable, startWith, Subject, switchMap, map, merge } from 'rxjs';
 import { Emplacement } from '../../model/emplacement';
 import { EmplacementService } from './../../service/emplacement-service';
-import { TypeBox } from '../../model/type-box';
+import { TypeBox } from '../../enum/type-box';
 
 type FiltreStatut = 'tous' | 'complet' | 'disponible';
 

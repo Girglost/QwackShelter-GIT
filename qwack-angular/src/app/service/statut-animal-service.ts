@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Statut } from '../model/statut';
+import { Statut } from '../enum/statut';
 import { StatutAnimal } from '../model/statut-animal';
 
 

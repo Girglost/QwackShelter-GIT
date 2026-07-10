@@ -1,7 +1,7 @@
 import { Animal } from "../model/animal";
 import { Emplacement } from "./emplacement";
-import { Statut } from "./statut";
-import { StatutValidation } from "./statut-validation";
+import { Statut } from "../enum/statut";
+import { StatutValidation } from "../enum/statut-validation";
 
 export interface StatutAnimal {
   id: number;
