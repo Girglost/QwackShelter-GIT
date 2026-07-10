@@ -2,6 +2,7 @@ package qwack_boot.api.requestDTO.animal;
 
 import java.time.LocalDate;
 import java.util.List;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import qwack_boot.model.Caractere;
@@ -26,12 +27,33 @@ public class UpdateAnimalRequest {
 
     private boolean capaciteVol;
     private boolean pondeuse;
+    private boolean couveuse;
 
     private String race;
     private boolean sterilisation;
     private boolean gestante;
     private boolean estSauvage;
     private String espece;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    // on recupere quel type d'animal est créé
+    private String type_animal;
+
+    public String getType_animal() {
+        return type_animal;
+    }
+
+    public void setType_animal(String type_animal) {
+        this.type_animal = type_animal;
+    }
 
     public boolean isSterilisation() {
         return sterilisation;
@@ -105,7 +127,6 @@ public class UpdateAnimalRequest {
         this.traitement = traitement;
     }
 
-
     public Genre getGenre() {
         return genre;
     }
@@ -152,6 +173,14 @@ public class UpdateAnimalRequest {
 
     public void setCaracteres(List<Caractere> caracteres) {
         this.caracteres = caracteres;
+    }
+
+    public boolean isCouveuse() {
+        return couveuse;
+    }
+
+    public void setCouveuse(boolean couveuse) {
+        this.couveuse = couveuse;
     }
 
 }

@@ -1,4 +1,5 @@
 package qwack_boot.api.controller.animaux;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -52,6 +53,7 @@ public class PouleRestController {
         poule.setQuackShelter(refuge);
 
         poule.setPondeuse(request.isPondeuse());
+        poule.setDescription(request.getDescription());
 
         srvPoule.insert(poule);
         return PouleResponse.convert(poule);
@@ -71,6 +73,7 @@ public class PouleRestController {
         poule.setGenre(request.getGenre());
         poule.setCaracteres(request.getCaracteres());
         poule.setPondeuse(request.isPondeuse());
+        poule.setDescription(request.getDescription());
 
         if (request.getQwackShelterId() != null) {
             QuackShelter refuge = daoQuackShelter

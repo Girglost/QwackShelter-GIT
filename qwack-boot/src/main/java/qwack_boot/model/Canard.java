@@ -16,15 +16,15 @@ public class Canard extends Oiseau {
 
 	public Canard(String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter qwackShelter,
-			boolean capaciteVol, boolean pondeuse, String race, boolean estSauvage) {
+			boolean capaciteVol, boolean pondeuse, String race, boolean estSauvage, String description) {
 		super(nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre, caracteres,
-				qwackShelter, capaciteVol, pondeuse);
+				qwackShelter, capaciteVol, pondeuse, description);
 		this.race = race;
 		this.estSauvage = estSauvage;
 	}
 
 	public Canard(String nomAnimal, String couleur, Genre genre, QuackShelter qwackShelter, boolean pondeuse,
-			String race, boolean estSauvage) {
+			String race, boolean estSauvage, String description) {
 		super(nomAnimal,
 				LocalDate.now(),
 				couleur,
@@ -34,7 +34,7 @@ public class Canard extends Oiseau {
 				genre,
 				qwackShelter,
 				true,
-				pondeuse);
+				pondeuse, description);
 		this.race = race;
 		this.estSauvage = estSauvage;
 	}

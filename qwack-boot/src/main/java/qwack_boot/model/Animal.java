@@ -46,6 +46,8 @@ public abstract class Animal {
 	@Enumerated(EnumType.STRING)
 	protected Genre genre;
 
+	protected String description;
+
 	@ElementCollection(targetClass = Caractere.class)
 	@Enumerated(EnumType.STRING)
 	@CollectionTable(name = "caracteres", joinColumns = @JoinColumn(name = "id_animal"))
@@ -63,7 +65,8 @@ public abstract class Animal {
 	private List<Visite> visites = new ArrayList();
 
 	public Animal(String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
-			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter quackShelter) {
+			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter quackShelter,
+			String description) {
 		this.nomAnimal = nomAnimal;
 		this.dateNaissance = dateNaissance;
 		this.couleur = couleur;
@@ -73,10 +76,11 @@ public abstract class Animal {
 		this.genre = genre;
 		this.caracteres = caracteres;
 		this.quackShelter = quackShelter;
+		this.description = description;
 	}
 
 	public Animal(String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
-			String traitement, Famille famille, Genre genre, QuackShelter quackShelter) {
+			String traitement, Famille famille, Genre genre, QuackShelter quackShelter, String description) {
 		this.nomAnimal = nomAnimal;
 		this.dateNaissance = dateNaissance;
 		this.couleur = couleur;
@@ -85,6 +89,7 @@ public abstract class Animal {
 		this.famille = famille;
 		this.genre = genre;
 		this.quackShelter = quackShelter;
+		this.description = description;
 	}
 
 	public Animal() {
@@ -212,7 +217,15 @@ public abstract class Animal {
 		return "Animal [id=" + id + ", nomAnimal=" + nomAnimal + ", dateNaissance=" + dateNaissance + ", couleur="
 				+ couleur + ", regimeAlimentaire=" + regimeAlimentaire + ", traitement=" + traitement + ", famille="
 				+ famille + ", genre=" + genre + ", quackShelter=" + quackShelter
-				+ "]";
+				+ ", description=" + description + "]";
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

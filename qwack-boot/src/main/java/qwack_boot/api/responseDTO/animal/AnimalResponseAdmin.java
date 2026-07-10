@@ -26,6 +26,15 @@ public class AnimalResponseAdmin {
 	private List<Caractere> caracteres;
 	private List<VisiteDTO> visites;
 	private List<HistoriqueSanteDTO> historiqueSantes;
+	private String description;
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	public static AnimalResponseAdmin convert(Animal animal) {
 		AnimalResponseAdmin a = new AnimalResponseAdmin();

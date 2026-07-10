@@ -44,6 +44,7 @@ public class ChatRestController {
         chat.setRace(request.getRace());
         chat.setCaracteres(request.getCaracteres());
         chat.setQuackShelter(qSrv.getById(request.getQwackShelterId()));
+        chat.setDescription(request.getDescription());
 
         srvChat.insert(chat);
         return ChatResponse.convert(chat);
@@ -65,7 +66,8 @@ public class ChatRestController {
         chat.setRace(request.getRace());
         chat.setCaracteres(request.getCaracteres());
         chat.setQuackShelter(qSrv.getById(request.getQwackShelterId()));
-        
+        chat.setDescription(request.getDescription());
+
         srvChat.update(id, chat);
 
         return ChatResponse.convert(chat);

@@ -11,7 +11,6 @@ import qwack_boot.model.Genre;
 
 public class CreateAnimalRequest {
 
-    
     @NotBlank
     private String nomAnimal;
     private LocalDate dateNaissance;
@@ -30,12 +29,24 @@ public class CreateAnimalRequest {
 
     private boolean capaciteVol;
     private boolean pondeuse;
+    private boolean couveuse;
 
     private String race;
     private boolean sterilisation;
     private boolean gestante;
     private boolean estSauvage;
     private String espece;
+    private String description;
+    // on recupere quel type d'animal est créé
+    private String type_animal;
+
+    public String getType_animal() {
+        return type_animal;
+    }
+
+    public void setType_animal(String type_animal) {
+        this.type_animal = type_animal;
+    }
 
     public boolean isSterilisation() {
         return sterilisation;
@@ -91,6 +102,14 @@ public class CreateAnimalRequest {
 
     public void setCouleur(String couleur) {
         this.couleur = couleur;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getRegimeAlimentaire() {
@@ -165,5 +184,12 @@ public class CreateAnimalRequest {
         this.caracteres = caracteres;
     }
 
-}
+    public boolean isCouveuse() {
+        return couveuse;
+    }
 
+    public void setCouveuse(boolean couveuse) {
+        this.couveuse = couveuse;
+    }
+
+}

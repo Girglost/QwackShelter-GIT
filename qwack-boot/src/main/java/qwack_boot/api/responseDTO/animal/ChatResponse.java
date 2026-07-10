@@ -21,6 +21,15 @@ public class ChatResponse {
     private String race;
     private List<Caractere> caracteres;
     private Integer qwackShelterId;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public static ChatResponse convert(Chat chat) {
         ChatResponse c = new ChatResponse();

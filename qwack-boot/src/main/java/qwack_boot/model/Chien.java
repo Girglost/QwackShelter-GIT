@@ -12,14 +12,14 @@ public class Chien extends Mamifere {
 
 	public Chien(String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter qwackShelter,
-			boolean sterilisation, boolean gestante, String race) {
+			boolean sterilisation, boolean gestante, String race, String description) {
 		super(nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre, caracteres,
-				qwackShelter, sterilisation, gestante);
+				qwackShelter, sterilisation, gestante, description);
 		this.race = race;
 	}
 
 	public Chien(String nomAnimal, String couleur, Genre genre, QuackShelter qwackShelter, boolean sterilisation,
-			boolean gestante, String race) {
+			boolean gestante, String race, String description) {
 		super(nomAnimal,
 				LocalDate.now(),
 				couleur,
@@ -29,7 +29,8 @@ public class Chien extends Mamifere {
 				genre,
 				qwackShelter,
 				sterilisation,
-				gestante);
+				gestante,
+				description);
 		this.race = race;
 	}
 

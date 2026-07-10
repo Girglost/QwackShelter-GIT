@@ -4,9 +4,9 @@ import java.time.LocalDate;
 
 import org.springframework.beans.BeanUtils;
 
+import qwack_boot.model.Canard;
 import qwack_boot.model.Famille;
 import qwack_boot.model.Genre;
-import qwack_boot.model.Canard;
 
 public class CanardResponse {
 
@@ -26,6 +26,23 @@ public class CanardResponse {
 
     private String race;
     private boolean estSauvage;
+    private String description;
+
+    public Integer getQwackShelterId() {
+        return qwackShelterId;
+    }
+
+    public void setQwackShelterId(Integer qwackShelterId) {
+        this.qwackShelterId = qwackShelterId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public static CanardResponse convert(Canard canard) {
         CanardResponse p = new CanardResponse();

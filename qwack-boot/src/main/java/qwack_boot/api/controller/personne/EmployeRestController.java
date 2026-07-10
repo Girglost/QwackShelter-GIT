@@ -24,9 +24,10 @@ import qwack_boot.api.requestDTO.personne.CreateEmployeRequest;
 import qwack_boot.api.requestDTO.personne.UpdateEmployeRequest;
 import qwack_boot.api.responseDTO.HistoriqueSanteReponse;
 import qwack_boot.api.responseDTO.StatutAnimalReponse;
+import qwack_boot.api.responseDTO.animal.AnimalResponse;
 import qwack_boot.api.responseDTO.personne.EmployeResponse;
 import qwack_boot.dto.VisiteDTO;
-import qwack_boot.model.Chat;
+import qwack_boot.model.Animal;
 import qwack_boot.model.HistoriqueSante;
 import qwack_boot.model.Lieu;
 import qwack_boot.model.Personne;
@@ -204,15 +205,16 @@ public class EmployeRestController {
         }
 
         @PostMapping("/accueillir-animal")
-        public ResponseEntity<Map<String, String>> accueillirAnimal(
+        public ResponseEntity<Map<String, AnimalResponse>> accueillirAnimal(
                         @RequestBody CreateAnimalRequest animalRequest) {
-                Chat chat = new Chat();
-                String typeAnimal = chat.getClass().getSimpleName();
 
+                Animal animal = animalSrv.createFromRequest(animalRequest);
+
+                AnimalResponse animalAccueillit = AnimalResponse.convert(employeSrv.accueilAnimal(animal));
                 // A partir du dto de l'animal, on reconstruit un objet pour l'envoyer au
                 // service
                 return ResponseEntity.status(HttpStatus.OK)
-                                .body(Map.of("Animal accueillit ", typeAnimal));
+                                .body(Map.of("Animal accueillit ", animalAccueillit));
         }
 
 }

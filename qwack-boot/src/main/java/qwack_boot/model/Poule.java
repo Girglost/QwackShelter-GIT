@@ -14,14 +14,14 @@ public class Poule extends Oiseau {
 
 	public Poule(String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter qwackShelter,
-			boolean capaciteVol, boolean pondeuse, String race, boolean couveuse) {
+			boolean capaciteVol, boolean pondeuse, String race, boolean couveuse, String description) {
 		super(nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre, caracteres,
-				qwackShelter, capaciteVol, pondeuse);
+				qwackShelter, capaciteVol, pondeuse, description);
 		this.race = race;
 	}
 
 	public Poule(String nomAnimal, String couleur, Genre genre, QuackShelter qwackShelter, boolean pondeuse,
-			String race) {
+			String race, String description) {
 		super(nomAnimal,
 				LocalDate.now(),
 				couleur,
@@ -31,7 +31,7 @@ public class Poule extends Oiseau {
 				genre,
 				qwackShelter,
 				true,
-				pondeuse);
+				pondeuse, description);
 		this.race = race;
 	}
 

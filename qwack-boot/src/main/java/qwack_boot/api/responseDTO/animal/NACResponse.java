@@ -10,8 +10,8 @@ import qwack_boot.model.Genre;
 import qwack_boot.model.NAC;
 
 public class NACResponse {
-    
-     private String nomAnimal;
+
+    private String nomAnimal;
     private LocalDate dateNaissance;
     private String couleur;
     private String regimeAlimentaire;
@@ -22,6 +22,7 @@ public class NACResponse {
     private String espece;
     private List<Caractere> caracteres;
     private Integer qwackShelterId;
+    private String description;
 
     public static NACResponse convert(NAC nac) {
         NACResponse n = new NACResponse();
@@ -116,5 +117,13 @@ public class NACResponse {
 
     public Integer getQwackShelterId() {
         return qwackShelterId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

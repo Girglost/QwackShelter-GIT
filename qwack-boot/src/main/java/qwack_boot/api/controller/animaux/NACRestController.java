@@ -53,6 +53,7 @@ public class NACRestController {
         nac.setFamille(request.getFamille());
 
         nac.setQuackShelter(refuge);
+        nac.setDescription(request.getDescription());
 
         srvNAC.insert(nac);
         return NACResponse.convert(nac);
@@ -60,7 +61,7 @@ public class NACRestController {
 
     @PutMapping("/{id}")
     public NACResponse modifier(@PathVariable Integer id, @RequestBody UpdateAnimalRequest request) {
-        
+
         NAC nac = (NAC) animalService.getById(id);
 
         if (nac == null) {
@@ -74,6 +75,7 @@ public class NACRestController {
         nac.setGestante(request.isGestante());
         nac.setCaracteres(request.getCaracteres());
         nac.setEspece(request.getEspece());
+        nac.setDescription(request.getDescription());
 
         if (request.getQwackShelterId() != null) {
             QuackShelter refuge = daoQuackShelter
@@ -83,11 +85,9 @@ public class NACRestController {
             nac.setQuackShelter(refuge);
         }
 
-              srvNAC.update(nac);
+        srvNAC.update(nac);
 
         return NACResponse.convert(nac);
-
-
 
     }
 

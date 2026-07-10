@@ -14,14 +14,14 @@ public class NAC extends Mamifere {
 
 	public NAC(String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter qwackShelter,
-			boolean sterilisation, boolean gestante, String espece) {
+			boolean sterilisation, boolean gestante, String espece, String description) {
 		super(nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre, caracteres,
-				qwackShelter, sterilisation, gestante);
+				qwackShelter, sterilisation, gestante, description);
 		this.espece = espece;
 	}
 
 	public NAC(String nomAnimal, String couleur, Genre genre, QuackShelter qwackShelter, boolean sterilisation,
-			boolean gestante, String espece) {
+			boolean gestante, String espece, String description) {
 		super(nomAnimal,
 				LocalDate.now(),
 				couleur,
@@ -31,7 +31,7 @@ public class NAC extends Mamifere {
 				genre,
 				qwackShelter,
 				sterilisation,
-				gestante);
+				gestante, description);
 		this.espece = espece;
 	}
 
@@ -45,7 +45,6 @@ public class NAC extends Mamifere {
 	public void setEspece(String espece) {
 		this.espece = espece;
 	}
-	
 
 	@Override
 	public String toString() {

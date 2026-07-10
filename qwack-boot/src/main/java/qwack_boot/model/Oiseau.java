@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @Entity
@@ -16,18 +15,18 @@ public abstract class Oiseau extends Animal {
 
 	public Oiseau(String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 			String traitement, Famille famille, Genre genre, List<Caractere> caracteres, QuackShelter qwackShelter,
-			boolean capaciteVol, boolean pondeuse) {
+			boolean capaciteVol, boolean pondeuse, String description) {
 		super(nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre, caracteres,
-				qwackShelter);
+				qwackShelter, description);
 		this.capaciteVol = capaciteVol;
 		this.pondeuse = pondeuse;
 	}
 
 	public Oiseau(String nomAnimal, LocalDate dateNaissance, String couleur, String regimeAlimentaire,
 			String traitement, Famille famille, Genre genre, QuackShelter qwackShelter,
-			boolean capaciteVol, boolean pondeuse) {
+			boolean capaciteVol, boolean pondeuse, String description) {
 		super(nomAnimal, dateNaissance, couleur, regimeAlimentaire, traitement, famille, genre,
-				qwackShelter);
+				qwackShelter, description);
 		this.capaciteVol = capaciteVol;
 		this.pondeuse = pondeuse;
 	}

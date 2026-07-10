@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import qwack_boot.api.requestDTO.animal.CreateAnimalRequest;
 import qwack_boot.dao.IDAOAnimal;
 import qwack_boot.dao.IDAOQuackShelter;
 import qwack_boot.model.Animal;
@@ -96,6 +97,49 @@ public class AnimalService {
 
 	public Animal getByIdWithVisite(int idAnimal) {
 		return daoAnimal.findByIdWithVisite(idAnimal);
+	}
+
+	// Permet d'instancier le bon animal
+	public Animal createFromRequest(CreateAnimalRequest animalRequest) {
+		return switch (animalRequest.getType_animal().toUpperCase()) {
+			case "CHAT" -> new Chat(animalRequest.getNomAnimal(), animalRequest.getDateNaissance(),
+					animalRequest.getCouleur(), animalRequest.getRegimeAlimentaire(),
+					animalRequest.getTraitement(), animalRequest.getFamille(), animalRequest.getGenre(),
+					animalRequest.getCaracteres(),
+					daoQuackShelter.findById(animalRequest.getQwackShelterId()).orElse(null),
+					animalRequest.isSterilisation(), animalRequest.isGestante(), animalRequest.getRace(),
+					animalRequest.getDescription());
+			case "CHIEN" -> new Chien(animalRequest.getNomAnimal(), animalRequest.getDateNaissance(),
+					animalRequest.getCouleur(), animalRequest.getRegimeAlimentaire(),
+					animalRequest.getTraitement(), animalRequest.getFamille(), animalRequest.getGenre(),
+					animalRequest.getCaracteres(),
+					daoQuackShelter.findById(animalRequest.getQwackShelterId()).orElse(null),
+					animalRequest.isSterilisation(), animalRequest.isGestante(), animalRequest.getRace(),
+					animalRequest.getDescription());
+			case "NAC" -> new NAC(animalRequest.getNomAnimal(), animalRequest.getDateNaissance(),
+					animalRequest.getCouleur(), animalRequest.getRegimeAlimentaire(),
+					animalRequest.getTraitement(), animalRequest.getFamille(), animalRequest.getGenre(),
+					animalRequest.getCaracteres(),
+					daoQuackShelter.findById(animalRequest.getQwackShelterId()).orElse(null),
+					animalRequest.isSterilisation(), animalRequest.isGestante(), animalRequest.getEspece(),
+					animalRequest.getDescription());
+			case "POULE" -> new Poule(animalRequest.getNomAnimal(), animalRequest.getDateNaissance(),
+					animalRequest.getCouleur(), animalRequest.getRegimeAlimentaire(),
+					animalRequest.getTraitement(), animalRequest.getFamille(), animalRequest.getGenre(),
+					animalRequest.getCaracteres(),
+					daoQuackShelter.findById(animalRequest.getQwackShelterId()).orElse(null),
+					animalRequest.isCapaciteVol(), animalRequest.isPondeuse(), animalRequest.getRace(),
+					animalRequest.isCouveuse(), animalRequest.getDescription());
+			case "CANARD" -> new Canard(animalRequest.getNomAnimal(), animalRequest.getDateNaissance(),
+					animalRequest.getCouleur(), animalRequest.getRegimeAlimentaire(),
+					animalRequest.getTraitement(), animalRequest.getFamille(), animalRequest.getGenre(),
+					animalRequest.getCaracteres(),
+					daoQuackShelter.findById(animalRequest.getQwackShelterId()).orElse(null),
+					animalRequest.isCapaciteVol(), animalRequest.isPondeuse(), animalRequest.getRace(),
+					animalRequest.isEstSauvage(), animalRequest.getDescription());
+			default -> throw new IllegalArgumentException(
+					"Type d'animal inconnu : " + animalRequest.getType_animal().toUpperCase());
+		};
 	}
 
 }

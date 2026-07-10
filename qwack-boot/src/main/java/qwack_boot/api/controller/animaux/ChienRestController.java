@@ -15,8 +15,6 @@ import qwack_boot.model.Famille;
 import qwack_boot.service.ChienService;
 import qwack_boot.service.QuackShelterService;
 
-
-
 @RestController
 @RequestMapping("api/chien")
 public class ChienRestController {
@@ -45,6 +43,7 @@ public class ChienRestController {
         chien.setRace(request.getRace());
         chien.setCaracteres(request.getCaracteres());
         chien.setQuackShelter(qSrv.getById(request.getQwackShelterId()));
+        chien.setDescription(request.getDescription());
 
         srvChien.insert(chien);
 
@@ -67,10 +66,11 @@ public class ChienRestController {
         chien.setRace(request.getRace());
         chien.setCaracteres(request.getCaracteres());
         chien.setQuackShelter(qSrv.getById(request.getQwackShelterId()));
+        chien.setDescription(request.getDescription());
 
         srvChien.update(id, chien);
 
         return ChienResponse.convert(chien);
 
-}
+    }
 }

@@ -54,6 +54,7 @@ public class CanardRestController {
         canard.setQuackShelter(refuge);
 
         canard.setPondeuse(request.isPondeuse());
+        canard.setDescription(request.getDescription());
 
         srvCanard.insert(canard);
         return CanardResponse.convert(canard);
@@ -74,6 +75,7 @@ public class CanardRestController {
         canard.setCaracteres(request.getCaracteres());
         canard.setPondeuse(request.isPondeuse());
         canard.setestSauvage(request.isEstSauvage());
+        canard.setDescription(request.getDescription());
 
         if (request.getQwackShelterId() != null) {
             QuackShelter refuge = daoQuackShelter

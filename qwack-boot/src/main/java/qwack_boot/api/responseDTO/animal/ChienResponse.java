@@ -10,8 +10,8 @@ import qwack_boot.model.Chien;
 import qwack_boot.model.Genre;
 
 public class ChienResponse {
-    
-     private String nomAnimal;
+
+    private String nomAnimal;
     private LocalDate dateNaissance;
     private String couleur;
     private String regimeAlimentaire;
@@ -22,6 +22,7 @@ public class ChienResponse {
     private String race;
     private List<Caractere> caracteres;
     private Integer qwackShelterId;
+    private String description;
 
     public static ChienResponse convert(Chien chien) {
         ChienResponse c = new ChienResponse();
@@ -116,5 +117,13 @@ public class ChienResponse {
 
     public Integer getQwackShelterId() {
         return qwackShelterId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

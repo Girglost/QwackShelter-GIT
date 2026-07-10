@@ -25,6 +25,23 @@ public class PouleResponse {
     private boolean pondeuse;
 
     private String race;
+    private String description;
+
+    public Integer getQwackShelterId() {
+        return qwackShelterId;
+    }
+
+    public void setQwackShelterId(Integer qwackShelterId) {
+        this.qwackShelterId = qwackShelterId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public static PouleResponse convert(Poule poule) {
         PouleResponse p = new PouleResponse();
@@ -35,7 +52,6 @@ public class PouleResponse {
 
         return p;
     }
-
 
     public Integer getId() {
         return id;
