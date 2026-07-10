@@ -1,0 +1,203 @@
+
+<header class="site-header">
+  <div class="hero">
+    <div class="hero__content">
+      <h1 class="hero__title">Adopter</h1>
+      <p class="hero__subtitle">Offrez un nouveau départ à un animal.</p>
+      <p class="hero__text">
+        Chats, chiens, poules, hamsters et bien d'autres encore... Chez QwackShelter,
+        nous avons choisi d'offrir une seconde chance à tous les animaux, petits comme
+        grands.<br />À vous maintenant d'écrire la suite de leur histoire.
+      </p>
+      <div class="hero__actions">
+        <a routerLink="/animaux" class="btn btn--primary">Voir les animaux</a>
+        <a routerLink="/guide-adoption" class="btn btn--outline">Guide de l'adoption</a>
+      </div>
+    </div>
+
+    <div class="hero__media">
+      <img src="assets/image/adopter/hero-cat.jpg" alt="Chat roux se reposant dans le refuge" />
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="informations">
+    <ol class="steps">
+      <li class="step">
+        <span class="step__number">1</span>
+        <h3>Visitez le refuge</h3>
+        <p>Le refuge est ouvert du lundi au samedi ! Venez voir nos boules de poils et autres animaux.</p>
+      </li>
+      <img src="assets/icons/arrow.svg" class="steps__arrow" alt="" />
+      <li class="step">
+        <span class="step__number">2</span>
+        <h3>Je m'informe</h3>
+        <p>Je découvre les besoins de l'animal et vérifie qu'il me correspond.</p>
+      </li>
+      <img src="assets/icons/arrow.svg" class="steps__arrow" alt="" />
+      <li class="step">
+        <span class="step__number">3</span>
+        <h3>Je fais une demande</h3>
+        <p>Je remplis un formulaire en ligne pour rendre visite à l'animal de mon choix.</p>
+      </li>
+      <img src="assets/icons/arrow.svg" class="steps__arrow" alt="" />
+      <li class="step">
+        <span class="step__number">4</span>
+        <h3>L'adoption est validée</h3>
+        <p>Après validation de la demande, l'animal peut rejoindre votre famille !</p>
+      </li>
+    </ol>
+
+    <div class="commitment-help">
+      <div class="commitment-card">
+        <img src="assets/icons/cat.svg" class="commitment-card__deco" alt="" />
+        <h2>L'adoption c'est un engagement !</h2>
+        <p>
+          Adopter un animal, c'est lui promettre un foyer pour toujours. Même s'il ne
+          partage qu'une partie de votre vie, vous représenterez toute la sienne.
+        </p>
+        <ul class="checklist">
+          <li>
+            <span class="checklist__bullet"><img src="assets/icons/checkmark.svg" alt="" /></span>
+            Respecter son rythme d'adaptation
+          </li>
+          <li>
+            <span class="checklist__bullet"><img src="assets/icons/checkmark.svg" alt="" /></span>
+            Assurer ses besoins au quotidien
+          </li>
+          <li>
+            <span class="checklist__bullet"><img src="assets/icons/checkmark.svg" alt="" /></span>
+            Offrir du temps et de l'affection (certains en auront besoin plus que d'autres)
+          </li>
+          <li>
+            <span class="checklist__bullet"><img src="assets/icons/checkmark.svg" alt="" /></span>
+            Prévoir un budget pour veiller sur sa santé et son bien-être
+          </li>
+        </ul>
+      </div>
+
+      <div class="help-card">
+        <h2>Besoin d'aide ?</h2>
+        <p>
+          Notre équipe est là pour répondre à vos questions et vous accompagne sur vos
+          projets et vos choix.<br /><br />
+          Vous pouvez aussi téléphoner au 02 34 56 78 90 du Lundi au Samedi de 10h à 18h.
+        </p>
+        <a routerLink="/contact" class="btn btn--contact">Prendre contact avec nous</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="quizz-visites">
+    <div class="support-intro">
+      <h2>Et si vous ne pouvez pas adopter ?</h2>
+    </div>
+
+    <div class="support-cards">
+      <div class="support-card">
+        <img src="assets/icons/rabbit.svg" alt="" class="support-card__icon" />
+        <h3>Parrainer</h3>
+        <p>Aidez un animal en le parrainant chaque mois.</p>
+      </div>
+      <div class="support-card">
+        <img src="assets/icons/piggy-bank.svg" alt="" class="support-card__icon" />
+        <h3>Faire un don</h3>
+        <p>Vos dons permettent de financer soins, nourriture et abris.</p>
+      </div>
+      <div class="support-card">
+        <img src="assets/icons/team.svg" alt="" class="support-card__icon" />
+        <h3>Devenir Bénévole</h3>
+        <p>Rejoignez nos équipes et donnez de votre temps pour aider nos animaux.</p>
+      </div>
+    </div>
+
+    <p class="section-kicker">Nouveau !</p>
+
+    <div class="teaser-cards">
+      <div class="teaser-card teaser-card--quiz">
+        <p class="teaser-card__lead">
+          Faites notre quizz et trouvez l'animal qui vous correspond le mieux !
+        </p>
+        <img src="assets/images/chaton.jpg" alt="Chaton" class="teaser-card__image" />
+        <a routerLink="/quizz" class="pill pill--quiz">Faire le quizz</a>
+      </div>
+
+      <div class="teaser-card teaser-card--visit">
+        <h3>Une visite avant l'adoption</h3>
+        <p>
+          La visite est une étape cruciale avant l'adoption, elle permet de faire
+          connaissance avec l'animal, comprendre son caractère et ses besoins et
+          s'assurer que le courant passe.
+        </p>
+        <a routerLink="/visites" class="btn btn--outline">En savoir plus</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="newsletter">
+    <img src="assets/icons/email.svg" alt="" class="newsletter__icon" />
+    <h2>Suivez les nouvelles du refuge</h2>
+    <p>Inscrivez vous à la newsletter pour ne rien manquer !</p>
+
+    <form class="newsletter__form">
+      <input type="email" placeholder="qwack@gmail.com" aria-label="Adresse email" />
+      <button type="submit" aria-label="S'inscrire">
+        <img src="assets/icons/checkmark.svg" alt="" />
+      </button>
+    </form>
+  </div>
+
+  <div class="footer-columns">
+    <div class="footer-column">
+      <h3>Le Refuge</h3>
+      <a routerLink="/a-propos">A propos</a>
+      <a routerLink="/nous-aider">Nous aider</a>
+      <a routerLink="/animaux">Nos animaux</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>Nous aider</h3>
+      <a routerLink="/don">Faire un don</a>
+      <a routerLink="/parrainage">Parrainer un animal</a>
+      <a routerLink="/benevolat">Devenir Bénévoles</a>
+    </div>
+
+    <div class="footer-column footer-column--quiz">
+      <h3>Découvrir</h3>
+      <a routerLink="/quizz" class="footer-quiz-card">
+        <span>Swipe ton compagnon</span>
+        <span>Quel animal es-tu ?</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom__brand">
+      <img src="assets/images/logo.png" alt="Logo QwackShelter" />
+      <div>
+        <p class="footer-bottom__tagline">
+          QwackShelter - refuge animalier.<br />Chaque animal mérite sa chance
+        </p>
+        <p class="footer-bottom__address">
+          12 chemin du qwack | Ouvert du Lundi au Samedi | 10h-18h
+        </p>
+        <p class="footer-bottom__contact">
+          contact&#64;qwackshelter.fr | 05 00 00 00 00
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom__meta">
+      <a routerLink="/mentions-legales">Mentions légales</a>
+      <p class="footer-bottom__credits">
+        <span>&#64;Yohann</span>
+        <span>&#64;Cléa</span>
+        <span>&#64;Marie</span>
+        <span>&#64;Ronan</span>
+      </p>
+    </div>
+  </div>
+</footer>

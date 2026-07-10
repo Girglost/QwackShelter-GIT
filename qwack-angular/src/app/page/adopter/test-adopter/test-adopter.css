@@ -1,0 +1,418 @@
+:host {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  color: #504e4c;
+  background: #fafaf7;
+}
+
+:host * {
+  box-sizing: border-box;
+}
+
+:host img {
+  max-width: 100%;
+  display: block;
+}
+
+:host a {
+  text-decoration: none;
+  color: inherit;
+}
+
+:host ul,
+:host ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+:host h1,
+:host h2,
+:host h3,
+:host p {
+  margin: 0;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* ---------- Boutons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: 'Montagu Slab';
+  font-weight: 600;
+  font-size: 1.125rem;
+  letter-spacing: 0.02em;
+  padding: 0.9rem 2rem;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background: #365027;
+  color: #f5f1e8;
+}
+
+.btn--outline {
+  background: transparent;
+  border-color: #da9245;
+  color: #da9245;
+}
+
+.btn--contact {
+  background: #da9245;
+  color: #23411d;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Montagu Slab';
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 999px;
+  background: rgba(218, 146, 69, 0.5);
+  color: #fafaf7;
+}
+
+
+/* ---------- Hero ---------- */
+
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 4vw;
+  padding: 4rem 4vw 5rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.hero__content {
+  flex: 1 1 420px;
+}
+
+.hero__title {
+  font-family: 'Merriweather';
+  font-weight: 800;
+  font-size: clamp(3rem, 6vw, 6rem);
+  color: #365027;
+  line-height: 1.05;
+}
+
+.hero__subtitle {
+  font-family: 'Merriweather';
+  font-weight: 800;
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  color: #60733e;
+  margin-top: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 3px solid #b77f38;
+  display: inline-block;
+}
+
+.hero__text {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 2rem;
+  max-width: 40rem;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.hero__media {
+  position: relative;
+
+  flex: 1 1 480px;
+}
+
+.hero__media img {
+  width: 100%;
+  height: auto;
+  border-radius: 1.5rem;
+  aspect-ratio: 1053 / 545;
+  object-fit: cover;
+}
+
+.hero__media .pill--quiz {
+  position: absolute;
+  top: -1.5rem;
+  right: 1.5rem;
+}
+
+/* ---------- Informations : étapes ---------- */
+
+.informations {
+  background: #ffffff;
+  padding: 5rem 4vw;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.steps {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.step {
+  background: #f3efe6;
+  border-radius: 1.25rem;
+  padding: 2rem 1.75rem;
+  flex: 1 1 260px;
+  max-width: 320px;
+}
+
+.step__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: #365027;
+  color: #f5f1e8;
+  font-family: 'Merriweather';
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.step h3 {
+  font-family: 'Merriweather';
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #23411d;
+  margin-top: 1.25rem;
+}
+
+.step p {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.steps__arrow {
+  width: 2.5rem;
+  align-self: center;
+  margin-top: 3rem;
+  flex-shrink: 0;
+}
+
+/* ---------- Informations : engagement et aide ---------- */
+
+.commitment-help {
+  display: flex;
+  gap: 2rem;
+  margin-top: 4rem;
+  flex-wrap: wrap;
+}
+
+.commitment-card {
+  background: #f3efe6;
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  flex: 2 1 480px;
+  position: relative;
+  overflow: hidden;
+}
+
+.commitment-card__deco {
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+  width: 3.5rem;
+  opacity: 0.85;
+}
+
+.commitment-card h2,
+.help-card h2 {
+  font-family: 'Merriweather';
+  font-weight: 600;
+  font-size: 1.75rem;
+  color: #23411d;
+}
+
+.commitment-card p,
+.help-card p {
+  margin-top: 1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.checklist {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.checklist li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #23411d;
+}
+
+.checklist__bullet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: #708857;
+  flex-shrink: 0;
+}
+
+.checklist__bullet img {
+  width: 0.9rem;
+}
+
+.help-card {
+  flex: 1 1 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.5rem 1rem;
+}
+
+.help-card .btn--contact {
+  margin-top: 2rem;
+  align-self: flex-start;
+}
+
+/* ---------- Quizz et visites ---------- */
+
+.quizz-visites {
+  background: #fafaf7;
+  padding: 5rem 4vw;
+}
+
+.support-intro {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.support-intro h2 {
+  font-family: 'Merriweather';
+  font-weight: 800;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  color: #23411d;
+}
+
+.support-cards {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.support-card {
+  background: rgba(243, 239, 230, 0.5);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  flex: 1 1 280px;
+  max-width: 360px;
+}
+
+.support-card__icon {
+  width: 4rem;
+  height: auto;
+}
+
+.support-card h3 {
+  font-family: 'Merriweather';
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: #23411d;
+  margin-top: 1.25rem;
+}
+
+.support-card p {
+  margin-top: 0.75rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.section-kicker {
+  font-family: 'Merriweather';
+  font-weight: 800;
+  font-size: 1.75rem;
+  color: #23411d;
+  text-align: center;
+  margin: 4rem 0 1.5rem;
+}
+
+.teaser-cards {
+  display: flex;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.teaser-card {
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  flex: 1 1 420px;
+}
+
+.teaser-card--quiz {
+  background: #ffffff;
+  text-align: center;
+}
+
+.teaser-card__lead {
+  font-family: 'Merriweather';
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #23411d;
+}
+
+.teaser-card__image {
+  width: 100%;
+  border-radius: 1.25rem;
+  margin: 1.5rem 0;
+  aspect-ratio: 1000 / 500;
+  object-fit: cover;
+}
+
+.teaser-card--visit {
+  background: #f3efe6;
+}
+
+.teaser-card--visit h3 {
+  font-family: 'Merriweather';
+  font-weight: 800;
+  font-size: 1.75rem;
+  color: #23411d;
+}
+
+.teaser-card--visit p {
+  margin: 1.25rem 0 2rem;
+  font-weight: 500;
+  line-height: 1.6;
+}

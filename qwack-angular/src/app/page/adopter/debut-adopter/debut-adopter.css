@@ -1,0 +1,111 @@
+.debut-adopter {
+  background-color: #f3efe6;
+  width: 100%;
+  min-height: 80vh;
+  overflow: hidden;
+}
+
+/* ---------- Hero ---------- */
+
+.text {
+  display: flex;
+  align-items: center;
+  padding: 2rem 4vw 5rem;
+}
+
+.text__content {
+  flex: 1 1 420px;
+}
+
+.text__title {
+  font-family: 'Merriweather';
+  font-weight: 800;
+  font-size: clamp(3rem, 6vw, 6rem);
+  color: #365027;
+  line-height: 1.05;
+}
+
+.trait{
+  width: 10%;
+  height: 3px;
+  background-color: #b77f38;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+  margin-left : 1rem;
+}
+
+.text__subtitle {
+  font-family: 'Merriweather';
+  font-weight: 800;
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  color: #60733e;
+  width:70%;
+  margin-top:-2rem;
+  padding-bottom: 0.75rem;
+  display: inline-block;
+}
+
+.text__text {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 2rem;
+  max-width: 40rem;
+}
+
+.text__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.text__media {
+  position: relative;
+
+  flex: 1 1 480px;
+}
+
+.text__media img {
+  width: 100%;
+  height: auto;
+  border-radius: 1.5rem;
+  aspect-ratio: 1053 / 545;
+  object-fit: cover;
+}
+
+.text__media .pill--quiz {
+  position: absolute;
+  top: -1.5rem;
+  right: 1.5rem;
+}
+
+/* ---------- Boutons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: 'Montagu Slab';
+  font-weight: 600;
+  font-size: 1.125rem;
+  letter-spacing: 0.02em;
+  padding: 0.9rem 2rem;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background: #365027;
+  color: #f5f1e8;
+}
+
+.btn--outline {
+  background: transparent;
+  border-color: #da9245;
+  color: #da9245;
+}
+

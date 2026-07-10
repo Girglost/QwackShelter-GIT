@@ -1,0 +1,177 @@
+:host {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  color: #504e4c;
+  background: #fafaf7;
+}
+
+:host * {
+  box-sizing: border-box;
+}
+
+:host img {
+  max-width: 100%;
+  display: block;
+}
+
+:host a {
+  text-decoration: none;
+  color: inherit;
+}
+
+:host ul,
+:host ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+:host h1,
+:host h2,
+:host h3,
+:host p {
+  margin: 0;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* ---------- Quizz et visites ---------- */
+
+.quizz-visites {
+  background: #fafaf7;
+  padding: 5rem 4vw;
+}
+
+.support-parent{
+  background-color: #fafaf7FF;;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 3rem
+}
+
+.support-intro {
+  text-align: center;
+  width : 15%;
+;
+}
+
+.support-intro h2 {
+  font-family: 'Merriweather';
+  font-weight: 800;
+  font-size: clamp(1.75rem, 2vw, 2.5rem);
+  color: #23411d;
+}
+
+.support-cards {
+  display: flex;
+  justify-content: center;
+  gap: 5.5rem;
+  margin: 0 auto;
+  flex-wrap: wrap;
+
+}
+
+.support-card {
+  background: rgba(243, 239, 230, 0.5);
+  border-radius: 1.25rem;
+  padding: 1rem;
+  flex: 0 1 280px;
+  border-radius: 45px;
+  border: 4px solid #23411d;
+}
+
+.support-card__icon {
+  width: 4rem;
+  height: auto;
+  margin-top:1rem;
+  margin-left : 10rem;
+}
+
+.support-card h3 {
+  font-family: 'Merriweather';
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: #23411d;
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+.support-card p {
+  margin-top: 0.75rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+
+
+.fin{
+  width:100%;
+  background-color: #ffffff;
+}
+
+.teaser-cards{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:4%;
+}
+
+
+.teaser-card--quiz{
+    width:42%;
+    padding:2%;
+    background:#fff;
+    border-radius:45px;
+}
+
+.teaser-card--visit{
+    width:20%;
+    padding:2%;
+    margin-top:10%;
+    background:#f3efe6;
+    border-radius:45px;
+}
+
+.section-kicker {
+  font-family: 'Merriweather';
+  font-weight: 800;
+  font-size: 1.75rem;
+  color: #23411d;
+  margin-bottom:2rem;
+}
+
+.teaser-card__lead {
+  font-family: 'Merriweather';
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #23411d;
+}
+
+.teaser-card__image {
+  width: 100%;
+  border-radius: 1.25rem;
+  margin: 1.5rem 0;
+  aspect-ratio: 1000 / 500;
+  object-fit: cover;
+}
+
+
+.teaser-card--visit h3 {
+  font-family: 'Merriweather';
+  font-weight: 800;
+  font-size: 1.75rem;
+  color: #23411d;
+}
+
+.teaser-card--visit p {
+  margin: 1.25rem 0 2rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
