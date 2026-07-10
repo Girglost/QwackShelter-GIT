@@ -20,7 +20,7 @@ body {
 
     position:relative;
 
-    background-image:url("/assets/image/a-propos/chien.png");
+    background-image:url("/assets/image/a-propos/fond-fleur.jpg");
     background-size:cover;
     background-position:center;
 
@@ -145,6 +145,75 @@ body {
 
 /* NOS INFRASTRUCTURES */
 
+.intro-infrastructures {
+    position: relative;
+    background: #f3ede1;
+    overflow: hidden;
+    padding: 60px 45px;
+}
+
+.cercle-deco {
+    position: absolute;
+    top: 50px;
+    left: -200px;
+    width: 400px;
+    height: 400px;
+    background: #e8c9a3;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.cercle-deco-grid {
+    position: absolute;
+    top: 500px;
+    right: -200px;
+    width: 400px;
+    height: 400px;
+    background: #e8c9a3;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.intro-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    max-width: 1300px;
+    margin: auto;
+}
+
+.intro-texte {
+    flex: 1;
+}
+
+.intro-texte h1 {
+    text-align: left;
+    color: #c9873c;
+    font-family: 'Montagu Slab';
+    font-size: 35px;
+}
+
+.intro-texte p {
+    color: #555;
+    line-height: 1.7;
+    font-weight: 600;
+    font-family: 'Montagu Slab';
+}
+
+.intro-image {
+    flex: 1;
+}
+
+.intro-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+
+    display: block;
+}
+
 .infrastructures {
 
     width:100%;
@@ -152,9 +221,7 @@ body {
 
     position:relative;
 
-    background-image:url("/assets/image/a-propos/chien.png");
-    background-size:cover;
-    background-position:center;
+    background: #f3ede1;
 
     overflow:hidden;
 
