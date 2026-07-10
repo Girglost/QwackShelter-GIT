@@ -25,6 +25,8 @@ body {
     background-position:center;
 
     overflow:hidden;
+
+    margin-bottom: -37px;
 }
 
 
@@ -110,9 +112,9 @@ body {
 
     color:#c9873c;
 
-    font-family: var(--font-body);
+    font-family: 'Montagu Slab';
 
-    font-size:26px;
+    font-size:35px;
 
     letter-spacing:1px;
 
@@ -136,10 +138,28 @@ body {
 
     margin-bottom:22px;
 
+
+
 }
 
 
 /* NOS INFRASTRUCTURES */
+
+.infrastructures {
+
+    width:100%;
+    min-height:430px;
+
+    position:relative;
+
+    background-image:url("/assets/image/a-propos/chien.png");
+    background-size:cover;
+    background-position:center;
+
+    overflow:hidden;
+
+    padding-bottom: 80px;
+}
 
 .a-propos-container {
   max-width: 1200px;
@@ -163,7 +183,6 @@ body {
 }
 
 
-
 .grid-a-propos {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -175,16 +194,20 @@ body {
 
 h1 {
   text-align: center;
-  font-family: 'Pacifico', cursive;
-  color: var(--forest);
+  font-family: 'Montagu Slab';
   font-size: 40px;
   margin-bottom: 40px;
+  color:#c9873c;
 }
 
 .content-card p {
   color: var(--ink);
   line-height: 1.8;
   text-align: center;
+  font-family: var(--font-body);
+  color:white;
+  font-weight:600;
+
 }
 
 
@@ -206,14 +229,6 @@ h1 {
   display: block;
 }
 
-
-.content-card p {
-
-  color: var(--ink);
-  line-height: 1.8;
-  text-align: justify;
-
-}
 
 
 .infra-grid {
@@ -249,11 +264,13 @@ h1 {
 
 .infra-card h2 {
 
-  font-family:'Pacifico', cursive;
+  font-family: 'Montagu Slab';
 
   color:var(--gold);
 
   font-size:26px;
+
+  color:#3e7034;
 
 }
 
@@ -264,6 +281,8 @@ h1 {
   color:var(--ink);
 
   line-height:1.6;
+
+  font-family: var(--font-body)
 
 }
 
@@ -302,7 +321,7 @@ h1 {
 
 .titre-chiffres h2 {
 
-  font-family: 'Pacifico', cursive;
+  font-family: 'Montagu Slab';
 
   color: #2f522d;
 
@@ -399,7 +418,7 @@ h1 {
 
   text-transform:uppercase;
 
-  font-family:'Pacifico', cursive;
+  font-family:'Montagu Slab';
 
   color:#2f522d;
 
@@ -455,7 +474,7 @@ h1 {
 
   color:#b77f38;
 
-  font-family:'Pacifico', cursive;
+  font-family:'Montagu Slab', serif;
 
   font-size:30px;
 
@@ -472,5 +491,7 @@ h1 {
   max-width:850px;
 
   margin:15px auto;
+
+  font-family:'Montagu Slab', serif;
 
 }
