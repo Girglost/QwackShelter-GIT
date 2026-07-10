@@ -1,0 +1,10 @@
+export enum Caractere {
+  GENTIL = "GENTIL",
+  AGRESSIF = "AGRESSIF",
+  CALME = "CALME",
+  CALIN = "CALIN",
+  TIMIDE = "TIMIDE",
+  AFFECTUEUX = "AFFECTUEUX",
+  CRAINTIF = "CRAINTIF",
+  JOUEUR = "JOUEUR"
+}
