@@ -1,0 +1,321 @@
+<h1>Liste des Animaux</h1>
+
+<div class="form-container">
+  <h2 class="form-title">
+    {{ editingAnimal ? "Modifier l'animal" : 'Ajouter un animal' }}
+  </h2>
+
+  <form (submit)="addOrUpdate()" [formGroup]="formAnimal" class="form-emplacement">
+    <div class="form-group">
+      <label for="typeAnimal">Type d'animal :</label>
+      <div class="input-container">
+        <select id="typeAnimal" formControlName="typeAnimal" [disabled]="!!editingAnimal">
+          <option value="">-- Sélectionner un type --</option>
+          @for (t of typeAnimalValues; track t) {
+            <option [value]="t">{{ t }}</option>
+          }
+        </select>
+        <div
+          class="error-message"
+          *ngIf="CtrlTypeAnimal.dirty && CtrlTypeAnimal.hasError('required')"
+        >
+          * Indiquer le type d'animal *
+        </div>
+      </div>
+    </div>
+
+    @if (CtrlTypeAnimal.value) {
+      <div class="form-group">
+        <label for="nomAnimal">Nom :</label>
+        <div class="input-container">
+          <input id="nomAnimal" type="text" formControlName="nomAnimal" placeholder="Ex: Milo" />
+          <div
+            class="error-message"
+            *ngIf="CtrlNomAnimal.dirty && CtrlNomAnimal.hasError('required')"
+          >
+            * Indiquer le nom *
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dateNaissance">Date de naissance :</label>
+        <div class="input-container">
+          <input id="dateNaissance" type="date" formControlName="dateNaissance" />
+          <div
+            class="error-message"
+            *ngIf="CtrlDateNaissance.dirty && CtrlDateNaissance.hasError('required')"
+          >
+            * Indiquer la date de naissance *
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="couleur">Couleur :</label>
+        <div class="input-container">
+          <input id="couleur" type="text" formControlName="couleur" placeholder="Ex: Roux" />
+          <div class="error-message" *ngIf="CtrlCouleur.dirty && CtrlCouleur.hasError('required')">
+            * Indiquer la couleur *
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="regimeAlimentaire">Régime alimentaire :</label>
+        <div class="input-container">
+          <input
+            id="regimeAlimentaire"
+            type="text"
+            formControlName="regimeAlimentaire"
+            placeholder="Ex: Croquettes"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="traitement">Traitement :</label>
+        <div class="input-container">
+          <input id="traitement" type="text" formControlName="traitement" placeholder="Ex: Aucun" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="famille">Famille :</label>
+        <div class="input-container">
+          <select id="famille" formControlName="famille">
+            <option value="">-- Sélectionner une famille --</option>
+            @for (f of familleValues; track f) {
+              <option [value]="f">{{ f }}</option>
+            }
+          </select>
+          <div class="error-message" *ngIf="CtrlFamille.dirty && CtrlFamille.hasError('required')">
+            * Indiquer la famille *
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="genre">Genre :</label>
+        <div class="input-container">
+          <select id="genre" formControlName="genre">
+            <option value="">-- Sélectionner un genre --</option>
+            @for (g of genreValues; track g) {
+              <option [value]="g">{{ g }}</option>
+            }
+          </select>
+          <div class="error-message" *ngIf="CtrlGenre.dirty && CtrlGenre.hasError('required')">
+            * Indiquer le genre *
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="quackShelter">QuackShelter :</label>
+        <div class="input-container">
+          <select id="quackShelter" formControlName="quackShelter">
+            <option [ngValue]="''">-- Sélectionner un QuackShelter --</option>
+            @for (qs of quackShelters$ | async; track qs.id) {
+              <option [ngValue]="qs">{{ qs.id }} - {{ qs.nom }}</option>
+            }
+          </select>
+          <div
+            class="error-message"
+            *ngIf="CtrlQuackShelter.dirty && CtrlQuackShelter.hasError('required')"
+          >
+            * Sélectionner un QuackShelter *
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Caractères :</label>
+        <div class="input-container checkbox-list">
+          @for (c of caractereValues; track c) {
+            <label class="checkbox-label checkbox-inline">
+              <input
+                type="checkbox"
+                [checked]="caracteresSelectionnes.includes(c)"
+                (change)="toggleCaractereForm(c)"
+              />
+              <span class="custom-checkbox"></span>
+              {{ c }}
+            </label>
+          }
+        </div>
+      </div>
+
+      <!-- Champs spécifiques Chat / Chien / NAC -->
+      @if (estDomestique) {
+        <div class="form-section-title">Informations spécifiques</div>
+
+        <div class="form-group">
+          <label for="race">Race :</label>
+          <div class="input-container">
+            <input id="race" type="text" formControlName="race" placeholder="Ex: Labrador" />
+            <div class="error-message" *ngIf="CtrlRace.dirty && CtrlRace.hasError('required')">
+              * Indiquer la race *
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label for="sterilisation" class="checkbox-label">
+            <input id="sterilisation" type="checkbox" formControlName="sterilisation" />
+            <span class="custom-checkbox"></span>
+            Stérilisé(e)
+          </label>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label for="gestante" class="checkbox-label">
+            <input id="gestante" type="checkbox" formControlName="gestante" />
+            <span class="custom-checkbox"></span>
+            Gestante
+          </label>
+        </div>
+      }
+
+      <!-- Champs spécifiques Canard / Poule -->
+      @if (estVolaille) {
+        <div class="form-section-title">Informations spécifiques</div>
+
+        <div class="form-group">
+          <label for="raceVolaille">Race :</label>
+          <div class="input-container">
+            <input id="raceVolaille" type="text" formControlName="race" placeholder="Ex: Leghorn" />
+            <div class="error-message" *ngIf="CtrlRace.dirty && CtrlRace.hasError('required')">
+              * Indiquer la race *
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label for="capaciteVol" class="checkbox-label">
+            <input id="capaciteVol" type="checkbox" formControlName="capaciteVol" />
+            <span class="custom-checkbox"></span>
+            Capacité de vol
+          </label>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label for="pondeuse" class="checkbox-label">
+            <input id="pondeuse" type="checkbox" formControlName="pondeuse" />
+            <span class="custom-checkbox"></span>
+            Pondeuse
+          </label>
+        </div>
+
+        @if (estCanard) {
+          <div class="form-group checkbox-group">
+            <label for="estSauvage" class="checkbox-label">
+              <input id="estSauvage" type="checkbox" formControlName="estSauvage" />
+              <span class="custom-checkbox"></span>
+              Sauvage
+            </label>
+          </div>
+        }
+      }
+    }
+
+    <div class="form-actions">
+      @if (editingAnimal) {
+        <button type="button" class="btn-cancel" (click)="annulerEdition()">Annuler</button>
+      }
+      <input
+        [disabled]="formAnimal.invalid"
+        type="submit"
+        [value]="editingAnimal ? 'Modifier' : 'Ajouter'"
+        class="btn-submit"
+      />
+    </div>
+  </form>
+</div>
+
+<hr />
+
+<!-- Barre de filtres (inchangée) -->
+<div class="filter-bar filter-bar-wrap">
+  <div class="filter-group">
+    <span class="filter-group-label">Famille :</span>
+    @for (f of familleValues; track f) {
+      <button
+        class="filter-btn"
+        [class.active]="famillesFiltre.has(f)"
+        (click)="toggleFamilleFiltre(f)"
+      >
+        {{ f }}
+      </button>
+    }
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-group-label">Genre :</span>
+    @for (g of genreValues; track g) {
+      <button
+        class="filter-btn"
+        [class.active]="genresFiltre.has(g)"
+        (click)="toggleGenreFiltre(g)"
+      >
+        {{ g }}
+      </button>
+    }
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-group-label">Caractères :</span>
+    @for (c of caractereValues; track c) {
+      <button
+        class="filter-btn"
+        [class.active]="caracteresFiltre.has(c)"
+        (click)="toggleCaractereFiltre(c)"
+      >
+        {{ c }}
+      </button>
+    }
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-group-label">Statut :</span>
+    @for (s of statutValues; track s) {
+      <button
+        class="filter-btn"
+        [class.active]="statutsFiltre.has(s)"
+        (click)="toggleStatutFiltre(s)"
+      >
+        {{ s }}
+      </button>
+    }
+  </div>
+
+  <button class="filter-btn filter-btn-reset" (click)="reinitialiserFiltres()">
+    Réinitialiser les filtres
+  </button>
+</div>
+
+<table class="Liste">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nom</th>
+      <th>Genre</th>
+      <th>Caractères</th>
+      <th>StatutAnimal</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let a of animauxFiltres$ | async">
+      <td>{{ a.id }}</td>
+      <td>{{ a.nomAnimal }}</td>
+      <td>{{ a.genre }}</td>
+      <td>{{ a.caracteres?.join(', ') }}</td>
+      <td>{{ afficherStatut(a) }}</td>
+      <td>
+        <button (click)="edit(a)">MODIFIER</button>
+        <button (click)="remove(a)">SUPPRIMER</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

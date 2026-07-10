@@ -13,7 +13,7 @@
         <select id="animal" formControlName="animal">
           <option [ngValue]="''">-- Sélectionner un animal --</option>
           @for (a of animaux$ | async; track a.id) {
-            <option [ngValue]="a">{{ a.nom }}</option>
+            <option [ngValue]="a">{{ a.nomAnimal }}</option>
           }
         </select>
         <div class="error-message" *ngIf="CtrlAnimal.dirty && CtrlAnimal.hasError('required')">
@@ -117,7 +117,7 @@
     (ngModelChange)="filtrerParAnimal($event)">
     <option [ngValue]="null">-- Filtrer par animal --</option>
     @for (a of animaux$ | async; track a.id) {
-      <option [ngValue]="a">{{ a.nom }}</option>
+      <option [ngValue]="a">{{ a.nomAnimal }}</option>
     }
   </select>
 </div>
@@ -139,7 +139,7 @@
   <tbody>
     <tr *ngFor="let h of historiques$ | async">
       <td>{{ h.id }}</td>
-      <td>{{ h.animal?.nom }}</td>
+      <td>{{ h.animal?.nomAnimal }}</td>
       <td>{{ h.cause }}</td>
       <td>{{ h.date }}</td>
       <td>{{ h.heure }}</td>

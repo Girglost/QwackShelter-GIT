@@ -3,5 +3,5 @@ export enum Statut {
   EnBalade = "ENBALADE",
   EnSoin = "ENSOIN",
   Adopte = "ADOPTE",
-  Mort = "MORT"
+  Mort = "MORT",
 }

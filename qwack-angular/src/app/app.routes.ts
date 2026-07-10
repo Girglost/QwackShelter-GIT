@@ -16,13 +16,13 @@ import { PersonnePage } from './page/personne-page/personne-page';
 import { LieuPage } from './page/lieu-page/lieu-page';
 import { ProfilAnimal } from './page/profil-animal/profil-animal';
 import { Adopter } from './page/adopter/adopter/adopter';
+import { AnimalPage } from './page/animal-page/animal-page';
 
 export const routes: Routes = [
   { path: 'accueil', component: Accueil },
   { path: 'actualites', component: Actualites },
   { path: 'contact', component: Contact },
   { path: 'nous-rejoindre', component: NousRejoindre },
-  { path: 'emplacement', component: EmplacementPage },
   { path: 'devenir-benevole', component: DevenirBenevole },
   { path: 'nos-missions', component: NosMissions },
   { path: 'swipe-compagnon', component: SwipeCompagnon },
@@ -37,6 +37,7 @@ export const routes: Routes = [
   { path: 'hSante', component: HistoriqueSantePage},
   { path: 'personne', component: PersonnePage},
   { path : 'lieu', component: LieuPage},
+  { path : 'animal', component: AnimalPage},
 
   { path: '**', component: NotFound }, // a mettre a la fin de toutes les routes pour gérer les pages non trouvées
 ];
