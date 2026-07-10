@@ -1,0 +1,151 @@
+.adoption {
+  background-color: #ece7dd;
+}
+
+.bandeau-adoption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #60733e;
+  padding: 2rem 1rem;
+}
+
+.bandeau-adoption h1 {
+  font-family: 'Montagu Slab';
+  font-weight: 600;
+  font-size: clamp(24px, 3.5vw, 39px);
+  color: #f5f1e8;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.adoption-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 1rem;
+}
+
+/* Points de pagination */
+
+.pagination-dots {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 2rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #d3d1c7;
+}
+
+.dot.active {
+  background-color: #60733e;
+}
+
+/* Carousel */
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 2.5rem;
+}
+
+.carte-animal {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.carte-animal img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* La carte du milieu, plus grande, effet "focus" */
+.carte-animal.grand {
+  width: clamp(180px, 20vw, 220px);
+  height: clamp(220px, 24vw, 260px);
+}
+
+.carte-animal.grand :hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.carte-animal.petit {
+  width: clamp(120px, 14vw, 150px);
+  height: clamp(160px, 18vw, 190px);
+  opacity: 0.85;
+}
+
+.carte-animal.petit :hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+
+}
+
+.etiquette {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #60733ecc;
+  color: #f5f1e8;
+  font-family: 'Montagu Slab';
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+/* Bouton voir tous */
+
+.btn-voir-tous {
+  display: inline-block;
+  background-color: #b77f38;
+  color: #f5f1e8;
+  font-family: 'Montagu Slab';
+  font-weight: 600;
+  font-size: clamp(15px, 1.5vw, 18px);
+  text-decoration: none;
+  padding: 14px 32px;
+  border-radius: 28px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-voir-tous:hover {
+  background-color: #916327;
+  transform: scale(1.02);
+}
+
+/* RESPONSIVE : sur petit écran, on cache les cartes latérales pour ne garder que le focus */
+@media (max-width: 800px) {
+  .carousel {
+    gap: 1rem;
+  }
+
+  .carte-animal.petit {
+    display: none;
+  }
+
+  .carte-animal.grand {
+    width: clamp(200px, 60vw, 280px);
+    height: clamp(240px, 70vw, 320px);
+  }
+}

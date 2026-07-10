@@ -69,6 +69,12 @@
   margin-left: 5%;
 }
 
+.carte-evenement:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
 .carte-image {
   position: relative;
   border-radius: 12px;
