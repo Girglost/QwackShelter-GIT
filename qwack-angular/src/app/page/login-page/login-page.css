@@ -1,0 +1,108 @@
+:host {
+    --forest: #2f522d;
+    --forest-dark: #1f461d;
+    --gold: #b77f38;
+    --ink: #555;
+    --light: #faf8f3;
+
+    --font-display: 'Pacifico', cursive;
+    --font-body: 'Montserrat', sans-serif;
+
+    display: block;
+    font-family: var(--font-body);
+}
+
+.container-login-form {
+    max-width: 100%;
+    background: #f3efe6FF;
+    margin: auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-family: var(--font-display);
+    color: var(--forest);
+    font-weight: 700;
+    font-size: 80px;
+
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+.div-error-login {
+    color: red;
+    display: flex;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.form-login {
+    width: 60%;
+}
+
+.form-login div {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-login div:not(.div-error-login):not(:last-of-type) {
+    margin-bottom: 75px;
+}
+
+label {
+    color: #504e4cFF;
+    font-size: 24px;
+}
+
+input {
+    background-color: white;
+    color: #504e4cFF;
+    height: 75px;
+    border-radius: 12px;
+    border: none;
+    margin-top: 11px;
+    padding-left: 10px;
+    font-size: 24px;
+}
+
+.div-connexion {
+    color: #f5f1e8FF;
+    font-family: "Montagu Slab";
+}
+
+.div-connexion input:disabled {
+    background-color: grey;
+}
+
+.div-connexion input {
+    background: #365027FF;
+    color: #f5f1e8FF;
+    cursor: pointer;
+    margin: 0;
+    font-size: 32px;
+}
+
+.div-inscription {
+    color: #23411dFF;
+    font-family: "Pacifico";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 50px;
+    font-size: 24px;
+}
+
+.div-inscription a {
+    color: #da9245FF;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.div-inscription p {
+    margin: 0;
+}

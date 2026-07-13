@@ -1,0 +1,43 @@
+<div class="container-login-form">
+  <h1>Connexion</h1>
+
+  @if (loginError()) {
+  <div class="div-error-login">Nom d'utilisateur ou mot de passe incorrect !</div>
+  }
+
+  <form class="form-login" (submit)="auth()" [formGroup]="formAuth">
+    <div>
+      <label for="login">Email</label>
+      <input type="text" formControlName="login" />
+      @if (formCtrlLogin.dirty && formCtrlLogin.invalid) {
+      <div class="div-error-login">Le nom d'utilisateur est obligatoire</div>
+      }
+    </div>
+
+
+
+    <div>
+      <label for="password">Mot de passe</label>
+      <input type="password" formControlName="password" />
+      @if (formCtrlPassword.dirty && formCtrlPassword.hasError('required')) {
+      <div class="div-error-login">Le mot de passe est obligatoire</div>
+      }
+      @if (formCtrlPassword.dirty && formCtrlPassword.hasError('minlength')) {
+      <div class="div-error-login">Le mot de passe doit faire 6 caractères minimum</div>
+      }
+    </div>
+
+
+    <div class="div-connexion">
+      <input [disabled]="formAuth.invalid" type="submit" value="Se connecter" />
+    </div>
+  </form>
+
+  <div class="div-inscription">
+    <p>Vous n'avez pas de compte ?</p>
+
+    <a routerLink="/inscription">Inscrivez vous ! </a>
+  </div>
+
+
+</div>

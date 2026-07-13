@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Lieu } from '../model/lieu';
 import { TypeLieu } from '../enum/type-lieu';
+import { Lieu } from '../model/lieu';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LieuService {
   private http: HttpClient = inject(HttpClient);
-  private apiUrl: string = "http://localhost:8080/api/lieu";
+  private apiUrl: string = "/lieu";
 
   public findAll(): Observable<Lieu[]> {
     return this.http.get<Lieu[]>(this.apiUrl);

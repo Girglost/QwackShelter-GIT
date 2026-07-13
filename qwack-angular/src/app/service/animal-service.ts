@@ -10,14 +10,14 @@ import { UpdateAnimalRequest } from '../model/update-animal-request';
 })
 export class AnimalService {
   private http: HttpClient = inject(HttpClient);
-  private apiUrl: string = "http://localhost:8080/api/animal";
+  private apiUrl: string = "/animal";
 
   public findAll(): Observable<Animal[]> {
     return this.http.get<Animal[]>(this.apiUrl);
   }
 
-  public findById( id : number): Observable<Animal> {
-    return this.http.get<Animal>(`this.apiUrl/${id}`);
+  public findById(id: number): Observable<Animal> {
+    return this.http.get<Animal>(`${this.apiUrl}/${id}`);
   }
 
   public add(req: CreateAnimalRequest): Observable<Animal> {

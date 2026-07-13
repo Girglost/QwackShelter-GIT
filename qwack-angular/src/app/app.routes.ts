@@ -11,13 +11,14 @@ import { NousRejoindre } from './page/nous-rejoindre/nous-rejoindre';
 import { StatutAnimalPage } from './page/statut-animal-page/statut-animal-page';
 import { SwipeCompagnon } from './page/swipe-compagnon/swipe-compagnon';
 
+import { authGuard } from './guard/auth-guard';
 import { APropos } from './page/a-propos/a-propos';
-import { PersonnePage } from './page/personne-page/personne-page';
-import { LieuPage } from './page/lieu-page/lieu-page';
-import { ProfilAnimal } from './page/profil-animal/profil-animal';
 import { Adopter } from './page/adopter/adopter/adopter';
 import { AnimalPage } from './page/animal-page/animal-page';
-import { NosAnimauxPage } from './page/nos-animaux-page/nos-animaux-page';
+import { LieuPage } from './page/lieu-page/lieu-page';
+import { LoginPage } from './page/login-page/login-page';
+import { PersonnePage } from './page/personne-page/personne-page';
+import { ProfilAnimal } from './page/profil-animal/profil-animal';
 
 export const routes: Routes = [
   { path: 'accueil', component: Accueil },
@@ -28,18 +29,18 @@ export const routes: Routes = [
   { path: 'nos-missions', component: NosMissions },
   { path: 'swipe-compagnon', component: SwipeCompagnon },
   { path: 'a-propos', component: APropos },
-  { path: 'adopter', component: Adopter },
-  { path: 'animaux', component: NosAnimauxPage},
+  { path: 'adopter', component: Adopter, canActivate: [authGuard] },
+  { path: 'login', component: LoginPage },
 
   { path: 'animal/:id', component: ProfilAnimal },
 
   // ====== Routes vers le CRUD des classes ======
-  { path: 'emplacement', component: EmplacementPage },
-  { path: 'sAnimal', component: StatutAnimalPage},
-  { path: 'hSante', component: HistoriqueSantePage},
-  { path: 'personne', component: PersonnePage},
-  { path: 'lieu', component: LieuPage},
-  { path: 'animal', component: AnimalPage},
+  { path: 'emplacement', component: EmplacementPage, canActivate: [authGuard] },
+  { path: 'sAnimal', component: StatutAnimalPage, canActivate: [authGuard] },
+  { path: 'hSante', component: HistoriqueSantePage, canActivate: [authGuard] },
+  { path: 'personne', component: PersonnePage, canActivate: [authGuard] },
+  { path: 'lieu', component: LieuPage, canActivate: [authGuard] },
+  { path: 'animal', component: AnimalPage, canActivate: [authGuard] },
 
   { path: '**', component: NotFound }, // a mettre a la fin de toutes les routes pour gérer les pages non trouvées
 ];

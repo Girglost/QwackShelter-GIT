@@ -8,7 +8,7 @@ import { QuackShelter } from '../model/quack-shelter';
 })
 export class QuackShelterService {
   private http: HttpClient = inject(HttpClient);
-  private apiUrl: string = "http://localhost:8080/api/quackshelter";
+  private apiUrl: string = "/quackshelter";
 
   public findAll(): Observable<QuackShelter[]> {
     return this.http.get<QuackShelter[]>(this.apiUrl);

@@ -28,9 +28,14 @@
   margin-left: 0.7rem;
 }
 
+.lien-connexion {
+  cursor: pointer;
+}
+
 /* Le conteneur principal */
 .header_don_bouton {
-  display: flex; /* Permet au bouton de s'adapter à la taille de son contenu */
+  display: flex;
+  /* Permet au bouton de s'adapter à la taille de son contenu */
   justify-content: flex-end;
 }
 
@@ -39,17 +44,24 @@
   margin-right: 9px;
   display: inline-flex;
   align-items: center;
-  gap: 6px; /* Espace entre le cœur et le texte */
+  gap: 6px;
+  /* Espace entre le cœur et le texte */
 
-  width: 193px; /* AJOUTÉ */
-  height: 48px; /* AJOUTÉ */
-  box-sizing: border-box; /* AJOUTÉ */
-  justify-content: center; /* AJOUTÉ */
+  width: 193px;
+  /* AJOUTÉ */
+  height: 48px;
+  /* AJOUTÉ */
+  box-sizing: border-box;
+  /* AJOUTÉ */
+  justify-content: center;
+  /* AJOUTÉ */
 
   /* Couleurs et bordures */
-  background-color: #b77f38; /* Marron/doré du fond */
+  background-color: #b77f38;
+  /* Marron/doré du fond */
   color: #f5f1e8;
-  border-radius: 16px; /* Coins très arrondis */
+  border-radius: 16px;
+  /* Coins très arrondis */
 
   /* Espacement interne (Padding) */
   padding: 2px 6px 2px 4px;
@@ -58,8 +70,10 @@
   font-family: 'Montagu Slab';
   font-weight: 600;
   font-size: clamp(14px, 1.7vw, 17px);
-  text-decoration: none; /* Enlève le soulignement du lien */
-  letter-spacing: 0.8px; /* Léger espacement des lettres */
+  text-decoration: none;
+  /* Enlève le soulignement du lien */
+  letter-spacing: 0.8px;
+  /* Léger espacement des lettres */
 
   cursor: pointer;
   transition:
@@ -99,6 +113,7 @@
   }
 
   .btn-connexion p {
-    display: none; /* cache le texte "Se connecter" sur mobile, garde juste l'icône */
+    display: none;
+    /* cache le texte "Se connecter" sur mobile, garde juste l'icône */
   }
 }

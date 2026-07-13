@@ -1,16 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Personne } from '../model/personne';
 import { Role } from '../enum/role';
 import { StatutActivite } from '../enum/statut-activite';
+import { Personne } from '../model/personne';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PersonneService {
   private http: HttpClient = inject(HttpClient);
-  private apiUrl: string = "http://localhost:8080/api/personne";
+  private apiUrl: string = "/personne";
 
   public findAll(): Observable<Personne[]> {
     return this.http.get<Personne[]>(this.apiUrl);

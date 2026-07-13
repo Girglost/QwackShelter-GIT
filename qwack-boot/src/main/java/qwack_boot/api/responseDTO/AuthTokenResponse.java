@@ -1,4 +1,4 @@
-package qwack_boot.dto.request;
+package qwack_boot.api.responseDTO;
 
 /**
  * AuthTokenResponse

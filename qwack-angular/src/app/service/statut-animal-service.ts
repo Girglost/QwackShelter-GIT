@@ -10,7 +10,7 @@ import { StatutAnimal } from '../model/statut-animal';
 })
 export class StatutAnimalService {
   private http: HttpClient = inject(HttpClient);
-  private apiUrl: string = 'http://localhost:8080/api/sAnimal';
+  private apiUrl: string = '/sAnimal';
 
   public findAll(): Observable<StatutAnimal[]> {
     return this.http.get<StatutAnimal[]>(this.apiUrl);

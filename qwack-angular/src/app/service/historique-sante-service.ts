@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HistoriqueSante } from '../model/historique-sante';
 import { Cause } from '../enum/cause';
+import { HistoriqueSante } from '../model/historique-sante';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HistoriqueSanteService {
   private http: HttpClient = inject(HttpClient);
-  private apiUrl: string = "http://localhost:8080/api/hSante";
+  private apiUrl: string = "/hSante";
 
   public findAll(): Observable<HistoriqueSante[]> {
     return this.http.get<HistoriqueSante[]>(this.apiUrl);

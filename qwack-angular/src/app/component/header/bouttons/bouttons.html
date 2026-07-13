@@ -1,11 +1,18 @@
 <div class="header-boutons">
   <div class="btn-connexion">
-    <p>Connexion</p>
-    <img src="./../../../../assets/image/header/connexion-btn.png" width="40px" />
+    @if(authService.isLogged()){
+    <a class="lien-connexion" (click)="logout()">Deconnexion</a>
+    <img routerLink="/profil-personne" src="./../../../../assets/image/header/connexion-btn.png" width="40px" />
+    }@else{
+    <a routerLink="/login">Connexion</a>
+    }
+
+
+
   </div>
 
   <div class="header_don_bouton">
-    <a (click)="faireDon()"><img src="./../../../assets/image/footer/coeur.png" alt="Image de Coeur" width="35px"/>
+    <a (click)="faireDon()"><img src="./../../../assets/image/footer/coeur.png" alt="Image de Coeur" width="35px" />
       <span>FAIRE UN DON</span>
     </a>
   </div>

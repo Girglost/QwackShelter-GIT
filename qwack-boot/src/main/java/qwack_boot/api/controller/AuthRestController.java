@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import qwack_boot.dto.request.AuthRequest;
-import qwack_boot.dto.request.AuthTokenResponse;
+import qwack_boot.api.requestDTO.AuthRequest;
+import qwack_boot.api.responseDTO.AuthTokenResponse;
 import qwack_boot.model.Personne;
 import qwack_boot.security.JwtUtils;
 import qwack_boot.service.PersonneService;

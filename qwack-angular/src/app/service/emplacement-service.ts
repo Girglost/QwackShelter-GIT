@@ -1,7 +1,7 @@
-import { TypeBox } from '../enum/type-box';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { TypeBox } from '../enum/type-box';
 import { Emplacement } from '../model/emplacement';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { Emplacement } from '../model/emplacement';
 })
 export class EmplacementService {
   private http: HttpClient = inject(HttpClient);
-  private apiUrl: string = "http://localhost:8080/api/emplacement";
+  private apiUrl: string = "/emplacement";
 
   public findAll(): Observable<Emplacement[]> {
     return this.http.get<Emplacement[]>(this.apiUrl);
@@ -20,11 +20,11 @@ export class EmplacementService {
   }
 
   public update(emplacement: Emplacement): Observable<Emplacement> {
-    return this.http.put<Emplacement>(`${ this.apiUrl }/${ emplacement.id }`, emplacement);
+    return this.http.put<Emplacement>(`${this.apiUrl}/${emplacement.id}`, emplacement);
   }
 
   public remove(emplacement: Emplacement): Observable<void> {
-    return this.http.delete<void>(`${ this.apiUrl }/${ emplacement.id }`);
+    return this.http.delete<void>(`${this.apiUrl}/${emplacement.id}`);
   }
 
   public findDispo(): Observable<Emplacement[]> {
@@ -35,7 +35,7 @@ export class EmplacementService {
     return this.http.get<Emplacement[]>(`${this.apiUrl}/complet`);
   }
 
-  public findByBox(box:TypeBox): Observable<Emplacement[]> {
+  public findByBox(box: TypeBox): Observable<Emplacement[]> {
     return this.http.get<Emplacement[]>(`${this.apiUrl}/box/${box}`);
   }
 
