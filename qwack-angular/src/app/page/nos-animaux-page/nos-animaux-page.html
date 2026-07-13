@@ -1,1 +1,63 @@
-<p>nos-animaux-page works!</p>
+<!-- ======== Barre de Recherche + Filtres ======== -->
+
+<div class="recherche-filtres">
+  <div class="div-recherche">
+    <input
+      class="barreRecherche"
+      type="text"
+      placeholder="Chercher un animal"
+      [formControl]="rechercheControl"
+    />
+  </div>
+  <div class="div-filtres">
+    <input class="BoutonFiltre" type="button" value="Filtres" (click)="toggleFiltres()" />
+  </div>
+</div>
+
+<!-- ======== Liste des Filtres ======== -->
+
+<div class="filtreListe" [class.filtreListe--ouvert]="afficherFiltre">
+  <div class="filtreAge">
+    Age
+    <select>
+      <option value="">--- Filtre par Age ---</option>
+      <option value="-1">1 an et moins</option>
+      <option value="1-3">Entre 1 et 3 ans</option>
+      <option value="4-6">Entre 4 et 6 ans</option>
+      <option value="7+">7 ans et plus</option>
+    </select>
+  </div>
+  <div class="filtreEspece">
+    Espèce
+    <select>
+      <option value="">--- Filtre par Espèce ---</option>
+      <option *ngFor="let e of typeAnimalValues" [value]="e">{{ e }}</option>
+    </select>
+  </div>
+  <div class="filtreCaractere">
+    Caractère
+    <select>
+      <option value="">--- Filtre par Caractère ---</option>
+      <option *ngFor="let e of caractereValues" [value]="e">{{ e }}</option>
+    </select>
+  </div>
+</div>
+
+<!-- ======== Liste des Animaux ======== -->
+
+<div class="ListeAnimaux">
+  <ng-container *ngFor="let a of animaux$ | async">
+    <div class="animalFiche">
+      <div class="animalImg"></div>
+      <div class="animalInfo">
+        {{ a.nomAnimal }} <br />
+        {{ a.genre }} -
+        @if (calculAge(a.dateNaissance) < 1) {
+          {{ convertAnneeEnMois(calculAge(a.dateNaissance)) }} mois
+        } @else {
+          {{ cleanAge(calculAge(a.dateNaissance)) }} ans
+        }
+      </div>
+    </div>
+  </ng-container>
+</div>

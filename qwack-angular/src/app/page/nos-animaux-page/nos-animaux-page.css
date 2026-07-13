@@ -1,0 +1,184 @@
+/*
+////////////////////////////////////////////////////////
+////////////////  Recherche et Filtre  /////////////////
+////////////////////////////////////////////////////////
+*/
+
+
+.recherche-filtres {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 75px;
+  gap: 20px;
+  padding: 0 5%;
+  box-sizing: border-box;
+}
+
+.div-recherche {
+  flex: 1 1 65%;
+}
+
+.barreRecherche {
+  width: 100%;
+  height: 45px;
+  padding: 0 20px;
+  box-sizing: border-box;
+
+  font-family: 'Montagu Slab';
+  font-size: clamp(16px, 1.4vw, 17px);
+  font-weight: 400;
+
+  border: 2px solid #60733e;
+  border-radius: 50px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.barreRecherche:focus {
+  border-color: #4a5a30;
+  box-shadow: 0 0 0 3px rgba(96, 115, 62, 0.2);
+}
+
+.barreRecherche::placeholder {
+  color: #999;
+}
+
+.div-filtres {
+  flex: 0 0 auto;
+}
+
+.BoutonFiltre {
+  height: 45px;
+  padding: 0 25px;
+
+  background-color: #60733e;
+  border: none;
+  border-radius: 50px;
+
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+
+  color: white;
+  font-family: 'Montagu Slab';
+  font-size: clamp(16px, 1.4vw, 17px);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.BoutonFiltre:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.BoutonFiltre:active {
+  transform: scale(0.98);
+}
+
+
+/*
+////////////////////////////////////////////////////////
+//////////////////  Liste des Filtres  /////////////////
+////////////////////////////////////////////////////////
+*/
+
+
+.filtreListe {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  gap: 20px;
+  padding: 0 20px;
+  box-sizing: border-box;
+
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+}
+
+.filtreListe--ouvert {
+  max-height: 200px; /* assez grand pour contenir les filtres */
+  opacity: 1;
+  padding: 15px 20px;
+}
+
+.filtreAge,
+.filtreEspece,
+.filtreCaractere {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-width: 0; /* évite que les select ne débordent leur colonne */
+  font-family: 'Montagu Slab';
+  font-size: 14px;
+  gap: 5px;
+}
+
+.filtreAge select,
+.filtreEspece select,
+.filtreCaractere select {
+  width: 100%;
+  height: 36px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  padding: 0 10px;
+  font-family: 'Montagu Slab';
+  font-size: 14px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+
+
+/*
+////////////////////////////////////////////////////////
+///////////////////  Fiches Animaux  ///////////////////
+////////////////////////////////////////////////////////
+*/
+
+
+.ListeAnimaux {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  padding: 30px 5%; /* espace avec les bords de la page */
+  box-sizing: border-box;
+}
+
+.animalFiche {
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.animalFiche:hover {
+  transform: translateY(-3px);
+}
+
+.animalImg {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-color: #ddd; /* placeholder tant qu'il n'y a pas d'image réelle */
+}
+
+.animalInfo {
+  padding: 10px 15px;
+  font-family: 'Montagu Slab';
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+
+@media (max-width: 900px) {
+  .ListeAnimaux { grid-template-columns: repeat(2, 1fr); }
+  .filtreListe { flex-wrap: wrap; }
+}
+
+@media (max-width: 600px) {
+  .ListeAnimaux { grid-template-columns: 1fr; }
+}
