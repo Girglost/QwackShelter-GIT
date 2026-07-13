@@ -17,6 +17,7 @@ import { LieuPage } from './page/lieu-page/lieu-page';
 import { ProfilAnimal } from './page/profil-animal/profil-animal';
 import { Adopter } from './page/adopter/adopter/adopter';
 import { AnimalPage } from './page/animal-page/animal-page';
+import { NosAnimauxPage } from './page/nos-animaux-page/nos-animaux-page';
 
 export const routes: Routes = [
   { path: 'accueil', component: Accueil },
@@ -28,6 +29,7 @@ export const routes: Routes = [
   { path: 'swipe-compagnon', component: SwipeCompagnon },
   { path: 'a-propos', component: APropos },
   { path: 'adopter', component: Adopter },
+  { path: 'nos-animaux', component: NosAnimauxPage},
 
   { path: 'animal/:id', component: ProfilAnimal },
 
