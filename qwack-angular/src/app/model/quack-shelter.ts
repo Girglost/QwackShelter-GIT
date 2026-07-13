@@ -1,4 +1,6 @@
+import { Lieu } from "./lieu";
+
 export interface QuackShelter {
   id: number;
-  nom: string;
+  lieu: Lieu;
 }

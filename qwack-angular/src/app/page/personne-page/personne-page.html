@@ -12,7 +12,7 @@
         <select id="role" formControlName="role">
           <option value="">-- Sélectionner un rôle --</option>
           @for (r of roleValues; track r) {
-            <option [value]="r">{{ r }}</option>
+          <option [value]="r">{{ r }}</option>
           }
         </select>
         <div class="error-message" *ngIf="CtrlRole.dirty && CtrlRole.hasError('required')">
@@ -22,160 +22,136 @@
     </div>
 
     @if (CtrlRole.value) {
-      <div class="form-group">
-        <label for="nom">Nom :</label>
-        <div class="input-container">
-          <input id="nom" type="text" formControlName="nom" placeholder="Ex: Dupont" />
-          <div class="error-message" *ngIf="CtrlNom.dirty && CtrlNom.hasError('required')">
-            * Indiquer le nom *
-          </div>
+    <div class="form-group">
+      <label for="nom">Nom :</label>
+      <div class="input-container">
+        <input id="nom" type="text" formControlName="nom" placeholder="Ex: Dupont" />
+        <div class="error-message" *ngIf="CtrlNom.dirty && CtrlNom.hasError('required')">
+          * Indiquer le nom *
         </div>
       </div>
+    </div>
 
-      <div class="form-group">
-        <label for="prenom">Prénom :</label>
-        <div class="input-container">
-          <input id="prenom" type="text" formControlName="prenom" placeholder="Ex: Marie" />
-          <div class="error-message" *ngIf="CtrlPrenom.dirty && CtrlPrenom.hasError('required')">
-            * Indiquer le prénom *
-          </div>
+    <div class="form-group">
+      <label for="prenom">Prénom :</label>
+      <div class="input-container">
+        <input id="prenom" type="text" formControlName="prenom" placeholder="Ex: Marie" />
+        <div class="error-message" *ngIf="CtrlPrenom.dirty && CtrlPrenom.hasError('required')">
+          * Indiquer le prénom *
         </div>
       </div>
+    </div>
 
-      <div class="form-group">
-        <label for="login">Login :</label>
-        <div class="input-container">
-          <input id="login" type="text" formControlName="login" placeholder="Ex: mdupont" />
-          <div class="error-message" *ngIf="CtrlLogin.dirty && CtrlLogin.hasError('required')">
-            * Indiquer le login *
-          </div>
+    <div class="form-group">
+      <label for="login">Login :</label>
+      <div class="input-container">
+        <input id="login" type="text" formControlName="login" placeholder="Ex: mdupont" />
+        <div class="error-message" *ngIf="CtrlLogin.dirty && CtrlLogin.hasError('required')">
+          * Indiquer le login *
         </div>
       </div>
+    </div>
 
-      <div class="form-group">
-        <label for="password">Mot de passe :</label>
-        <div class="input-container">
-          <input id="password" type="password" formControlName="password" />
-          <div
-            class="error-message"
-            *ngIf="CtrlPassword.dirty && CtrlPassword.hasError('required')"
-          >
-            * Indiquer un mot de passe *
-          </div>
+    <div class="form-group">
+      <label for="password">Mot de passe :</label>
+      <div class="input-container">
+        <input id="password" type="password" formControlName="password" />
+        <div class="error-message" *ngIf="CtrlPassword.dirty && CtrlPassword.hasError('required')">
+          * Indiquer un mot de passe *
         </div>
       </div>
+    </div>
 
+    <div class="form-group">
+      <label for="quackshelter">QuackShelter :</label>
+      <div class="input-container">
+        <select id="quackshelter" formControlName="quackshelter">
+          <option [ngValue]="''">-- Sélectionner un QuackShelter --</option>
+          @for (qs of quackShelters$ | async; track qs.id) {
+          <option [ngValue]="qs">{{ qs.id }} - {{ qs.lieu.adresse }}</option>
+          }
+        </select>
+        <div class="error-message" *ngIf="CtrlQuackShelter.dirty && CtrlQuackShelter.hasError('required')">
+          * Sélectionner un QuackShelter *
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section-title">Habitation</div>
+
+    <ng-container formGroupName="habitation">
       <div class="form-group">
-        <label for="quackshelter">QuackShelter :</label>
+        <label for="typeLieuReel">Type de lieu :</label>
         <div class="input-container">
-          <select id="quackshelter" formControlName="quackshelter">
-            <option [ngValue]="''">-- Sélectionner un QuackShelter --</option>
-            @for (qs of quackShelters$ | async; track qs.id) {
-              <option [ngValue]="qs">{{ qs.id }} - {{ qs.nom }}</option>
+          <select id="typeLieuReel" formControlName="typeLieu">
+            <option value="">-- Sélectionner un type --</option>
+            @for (t of typeLieuValues; track t) {
+            <option [value]="t">{{ t }}</option>
             }
           </select>
-          <div
-            class="error-message"
-            *ngIf="CtrlQuackShelter.dirty && CtrlQuackShelter.hasError('required')"
-          >
-            * Sélectionner un QuackShelter *
-          </div>
         </div>
       </div>
 
-      <div class="form-section-title">Habitation</div>
-
-      <ng-container formGroupName="habitation">
+      <ng-container formGroupName="adresse">
         <div class="form-group">
-          <label for="typeLieuReel">Type de lieu :</label>
+          <label for="numero">Numéro :</label>
           <div class="input-container">
-            <select id="typeLieuReel" formControlName="typeLieu">
-              <option value="">-- Sélectionner un type --</option>
-              @for (t of typeLieuValues; track t) {
-                <option [value]="t">{{ t }}</option>
-              }
-            </select>
+            <input id="numero" type="text" formControlName="numero" placeholder="Ex: 12" />
           </div>
         </div>
 
-        <ng-container formGroupName="adresse">
-          <div class="form-group">
-            <label for="numero">Numéro :</label>
-            <div class="input-container">
-              <input id="numero" type="text" formControlName="numero" placeholder="Ex: 12" />
-            </div>
+        <div class="form-group">
+          <label for="voie">Voie :</label>
+          <div class="input-container">
+            <input id="voie" type="text" formControlName="voie" placeholder="Ex: rue des Lilas" />
           </div>
+        </div>
 
-          <div class="form-group">
-            <label for="voie">Voie :</label>
-            <div class="input-container">
-              <input id="voie" type="text" formControlName="voie" placeholder="Ex: rue des Lilas" />
-            </div>
+        <div class="form-group">
+          <label for="ville">Ville :</label>
+          <div class="input-container">
+            <input id="ville" type="text" formControlName="ville" placeholder="Ex: Angers" />
           </div>
+        </div>
 
-          <div class="form-group">
-            <label for="ville">Ville :</label>
-            <div class="input-container">
-              <input id="ville" type="text" formControlName="ville" placeholder="Ex: Angers" />
-            </div>
+        <div class="form-group">
+          <label for="codePostal">Code postal :</label>
+          <div class="input-container">
+            <input id="codePostal" type="text" formControlName="codePostal" placeholder="Ex: 49000" />
           </div>
-
-          <div class="form-group">
-            <label for="codePostal">Code postal :</label>
-            <div class="input-container">
-              <input
-                id="codePostal"
-                type="text"
-                formControlName="codePostal"
-                placeholder="Ex: 49000"
-              />
-            </div>
-          </div>
-        </ng-container>
+        </div>
       </ng-container>
+    </ng-container>
 
-      @if (estEmploye) {
-        <div class="form-section-title">Informations Employé</div>
+    @if (estEmploye) {
+    <div class="form-section-title">Informations Employé</div>
 
-        <div class="form-group">
-          <label for="salaire">Salaire :</label>
-          <div class="input-container">
-            <input
-              id="salaire"
-              type="number"
-              step="0.01"
-              formControlName="salaire"
-              placeholder="Ex: 2200"
-            />
-            <div
-              class="error-message"
-              *ngIf="CtrlSalaire.dirty && CtrlSalaire.hasError('required')"
-            >
-              * Indiquer le salaire *
-            </div>
-          </div>
+    <div class="form-group">
+      <label for="salaire">Salaire :</label>
+      <div class="input-container">
+        <input id="salaire" type="number" step="0.01" formControlName="salaire" placeholder="Ex: 2200" />
+        <div class="error-message" *ngIf="CtrlSalaire.dirty && CtrlSalaire.hasError('required')">
+          * Indiquer le salaire *
         </div>
+      </div>
+    </div>
 
-        <div class="form-group checkbox-group">
-          <label for="admin" class="checkbox-label">
-            <input id="admin" type="checkbox" formControlName="admin" />
-            <span class="custom-checkbox"></span>
-            Cette personne est administrateur
-          </label>
-        </div>
-      }
+    <div class="form-group checkbox-group">
+      <label for="admin" class="checkbox-label">
+        <input id="admin" type="checkbox" formControlName="admin" />
+        <span class="custom-checkbox"></span>
+        Cette personne est administrateur
+      </label>
+    </div>
+    }
     }
 
     <div class="form-actions">
       @if (editingPersonneId) {
-        <button type="button" class="btn-cancel" (click)="annulerEdition()">Annuler</button>
+      <button type="button" class="btn-cancel" (click)="annulerEdition()">Annuler</button>
       }
-      <input
-        [disabled]="formPersonne.invalid"
-        type="submit"
-        [value]="editingPersonneId ? 'Modifier' : 'Ajouter'"
-        class="btn-submit"
-      />
+      <input [disabled]="formPersonne.invalid" type="submit" [value]="editingPersonneId ? 'Modifier' : 'Ajouter'"
+        class="btn-submit" />
     </div>
   </form>
 </div>
@@ -189,41 +165,26 @@
   </button>
 
   @for (r of roleFiltreValues; track r) {
-    <button
-      class="filter-btn"
-      [class.active]="filtreType === 'role' && roleFiltre === r"
-      (click)="filtrerParRole(r)"
-    >
-      {{ r }}
-    </button>
+  <button class="filter-btn" [class.active]="filtreType === 'role' && roleFiltre === r" (click)="filtrerParRole(r)">
+    {{ r }}
+  </button>
   }
 
-  <select
-    class="filter-select"
-    [(ngModel)]="quackShelterFiltre"
-    (ngModelChange)="filtrerParQuackShelter($event)"
-  >
+  <select class="filter-select" [(ngModel)]="quackShelterFiltre" (ngModelChange)="filtrerParQuackShelter($event)">
     <option [ngValue]="null">-- Filtrer par QuackShelter --</option>
     @for (qs of quackShelters$ | async; track qs.id) {
-      <option [ngValue]="qs">{{ qs.id }} - {{ qs.nom }}</option>
+    <option [ngValue]="qs">{{ qs.id }} - {{ qs.lieu.adresse.ville }} {{ qs.lieu.adresse.cp }}</option>
     }
   </select>
 
-  <select
-    class="filter-select"
-    [(ngModel)]="statutFiltre"
-    (ngModelChange)="filtrerParStatut($event)"
-  >
+  <select class="filter-select" [(ngModel)]="statutFiltre" (ngModelChange)="filtrerParStatut($event)">
     <option [ngValue]="null">-- Filtrer par statut d'activité --</option>
     @for (s of statutActiviteValues; track s) {
-      <option [value]="s">{{ s }}</option>
+    <option [value]="s">{{ s }}</option>
     }
   </select>
 
-  <select
-    class="filter-select"
-    [(ngModel)]="adminSelectValue"
-    (ngModelChange)="filtrerParAdmin($event)">
+  <select class="filter-select" [(ngModel)]="adminSelectValue" (ngModelChange)="filtrerParAdmin($event)">
     <option value="">-- Filtrer par Admin --</option>
     <option value="true">Admin uniquement</option>
     <option value="false">Non-admin uniquement</option>
@@ -245,10 +206,10 @@
         <td>{{ p.id }}</td>
         <td>{{ p.nom }} {{ p.prenom }}</td>
         <td>{{ p.role }}</td>
-        <td>{{ p.quackshelter?.nom }}</td>
+        <td>{{ p.quackShelterId }}</td>
         <td>
           @if (p.role !== 'PATRON') {
-            <button (click)="edit(p)">MODIFIER</button>
+          <button (click)="edit(p)">MODIFIER</button>
           }
           <button (click)="remove(p)">SUPPRIMER</button>
         </td>

@@ -12,16 +12,40 @@ export class PersonneService {
   private http: HttpClient = inject(HttpClient);
   private apiUrl: string = "/personne";
 
+  // Distinguer les roles, on va chercher le bon controller
+  //  AddVisiteur, AddBenevole etc...
+  private getUrlByRole(role: Role): string {
+
+    switch (role) {
+      case Role.EMPLOYE:
+        return "/employe";
+
+      case Role.BENEVOLE:
+        return "/benevole";
+
+      case Role.PATRON:
+        return "/patron";
+
+      case Role.VISITEUR:
+        return "/visiteur";
+
+      default:
+        return "/personne";
+    }
+  }
+
   public findAll(): Observable<Personne[]> {
     return this.http.get<Personne[]>(this.apiUrl);
   }
 
   public add(p: Personne): Observable<Personne> {
-    return this.http.post<Personne>(this.apiUrl, p);
+    const url = this.getUrlByRole(p.role);
+    return this.http.post<Personne>(url, p);
   }
 
   public update(p: Personne): Observable<Personne> {
-    return this.http.put<Personne>(`${this.apiUrl}/${p.id}`, p);
+    const url = this.getUrlByRole(p.role);
+    return this.http.put<Personne>(`${url}/${p.id}`, p);
   }
 
   public remove(p: Personne): Observable<void> {
@@ -29,7 +53,10 @@ export class PersonneService {
   }
 
   public findByRole(role: Role): Observable<Personne[]> {
-    return this.http.get<Personne[]>(`/${role}`);
+    if (role == Role.PATRON) {
+      return this.http.get<Personne[]>(`${this.apiUrl}/${role.toLowerCase()}`);
+    }
+    return this.http.get<Personne[]>(`/${role.toLowerCase()}`);
   }
 
   public findByQuackShelter(idQuackShelter: number): Observable<Personne[]> {
@@ -41,6 +68,6 @@ export class PersonneService {
   }
 
   public findByAdmin(admin: boolean): Observable<Personne[]> {
-    return this.http.get<Personne[]>(`${this.apiUrl}/admin/${admin}`);
+    return this.http.get<Personne[]>(`${this.apiUrl}/admin`);
   }
 }

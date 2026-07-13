@@ -14,17 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.api.requestDTO.lieu.CreateLieuRequest;
 import qwack_boot.api.requestDTO.lieu.UpdateLieuRequest;
-
 import qwack_boot.api.responseDTO.lieu.LieuResponse;
-
 import qwack_boot.model.Adresse;
-
 import qwack_boot.model.Lieu;
-
 import qwack_boot.service.LieuService;
 
 @RestController
-@RequestMapping("/lieu")
+@RequestMapping("api/lieu")
 public class LieuRestController {
 
     @Autowired

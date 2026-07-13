@@ -17,7 +17,7 @@ import qwack_boot.model.QuackShelter;
 import qwack_boot.service.QuackShelterService;
 
 @RestController
-@RequestMapping("/quackshelter")
+@RequestMapping("api/quackshelter")
 public class QuackShelterRestController {
 
     @Autowired

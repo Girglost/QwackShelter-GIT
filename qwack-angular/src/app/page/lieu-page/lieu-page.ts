@@ -3,9 +3,9 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { merge, Observable, startWith, Subject, switchMap } from 'rxjs';
+import { TypeLieu } from '../../enum/type-lieu';
 import { Lieu } from '../../model/lieu';
 import { LieuService } from '../../service/lieu-service';
-import { TypeLieu } from '../../enum/type-lieu';
 
 @Component({
   selector: 'app-lieu-page',
@@ -101,7 +101,7 @@ export class LieuPage implements OnInit {
     this.CtrlNumero.setValue(l.adresse?.numero);
     this.CtrlVoie.setValue(l.adresse?.voie);
     this.CtrlVille.setValue(l.adresse?.ville);
-    this.CtrlCodePostal.setValue(l.adresse?.codePostal);
+    this.CtrlCodePostal.setValue(l.adresse?.cp);
   }
 
   protected annulerEdition(): void {

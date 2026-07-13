@@ -1,7 +1,6 @@
-import { Lieu } from './lieu';
 import { Role } from '../enum/role';
 import { StatutActivite } from '../enum/statut-activite';
-import { QuackShelter } from './quack-shelter';
+import { Lieu } from './lieu';
 
 export interface Personne {
   id: number;
@@ -13,7 +12,7 @@ export interface Personne {
   role: Role;
   admin: boolean;
   statutActivite: StatutActivite;
-  quackshelter: QuackShelter;
+  quackShelterId: number;
   dateInscription: Date;
   dateEngagement: Date;
   salaire: number;

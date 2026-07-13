@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import qwack_boot.api.responseDTO.personne.EmployeResponse;
 import qwack_boot.api.responseDTO.personne.VisiteurResponse;
 import qwack_boot.model.StatutActivite;
 import qwack_boot.service.PersonneService;
@@ -64,6 +65,14 @@ public class PersonneRestController {
                 .map(p -> VisiteurResponse.convert(p))
                 .toList();
         return personnes;
+    }
+
+    @GetMapping("/patron")
+    public List<EmployeResponse> chercherPatroon() {
+        List<EmployeResponse> patrons = personneSrv.getAllPatron().stream()
+                .map(p -> EmployeResponse.convert(p))
+                .toList();
+        return patrons;
     }
 
 }

@@ -13,7 +13,7 @@
         <select id="typeLieu" formControlName="typeLieu">
           <option value="">-- Sélectionner un type --</option>
           @for (t of typeLieuValues; track t) {
-            <option [value]="t">{{ t }}</option>
+          <option [value]="t">{{ t }}</option>
           }
         </select>
         <div class="error-message" *ngIf="CtrlTypeLieu.dirty && CtrlTypeLieu.hasError('required')">
@@ -66,14 +66,10 @@
 
     <div class="form-actions">
       @if (editingLieuId) {
-        <button type="button" class="btn-cancel" (click)="annulerEdition()">Annuler</button>
+      <button type="button" class="btn-cancel" (click)="annulerEdition()">Annuler</button>
       }
-      <input
-        [disabled]="formLieu.invalid"
-        type="submit"
-        [value]="editingLieuId ? 'Modifier' : 'Ajouter'"
-        class="btn-submit"
-      />
+      <input [disabled]="formLieu.invalid" type="submit" [value]="editingLieuId ? 'Modifier' : 'Ajouter'"
+        class="btn-submit" />
     </div>
   </form>
 </div>
@@ -82,20 +78,14 @@
 
 <!-- Barre de filtres -->
 <div class="filter-bar">
-  <button
-    class="filter-btn"
-    [class.active]="!typeLieuFiltre"
-    (click)="filtrerParTypeLieu(null)">
+  <button class="filter-btn" [class.active]="!typeLieuFiltre" (click)="filtrerParTypeLieu(null)">
     Tous
   </button>
 
   @for (t of typeLieuValues; track t) {
-    <button
-      class="filter-btn"
-      [class.active]="typeLieuFiltre === t"
-      (click)="filtrerParTypeLieu(t)">
-      {{ t }}
-    </button>
+  <button class="filter-btn" [class.active]="typeLieuFiltre === t" (click)="filtrerParTypeLieu(t)">
+    {{ t }}
+  </button>
   }
 </div>
 
@@ -113,7 +103,7 @@
     <tr *ngFor="let l of lieux$ | async">
       <td>{{ l.id }}</td>
       <td>{{ l.typeLieu }}</td>
-      <td>{{ l.adresse?.numero }} {{ l.adresse?.voie }}, {{ l.adresse?.codePostal }} {{ l.adresse?.ville }}</td>
+      <td>{{ l.adresse?.numero }} {{ l.adresse?.voie }}, {{ l.adresse?.cp }} {{ l.adresse?.ville }}</td>
       <td>
         <button (click)="edit(l)">MODIFIER</button>
         <button (click)="remove(l)">SUPPRIMER</button>

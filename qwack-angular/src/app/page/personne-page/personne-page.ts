@@ -10,12 +10,12 @@ import {
 } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { merge, Observable, startWith, Subject, switchMap } from 'rxjs';
-import { Personne } from '../../model/personne';
-import { PersonneService } from '../../service/personne-service';
 import { Role } from '../../enum/role';
 import { StatutActivite } from '../../enum/statut-activite';
 import { TypeLieu } from '../../enum/type-lieu';
+import { Personne } from '../../model/personne';
 import { QuackShelter } from '../../model/quack-shelter';
+import { PersonneService } from '../../service/personne-service';
 import { QuackShelterService } from '../../service/quack-shelter-service';
 
 type TypeFiltre = 'tous' | 'role' | 'quackshelter' | 'statut' | 'admin';
@@ -72,13 +72,15 @@ export class PersonnePage implements OnInit {
   ngOnInit(): void {
     this.titleService.setTitle('Gestion des Personnes du Shelter');
 
+
+
     this.personnes$ = merge(this.refresh$, this.filtreChange$).pipe(
       startWith(0),
       switchMap(() => this.getPersonnesSelonFiltre()),
     );
 
     this.quackShelters$ = this.quackShelterSrv.findAll();
-
+    console.log("QUACKSSSS", this.quackShelters$)
     this.CtrlNom = this.formBuilder.control('', Validators.required);
     this.CtrlPrenom = this.formBuilder.control('', Validators.required);
     this.CtrlLogin = this.formBuilder.control('', Validators.required);
@@ -228,14 +230,14 @@ export class PersonnePage implements OnInit {
     this.CtrlLogin.setValue(p.login);
     this.CtrlPassword.setValue(p.password);
     this.CtrlRole.setValue(p.role);
-    this.CtrlQuackShelter.setValue(p.quackshelter);
+    this.CtrlQuackShelter.setValue(p.quackShelterId);
     this.CtrlAdmin.setValue(p.admin);
     this.CtrlSalaire.setValue(p.salaire);
     this.CtrlTypeLieu.setValue(p.habitation?.typeLieu);
     this.CtrlNumero.setValue(p.habitation?.adresse?.numero);
     this.CtrlVoie.setValue(p.habitation?.adresse?.voie);
     this.CtrlVille.setValue(p.habitation?.adresse?.ville);
-    this.CtrlCodePostal.setValue(p.habitation?.adresse?.codePostal);
+    this.CtrlCodePostal.setValue(p.habitation?.adresse?.cp);
   }
 
   protected annulerEdition(): void {
