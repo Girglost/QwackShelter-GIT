@@ -107,7 +107,6 @@ export class AnimalPage implements OnInit {
     this.CtrlCouleur = this.formBuilder.control('', Validators.required);
     this.CtrlRegimeAlimentaire = this.formBuilder.control('');
     this.CtrlTraitement = this.formBuilder.control('');
-    this.CtrlFamille = this.formBuilder.control('', Validators.required);
     this.CtrlGenre = this.formBuilder.control('', Validators.required);
     this.CtrlQuackShelter = this.formBuilder.control('', Validators.required);
 

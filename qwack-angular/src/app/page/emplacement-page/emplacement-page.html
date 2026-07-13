@@ -7,9 +7,9 @@
 
   <form (submit)="addOrUpdate()" [formGroup]="formEmplacement" class="form-emplacement">
     <div class="form-group">
-      <label for="nbPlace">Nombre de Places :</label>
+      <label for="nb_place">Nombre de Places :</label>
       <div class="input-container">
-        <input id="nbPlace" type="number" formControlName="nbPlace" placeholder="Ex: 5" />
+        <input id="nb_place" type="number" formControlName="nb_place" placeholder="Ex: 5" />
         <div class="error-message" *ngIf="CtrlNbPlace.dirty && CtrlNbPlace.hasError('required')">
           * Indiquer le nombre de places *
         </div>
@@ -100,7 +100,7 @@
   <tbody>
     <tr *ngFor="let emplacement of emplacements$ | async">
       <td>{{ emplacement.id }}</td>
-      <td>{{ emplacement.nbPlace }}</td>
+      <td>{{ emplacement.nb_place }}</td>
       <td>{{ emplacement.complet }}</td>
       <td>{{ emplacement.box }}</td>
       <td>

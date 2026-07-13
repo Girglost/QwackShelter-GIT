@@ -58,10 +58,12 @@ ngOnInit(): void {
   this.CtrlNbPlace = this.formBuilder.control('1', [Validators.required, Validators.min(1)]);
   this.CtrlComplet = this.formBuilder.control('');
 
+  this.emplacements$.subscribe(emplacements => console.log(emplacements));
+
   this.formEmplacement = this.formBuilder.group({
     complet: this.CtrlComplet,
     box: this.CtrlBox,
-    nbPlace: this.CtrlNbPlace
+    nb_place: this.CtrlNbPlace
   });
 }
 
@@ -101,9 +103,11 @@ protected filtrerParType(type: TypeBox | null): void {
 
     if(this.editingEmplacmeentId){
       emp.id = this.editingEmplacmeentId;
+      console.log(emp);
       this.emplacementSrv.update(emp).subscribe(() => this.reload());
     }
     else{
+      console.log(emp);
       this.emplacementSrv.add(emp).subscribe(()=> this.reload())
     }
 
@@ -117,7 +121,7 @@ protected filtrerParType(type: TypeBox | null): void {
     this.editingEmplacmeentId = emp.id;
     this.CtrlBox.setValue(emp.box);
     this.CtrlComplet.setValue(emp.complet);
-    this.CtrlNbPlace.setValue(emp.nbPlace);
+    this.CtrlNbPlace.setValue(emp.nb_place);
   }
 
   protected remove(emp: Emplacement){

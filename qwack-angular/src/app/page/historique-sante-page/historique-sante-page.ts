@@ -1,6 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { merge, Observable, startWith, Subject, switchMap } from 'rxjs';
 import { HistoriqueSante } from '../../model/historique-sante';
@@ -11,11 +18,7 @@ import { AnimalService } from '../../service/animal-service';
 
 @Component({
   selector: 'app-historique-sante-page',
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './historique-sante-page.html',
   styleUrl: './historique-sante-page.css',
 })
@@ -51,10 +54,14 @@ export class HistoriqueSantePage implements OnInit {
 
     this.historiques$ = merge(this.refresh$, this.filtreChange$).pipe(
       startWith(0),
-      switchMap(() => this.getHistoriquesSelonFiltre())
+      switchMap(() => this.getHistoriquesSelonFiltre()),
     );
 
     this.animaux$ = this.animalSrv.findAll();
+
+    this.historiques$.subscribe((historiques: HistoriqueSante[]) => {
+      console.log(historiques);
+    });
 
     this.CtrlCause = this.formBuilder.control('', Validators.required);
     this.CtrlDate = this.formBuilder.control('', Validators.required);
@@ -104,8 +111,10 @@ export class HistoriqueSantePage implements OnInit {
 
     if (this.editingHistoriqueId) {
       h.id = this.editingHistoriqueId;
+      console.log(h);
       this.hsSrv.update(h).subscribe(() => this.reload());
     } else {
+      console.log(h);
       this.hsSrv.add(h).subscribe(() => this.reload());
     }
 

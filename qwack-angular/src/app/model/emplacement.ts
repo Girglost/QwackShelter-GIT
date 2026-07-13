@@ -2,7 +2,7 @@ import { TypeBox } from "../enum/type-box";
 
 export interface Emplacement {
   id?: number;
-  nbPlace: number;
+  nb_place: number;
   complet: boolean;
   box: TypeBox
 }
