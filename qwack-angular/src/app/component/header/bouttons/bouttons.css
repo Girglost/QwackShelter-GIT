@@ -11,13 +11,14 @@
   margin-top: 10px;
   margin-bottom: 3px;
   margin-right: 7px;
+  cursor:pointer;
 }
 
 .btn-connexion p {
   font-family: 'Montagu Slab';
   font-size: clamp(14px, 1.7vw, 17px);
   font-weight: 400;
-  color: #504e4c;
+  color: #f3e9e0;
 }
 
 .btn-connexion img {
