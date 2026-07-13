@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    @if (CtrlRole.value) {
+    @if (formPersonne) {
     <div class="form-group">
       <label for="nom">Nom :</label>
       <div class="input-container">
@@ -45,13 +45,14 @@
     <div class="form-group">
       <label for="login">Login :</label>
       <div class="input-container">
-        <input id="login" type="text" formControlName="login" placeholder="Ex: mdupont" />
+        <input [readonly]="editingPersonneId" id="login" type="text" formControlName="login"
+          placeholder="Ex: mdupont" />
         <div class="error-message" *ngIf="CtrlLogin.dirty && CtrlLogin.hasError('required')">
           * Indiquer le login *
         </div>
       </div>
     </div>
-
+    @if(!editingPersonneId){
     <div class="form-group">
       <label for="password">Mot de passe :</label>
       <div class="input-container">
@@ -61,14 +62,17 @@
         </div>
       </div>
     </div>
+    }
+
+
 
     <div class="form-group">
       <label for="quackshelter">QuackShelter :</label>
       <div class="input-container">
-        <select id="quackshelter" formControlName="quackshelter">
+        <select id="quackshelter" formControlName="quackShelterId">
           <option [ngValue]="''">-- Sélectionner un QuackShelter --</option>
           @for (qs of quackShelters$ | async; track qs.id) {
-          <option [ngValue]="qs">{{ qs.id }} - {{ qs.lieu.adresse }}</option>
+          <option [ngValue]="qs.id">{{qs.id}} - {{ qs.lieu.adresse.ville }} - {{ qs.lieu.adresse.cp }}</option>
           }
         </select>
         <div class="error-message" *ngIf="CtrlQuackShelter.dirty && CtrlQuackShelter.hasError('required')">
@@ -115,9 +119,9 @@
         </div>
 
         <div class="form-group">
-          <label for="codePostal">Code postal :</label>
+          <label for="cp">Code postal :</label>
           <div class="input-container">
-            <input id="codePostal" type="text" formControlName="codePostal" placeholder="Ex: 49000" />
+            <input id="cp" type="text" formControlName="cp" placeholder="Ex: 49000" />
           </div>
         </div>
       </ng-container>

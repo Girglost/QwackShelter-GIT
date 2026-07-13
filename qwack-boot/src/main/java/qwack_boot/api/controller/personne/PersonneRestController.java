@@ -1,9 +1,13 @@
 package qwack_boot.api.controller.personne;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.api.responseDTO.personne.EmployeResponse;
 import qwack_boot.api.responseDTO.personne.VisiteurResponse;
+import qwack_boot.model.Personne;
 import qwack_boot.model.StatutActivite;
 import qwack_boot.service.PersonneService;
 import qwack_boot.service.QuackShelterService;
@@ -75,4 +80,14 @@ public class PersonneRestController {
         return patrons;
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Map<String, VisiteurResponse>> delete(@PathVariable Integer id) {
+
+        Personne deletedPersonne = personneSrv.getById(id);
+        personneSrv.deleteById(id);
+
+        VisiteurResponse personneDeleted = VisiteurResponse.convert(deletedPersonne);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(Map.of("Personne DELETED", personneDeleted));
+    }
 }

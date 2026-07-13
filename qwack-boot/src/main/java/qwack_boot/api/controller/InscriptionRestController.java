@@ -38,7 +38,7 @@ public class InscriptionRestController {
 
         QuackShelter quackShelter = quackSrv.getById(request.getQuackShelterId());
         Lieu habitation = new Lieu();
-        habitation.setType(request.getHabitation().getType());
+        habitation.setType(request.getHabitation().getTypeLieu());
         habitation.setAdresse(request.getHabitation().getAdresse());
 
         switch (request.getRole()) {

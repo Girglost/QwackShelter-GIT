@@ -76,7 +76,7 @@ public class BenevoleRestController {
                 System.out.println(benevoleRequest);
                 QuackShelter quackShelter = quackSrv.getById(benevoleRequest.getQuackShelterId());
                 Lieu habitation = new Lieu();
-                habitation.setType(benevoleRequest.getHabitation().getType());
+                habitation.setType(benevoleRequest.getHabitation().getTypeLieu());
                 habitation.setAdresse(benevoleRequest.getHabitation().getAdresse());
 
                 Personne benevole = Personne.createBenevole(benevoleRequest.getNom(), benevoleRequest.getPrenom(),
@@ -93,13 +93,14 @@ public class BenevoleRestController {
         @PutMapping("/{id}")
         public ResponseEntity<Map<String, BenevoleResponse>> modifierBenevole(@PathVariable Integer id,
                         @RequestBody UpdateBenevoleRequest benevoleRequest) {
-
+                System.out.println("VOILA CE QUON ENVOIE ! ");
+                System.out.println(benevoleRequest);
                 // On envoie un DTO, donc on reconstruit un objet Personne complet
                 // pour l'envoyer au service !
 
                 QuackShelter quackShelter = quackSrv.getById(benevoleRequest.getQuackShelterId());
                 Lieu habitation = new Lieu();
-                habitation.setType(benevoleRequest.getHabitation().getType());
+                habitation.setType(benevoleRequest.getHabitation().getTypeLieu());
                 habitation.setAdresse(benevoleRequest.getHabitation().getAdresse());
 
                 // On lui donne les champs qu'on a donné dans la updateRequest
@@ -115,6 +116,9 @@ public class BenevoleRestController {
                 System.out.println("CONTROLLER : benevole recréé " + benevole);
 
                 BenevoleResponse benevoleUpdated = BenevoleResponse.convert(personneSrv.update(id, benevole));
+
+                System.out.println("LIEU ENVOYE : "
+                                + benevole.getHabitation().getType());
                 return ResponseEntity.status(HttpStatus.OK)
                                 .body(Map.of("Benevole Modifié", benevoleUpdated));
 

@@ -1,35 +1,28 @@
 package qwack_boot.api.responseDTO.lieu;
+
+import qwack_boot.model.Adresse;
 import qwack_boot.model.Lieu;
 import qwack_boot.model.TypeLieu;
 
 public class LieuResponse {
 
     private Integer id;
-    private TypeLieu type;
-    private String numero;
-    private String voie;
-    private String ville;
-    private String cp;
+    private TypeLieu typeLieu;
+    private Adresse adresse;
 
     public LieuResponse() {
     }
 
-       public static LieuResponse convert(Lieu lieu) {
-       
+    public static LieuResponse convert(Lieu lieu) {
+
         if (lieu == null) {
-        return null;
-    }
+            return null;
+        }
         LieuResponse response = new LieuResponse();
 
         response.setId(lieu.getId());
-        response.setType(lieu.getType());
-
-          if (lieu.getAdresse() != null) {
-            response.setNumero(lieu.getAdresse().getNumero());
-            response.setVoie(lieu.getAdresse().getVoie());
-            response.setVille(lieu.getAdresse().getVille());
-            response.setCp(lieu.getAdresse().getCp());
-        }
+        response.setTypeLieu(lieu.getType());
+        response.setAdresse(lieu.getAdresse());
 
         return response;
     }
@@ -42,43 +35,19 @@ public class LieuResponse {
         this.id = id;
     }
 
-    public TypeLieu getType() {
-        return type;
+    public TypeLieu getTypeLieu() {
+        return typeLieu;
     }
 
-    public void setType(TypeLieu type) {
-        this.type = type;
+    public void setTypeLieu(TypeLieu typeLieu) {
+        this.typeLieu = typeLieu;
     }
 
-    public String getNumero() {
-        return numero;
+    public Adresse getAdresse() {
+        return adresse;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getVoie() {
-        return voie;
-    }
-
-    public void setVoie(String voie) {
-        this.voie = voie;
-    }
-
-    public String getVille() {
-        return ville;
-    }
-
-    public void setVille(String ville) {
-        this.ville = ville;
-    }
-
-    public String getCp() {
-        return cp;
-    }
-
-    public void setCp(String cp) {
-        this.cp = cp;
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
     }
 }

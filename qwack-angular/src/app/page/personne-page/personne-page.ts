@@ -65,7 +65,7 @@ export class PersonnePage implements OnInit {
   protected CtrlNumero!: FormControl;
   protected CtrlVoie!: FormControl;
   protected CtrlVille!: FormControl;
-  protected CtrlCodePostal!: FormControl;
+  protected CtrlCP!: FormControl;
 
   protected editingPersonneId: number | undefined = 0;
 
@@ -80,7 +80,7 @@ export class PersonnePage implements OnInit {
     );
 
     this.quackShelters$ = this.quackShelterSrv.findAll();
-    console.log("QUACKSSSS", this.quackShelters$)
+
     this.CtrlNom = this.formBuilder.control('', Validators.required);
     this.CtrlPrenom = this.formBuilder.control('', Validators.required);
     this.CtrlLogin = this.formBuilder.control('', Validators.required);
@@ -94,7 +94,7 @@ export class PersonnePage implements OnInit {
     this.CtrlNumero = this.formBuilder.control('', Validators.required);
     this.CtrlVoie = this.formBuilder.control('', Validators.required);
     this.CtrlVille = this.formBuilder.control('', Validators.required);
-    this.CtrlCodePostal = this.formBuilder.control('', Validators.required);
+    this.CtrlCP = this.formBuilder.control('', Validators.required);
 
     this.formPersonne = this.formBuilder.group({
       nom: this.CtrlNom,
@@ -102,7 +102,7 @@ export class PersonnePage implements OnInit {
       login: this.CtrlLogin,
       password: this.CtrlPassword,
       role: this.CtrlRole,
-      quackshelter: this.CtrlQuackShelter,
+      quackShelterId: this.CtrlQuackShelter,
       admin: this.CtrlAdmin,
       salaire: this.CtrlSalaire,
       habitation: this.formBuilder.group({
@@ -111,8 +111,9 @@ export class PersonnePage implements OnInit {
           numero: this.CtrlNumero,
           voie: this.CtrlVoie,
           ville: this.CtrlVille,
-          codePostal: this.CtrlCodePostal,
-        }),
+          cp: this.CtrlCP
+        })
+
       }),
     });
 
@@ -228,16 +229,23 @@ export class PersonnePage implements OnInit {
     this.CtrlNom.setValue(p.nom);
     this.CtrlPrenom.setValue(p.prenom);
     this.CtrlLogin.setValue(p.login);
-    this.CtrlPassword.setValue(p.password);
+
+    // On ne modifie jamais le password ici
+    //this.CtrlPassword.setValue(p.password);
     this.CtrlRole.setValue(p.role);
+
+    this.CtrlTypeLieu.setValue(p.habitation?.typeLieu);
+    this.CtrlNumero.setValue(p.habitation?.adresse.numero);
+    this.CtrlVoie.setValue(p.habitation?.adresse.voie);
+    this.CtrlVille.setValue(p.habitation?.adresse.ville);
+    this.CtrlCP.setValue(p.habitation?.adresse.cp);
+
+    //  Permet de select le qs 
     this.CtrlQuackShelter.setValue(p.quackShelterId);
+
     this.CtrlAdmin.setValue(p.admin);
     this.CtrlSalaire.setValue(p.salaire);
-    this.CtrlTypeLieu.setValue(p.habitation?.typeLieu);
-    this.CtrlNumero.setValue(p.habitation?.adresse?.numero);
-    this.CtrlVoie.setValue(p.habitation?.adresse?.voie);
-    this.CtrlVille.setValue(p.habitation?.adresse?.ville);
-    this.CtrlCodePostal.setValue(p.habitation?.adresse?.cp);
+
   }
 
   protected annulerEdition(): void {

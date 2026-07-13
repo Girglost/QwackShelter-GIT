@@ -90,7 +90,7 @@ public class EmployeRestController {
                 // pour l'envoyer au service !
                 QuackShelter quackShelter = quackSrv.getById(employeRequest.getQuackShelterId());
                 Lieu habitation = new Lieu();
-                habitation.setType(employeRequest.getHabitation().getType());
+                habitation.setType(employeRequest.getHabitation().getTypeLieu());
                 habitation.setAdresse(employeRequest.getHabitation().getAdresse());
 
                 Personne employe = Personne.createEmploye(employeRequest.getNom(), employeRequest.getPrenom(),
@@ -110,7 +110,7 @@ public class EmployeRestController {
 
                 QuackShelter quackShelter = quackSrv.getById(employeRequest.getQuackShelterId());
                 Lieu habitation = new Lieu();
-                habitation.setType(employeRequest.getHabitation().getType());
+                habitation.setType(employeRequest.getHabitation().getTypeLieu());
                 habitation.setAdresse(employeRequest.getHabitation().getAdresse());
 
                 // On lui donne les champs qu'on a donné dans la updateRequest

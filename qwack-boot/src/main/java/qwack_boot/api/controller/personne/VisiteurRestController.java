@@ -92,7 +92,7 @@ public class VisiteurRestController {
                 // pour l'envoyer au service !
                 QuackShelter quackShelter = quackSrv.getById(visiteurRequest.getQuackShelterId());
                 Lieu habitation = new Lieu();
-                habitation.setType(visiteurRequest.getHabitation().getType());
+                habitation.setType(visiteurRequest.getHabitation().getTypeLieu());
                 habitation.setAdresse(visiteurRequest.getHabitation().getAdresse());
 
                 Personne visiteur = Personne.createVisiteur(visiteurRequest.getNom(), visiteurRequest.getPrenom(),
@@ -112,7 +112,7 @@ public class VisiteurRestController {
 
                 QuackShelter quackShelter = quackSrv.getById(visiteurRequest.getQuackShelterId());
                 Lieu habitation = new Lieu();
-                habitation.setType(visiteurRequest.getHabitation().getType());
+                habitation.setType(visiteurRequest.getHabitation().getTypeLieu());
                 habitation.setAdresse(visiteurRequest.getHabitation().getAdresse());
 
                 // On lui donne les champs qu'on a donné dans la updateRequest
