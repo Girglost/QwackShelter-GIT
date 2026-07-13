@@ -29,7 +29,7 @@ export const routes: Routes = [
   { path: 'swipe-compagnon', component: SwipeCompagnon },
   { path: 'a-propos', component: APropos },
   { path: 'adopter', component: Adopter },
-  { path: 'nos-animaux', component: NosAnimauxPage},
+  { path: 'animaux', component: NosAnimauxPage},
 
   { path: 'animal/:id', component: ProfilAnimal },
 
@@ -38,8 +38,8 @@ export const routes: Routes = [
   { path: 'sAnimal', component: StatutAnimalPage},
   { path: 'hSante', component: HistoriqueSantePage},
   { path: 'personne', component: PersonnePage},
-  { path : 'lieu', component: LieuPage},
-  { path : 'animal', component: AnimalPage},
+  { path: 'lieu', component: LieuPage},
+  { path: 'animal', component: AnimalPage},
 
   { path: '**', component: NotFound }, // a mettre a la fin de toutes les routes pour gérer les pages non trouvées
 ];
