@@ -27,6 +27,7 @@ public class AnimalResponseAdmin {
 	private List<VisiteDTO> visites;
 	private List<HistoriqueSanteReponse> historiqueSantes;
 	private String description;
+	private String typeAnimal;
 
 	public String getDescription() {
 		return description;
@@ -40,6 +41,7 @@ public class AnimalResponseAdmin {
 		AnimalResponseAdmin a = new AnimalResponseAdmin();
 		BeanUtils.copyProperties(animal, a);
 		a.idQuackShelter = animal.getQuackShelter().getId();
+		a.typeAnimal = animal.getClass().getSimpleName();
 		return a;
 	}
 
@@ -162,5 +164,15 @@ public class AnimalResponseAdmin {
 	public void setIdQuackShelter(Integer idQuackShelter) {
 		this.idQuackShelter = idQuackShelter;
 	}
+
+	public String getTypeAnimal() {
+		return typeAnimal;
+	}
+
+	public void setTypeAnimal(String typeAnimal) {
+		this.typeAnimal = typeAnimal;
+	}
+
+	
 
 }

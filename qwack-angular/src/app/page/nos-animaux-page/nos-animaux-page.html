@@ -48,7 +48,9 @@
 <div class="ListeAnimaux">
   <ng-container *ngFor="let a of animaux$ | async">
     <div class="animalFiche">
-      <div class="animalImg"></div>
+      <div class="animalImg">
+        <img [src]="getImageAnimal(a)" [alt]="a.nomAnimal">
+      </div>
       <div class="animalInfo">
         {{ a.nomAnimal }} <br />
         {{ a.genre }} -

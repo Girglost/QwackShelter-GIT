@@ -1,3 +1,4 @@
+import { Chien } from './../../model/chien';
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -56,6 +57,14 @@ export class NosAnimauxPage implements OnInit {
   protected rechercheControl = new FormControl<string>('', { nonNullable: true });
   private recherche$!: Observable<string>;
 
+  private readonly nbImagesParType: Record<string, number> = {
+    [TypeAnimal.CHAT]: 5,
+    [TypeAnimal.CANARD]: 5,
+    [TypeAnimal.CHIEN]: 5,
+    [TypeAnimal.POULE]: 3,
+    [TypeAnimal.NAC]: 5,
+  };
+
   ngOnInit(): void {
     this.titleService.setTitle('Gestion des Animaux du Shelter');
 
@@ -73,12 +82,39 @@ export class NosAnimauxPage implements OnInit {
 
     this.animauxFiltres$ = combineLatest([this.animaux$, this.filtreChange$, this.recherche$]).pipe(
       map(([animaux, , recherche]) =>
-        animaux.filter((a) => this.correspondAuxFiltres(a) && this.correspondALaRecherche(a, recherche)),
+        animaux.filter(
+          (a) => this.correspondAuxFiltres(a) && this.correspondALaRecherche(a, recherche),
+        ),
       ),
     );
 
     this.quackShelters$ = this.quackShelterSrv.findAll();
   }
+
+
+
+
+  private imageCache = new Map<string, string>();
+
+  protected getImageAnimal(a: Animal): string {
+    const cle = String(a.id);
+
+    if (!this.imageCache.has(cle)) {
+      const type = a.typeAnimal;
+      const nb = this.nbImagesParType[type] ?? 1;
+      const index = Math.floor(Math.random() * nb) + 1;
+      const dossier = type; // ex: "Chat"
+      const prefixe = type.toString().toLowerCase(); // ex: "chat"
+
+      this.imageCache.set(cle, `assets/image/animaux/${dossier}/${prefixe}${index}.png`);
+    }
+
+    return this.imageCache.get(cle)!;
+  }
+
+
+
+
 
   private correspondAuxFiltres(a: Animal): boolean {
     const matchFamille = this.famillesFiltre.size === 0 || this.famillesFiltre.has(a.famille);

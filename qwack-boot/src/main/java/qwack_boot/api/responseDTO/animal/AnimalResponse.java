@@ -22,10 +22,12 @@ public class AnimalResponse {
 	private Famille famille;
 	private Genre genre;
 	private List<Caractere> caracteres;
+	private String typeAnimal;
 
 	public static AnimalResponse convert(Animal animal) {
 		AnimalResponse a = new AnimalResponse();
 		BeanUtils.copyProperties(animal, a);
+		a.typeAnimal = animal.getClass().getSimpleName();
 		return a;
 	}
 
@@ -100,5 +102,15 @@ public class AnimalResponse {
 	public void setCaracteres(List<Caractere> caracteres) {
 		this.caracteres = caracteres;
 	}
+
+	public String getTypeAnimal() {
+		return typeAnimal;
+	}
+
+	public void setTypeAnimal(String typeAnimal) {
+		this.typeAnimal = typeAnimal;
+	}
+
+	
 
 }
