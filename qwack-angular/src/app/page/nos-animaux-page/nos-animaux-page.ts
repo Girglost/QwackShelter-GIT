@@ -186,10 +186,11 @@ export class NosAnimauxPage implements OnInit {
     this.afficherFiltre = !this.afficherFiltre;
   }
 
-  calculAge(d: Date): number {
-    const MS_PAR_AN = 365.25 * 24 * 60 * 60 * 1000; // prise en compte des années bissextiles
-    return (Date.now() - d.getTime()) / MS_PAR_AN;
-  }
+  calculAge(d: Date | string): number {
+  const MS_PAR_AN = 365.25 * 24 * 60 * 60 * 1000; // prise en compte des années bissextiles
+  const date = d instanceof Date ? d : new Date(d);
+  return (Date.now() - date.getTime()) / MS_PAR_AN;
+}
 
   cleanAge(age: number): number {
     return Math.floor(age);

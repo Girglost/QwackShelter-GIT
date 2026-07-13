@@ -49,7 +49,7 @@
   <ng-container *ngFor="let a of animaux$ | async">
     <div class="animalFiche">
       <div class="animalImg">
-        <img [src]="getImageAnimal(a)" [alt]="a.nomAnimal">
+        <img [src]="getImageAnimal(a)" [alt]="a.nomAnimal" width="100%">
       </div>
       <div class="animalInfo">
         {{ a.nomAnimal }} <br />
