@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-adoption',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './adoption.html',
   styleUrl: './adoption.css',
 })

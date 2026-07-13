@@ -116,7 +116,7 @@
           <select id="quackShelter" formControlName="quackShelter">
             <option [ngValue]="''">-- Sélectionner un QuackShelter --</option>
             @for (qs of quackShelters$ | async; track qs.id) {
-              <option [ngValue]="qs">{{ qs.id }} - {{ qs.lieu }}</option>
+              <option [ngValue]="qs">{{ qs.id }}</option>
             }
           </select>
           <div
