@@ -51,6 +51,7 @@ export class AnimalPage implements OnInit {
   protected caractereValues: Caractere[] = Object.values(Caractere);
   protected statutValues: Statut[] = Object.values(Statut);
   protected quackShelters$!: Observable<QuackShelter[]>;
+  protected selectedFamille!: Famille;
 
   // --- Filtres combinables ---
   protected famillesFiltre = new Set<Famille>();
@@ -266,11 +267,27 @@ export class AnimalPage implements OnInit {
       const req: UpdateAnimalRequest = commun;
       this.animalSrv.update(this.editingAnimal.id, req).subscribe(() => this.reload());
     } else {
-      const req: CreateAnimalRequest = { ...commun, famille: v.famille };
+      const req: CreateAnimalRequest = { ...commun, famille: this.defaultFamille(v)! };
       this.animalSrv.add(req).subscribe(() => this.reload());
     }
 
     this.annulerEdition();
+  }
+
+  protected defaultFamille(a : Animal) : Famille | undefined {
+    if(a.typeAnimal === TypeAnimal.CHAT){
+      return Famille.FELIN;
+    }
+    if(a.typeAnimal === TypeAnimal.CHIEN){
+      return Famille.CANIN;
+    }
+    if(a.typeAnimal === TypeAnimal.NAC){
+      return Famille.MUSCILIDE;
+    }
+    if(a.typeAnimal === TypeAnimal.CANARD || a.typeAnimal === TypeAnimal.POULE){
+      return Famille.GALIDE;
+    }
+    return undefined;
   }
 
 
