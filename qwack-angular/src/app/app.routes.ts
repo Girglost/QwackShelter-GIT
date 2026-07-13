@@ -20,6 +20,7 @@ import { LoginPage } from './page/login-page/login-page';
 import { PersonnePage } from './page/personne-page/personne-page';
 import { ProfilAnimal } from './page/profil-animal/profil-animal';
 import { NosAnimauxPage } from './page/nos-animaux-page/nos-animaux-page';
+import { EmployePage } from './page/employe-page/employe-page';
 
 export const routes: Routes = [
   { path: 'accueil', component: Accueil },
@@ -30,9 +31,10 @@ export const routes: Routes = [
   { path: 'nos-missions', component: NosMissions },
   { path: 'swipe-compagnon', component: SwipeCompagnon },
   { path: 'a-propos', component: APropos },
-  { path: 'adopter', component: Adopter, canActivate: [authGuard] },
+  { path: 'adopter', component: Adopter},
   { path: 'login', component: LoginPage },
   { path: 'animaux', component:NosAnimauxPage},
+  {path: 'employe' , component : EmployePage},
 
   { path: 'animal/:id', component: ProfilAnimal },
 

@@ -1,0 +1,250 @@
+<div class="dashboard">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+
+    <div class="user-card">
+      <img src="assets/images/avatar.png" alt="Photo de profil">
+
+      <div class="user-info">
+        <h2>Hello !</h2>
+<h3>{{ personne?.prenom }} {{ personne?.nom }}</h3>
+
+<p>
+  {{ roleLabel }} depuis le
+  <br>
+  {{ personne?.dateEngagement | date:'dd MMMM yyyy' }}
+</p>
+      </div>
+    </div>
+
+    <nav>
+
+      <a class="active">
+        <i class="fa-solid fa-table-columns"></i>
+        Tableau de bord
+      </a>
+
+      <a>
+        <i class="fa-regular fa-user"></i>
+        Mon profil
+      </a>
+
+      <a>
+        <i class="fa-regular fa-calendar"></i>
+        Planning
+      </a>
+
+      <a>
+        <i class="fa-solid fa-list-check"></i>
+        Mes tâches
+      </a>
+
+      <a>
+        <i class="fa-solid fa-paw"></i>
+        Mes adoptions
+      </a>
+
+      <a>
+        <i class="fa-regular fa-envelope"></i>
+        Mes demandes
+      </a>
+
+      <a routerLink="/gestion-benevole">
+        <i class="fa-solid fa-users" ></i>
+        Gestion des bénévoles
+      </a>
+
+      <a routerLink="/animal">
+        <i class="fa-solid fa-dog" ></i>
+        Gestion des animaux
+      </a>
+
+    </nav>
+
+    <button class="logout">
+      Déconnexion
+    </button>
+
+  </aside>
+
+  <!-- Contenu -->
+
+  <main class="content">
+
+    <section class="profile card">
+
+      <div class="avatar">
+        <img src="assets/images/avatar.png" alt="">
+      </div>
+
+      <div class="profile-content">
+
+        <h2>Mon Profil</h2>
+
+        <div class="infos">
+
+          <div>
+            <label>Nom</label>
+            <p>{{ personne?.prenom }} {{ personne?.nom }}</p>
+          </div>
+
+          <div>
+            <label>Login</label>
+            <p>{{ personne?.login}}</p>
+          </div>
+
+          <div>
+            <label>Adresse</label>
+            <p>{{ personne?.habitation}}</p>
+          </div>
+
+          <div>
+            <label>Téléphone</label>
+            <p>06 00 00 00 00</p>
+          </div>
+
+          <div>
+            <label>Engagement</label>
+            <p>{{ dateRole}}</p>
+          </div>
+
+        </div>
+
+        <button>
+          Modifier mes informations
+        </button>
+
+      </div>
+
+    </section>
+
+    <section class="planning card">
+
+      <h2>Planning</h2>
+
+      <div class="calendar">
+        Calendrier
+      </div>
+
+    </section>
+
+    <section class="todo card">
+
+      <h2>À venir</h2>
+
+      <div class="task">
+        <span>15/04/2026</span>
+        Nettoyer le box 4
+      </div>
+
+      <div class="task">
+        <span>18/04/2026</span>
+        Promener le chien
+      </div>
+
+      <div class="task">
+        <span>20/04/2026</span>
+        Tout compter
+      </div>
+
+    </section>
+
+    <section class="stats card">
+
+      <div class="stat">
+        <h3>150</h3>
+        <p>Animaux dans le refuge</p>
+      </div>
+
+      <div class="stat">
+        <h3>2</h3>
+        <p>Nouveaux arrivants</p>
+      </div>
+
+      <div class="stat">
+        <h3>0</h3>
+        <p>Adoptions</p>
+      </div>
+
+      <div class="stat">
+        <h3>45</h3>
+        <p>Bénévoles</p>
+      </div>
+
+      <div class="stat">
+        <h3>2</h3>
+        <p>Nouveaux bénévoles</p>
+      </div>
+
+      <div class="stat">
+        <h3>10</h3>
+        <p>Nouvelles demandes</p>
+      </div>
+
+    </section>
+
+    <section class="adoptions card">
+
+      <h2>Mes adoptions</h2>
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Animal</th>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Âge</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>Quackito</td>
+            <td>02/10/2024</td>
+            <td>Canard</td>
+            <td>2 ans</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </section>
+
+    <section class="requests card">
+
+      <h2>Mes demandes</h2>
+
+      <table>
+
+        <tbody>
+
+          <tr>
+            <td>14/03/2026</td>
+            <td>EN COURS</td>
+          </tr>
+
+          <tr>
+            <td>12/02/2026</td>
+            <td>VALIDÉE</td>
+          </tr>
+
+          <tr>
+            <td>15/01/2026</td>
+            <td>REFUSÉE</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </section>
+
+  </main>
+
+</div>
