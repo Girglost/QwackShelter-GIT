@@ -331,4 +331,16 @@ public class PersonneService {
 
 	}
 
+	public List<Personne> getByQuackShelterId(Integer id) {
+		return daoPersonne.findByQuackShelterId(id);
+	}
+
+	public List<Personne> getByStatutActivite(StatutActivite statut) {
+		return daoPersonne.findByStatutActivite(statut);
+	}
+
+	public List<Personne> getByAdmin(Boolean admin) {
+		return daoPersonne.findByAdmin(admin);
+	}
+
 }

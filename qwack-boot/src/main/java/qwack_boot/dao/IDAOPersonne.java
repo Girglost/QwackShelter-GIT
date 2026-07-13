@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import qwack_boot.model.Personne;
 import qwack_boot.model.Role;
+import qwack_boot.model.StatutActivite;
 
 public interface IDAOPersonne extends JpaRepository<Personne, Integer> {
 
@@ -74,5 +75,11 @@ public interface IDAOPersonne extends JpaRepository<Personne, Integer> {
 
 	@Query("SELECT  p from Personne p where p.role='VISITEUR' and p.id=:idPersonne")
 	public Optional<Personne> findVisiteurById(@Param("idPersonne") Integer idPersonne);
+
+	public List<Personne> findByQuackShelterId(Integer id);
+
+	public List<Personne> findByStatutActivite(StatutActivite statut);
+
+	public List<Personne> findByAdmin(Boolean admin);
 
 }

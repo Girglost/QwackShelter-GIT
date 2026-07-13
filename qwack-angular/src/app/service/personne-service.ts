@@ -29,7 +29,7 @@ export class PersonneService {
   }
 
   public findByRole(role: Role): Observable<Personne[]> {
-    return this.http.get<Personne[]>(`${this.apiUrl}/role/${role}`);
+    return this.http.get<Personne[]>(`/${role}`);
   }
 
   public findByQuackShelter(idQuackShelter: number): Observable<Personne[]> {
