@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-info-adopter',
-  imports: [],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './info-adopter.html',
   styleUrl: './info-adopter.css',
 })
