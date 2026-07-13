@@ -19,6 +19,7 @@ import { LieuPage } from './page/lieu-page/lieu-page';
 import { LoginPage } from './page/login-page/login-page';
 import { PersonnePage } from './page/personne-page/personne-page';
 import { ProfilAnimal } from './page/profil-animal/profil-animal';
+import { NosAnimauxPage } from './page/nos-animaux-page/nos-animaux-page';
 
 export const routes: Routes = [
   { path: 'accueil', component: Accueil },
@@ -31,6 +32,7 @@ export const routes: Routes = [
   { path: 'a-propos', component: APropos },
   { path: 'adopter', component: Adopter, canActivate: [authGuard] },
   { path: 'login', component: LoginPage },
+  { path: 'animaux', component:NosAnimauxPage},
 
   { path: 'animal/:id', component: ProfilAnimal },
 
