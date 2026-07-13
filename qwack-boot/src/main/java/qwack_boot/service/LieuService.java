@@ -29,7 +29,7 @@ public class LieuService {
 
 	public Lieu insert(CreateLieuRequest lieuRequest) {
 		Lieu lieu = new Lieu();
-		lieu.setType(lieuRequest.getType());
+		lieu.setType(lieuRequest.getTypeLieu());
 		lieu.setAdresse(lieuRequest.getAdresse());
 		return daoLieu.save(lieu);
 	}
@@ -38,7 +38,7 @@ public class LieuService {
 		Lieu lieu = daoLieu.findById(id)
 				.orElseThrow(() -> new RuntimeException("Lieu introuvable"));
 
-		lieu.setType(request.getType());
+		lieu.setType(request.getTypeLieu());
 		lieu.setAdresse(request.getAdresse());
 
 		daoLieu.save(lieu);

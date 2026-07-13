@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Role } from '../enum/role';
 import { StatutActivite } from '../enum/statut-activite';
+import { CurrentUser } from '../model/current-user';
 import { Personne } from '../model/personne';
 
 @Injectable({
@@ -69,5 +70,10 @@ export class PersonneService {
 
   public findByAdmin(admin: boolean): Observable<Personne[]> {
     return this.http.get<Personne[]>(`${this.apiUrl}/admin`);
+  }
+
+
+  public getMe(): Observable<CurrentUser> {
+    return this.http.get<CurrentUser>(`/auth/me`);
   }
 }

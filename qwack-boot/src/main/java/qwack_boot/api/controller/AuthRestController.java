@@ -1,6 +1,7 @@
 package qwack_boot.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.api.requestDTO.AuthRequest;
 import qwack_boot.api.responseDTO.AuthTokenResponse;
-import qwack_boot.model.Personne;
+import qwack_boot.api.responseDTO.personne.ConnectedResponse;
 import qwack_boot.security.JwtUtils;
 import qwack_boot.service.PersonneService;
 
@@ -41,13 +42,13 @@ public class AuthRestController {
     }
 
     @GetMapping("/me")
-    public String me(Authentication authentication) {
-        String login = (String) authentication.getPrincipal();
-        Personne personne = personneSrv.getByLogin(login);
+    public ResponseEntity<?> me(Authentication authentication) {
+        String login = authentication.getName();
+        ConnectedResponse personne = ConnectedResponse.convert(personneSrv.getByLogin(login));
 
         System.out.println(personne);
 
-        return "OK";
+        return ResponseEntity.ok(personne);
 
     }
 }
