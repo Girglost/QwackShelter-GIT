@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Role } from '../../enum/role';
+import { Component, OnInit, signal } from '@angular/core';
 import { RouterLink } from "@angular/router";
-import { CurrentUser } from '../../model/current-user';
-import { AuthService } from '../../service/auth-service';
+import { Role } from '../../enum/role';
 import { Personne } from '../../model/personne';
+import { AuthService } from '../../service/auth-service';
 import { PersonneService } from '../../service/personne-service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-employe-page',
@@ -19,38 +17,35 @@ export class ProfilPersonnePage implements OnInit {
 
   //private personne$!: Observable<Personne>;
 
-  personne?:Personne;
+  // personne?: Personne;
+  personne = signal<Personne | null>(null);
 
   constructor(
     private authService: AuthService,
     private personneService: PersonneService
-  ) {}
+  ) { }
 
   get currentUser() {
     return this.authService.currentUser();
   }
 
-ngOnInit(): void {
+  ngOnInit(): void {
 
-  this.authService.loadCurrentUser()
-    .subscribe(user => {
+    const user = this.authService.currentUser();
 
-      console.log("USER DANS COMPOSANT :", user);
+    if (user) {
 
       this.personneService.findByLogin(user.login)
         .subscribe(personne => {
-
-          console.log(personne);
-
-          this.personne = personne;
-
+          console.log("PERSONNE COMPLETE :", personne);
+          this.personne.set(personne);
         });
 
-    });
-}
+    }
+  }
 
   get roleLabel(): string {
-    switch (this.personne?.role) {
+    switch (this.personne()?.role) {
       case Role.BENEVOLE:
         return 'Bénévole';
 
@@ -71,15 +66,15 @@ ngOnInit(): void {
   get dateRole(): Date | undefined {
     if (!this.personne) return undefined;
 
-    switch (this.personne?.role) {
+    switch (this.personne()?.role) {
       case Role.BENEVOLE:
-        return this.personne.dateEngagement;
+        return this.personne()?.dateEmbauche;
 
       case Role.EMPLOYE:
-        return this.personne.dateEmbauche;
+        return this.personne()?.dateEmbauche;
 
       case Role.VISITEUR:
-        return this.personne.dateInscription;
+        return this.personne()?.dateInscription;
 
       default:
         return undefined;

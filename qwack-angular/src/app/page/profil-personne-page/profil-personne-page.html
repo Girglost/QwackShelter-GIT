@@ -1,3 +1,4 @@
+<h1>TEST : {{personne()?.nom}}</h1>
 <div class="dashboard">
 
   <!-- Sidebar -->
@@ -8,13 +9,13 @@
 
       <div class="user-info">
         <h2>Hello !</h2>
-<h3>{{ personne?.prenom }} {{ personne?.nom }}</h3>
+        <h3>{{ personne()?.prenom }} {{ personne()?.nom }}</h3>
 
-<p>
-  {{ roleLabel }} depuis le
-  <br>
-  {{dateRole}}
-</p>
+        <p>
+          {{ roleLabel }} depuis le
+          <br>
+          {{dateRole}}
+        </p>
       </div>
     </div>
 
@@ -51,12 +52,12 @@
       </a>
 
       <a routerLink="/gestion-benevole">
-        <i class="fa-solid fa-users" ></i>
+        <i class="fa-solid fa-users"></i>
         Gestion des bénévoles
       </a>
 
       <a routerLink="/animal">
-        <i class="fa-solid fa-dog" ></i>
+        <i class="fa-solid fa-dog"></i>
         Gestion des animaux
       </a>
 
@@ -86,17 +87,18 @@
 
           <div>
             <label>Nom</label>
-            <p>{{ personne?.prenom }} {{ personne?.nom }}</p>
+            <p>{{ personne()?.prenom }} {{ personne()?.nom }}</p>
           </div>
 
           <div>
             <label>Login</label>
-            <p>{{ personne?.login}}</p>
+            <p>{{ personne()?.login}}</p>
           </div>
 
           <div>
             <label>Adresse</label>
-            <p>{{ personne?.habitation?.adresse?.numero }} {{ personne?.habitation?.adresse?.voie }}, {{ personne?.habitation?.adresse?.cp }} {{ personne?.habitation?.adresse?.ville }}</p>
+            <p>{{ personne()?.habitation?.adresse?.numero }} {{ personne()?.habitation?.adresse?.voie }}, {{
+              personne()?.habitation?.adresse?.cp }} {{ personne()?.habitation?.adresse?.ville }}</p>
           </div>
 
           <div>
