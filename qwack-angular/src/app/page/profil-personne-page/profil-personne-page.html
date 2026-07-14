@@ -1,14 +1,17 @@
 <div class="dashboard">
-
   <!-- Sidebar -->
   <aside class="sidebar">
-
     <div class="user-card">
-
-      <svg class="avatar-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="60" height="60">
-        <circle cx="50" cy="50" r="50" fill="#e0e0e0"/>
-        <circle cx="50" cy="38" r="18" fill="#9e9e9e"/>
-        <path d="M50 60c-19 0-34 12-34 27v13h68V87c0-15-15-27-34-27z" fill="#9e9e9e"/>
+      <svg
+        class="avatar-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 100 100"
+        width="60"
+        height="60"
+      >
+        <circle cx="50" cy="50" r="50" fill="#e0e0e0" />
+        <circle cx="50" cy="38" r="18" fill="#9e9e9e" />
+        <path d="M50 60c-19 0-34 12-34 27v13h68V87c0-15-15-27-34-27z" fill="#9e9e9e" />
       </svg>
 
       <div class="user-info">
@@ -17,14 +20,13 @@
 
         <p>
           {{ roleLabel }} depuis le
-          <br>
-          {{dateRole}}
+          <br />
+          {{ dateRole }}
         </p>
       </div>
     </div>
 
     <nav>
-
       <a class="active" routerLink="/dashboard">
         <i class="fa-solid fa-table-columns"></i>
         Tableau de bord
@@ -34,35 +36,27 @@
         <i [class]="item.icon"></i>
         {{ item.label }}
       </a>
-
     </nav>
 
-    <button class="logout">
-      Déconnexion
-    </button>
-
+    <button class="logout" (click)="logout()">Déconnexion</button>
   </aside>
 
   <!-- Contenu -->
 
   <main class="content">
-
     <section class="profile card">
-
       <div class="avatar">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
-          <circle cx="50" cy="50" r="50" fill="#e0e0e0"/>
-          <circle cx="50" cy="38" r="18" fill="#9e9e9e"/>
-          <path d="M50 60c-19 0-34 12-34 27v13h68V87c0-15-15-27-34-27z" fill="#9e9e9e"/>
+          <circle cx="50" cy="50" r="50" fill="#e0e0e0" />
+          <circle cx="50" cy="38" r="18" fill="#9e9e9e" />
+          <path d="M50 60c-19 0-34 12-34 27v13h68V87c0-15-15-27-34-27z" fill="#9e9e9e" />
         </svg>
       </div>
 
       <div class="profile-content">
-
         <h2>Mon Profil</h2>
 
         <div class="infos">
-
           <div>
             <label>Nom</label>
             <p>{{ personne()?.prenom }} {{ personne()?.nom }}</p>
@@ -70,13 +64,16 @@
 
           <div>
             <label>Login</label>
-            <p>{{ personne()?.login}}</p>
+            <p>{{ personne()?.login }}</p>
           </div>
 
           <div>
             <label>Adresse</label>
-            <p>{{ personne()?.habitation?.adresse?.numero }} {{ personne()?.habitation?.adresse?.voie }}, {{
-              personne()?.habitation?.adresse?.cp }} {{ personne()?.habitation?.adresse?.ville }}</p>
+            <p>
+              {{ personne()?.habitation?.adresse?.numero }}
+              {{ personne()?.habitation?.adresse?.voie }}, {{ personne()?.habitation?.adresse?.cp }}
+              {{ personne()?.habitation?.adresse?.ville }}
+            </p>
           </div>
 
           <div>
@@ -86,33 +83,23 @@
 
           <div>
             <label>Engagement</label>
-            <p>{{dateRole}}</p>
+            <p>{{ dateRole }}</p>
           </div>
-
         </div>
 
-        <button>
-          Modifier mes informations
-        </button>
-
+        <button>Modifier mes informations</button>
       </div>
-
     </section>
 
     <!-- Planning : bénévole / employé / patron -->
     <section class="planning card" *ngIf="hasPlanning">
-
       <h2>Planning</h2>
 
-      <div class="calendar">
-        Calendrier
-      </div>
-
+      <div class="calendar">Calendrier</div>
     </section>
 
     <!-- À venir / tâches : bénévole / employé / patron -->
     <section class="todo card" *ngIf="hasPlanning">
-
       <h2>À venir</h2>
 
       <div class="task">
@@ -129,12 +116,10 @@
         <span>20/04/2026</span>
         Tout compter
       </div>
-
     </section>
 
     <!-- Statistiques du refuge : employé / admin -->
     <section class="stats card" *ngIf="hasStats">
-
       <div class="stat">
         <h3>150</h3>
         <p>Animaux dans le refuge</p>
@@ -164,51 +149,39 @@
         <h3>10</h3>
         <p>Nouvelles demandes</p>
       </div>
-
     </section>
 
     <!-- Adoptions : commun à tous les rôles -->
     <section class="adoptions card">
-
       <h2>Mes adoptions</h2>
 
       <table>
-
         <thead>
-
           <tr>
             <th>Animal</th>
             <th>Date</th>
             <th>Type</th>
             <th>Âge</th>
           </tr>
-
         </thead>
 
         <tbody>
-
           <tr>
             <td>Quackito</td>
             <td>02/10/2024</td>
             <td>Canard</td>
             <td>2 ans</td>
           </tr>
-
         </tbody>
-
       </table>
-
     </section>
 
     <!-- Demandes : commun à tous les rôles -->
     <section class="requests card">
-
       <h2>Mes demandes</h2>
 
       <table>
-
         <tbody>
-
           <tr>
             <td>14/03/2026</td>
             <td>EN COURS</td>
@@ -223,13 +196,8 @@
             <td>15/01/2026</td>
             <td>REFUSÉE</td>
           </tr>
-
         </tbody>
-
       </table>
-
     </section>
-
   </main>
-
 </div>

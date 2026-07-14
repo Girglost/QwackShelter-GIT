@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { Role } from '../../enum/role';
 import { Personne } from '../../model/personne';
 import { AuthService } from '../../service/auth-service';
@@ -25,7 +25,8 @@ export class ProfilPersonnePage implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private personneService: PersonneService
+    private personneService: PersonneService,
+    private router: Router
   ) { }
 
   get currentUser() {
@@ -89,12 +90,10 @@ export class ProfilPersonnePage implements OnInit {
     return this.personne()?.role === Role.PATRON;
   }
 
-  // Planning + tâches : bénévoles, employés et patrons
   get hasPlanning(): boolean {
     return this.isBenevole || this.isEmploye || this.isPatron;
   }
 
-  // Statistiques du refuge : employés / admins
   get hasStats(): boolean {
     return this.isEmploye || this.isAdmin;
   }
@@ -102,7 +101,6 @@ export class ProfilPersonnePage implements OnInit {
   get menuItems(): MenuItem[] {
     const role = this.personne()?.role;
 
-    // Items communs à tous les rôles
     const items: MenuItem[] = [
       { icon: 'fa-regular fa-user', label: 'Mon profil' },
       { icon: 'fa-regular fa-envelope', label: 'Mes demandes' },
@@ -143,7 +141,6 @@ export class ProfilPersonnePage implements OnInit {
         break;
     }
 
-    // Ajout des items admin, quel que soit le rôle
     if (this.isAdmin) {
       items.push(
         { icon: 'fa-solid fa-users-gear', label: 'Gestion des personnes', link: '/personne' },
@@ -153,6 +150,11 @@ export class ProfilPersonnePage implements OnInit {
     }
 
     return items;
+  }
+
+  logout(): void {
+    this.authService.resetAuth();
+    this.router.navigate(['/accueil']);
   }
 
 }
