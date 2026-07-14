@@ -65,13 +65,15 @@ export class ProfilPersonnePage implements OnInit {
 
     switch (this.personne()?.role) {
       case Role.BENEVOLE:
-        return this.personne()?.dateEmbauche;
+        return this.personne()?.dateEngagement;
 
       case Role.EMPLOYE:
         return this.personne()?.dateEmbauche;
 
       case Role.VISITEUR:
         return this.personne()?.dateInscription;
+      case Role.PATRON:
+        return this.personne()?.dateEmbauche;
 
       default:
         return undefined;
