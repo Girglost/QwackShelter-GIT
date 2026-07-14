@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import qwack_boot.api.requestDTO.QuackShelterDTO;
 import qwack_boot.model.QuackShelter;
 import qwack_boot.service.QuackShelterService;
 
@@ -24,13 +25,13 @@ public class QuackShelterRestController {
     QuackShelterService QuackShelterSrv;
 
     @GetMapping
-    public List<QuackShelter> chercherTous() {
-        return QuackShelterSrv.getAll();
+    public List<QuackShelterDTO> chercherTous() {
+        return QuackShelterSrv.getAll().stream().map(q -> QuackShelterDTO.convert(q)).toList();
     }
 
     @GetMapping("/{id}")
-    public QuackShelter chercherParId(@RequestParam Integer id) {
-        return QuackShelterSrv.getById(id);
+    public QuackShelterDTO chercherParId(@RequestParam Integer id) {
+        return QuackShelterDTO.convert(QuackShelterSrv.getById(id));
     }
 
     @DeleteMapping("/{id}")

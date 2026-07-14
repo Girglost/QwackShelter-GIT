@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.api.responseDTO.personne.EmployeResponse;
@@ -89,6 +90,14 @@ public class PersonneRestController {
         VisiteurResponse personneDeleted = VisiteurResponse.convert(deletedPersonne);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(Map.of("Personne DELETED", personneDeleted));
+    }
+
+    // Permet de vérifier si le login envoyé exist
+    // pour sécurisé l'insription
+    @GetMapping("/check-login")
+    public ResponseEntity<Boolean> checkLogin(
+            @RequestParam String login) {
+        return ResponseEntity.ok(personneSrv.loginExist(login));
     }
 
 }

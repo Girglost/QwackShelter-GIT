@@ -1,14 +1,12 @@
 <div class="header-boutons">
   <div class="btn-connexion">
     @if(authService.isLogged()){
+    <span class="username">Bonjour {{authService.currentUser()?.login}}</span>
     <a class="lien-connexion" (click)="logout()">Deconnexion</a>
     <img routerLink="/profil-personne" src="./../../../../assets/image/header/connexion-btn.png" width="40px" />
     }@else{
-    <a routerLink="/login">Connexion</a>
+    <a class="lien-connexion" routerLink="/login">Connexion</a>
     }
-
-
-
   </div>
 
   <div class="header_don_bouton">

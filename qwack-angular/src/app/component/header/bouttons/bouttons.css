@@ -8,10 +8,12 @@
   display: flex;
   justify-self: end;
   align-items: center;
+  gap: 15px;
+  /* espace entre les éléments */
   margin-top: 10px;
   margin-bottom: 3px;
   margin-right: 7px;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .btn-connexion p {
@@ -117,4 +119,51 @@
     display: none;
     /* cache le texte "Se connecter" sur mobile, garde juste l'icône */
   }
+}
+
+.lien-connexion {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 18px;
+
+  background-color: transparent;
+  color: #f3e9e0;
+
+  border: 2px solid #b77f38;
+  border-radius: 14px;
+
+  font-family: 'Montagu Slab';
+  font-size: clamp(14px, 1.6vw, 17px);
+  font-weight: 600;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.lien-connexion:hover {
+  background-color: #b77f38;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(183, 127, 56, 0.35);
+}
+
+.lien-connexion:active {
+  transform: scale(0.98);
+}
+
+.username {
+  font-family: 'Montagu Slab';
+  font-size: clamp(14px, 1.7vw, 17px);
+  font-weight: 600;
+  color: #f3e9e0;
+
+  white-space: nowrap;
 }

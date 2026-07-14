@@ -13,15 +13,16 @@ import { SwipeCompagnon } from './page/swipe-compagnon/swipe-compagnon';
 
 import { authGuard } from './guard/auth-guard';
 import { APropos } from './page/a-propos/a-propos';
+import { AdoptionForm } from './page/adopter/adopter-formulaire/adopter-formulaire';
 import { Adopter } from './page/adopter/adopter/adopter';
 import { AnimalPage } from './page/animal-page/animal-page';
+import { EmployePage } from './page/employe-page/employe-page';
+import { InscriptionPage } from './page/inscription-page/inscription-page';
 import { LieuPage } from './page/lieu-page/lieu-page';
 import { LoginPage } from './page/login-page/login-page';
+import { NosAnimauxPage } from './page/nos-animaux-page/nos-animaux-page';
 import { PersonnePage } from './page/personne-page/personne-page';
 import { ProfilAnimal } from './page/profil-animal/profil-animal';
-import { NosAnimauxPage } from './page/nos-animaux-page/nos-animaux-page';
-import { EmployePage } from './page/employe-page/employe-page';
-import { AdoptionForm } from './page/adopter/adopter-formulaire/adopter-formulaire';
 
 export const routes: Routes = [
   { path: 'accueil', component: Accueil },
@@ -32,10 +33,11 @@ export const routes: Routes = [
   { path: 'nos-missions', component: NosMissions },
   { path: 'swipe-compagnon', component: SwipeCompagnon },
   { path: 'a-propos', component: APropos },
-  { path: 'adopter', component: Adopter},
+  { path: 'adopter', component: Adopter },
   { path: 'login', component: LoginPage },
-  { path: 'animaux', component:NosAnimauxPage},
-  {path: 'employe' , component : EmployePage},
+  { path: 'inscription', component: InscriptionPage },
+  { path: 'animaux', component: NosAnimauxPage },
+  { path: 'employe', component: EmployePage },
 
   { path: 'animal/:id', component: ProfilAnimal },
   { path: 'demande-adoption', component: AdoptionForm },

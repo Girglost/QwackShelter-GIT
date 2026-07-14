@@ -31,48 +31,51 @@ public class JwtHeaderFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
 
-        if (authHeader != null) {
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7); // RETIRER BEARER
-            String login = JwtUtils.validate(token);
-            Personne personne = this.service.getByLogin(login);
+            if (!token.isEmpty()) {
 
-            /*
-             * System.out.println(authHeader);
-             * 
-             * System.out.println(login);
-             * 
-             * System.out.println(personne);
-             */
+                String login = JwtUtils.validate(token);
+                Personne personne = this.service.getByLogin(login);
 
-            if (personne != null) {
-                List<GrantedAuthority> authorities = new ArrayList<>();
+                /*
+                 * System.out.println(authHeader);
+                 * 
+                 * System.out.println(login);
+                 * 
+                 * System.out.println(personne);
+                 */
 
-                switch (personne.getRole()) {
-                    case Role.PATRON:
-                        authorities.add(new SimpleGrantedAuthority("ROLE_PATRON"));
-                        break;
-                    case Role.EMPLOYE:
-                        authorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYE"));
-                        break;
-                    case Role.BENEVOLE:
-                        authorities.add(new SimpleGrantedAuthority("ROLE_BENEVOLE"));
-                        break;
-                    case Role.VISITEUR:
-                        authorities.add(new SimpleGrantedAuthority("ROLE_VISITEUR"));
-                        break;
+                if (personne != null) {
+                    List<GrantedAuthority> authorities = new ArrayList<>();
 
-                    default:
-                        break;
+                    switch (personne.getRole()) {
+                        case Role.PATRON:
+                            authorities.add(new SimpleGrantedAuthority("ROLE_PATRON"));
+                            break;
+                        case Role.EMPLOYE:
+                            authorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYE"));
+                            break;
+                        case Role.BENEVOLE:
+                            authorities.add(new SimpleGrantedAuthority("ROLE_BENEVOLE"));
+                            break;
+                        case Role.VISITEUR:
+                            authorities.add(new SimpleGrantedAuthority("ROLE_VISITEUR"));
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    if (personne.isAdmin()) {
+                        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+                    }
+
+                    Authentication auth = new UsernamePasswordAuthenticationToken(personne.getLogin(), null,
+                            authorities);
+
+                    SecurityContextHolder.getContext().setAuthentication(auth);
                 }
-
-                if (personne.isAdmin()) {
-                    authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-                }
-
-                Authentication auth = new UsernamePasswordAuthenticationToken(personne.getLogin(), null,
-                        authorities);
-
-                SecurityContextHolder.getContext().setAuthentication(auth);
             }
         }
 

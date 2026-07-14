@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit(): void {
     this.formCtrlLogin = this.formBuilder.control("", Validators.required);
-    this.formCtrlPassword = this.formBuilder.control("", [Validators.required, Validators.minLength(6)]);
+    this.formCtrlPassword = this.formBuilder.control("", [Validators.required, Validators.minLength(4)]);
 
     this.formAuth = this.formBuilder.group({
       login: this.formCtrlLogin,

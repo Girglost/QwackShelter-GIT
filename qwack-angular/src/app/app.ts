@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Header } from './component/header/header/header';
 import { Footer } from './component/footer/footer/footer';
+import { Header } from './component/header/header/header';
+import { AuthService } from './service/auth-service';
 
 
 @Component({
@@ -16,4 +17,10 @@ import { Footer } from './component/footer/footer/footer';
 })
 export class App {
   protected readonly title = signal('quack-angular');
+
+  private authService: AuthService = inject(AuthService);
+
+  ngOnInit() {
+    this.authService.initialize();
+  }
 }

@@ -34,6 +34,7 @@ export class AuthService {
   public resetAuth() {
     this._token.set("");
     sessionStorage.removeItem("token");
+    this._currentUser.set(null);
   }
   public loadCurrentUser(): Observable<CurrentUser> {
 
@@ -72,5 +73,12 @@ export class AuthService {
         }
       });
     });
+  }
+
+  // au chargement de la page, on va récupérer le user connecté
+  public initialize() {
+    if (this.isLogged()) {
+      this.loadCurrentUser().subscribe();
+    }
   }
 }

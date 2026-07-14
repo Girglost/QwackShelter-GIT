@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -28,6 +29,14 @@ public class SecurityConfig {
             // On commence toujours par le plus spécifique, pour terminer par le plus
             // général
             auth.requestMatchers("/api/auth", "/api/inscription").permitAll();
+            auth.requestMatchers(HttpMethod.GET, "/api/quackshelter").permitAll();
+            auth.requestMatchers(HttpMethod.GET, "/api/animal").permitAll();
+            auth.requestMatchers(HttpMethod.GET, "/api/animal/*").permitAll();
+
+            // Inscription pour tout le monde
+            auth.requestMatchers(HttpMethod.POST, "/api/visiteur").permitAll();
+            auth.requestMatchers(HttpMethod.POST, "/api/benevole").permitAll();
+            auth.requestMatchers(HttpMethod.GET, "/api/personne/check-login**").permitAll();
             // Les utilisateurs doivent être authentifiés pour accéder à /quelquechose
             auth.requestMatchers("/**").authenticated();
         });

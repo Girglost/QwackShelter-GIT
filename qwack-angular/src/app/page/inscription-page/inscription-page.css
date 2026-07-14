@@ -1,0 +1,443 @@
+:host {
+    --forest: #2f522d;
+    --forest-dark: #1f461d;
+    --gold: #b77f38;
+    --ink: #555;
+    --light: #faf8f3;
+
+    --font-display: 'Pacifico', cursive;
+    --font-body: 'Montserrat', sans-serif;
+
+    display: block;
+    font-family: var(--font-body);
+}
+
+
+/* CONTENEUR PRINCIPAL */
+
+.container-login-form {
+
+    max-width: 100%;
+    background: #f3efe6FF;
+
+    margin: auto;
+    padding: 40px 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+/* TITRE */
+
+h1 {
+
+    font-family: var(--font-display);
+
+    color: var(--forest);
+
+    font-weight: 700;
+
+    font-size: 80px;
+
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+
+
+/* FORMULAIRE */
+
+.form-login {
+
+    width: 60%;
+}
+
+
+.form-login div {
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Espacement entre les champs principaux */
+
+.form-login>div:not(.div-connexion) {
+
+    margin-bottom: 55px;
+}
+
+
+
+/* LABEL */
+
+label {
+
+    color: #504e4cFF;
+
+    font-size: 24px;
+}
+
+
+
+/* INPUT */
+
+input,
+select {
+
+    background-color: white;
+
+    color: #504e4cFF;
+
+    height: 75px;
+
+    border-radius: 12px;
+
+    border: none;
+
+    margin-top: 11px;
+
+    padding-left: 10px;
+
+    font-size: 24px;
+
+    font-family: var(--font-body);
+
+}
+
+
+
+select {
+
+    cursor: pointer;
+
+}
+
+
+
+/* ERREURS */
+
+.div-error-login {
+
+    color: red;
+
+    display: flex;
+
+    text-align: left;
+
+    margin-top: 10px;
+
+    font-size: 18px;
+}
+
+
+
+/* ========================= */
+/*       ADRESSE             */
+/* ========================= */
+
+
+.ligne-adresse {
+
+    display: flex !important;
+
+    flex-direction: row !important;
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+
+}
+
+
+
+.adresse-numero {
+
+    width: 20%;
+}
+
+
+
+.adresse-voie {
+
+    width: 80%;
+}
+
+
+
+.adresse-ville {
+
+    width: 70%;
+}
+
+
+
+.adresse-cp {
+
+    width: 30%;
+}
+
+
+
+/* ========================= */
+/*       SELECT REFUGE       */
+/* ========================= */
+
+.form-login select {
+
+    padding-right: 15px;
+
+}
+
+
+
+/* ========================= */
+/*       RADIO ROLE          */
+/* ========================= */
+
+
+.choix-role {
+
+    margin-top: 40px;
+
+}
+
+
+.radio-container {
+
+    display: flex !important;
+
+    flex-direction: row !important;
+
+    gap: 50px;
+
+    margin-top: 20px;
+
+}
+
+
+
+.radio-container label {
+
+    display: flex !important;
+
+    flex-direction: row !important;
+
+    align-items: center;
+
+    gap: 10px;
+
+    cursor: pointer;
+
+}
+
+
+
+.radio-container input {
+
+    width: 25px;
+
+    height: 25px;
+
+    margin: 0;
+
+    cursor: pointer;
+
+}
+
+
+
+
+/* ========================= */
+/*       BOUTON              */
+/* ========================= */
+
+
+.div-connexion {
+
+    color: #f5f1e8FF;
+
+    font-family: "Montagu Slab";
+
+}
+
+
+
+.div-connexion input:disabled {
+
+    background-color: grey;
+
+}
+
+
+
+.div-connexion input {
+
+    background: #365027FF;
+
+    color: #f5f1e8FF;
+
+    cursor: pointer;
+
+    margin: 0;
+
+    font-size: 32px;
+
+    transition: transform 0.2s ease;
+
+}
+
+
+
+.div-connexion input:hover {
+
+    transform: scale(1.02);
+
+}
+
+
+
+
+/* ========================= */
+/*       RETOUR LOGIN        */
+/* ========================= */
+
+
+.div-inscription {
+
+    color: #23411dFF;
+
+    font-family: "Pacifico";
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    margin-top: 50px;
+
+    font-size: 24px;
+
+}
+
+
+
+.div-inscription a {
+
+    color: #da9245FF;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+}
+
+
+
+.div-inscription p {
+
+    margin: 0;
+
+}
+
+
+
+
+/* ========================= */
+/*       RESPONSIVE          */
+/* ========================= */
+
+
+@media(max-width: 900px) {
+
+
+    .form-login {
+
+        width: 90%;
+
+    }
+
+
+    h1 {
+
+        font-size: 60px;
+
+    }
+
+
+    .ligne-adresse {
+
+        flex-direction: column !important;
+
+    }
+
+
+    .adresse-numero,
+    .adresse-voie,
+    .adresse-ville,
+    .adresse-cp {
+
+        width: 100%;
+
+    }
+
+
+    .radio-container {
+
+        gap: 20px;
+
+    }
+
+}
+
+
+
+@media(max-width: 600px) {
+
+
+    h1 {
+
+        font-size: 45px;
+
+    }
+
+
+    label {
+
+        font-size: 18px;
+
+    }
+
+
+    input,
+    select {
+
+        height: 55px;
+
+        font-size: 18px;
+
+    }
+
+
+    .div-connexion input {
+
+        font-size: 24px;
+
+    }
+
+
+    .radio-container {
+
+        flex-direction: column !important;
+
+    }
+
+}

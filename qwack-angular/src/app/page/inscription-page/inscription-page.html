@@ -1,0 +1,261 @@
+<div class="container-login-form">
+
+    <h1>Inscription</h1>
+
+
+    <form class="form-login" (submit)="inscription()" [formGroup]="formInscription">
+
+
+        <!-- NOM -->
+        <div>
+            <label for="nom">Nom</label>
+            <input type="text" formControlName="nom" />
+
+            @if(formCtrlNom.dirty && formCtrlNom.invalid){
+            <div class="div-error-login">
+                Le nom est obligatoire
+            </div>
+            }
+        </div>
+
+
+
+        <!-- PRENOM -->
+        <div>
+            <label for="prenom">Prénom</label>
+            <input type="text" formControlName="prenom" />
+
+            @if(formCtrlPrenom.dirty && formCtrlPrenom.invalid){
+            <div class="div-error-login">
+                Le prénom est obligatoire
+            </div>
+            }
+        </div>
+
+
+
+        <!-- LOGIN -->
+        <div>
+            <label for="login">Email</label>
+            <input type="email" formControlName="login" />
+
+            @if(formCtrlLogin.dirty && formCtrlLogin.hasError('required')){
+            <div class="div-error-login">
+                L'email est obligatoire
+            </div>
+            }
+
+            @if(formCtrlLogin.dirty && formCtrlLogin.hasError('loginTaken')){
+            <div class="div-error-login">
+                Login déja utilisé !
+            </div>
+            }
+        </div>
+
+
+
+        <!-- PASSWORD -->
+        <div>
+            <label for="password">Mot de passe</label>
+            <input type="password" formControlName="password" />
+
+            @if(formCtrlPassword.dirty && formCtrlPassword.hasError('required')){
+            <div class="div-error-login">
+                Le mot de passe est obligatoire
+            </div>
+            }
+
+            @if(formCtrlPassword.dirty && formCtrlPassword.hasError('minlength')){
+            <div class="div-error-login">
+                Le mot de passe doit faire 4 caractères minimum
+            </div>
+            }
+        </div>
+        <div>
+            <label for="password">Confirmer le mot de passe</label>
+            <input type="password" formControlName="passwordConfirm" />
+
+            @if(formCtrlPasswordConfirm.dirty && formCtrlPasswordConfirm.hasError('required')){
+            <div class="div-error-login">
+                Confirmation du mot de passe requise
+            </div>
+            }
+
+            @if(formCtrlPasswordConfirm.dirty && formCtrlPasswordConfirm.hasError('minlength')){
+            <div class="div-error-login">
+                Le mot de passe doit faire 4 caractères minimum
+            </div>
+            }
+            @if(formCtrlPasswordConfirm.dirty && formCtrlPasswordConfirm.hasError('passwordMismatch')){
+            <div class="div-error-login">
+                Les mots de passe ne correspondent pas
+            </div>
+            }
+        </div>
+
+
+
+
+        <div formGroupName="habitation">
+
+            <label>Adresse</label>
+
+
+            <div>
+
+                <label>Type de logement</label>
+
+                <select id="typeLieuReel" formControlName="typeLieu">
+                    <option value="">-- Sélectionner un type --</option>
+                    @for (t of typeLieuDisponible; track t) {
+                    <option [value]="t">{{ t }}</option>
+                    }
+                </select>
+
+            </div>
+
+
+
+            <div formGroupName="adresse">
+
+
+                <div class="ligne-adresse">
+
+                    <div class="adresse-numero">
+
+                        <label>Numéro</label>
+
+                        <input type="text" formControlName="numero">
+
+                    </div>
+
+
+
+                    <div class="adresse-voie">
+
+                        <label>Voie</label>
+
+                        <input type="text" formControlName="voie">
+
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="ligne-adresse">
+
+                    <div class="adresse-ville">
+
+                        <label>Ville</label>
+
+                        <input type="text" formControlName="ville">
+
+                    </div>
+
+
+
+                    <div class="adresse-cp">
+
+                        <label>Code postal</label>
+
+                        <input type="text" formControlName="cp">
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+
+        <!-- QUACK SHELTER -->
+
+        <div>
+
+            <label for="quackShelter">
+                Refuge
+            </label>
+
+
+            <select formControlName="quackShelterId">
+
+
+                <option value="">
+                    Choisir un refuge
+                </option>
+
+
+                @for (refuge of quackShelters$ | async; track refuge.id) {
+
+                <option [value]="refuge.id">
+                    {{refuge.id}} - {{ refuge.lieu.adresse.ville }} - {{ refuge.lieu.adresse.cp }}
+                </option>
+
+                }
+
+
+            </select>
+
+            <div class="choix-role">
+
+                <label>Je souhaite m'inscrire comme :</label>
+
+                <div class="radio-container">
+
+                    <label>
+                        <input type="radio" value="VISITEUR" formControlName="role">
+                        Visiteur
+                    </label>
+
+
+                    <label>
+                        <input type="radio" value="BENEVOLE" formControlName="role">
+                        Bénévole
+                    </label>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+
+        <!-- BOUTON -->
+
+        <div class="div-connexion">
+
+            <input [disabled]="formInscription.invalid" type="submit" value="S'inscrire" />
+
+        </div>
+
+
+    </form>
+
+
+
+    <!-- RETOUR LOGIN -->
+
+    <div class="div-inscription">
+
+        <p>
+            Vous avez déjà un compte ?
+        </p>
+
+
+        <a routerLink="/login">
+            Connectez-vous !
+        </a>
+
+    </div>
+
+
+</div>

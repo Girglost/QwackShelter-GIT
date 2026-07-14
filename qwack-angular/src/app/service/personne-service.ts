@@ -76,4 +76,13 @@ export class PersonneService {
   public getMe(): Observable<CurrentUser> {
     return this.http.get<CurrentUser>(`/auth/me`);
   }
+
+
+  public checkLogin(login: string): Observable<boolean> {
+
+    return this.http.get<boolean>(
+      `${this.apiUrl}/check-login?login=${login}`
+    );
+
+  }
 }
