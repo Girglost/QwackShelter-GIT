@@ -9,6 +9,7 @@ import { UpdateAnimalRequest } from '../model/update-animal-request';
   providedIn: 'root',
 })
 export class AnimalService {
+  [x: string]: any;
   private http: HttpClient = inject(HttpClient);
   private apiUrl: string = "/animal";
 
@@ -31,4 +32,8 @@ export class AnimalService {
   public remove(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  public findDisponibles(): Observable<Animal[]> {
+  return this.http.get<Animal[]>(`${this.apiUrl}/statut/PRESENT`);
+}
 }

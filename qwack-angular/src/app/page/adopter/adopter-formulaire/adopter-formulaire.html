@@ -1,0 +1,106 @@
+<section class="adoption-form">
+
+  <div class="container">
+
+    <h1>Demande d'adoption</h1>
+
+    <p class="subtitle">
+      Merci de remplir ce formulaire. Notre équipe reviendra vers vous rapidement.
+    </p>
+
+    <form [formGroup]="adoptionForm" (ngSubmit)="onSubmit()">
+
+      <div class="grid">
+
+        <div class="field">
+          <label>Nom*</label>
+          <input type="text" formControlName="nom">
+        </div>
+
+        <div class="field">
+          <label>Prénom*</label>
+          <input type="text" formControlName="prenom">
+        </div>
+
+        <div class="field">
+          <label>Email*</label>
+          <input type="email" formControlName="email">
+        </div>
+
+        <div class="field">
+          <label>Téléphone (facultatif)</label>
+          <input type="tel" formControlName="telephone">
+        </div>
+
+        <div class="field full">
+          <label>Adresse*</label>
+          <input type="text" formControlName="adresse">
+        </div>
+
+
+        <div class="field full">
+
+    <label for="animal">
+        Animal souhaité*
+    </label>
+
+    <select id="animal" formControlName="animalId">
+
+        <option value="">
+            Sélectionnez un animal
+        </option>
+
+        <option
+            *ngFor="let animal of animaux"
+            [value]="animal.id">
+
+            {{ $any(animal).nom }} - {{ $any(animal).espece }}
+
+        </option>
+
+    </select>
+
+</div>
+
+
+
+        <div class="field">
+          <label>Type de logement*</label>
+
+          <select formControlName="logement">
+            <option value="">Choisir...</option>
+            <option>Appartement</option>
+            <option>Maison</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Possédez-vous un jardin ?*</label>
+
+          <select formControlName="jardin">
+            <option value="">Choisir...</option>
+            <option>Oui</option>
+            <option>Non</option>
+          </select>
+        </div>
+
+        <div class="field full">
+          <label>Pourquoi souhaitez-vous adopter ?*</label>
+
+          <textarea
+            rows="5"
+            formControlName="motivation">
+          </textarea>
+        </div>
+
+      </div>
+
+      <button class="btn" type="submit" [disabled]="adoptionForm.invalid">
+        Envoyer ma demande
+      </button>
+
+    </form>
+
+  </div>
+
+</section>

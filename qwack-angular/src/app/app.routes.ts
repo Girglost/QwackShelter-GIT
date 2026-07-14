@@ -21,6 +21,7 @@ import { PersonnePage } from './page/personne-page/personne-page';
 import { ProfilAnimal } from './page/profil-animal/profil-animal';
 import { NosAnimauxPage } from './page/nos-animaux-page/nos-animaux-page';
 import { EmployePage } from './page/employe-page/employe-page';
+import { AdoptionForm } from './page/adopter/adopter-formulaire/adopter-formulaire';
 
 export const routes: Routes = [
   { path: 'accueil', component: Accueil },
@@ -37,6 +38,7 @@ export const routes: Routes = [
   {path: 'employe' , component : EmployePage},
 
   { path: 'animal/:id', component: ProfilAnimal },
+  { path: 'demande-adoption', component: AdoptionForm },
 
   // ====== Routes vers le CRUD des classes ======
   { path: 'emplacement', component: EmplacementPage, canActivate: [authGuard] },
