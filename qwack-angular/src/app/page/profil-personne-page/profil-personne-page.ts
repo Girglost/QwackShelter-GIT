@@ -33,27 +33,11 @@ export class ProfilPersonnePage implements OnInit {
   }
 
   ngOnInit(): void {
-<<<<<<< Updated upstream
-
     this.personneService.getMonProfil()
       .subscribe(personne => {
-
         console.log("PROFIL :", personne);
-
         this.personne.set(personne);
-
       });
-=======
-    const user = this.authService.currentUser();
-
-    if (user) {
-      this.personneService.findByLogin(user.login)
-        .subscribe(personne => {
-          console.log("PERSONNE COMPLETE :", personne);
-          this.personne.set(personne);
-        });
-    }
->>>>>>> Stashed changes
   }
 
   get roleLabel(): string {
@@ -72,8 +56,6 @@ export class ProfilPersonnePage implements OnInit {
   }
 
   get dateRole(): Date | undefined {
-    if (!this.personne) return undefined;
-
     switch (this.personne()?.role) {
       case Role.BENEVOLE:
         return this.personne()?.dateEngagement;
@@ -87,15 +69,11 @@ export class ProfilPersonnePage implements OnInit {
     }
   }
 
-  /**
-   * ⚠️ À adapter selon le nom réel du champ dans ton modèle Personne
-   * (ex: personne.admin, personne.estAdmin, personne.isAdmin...)
-   */
   get isAdmin(): boolean {
     return !!(this.personne() as any)?.admin;
   }
 
-get menuItems(): MenuItem[] {
+  get menuItems(): MenuItem[] {
     const role = this.personne()?.role;
 
     // Items communs à tous les rôles
