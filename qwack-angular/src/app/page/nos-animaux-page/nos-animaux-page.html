@@ -19,7 +19,7 @@
 <div class="filtreListe" [class.filtreListe--ouvert]="afficherFiltre">
   <div class="filtreAge">
     Age
-    <select>
+    <select [formControl]="filtreAgeControl">
       <option value="">--- Filtre par Age ---</option>
       <option value="-1">1 an et moins</option>
       <option value="1-3">Entre 1 et 3 ans</option>
@@ -29,14 +29,14 @@
   </div>
   <div class="filtreEspece">
     Espèce
-    <select>
+    <select [formControl]="filtreEspeceControl">
       <option value="">--- Filtre par Espèce ---</option>
       <option *ngFor="let e of typeAnimalValues" [value]="e">{{ e }}</option>
     </select>
   </div>
   <div class="filtreCaractere">
     Caractère
-    <select>
+    <select [formControl]="filtreCaractereSelectControl">
       <option value="">--- Filtre par Caractère ---</option>
       <option *ngFor="let e of caractereValues" [value]="e">{{ e }}</option>
     </select>
@@ -46,7 +46,7 @@
 <!-- ======== Liste des Animaux ======== -->
 
 <div class="ListeAnimaux">
-  <ng-container *ngFor="let a of animaux$ | async">
+  <ng-container *ngFor="let a of animauxFiltres$ | async">
     <div class="animalFiche">
       <div class="animalImg">
         <img [src]="getImageAnimal(a)" [alt]="a.nomAnimal" width="100%" height="100%">
@@ -58,7 +58,8 @@
           {{ convertAnneeEnMois(calculAge(a.dateNaissance)) }} mois
         } @else {
           {{ cleanAge(calculAge(a.dateNaissance)) }} ans
-        }
+        } <br/>
+        {{affichageCaractere(a.caracteres)}}
       </div>
     </div>
   </ng-container>

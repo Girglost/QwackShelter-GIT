@@ -65,6 +65,12 @@ export class NosAnimauxPage implements OnInit {
     [TypeAnimal.NAC]: 5,
   };
 
+  protected filtreAgeControl = new FormControl<string>('', { nonNullable: true });
+  protected filtreEspeceControl = new FormControl<TypeAnimal | ''>('', { nonNullable: true });
+  protected filtreCaractereSelectControl = new FormControl<Caractere | ''>('', {
+    nonNullable: true,
+  });
+
   ngOnInit(): void {
     this.titleService.setTitle('Gestion des Animaux du Shelter');
 
@@ -89,10 +95,33 @@ export class NosAnimauxPage implements OnInit {
     );
 
     this.quackShelters$ = this.quackShelterSrv.findAll();
+
+    // Un seul filtre select actif à la fois : dès qu'on en choisit un,
+    // les deux autres sont réinitialisés (et leur <select> revient à la valeur par défaut).
+    this.filtreAgeControl.valueChanges.subscribe((valeur) => {
+      if (valeur) {
+        this.filtreEspeceControl.setValue('', { emitEvent: false });
+        this.filtreCaractereSelectControl.setValue('', { emitEvent: false });
+      }
+      this.appliquerFiltres();
+    });
+
+    this.filtreEspeceControl.valueChanges.subscribe((valeur) => {
+      if (valeur) {
+        this.filtreAgeControl.setValue('', { emitEvent: false });
+        this.filtreCaractereSelectControl.setValue('', { emitEvent: false });
+      }
+      this.appliquerFiltres();
+    });
+
+    this.filtreCaractereSelectControl.valueChanges.subscribe((valeur) => {
+      if (valeur) {
+        this.filtreAgeControl.setValue('', { emitEvent: false });
+        this.filtreEspeceControl.setValue('', { emitEvent: false });
+      }
+      this.appliquerFiltres();
+    });
   }
-
-
-
 
   private imageCache = new Map<string, string>();
 
@@ -112,10 +141,6 @@ export class NosAnimauxPage implements OnInit {
     return this.imageCache.get(cle)!;
   }
 
-
-
-
-
   private correspondAuxFiltres(a: Animal): boolean {
     const matchFamille = this.famillesFiltre.size === 0 || this.famillesFiltre.has(a.famille);
     const matchGenre = this.genresFiltre.size === 0 || this.genresFiltre.has(a.genre);
@@ -125,7 +150,45 @@ export class NosAnimauxPage implements OnInit {
       this.statutsFiltre.size === 0 ||
       (a.statutAnimal && this.statutsFiltre.has(a.statutAnimal.statut));
 
-    return matchFamille && matchGenre && matchCaracteres && matchStatut;
+    return (
+      matchFamille &&
+      matchGenre &&
+      matchCaracteres &&
+      matchStatut &&
+      this.matchAge(a) &&
+      this.matchEspece(a) &&
+      this.matchCaractereSelect(a)
+    );
+  }
+
+  private matchAge(a: Animal): boolean {
+    const filtre = this.filtreAgeControl.value;
+    if (!filtre) return true;
+    const age = this.calculAge(a.dateNaissance);
+    switch (filtre) {
+      case '-1':
+        return age <= 1;
+      case '1-3':
+        return age > 1 && age <= 3;
+      case '4-6':
+        return age > 3 && age <= 6;
+      case '7+':
+        return age > 6;
+      default:
+        return true;
+    }
+  }
+
+  private matchEspece(a: Animal): boolean {
+    const filtre = this.filtreEspeceControl.value;
+    return !filtre || a.typeAnimal.toUpperCase() === filtre;
+  }
+
+  private matchCaractereSelect(a: Animal): boolean {
+    const filtre = this.filtreCaractereSelectControl.value;
+    console.log( "Filtre : " + filtre);
+    console.log("Caractères : " + a.caracteres)
+    return !filtre || (a.caracteres?.includes(filtre) ?? false);
   }
 
   private correspondALaRecherche(a: Animal, recherche: string): boolean {
@@ -182,15 +245,17 @@ export class NosAnimauxPage implements OnInit {
     return `${statut} - ${a.statutAnimal.emplacement?.id ?? '?'}`;
   }
 
+  // Afficher les Filtres disponibles
+
   toggleFiltres(): void {
     this.afficherFiltre = !this.afficherFiltre;
   }
 
   calculAge(d: Date | string): number {
-  const MS_PAR_AN = 365.25 * 24 * 60 * 60 * 1000; // prise en compte des années bissextiles
-  const date = d instanceof Date ? d : new Date(d);
-  return (Date.now() - date.getTime()) / MS_PAR_AN;
-}
+    const MS_PAR_AN = 365.25 * 24 * 60 * 60 * 1000; // prise en compte des années bissextiles
+    const date = d instanceof Date ? d : new Date(d);
+    return (Date.now() - date.getTime()) / MS_PAR_AN;
+  }
 
   cleanAge(age: number): number {
     return Math.floor(age);
@@ -198,5 +263,9 @@ export class NosAnimauxPage implements OnInit {
 
   convertAnneeEnMois(age: number): number {
     return Math.floor(age * 12);
+  }
+
+  affichageCaractere(c: Caractere[]) : string {
+    return c.toString().replaceAll(',', ' - ');
   }
 }
