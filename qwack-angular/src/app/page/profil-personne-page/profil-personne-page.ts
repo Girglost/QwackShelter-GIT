@@ -113,8 +113,10 @@ export class ProfilPersonnePage implements OnInit {
     // Ajout des items admin, quel que soit le rôle
     if (this.isAdmin) {
       items.push(
-        { icon: 'fa-solid fa-users-gear', label: 'Gestion des personnes', link: '/gestion-benevole' },
+        { icon: 'fa-solid fa-users-gear', label: 'Gestion des personnes', link: '/personne' },
         { icon: 'fa-solid fa-dog', label: 'Gestion des animaux', link: '/animal' },
+        { icon: 'fa-solid fa-dog', label: 'Gestion des refuges', link: '/refuge' }
+
       );
     }
 
