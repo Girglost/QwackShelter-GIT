@@ -11,7 +11,7 @@ export interface CreateAnimalRequest {
   famille: Famille;
   genre: Genre;
   caracteres: Caractere[];
-  qwackShelterId: number;
+  quackShelterId: number;
   capaciteVol: boolean;
   pondeuse: boolean;
   race: string;

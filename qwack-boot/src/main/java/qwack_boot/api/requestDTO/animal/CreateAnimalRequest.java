@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import qwack_boot.api.responseDTO.StatutAnimalReponse;
 import qwack_boot.model.Caractere;
 import qwack_boot.model.Famille;
 import qwack_boot.model.Genre;
@@ -25,9 +26,9 @@ public class CreateAnimalRequest {
     private List<Caractere> caracteres;
 
     @NotNull
-    private Integer qwackShelterId;
+    private Integer quackShelterId;
     @NotNull
-    private Integer sAnimalId;
+    private StatutAnimalReponse statutAnimal;
 
     private boolean capaciteVol;
     private boolean pondeuse;
@@ -149,11 +150,11 @@ public class CreateAnimalRequest {
     }
 
     public Integer getQwackShelterId() {
-        return qwackShelterId;
+        return quackShelterId;
     }
 
-    public void setQwackShelterId(Integer qwackShelterId) {
-        this.qwackShelterId = qwackShelterId;
+    public void setQwackShelterId(Integer quackShelterId) {
+        this.quackShelterId = quackShelterId;
     }
 
     public boolean isCapaciteVol() {
@@ -196,12 +197,12 @@ public class CreateAnimalRequest {
         this.couveuse = couveuse;
     }
 
-    public Integer getsAnimalId() {
-        return sAnimalId;
+    public StatutAnimalReponse getStatutAnimal() {
+        return statutAnimal;
     }
 
-    public void setsAnimalId(Integer sAnimalId) {
-        this.sAnimalId = sAnimalId;
+    public void setStatutAnimal(StatutAnimalReponse sAnimalId) {
+        this.statutAnimal = sAnimalId;
     }
 
 }

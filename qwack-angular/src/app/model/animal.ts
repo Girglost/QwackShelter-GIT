@@ -20,7 +20,7 @@ export interface Animal {
   famille: Famille;
   genre: Genre;
   caracteres: Caractere[];
-  quackShelter: QuackShelter;
+  quackShelterId: number;
   historiqueSante: HistoriqueSante[];
   statutAnimal: StatutAnimal;
   visites: any[];

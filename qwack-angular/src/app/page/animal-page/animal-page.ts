@@ -124,6 +124,7 @@ export class AnimalPage implements OnInit {
     this.CtrlGenre = this.formBuilder.control('', Validators.required);
     this.CtrlQuackShelter = this.formBuilder.control('', Validators.required);
     this.CtrlEmplacement = this.formBuilder.control('', Validators.required);
+    this.CtrlFamille = this.formBuilder.control('');
 
     this.CtrlRace = this.formBuilder.control('');
     this.CtrlSterilisation = this.formBuilder.control(false);
@@ -270,7 +271,7 @@ export class AnimalPage implements OnInit {
       traitement: v.traitement,
       genre: v.genre,
       caracteres: this.caracteresSelectionnes,
-      qwackShelterId: v.qwackShelter?.id,
+      quackShelterId: v.quackShelter,
       capaciteVol: v.capaciteVol,
       pondeuse: v.pondeuse,
       race: v.race,
@@ -285,6 +286,7 @@ export class AnimalPage implements OnInit {
       this.animalSrv.update(this.editingAnimal.id, req).subscribe(() => this.reload());
     } else {
       const req: CreateAnimalRequest = { ...commun, famille: this.defaultFamille(v)! };
+      console.log(req);
       this.animalSrv.add(req).subscribe(() => this.reload());
     }
 
@@ -318,7 +320,7 @@ export class AnimalPage implements OnInit {
     this.CtrlTraitement.setValue(a.traitement);
     this.CtrlFamille.disable();
     this.CtrlGenre.setValue(a.genre);
-    this.CtrlQuackShelter.setValue(a.quackShelter);
+    this.CtrlQuackShelter.setValue(a.quackShelterId);
     this.CtrlRace.setValue(a.race ?? '');
     this.CtrlSterilisation.setValue(a.sterilisation ?? false);
     this.CtrlGestante.setValue(a.gestante ?? false);

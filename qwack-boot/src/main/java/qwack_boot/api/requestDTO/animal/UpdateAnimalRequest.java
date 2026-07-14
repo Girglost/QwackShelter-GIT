@@ -23,7 +23,7 @@ public class UpdateAnimalRequest {
     private List<Caractere> caracteres;
 
     @NotNull
-    private Integer qwackShelterId;
+    private Integer quackShelterId;
 
     private boolean capaciteVol;
     private boolean pondeuse;
@@ -136,11 +136,11 @@ public class UpdateAnimalRequest {
     }
 
     public Integer getQwackShelterId() {
-        return qwackShelterId;
+        return quackShelterId;
     }
 
-    public void setQwackShelterId(Integer qwackShelterId) {
-        this.qwackShelterId = qwackShelterId;
+    public void setQwackShelterId(Integer quackShelterId) {
+        this.quackShelterId = quackShelterId;
     }
 
     public boolean isCapaciteVol() {

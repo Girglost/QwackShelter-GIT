@@ -9,7 +9,7 @@ export interface UpdateAnimalRequest {
   traitement: string;
   genre: Genre;
   caracteres: Caractere[];
-  qwackShelterId: number;
+  quackShelterId: number;
   capaciteVol: boolean;
   pondeuse: boolean;
   race: string;
