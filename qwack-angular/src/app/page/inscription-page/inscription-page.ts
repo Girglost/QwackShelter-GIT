@@ -104,7 +104,7 @@ export class InscriptionPage implements OnInit {
     try {
       await this.inscriptionService.inscription(this.formInscription.getRawValue());
 
-      this.router.navigate(['/login']);
+      this.router.navigate(['/inscription-success']);
     }
 
     // Si l'inscription n'a pas pu se faire, affichage de l'erreur sur le template

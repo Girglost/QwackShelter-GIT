@@ -11,6 +11,7 @@ import { NousRejoindre } from './page/nous-rejoindre/nous-rejoindre';
 import { StatutAnimalPage } from './page/statut-animal-page/statut-animal-page';
 import { SwipeCompagnon } from './page/swipe-compagnon/swipe-compagnon';
 
+import { InscriptionSuccess } from './component/inscription-success/inscription-success';
 import { authGuard } from './guard/auth-guard';
 import { APropos } from './page/a-propos/a-propos';
 import { AdoptionForm } from './page/adopter/adopter-formulaire/adopter-formulaire';
@@ -36,6 +37,7 @@ export const routes: Routes = [
   { path: 'adopter', component: Adopter },
   { path: 'login', component: LoginPage },
   { path: 'inscription', component: InscriptionPage },
+  { path: 'inscription-success', component: InscriptionSuccess },
   { path: 'animaux', component: NosAnimauxPage },
   { path: 'employe', component: EmployePage },
 

@@ -1,0 +1,80 @@
+:host {
+
+    --forest: #2f522d;
+    --gold: #b77f38;
+
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.container-success {
+
+    min-height: 400px;
+
+    background: #f3efe6;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+}
+
+
+h1 {
+
+    font-family: 'Pacifico';
+
+    color: var(--forest);
+
+    font-size: 60px;
+
+    margin-bottom: 30px;
+
+}
+
+
+p {
+
+    color: #504e4c;
+
+    font-size: 24px;
+
+}
+
+
+a {
+
+    margin-top: 40px;
+    margin-bottom: 30px;
+
+    background: var(--gold);
+
+    color: #f5f1e8;
+
+    padding: 15px 35px;
+
+    border-radius: 16px;
+
+    text-decoration: none;
+
+    font-family: 'Montagu Slab';
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+}
+
+
+a:hover {
+
+    opacity: 0.9;
+
+    transform: scale(1.02);
+
+}
