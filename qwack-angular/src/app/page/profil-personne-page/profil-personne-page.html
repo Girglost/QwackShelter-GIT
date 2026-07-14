@@ -21,44 +21,14 @@
 
     <nav>
 
-      <a class="active">
+      <a class="active" routerLink="/dashboard">
         <i class="fa-solid fa-table-columns"></i>
         Tableau de bord
       </a>
 
-      <a>
-        <i class="fa-regular fa-user"></i>
-        Mon profil
-      </a>
-
-      <a>
-        <i class="fa-regular fa-calendar"></i>
-        Planning
-      </a>
-
-      <a>
-        <i class="fa-solid fa-list-check"></i>
-        Mes tâches
-      </a>
-
-      <a>
-        <i class="fa-solid fa-paw"></i>
-        Mes adoptions
-      </a>
-
-      <a>
-        <i class="fa-regular fa-envelope"></i>
-        Mes demandes
-      </a>
-
-      <a routerLink="/gestion-benevole">
-        <i class="fa-solid fa-users"></i>
-        Gestion des bénévoles
-      </a>
-
-      <a routerLink="/animal">
-        <i class="fa-solid fa-dog"></i>
-        Gestion des animaux
+      <a *ngFor="let item of menuItems" [routerLink]="item.link">
+        <i [class]="item.icon"></i>
+        {{ item.label }}
       </a>
 
     </nav>
