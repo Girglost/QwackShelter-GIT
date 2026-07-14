@@ -29,6 +29,8 @@ import { QuackShelter } from '../../model/quack-shelter';
 import { QuackShelterService } from '../../service/quack-shelter-service';
 import { CreateAnimalRequest } from '../../model/create-animal-request';
 import { UpdateAnimalRequest } from '../../model/update-animal-request';
+import { Emplacement } from '../../model/emplacement';
+import { EmplacementService } from '../../service/emplacement-service';
 
 @Component({
   selector: 'app-animal-page',
@@ -40,6 +42,7 @@ export class AnimalPage implements OnInit {
   private titleService: Title = inject(Title);
   private animalSrv: AnimalService = inject(AnimalService);
   private quackShelterSrv: QuackShelterService = inject(QuackShelterService);
+  private EmpSrv: EmplacementService = inject(EmplacementService);
 
   private refresh$: Subject<void> = new Subject<void>();
   private animaux$!: Observable<Animal[]>;
@@ -51,6 +54,7 @@ export class AnimalPage implements OnInit {
   protected caractereValues: Caractere[] = Object.values(Caractere);
   protected statutValues: Statut[] = Object.values(Statut);
   protected quackShelters$!: Observable<QuackShelter[]>;
+  protected emplacements$!: Observable<Emplacement[]>;
   protected selectedFamille!: Famille;
 
   // --- Filtres combinables ---
@@ -73,6 +77,7 @@ export class AnimalPage implements OnInit {
   protected CtrlFamille!: FormControl;
   protected CtrlGenre!: FormControl;
   protected CtrlQuackShelter!: FormControl;
+  protected CtrlEmplacement!: FormControl;
 
   // Champs spécifiques Chat/Chien/NAC
   protected CtrlRace!: FormControl;
@@ -95,11 +100,20 @@ export class AnimalPage implements OnInit {
       switchMap(() => this.animalSrv.findAll()),
     );
 
+
     this.animauxFiltres$ = combineLatest([this.animaux$, this.filtreChange$]).pipe(
       map(([animaux]) => animaux.filter((a) => this.correspondAuxFiltres(a))),
     );
 
     this.quackShelters$ = this.quackShelterSrv.findAll();
+    this.emplacements$ = this.EmpSrv.findAll();
+
+    this.animaux$.subscribe(animaux => console.log(animaux));
+
+    this.quackShelters$.subscribe(q => console.log(q));
+
+    this.emplacements$.subscribe(emplacements => console.log(emplacements));
+
 
     this.CtrlTypeAnimal = this.formBuilder.control('', Validators.required);
     this.CtrlNomAnimal = this.formBuilder.control('', Validators.required);
@@ -109,6 +123,7 @@ export class AnimalPage implements OnInit {
     this.CtrlTraitement = this.formBuilder.control('');
     this.CtrlGenre = this.formBuilder.control('', Validators.required);
     this.CtrlQuackShelter = this.formBuilder.control('', Validators.required);
+    this.CtrlEmplacement = this.formBuilder.control('', Validators.required);
 
     this.CtrlRace = this.formBuilder.control('');
     this.CtrlSterilisation = this.formBuilder.control(false);
@@ -127,6 +142,7 @@ export class AnimalPage implements OnInit {
       famille: this.CtrlFamille,
       genre: this.CtrlGenre,
       quackShelter: this.CtrlQuackShelter,
+      emplacement: this.CtrlEmplacement,
       race: this.CtrlRace,
       sterilisation: this.CtrlSterilisation,
       gestante: this.CtrlGestante,
@@ -141,8 +157,8 @@ export class AnimalPage implements OnInit {
   private ajusterValidateurs(): void {
     const type = this.CtrlTypeAnimal.value as TypeAnimal;
     const estDomestique =
-      type === TypeAnimal.CHAT || type === TypeAnimal.CHIEN || type === TypeAnimal.NAC;
-    const estVolaille = type === TypeAnimal.CANARD || type === TypeAnimal.POULE;
+      type === TypeAnimal.Chat || type === TypeAnimal.Chien || type === TypeAnimal.NAC;
+    const estVolaille = type === TypeAnimal.Canard || type === TypeAnimal.Poule;
 
     if (estDomestique || estVolaille) {
       this.CtrlRace.setValidators(Validators.required);
@@ -154,15 +170,15 @@ export class AnimalPage implements OnInit {
 
   protected get estDomestique(): boolean {
     const type = this.CtrlTypeAnimal.value;
-    return type === TypeAnimal.CHAT || type === TypeAnimal.CHIEN || type === TypeAnimal.NAC;
+    return type === TypeAnimal.Chat || type === TypeAnimal.Chien || type === TypeAnimal.NAC;
   }
 
   protected get estCanard(): boolean {
-    return this.CtrlTypeAnimal.value === TypeAnimal.CANARD;
+    return this.CtrlTypeAnimal.value === TypeAnimal.Canard;
   }
 
   protected get estPoule(): boolean {
-    return this.CtrlTypeAnimal.value === TypeAnimal.POULE;
+    return this.CtrlTypeAnimal.value === TypeAnimal.Poule;
   }
 
   protected get estVolaille(): boolean {
@@ -244,6 +260,8 @@ export class AnimalPage implements OnInit {
   protected addOrUpdate() {
     const v = this.formAnimal.getRawValue();
 
+
+
     const commun = {
       nomAnimal: v.nomAnimal,
       dateNaissance: v.dateNaissance,
@@ -274,17 +292,17 @@ export class AnimalPage implements OnInit {
   }
 
   protected defaultFamille(a : Animal) : Famille | undefined {
-    if(a.typeAnimal === TypeAnimal.CHAT){
-      return Famille.FELIN;
+    if(a.typeAnimal === TypeAnimal.Chat){
+      return Famille.Felin;
     }
-    if(a.typeAnimal === TypeAnimal.CHIEN){
-      return Famille.CANIN;
+    if(a.typeAnimal === TypeAnimal.Chien){
+      return Famille.Canin;
     }
     if(a.typeAnimal === TypeAnimal.NAC){
-      return Famille.MUSCILIDE;
+      return Famille.Muscilide;
     }
-    if(a.typeAnimal === TypeAnimal.CANARD || a.typeAnimal === TypeAnimal.POULE){
-      return Famille.GALIDE;
+    if(a.typeAnimal === TypeAnimal.Canard || a.typeAnimal === TypeAnimal.Poule){
+      return Famille.Galide;
     }
     return undefined;
   }
@@ -334,6 +352,6 @@ export class AnimalPage implements OnInit {
     if (statut === Statut.Adopte || statut === Statut.Mort) {
       return statut;
     }
-    return `${statut} - ${a.statutAnimal.emplacement?.id ?? '?'}`;
+    return `${statut} - ${a.statutAnimal.emplacement.id ?? '?'}`;
   }
 }

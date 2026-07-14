@@ -1,7 +1,6 @@
-import { Animal } from "../model/animal";
-import { Emplacement } from "./emplacement";
 import { Statut } from "../enum/statut";
 import { StatutValidation } from "../enum/statut-validation";
+import { Emplacement } from "./emplacement";
 
 export interface StatutAnimal {
   id: number;
@@ -10,8 +9,6 @@ export interface StatutAnimal {
   statut: Statut;
   emplacement: Emplacement;
   statutAdoption: StatutValidation;
-  animal: Animal;
+  animalId: number;
 }
-
-export type { Animal };
 

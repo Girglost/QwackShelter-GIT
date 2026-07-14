@@ -1,6 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { merge, Observable, startWith, Subject, switchMap } from 'rxjs';
 import { StatutAnimal } from '../../model/statut-animal';
@@ -14,11 +21,7 @@ import { AnimalService } from '../../service/animal-service';
 
 @Component({
   selector: 'app-statut-animal-page',
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './statut-animal-page.html',
   styleUrl: './statut-animal-page.css',
 })
@@ -57,15 +60,21 @@ export class StatutAnimalPage implements OnInit {
   protected editingStatutAnimalId: number | undefined = 0;
 
   ngOnInit(): void {
-    this.titleService.setTitle("Gestion des StatutAnimals du Shelter");
+    this.titleService.setTitle('Gestion des StatutAnimals du Shelter');
 
     this.sAnimals$ = merge(this.refresh$, this.filtreChange$).pipe(
       startWith(0),
-      switchMap(() => this.getStatutAnimauxSelonFiltre())
+      switchMap(() => this.getStatutAnimauxSelonFiltre()),
     );
 
     this.emplacements$ = this.emplacementSrv.findAll();
     this.animaux$ = this.animalSrv.findAll();
+
+    this.sAnimals$.subscribe((s) => console.log(s));
+
+    this.animaux$.subscribe((animaux) => console.log(animaux));
+
+    this.emplacements$.subscribe((emplacements) => console.log(emplacements));
 
     this.CtrlEmplacement = this.formBuilder.control('', Validators.required);
     this.CtrlAnimal = this.formBuilder.control('', Validators.required);
@@ -108,7 +117,7 @@ export class StatutAnimalPage implements OnInit {
       const sa: StatutAnimal = {
         id: this.editingStatutAnimalId,
         emplacement: valeurs.emplacement,
-        animal: valeurs.animal,
+        animalId: valeurs.animal,
         dateArrivee: valeurs.dateArrivee,
         dateDepart: valeurs.dateDepart,
         statut: valeurs.statut,
@@ -118,7 +127,7 @@ export class StatutAnimalPage implements OnInit {
     } else {
       const sa: StatutAnimal = {
         emplacement: valeurs.emplacement,
-        animal: valeurs.animal,
+        animalId: valeurs.animal,
       } as StatutAnimal;
       this.sAnimalSrv.add(sa).subscribe(() => this.reload());
     }
@@ -129,7 +138,7 @@ export class StatutAnimalPage implements OnInit {
   protected edit(sa: StatutAnimal) {
     this.editingStatutAnimalId = sa.id;
     this.CtrlEmplacement.setValue(sa.emplacement);
-    this.CtrlAnimal.setValue(sa.animal);
+    this.CtrlAnimal.setValue(sa.animalId);
     this.CtrlDateArrivee.setValue(sa.dateArrivee);
     this.CtrlDateDepart.setValue(sa.dateDepart);
     this.CtrlStatut.setValue(sa.statut);
@@ -163,5 +172,9 @@ export class StatutAnimalPage implements OnInit {
     this.CtrlDateArrivee.updateValueAndValidity();
     this.CtrlStatut.updateValueAndValidity();
     this.CtrlStatutAdoption.updateValueAndValidity();
+  }
+
+  afficherNomAnimal(n:number) : string {
+    return this.animalSrv.findById(n).subscribe(a => a.nomAnimal).toString();
   }
 }

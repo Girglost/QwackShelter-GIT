@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import qwack_boot.model.Emplacement;
 import qwack_boot.model.Statut;
 import qwack_boot.model.StatutAnimal;
 import qwack_boot.model.StatutValidation;
@@ -16,7 +17,7 @@ public class StatutAnimalReponse {
     private LocalDate dateDepart;
     private Statut statut;
     private StatutValidation statutAdoption;
-    private Integer emplacementId;
+    private Emplacement emplacement;
     private Integer adoptantId;
     private Integer animalId;
 
@@ -28,7 +29,7 @@ public class StatutAnimalReponse {
         sa.dateDepart = sAnimal.getDateDepart();
         sa.statut = sAnimal.getStatut();
         sa.statutAdoption = sAnimal.getStatutAdoption();
-        sa.emplacementId = sAnimal.getEmplacement().getId();
+        sa.emplacement = sAnimal.getEmplacement();
 
         sa.adoptantId = null;
         if(sAnimal.getAdoptant()!=null){
@@ -73,12 +74,12 @@ public class StatutAnimalReponse {
         this.statut = statut;
     }
 
-    public Integer getEmplacementId() {
-        return emplacementId;
+    public Emplacement getEmplacement() {
+        return emplacement;
     }
 
-    public void setEmplacementId(Integer emplacementId) {
-        this.emplacementId = emplacementId;
+    public void setEmplacement(Emplacement emplacement) {
+        this.emplacement = emplacement;
     }
 
     public Integer getAdoptantId() {

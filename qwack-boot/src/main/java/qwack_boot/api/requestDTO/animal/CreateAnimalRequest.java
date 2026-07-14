@@ -26,6 +26,8 @@ public class CreateAnimalRequest {
 
     @NotNull
     private Integer qwackShelterId;
+    @NotNull
+    private Integer sAnimalId;
 
     private boolean capaciteVol;
     private boolean pondeuse;
@@ -39,6 +41,8 @@ public class CreateAnimalRequest {
     private String description;
     // on recupere quel type d'animal est créé
     private String type_animal;
+
+    
 
     public String getType_animal() {
         return type_animal;
@@ -190,6 +194,14 @@ public class CreateAnimalRequest {
 
     public void setCouveuse(boolean couveuse) {
         this.couveuse = couveuse;
+    }
+
+    public Integer getsAnimalId() {
+        return sAnimalId;
+    }
+
+    public void setsAnimalId(Integer sAnimalId) {
+        this.sAnimalId = sAnimalId;
     }
 
 }

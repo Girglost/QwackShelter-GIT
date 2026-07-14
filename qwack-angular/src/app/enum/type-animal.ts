@@ -1,7 +1,7 @@
 export enum TypeAnimal {
-  CHAT = "CHAT",
-  CHIEN = "CHIEN",
-  CANARD = "CANARD",
+  Chat = "Chat",
+  Chien = "Chien",
+  Canard = "Canard",
   NAC = "NAC",
-  POULE = "POULE"
+  Poule = "Poule"
 }

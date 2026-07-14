@@ -1,4 +1,3 @@
-import { Chien } from './../../model/chien';
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,7 +18,7 @@ import { Famille } from '../../enum/famille';
 import { Genre } from '../../enum/genre';
 import { Statut } from '../../enum/statut';
 import { TypeAnimal } from '../../enum/type-animal';
-import { Animal } from '../../model/statut-animal';
+import { Animal } from '../../model/animal';
 import { AnimalService } from '../../service/animal-service';
 import { QuackShelterService } from '../../service/quack-shelter-service';
 import { QuackShelter } from '../../model/quack-shelter';
@@ -58,10 +57,10 @@ export class NosAnimauxPage implements OnInit {
   private recherche$!: Observable<string>;
 
   private readonly nbImagesParType: Record<string, number> = {
-    [TypeAnimal.CHAT]: 5,
-    [TypeAnimal.CANARD]: 5,
-    [TypeAnimal.CHIEN]: 5,
-    [TypeAnimal.POULE]: 3,
+    [TypeAnimal.Chat]: 5,
+    [TypeAnimal.Canard]: 5,
+    [TypeAnimal.Chien]: 5,
+    [TypeAnimal.Poule]: 3,
     [TypeAnimal.NAC]: 5,
   };
 

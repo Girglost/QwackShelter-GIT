@@ -1,7 +1,7 @@
 export enum Statut {
-  Present ="PRESENT",
-  EnBalade = "ENBALADE",
-  EnSoin = "ENSOIN",
-  Adopte = "ADOPTE",
-  Mort = "MORT",
+  Present ="Present",
+  EnBalade = "EnBalade",
+  EnSoin = "EnSoin",
+  Adopte = "Adopte",
+  Mort = "Mort",
 }

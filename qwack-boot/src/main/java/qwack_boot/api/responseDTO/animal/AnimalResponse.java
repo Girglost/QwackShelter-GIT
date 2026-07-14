@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
-
+import qwack_boot.api.responseDTO.StatutAnimalReponse;
 import qwack_boot.model.Animal;
 import qwack_boot.model.Caractere;
 import qwack_boot.model.Famille;
@@ -23,13 +23,17 @@ public class AnimalResponse {
 	private Genre genre;
 	private List<Caractere> caracteres;
 	private String typeAnimal;
+	private StatutAnimalReponse statutAnimal;
 
 	public static AnimalResponse convert(Animal animal) {
 		AnimalResponse a = new AnimalResponse();
 		BeanUtils.copyProperties(animal, a);
 		a.typeAnimal = animal.getClass().getSimpleName();
+		a.statutAnimal = StatutAnimalReponse.convert(animal.getStatutAnimal());
 		return a;
 	}
+
+	
 
 	public Integer getId() {
 		return id;
@@ -109,6 +113,16 @@ public class AnimalResponse {
 
 	public void setTypeAnimal(String typeAnimal) {
 		this.typeAnimal = typeAnimal;
+	}
+
+
+
+	public StatutAnimalReponse getStatutAnimal() {
+		return statutAnimal;
+	}
+
+	public void setStatutAnimal(StatutAnimalReponse statutAnimal) {
+		this.statutAnimal = statutAnimal;
 	}
 
 	

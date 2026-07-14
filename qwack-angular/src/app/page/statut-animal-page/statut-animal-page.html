@@ -143,7 +143,7 @@
   <tbody>
     <tr *ngFor="let sa of sAnimals$ | async">
       <td>{{ sa.id }}</td>
-      <td>{{ sa.animal?.nomAnimal }}</td>
+      <td>{{afficherNomAnimal(sa.animalId)}}</td>
       <td>#{{ sa.emplacement?.id }}</td>
       <td>{{ sa.dateArrivee }}</td>
       <td>{{ sa.dateDepart }}</td>

@@ -1,8 +1,8 @@
 export enum Famille {
-  FELIN = "FELIN",
-  CANIN = "CANIN",
-  MUSCILIDE = "MUSCILIDE",
-  GALIDE = "GALIDE",
-  EQUIDE = "EQUIDE",
-  BOVIDE = "BOVIDE"
+  Felin = "Felin",
+  Canin = "Canin",
+  Muscilide = "Muscilide",
+  Galide = "Galide",
+  Equide = "Equide",
+  Bovide = "Bovide"
 }
