@@ -6,7 +6,7 @@ import { InfoRefugeFooter } from '../info-refuge-footer/info-refuge-footer';
 
 @Component({
   selector: 'app-footer',
-  imports: [RouterLink,BasFooter,NewsletterFooter,InfoRefugeFooter],
+  imports: [BasFooter,NewsletterFooter,InfoRefugeFooter],
   templateUrl: './footer.html',
   styleUrl: './footer.css',
 })
