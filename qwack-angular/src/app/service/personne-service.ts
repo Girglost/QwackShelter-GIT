@@ -5,11 +5,13 @@ import { Role } from '../enum/role';
 import { StatutActivite } from '../enum/statut-activite';
 import { CurrentUser } from '../model/current-user';
 import { Personne } from '../model/personne';
+import { PersonneProfil } from '../model/personne-profil';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PersonneService {
+
   private http: HttpClient = inject(HttpClient);
   private apiUrl: string = '/personne';
 
@@ -75,11 +77,15 @@ export class PersonneService {
     return this.http.get<CurrentUser>(`/auth/me`);
   }
 
+  public getMonProfil(): Observable<Personne> {
+    return this.http.get<Personne>(`${this.apiUrl}/profil`);
+  }
+
   public checkLogin(login: string): Observable<boolean> {
     return this.http.get<boolean>(`${this.apiUrl}/check-login?login=${login}`);
   }
 
-  public findByLogin(login: string): Observable<Personne> {
-    return this.http.get<Personne>(`${this.apiUrl}/login/${login}`);
+  public findByLogin(login: string): Observable<PersonneProfil> {
+    return this.http.get<PersonneProfil>(`${this.apiUrl}/login/${login}`);
   }
 }

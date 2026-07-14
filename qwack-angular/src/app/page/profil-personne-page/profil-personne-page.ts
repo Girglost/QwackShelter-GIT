@@ -31,17 +31,14 @@ export class ProfilPersonnePage implements OnInit {
 
   ngOnInit(): void {
 
-    const user = this.authService.currentUser();
+    this.personneService.getMonProfil()
+      .subscribe(personne => {
 
-    if (user) {
+        console.log("PROFIL :", personne);
 
-      this.personneService.findByLogin(user.login)
-        .subscribe(personne => {
-          console.log("PERSONNE COMPLETE :", personne);
-          this.personne.set(personne);
-        });
+        this.personne.set(personne);
 
-    }
+      });
   }
 
   get roleLabel(): string {

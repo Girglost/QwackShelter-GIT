@@ -83,6 +83,15 @@ public class PersonneService {
 		return daoPersonne.findByLogin(login);
 	}
 
+	public Personne getProfilByLogin(String login) {
+		Personne personne = daoPersonne.findByLogin(login);
+
+		daoPersonne.findByIdwithVisites(personne.getId());
+		daoPersonne.findByIdwithAdoptions(personne.getId());
+
+		return personne;
+	}
+
 	public boolean loginExist(String login) {
 		return daoPersonne.existsByLogin(login);
 	}

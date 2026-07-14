@@ -50,7 +50,6 @@ public class PersonneResponse {
 
     private List<VisiteDTO> visites;
 
-
     public static PersonneResponse convert(Personne personne) {
         PersonneResponse v = new PersonneResponse();
 
@@ -63,10 +62,10 @@ public class PersonneResponse {
         v.role = personne.getRole();
         v.admin = personne.isAdmin();
         v.dateInscription = personne.getDateInscription();
-        v.dateEngagement=personne.getDateEngagement();
-        v.dateEmbauche=personne.getDateEmbauche();
-        v.salaire=personne.getSalaire();
-        v.statutActivite=personne.getStatutActivite();
+        v.dateEngagement = personne.getDateEngagement();
+        v.dateEmbauche = personne.getDateEmbauche();
+        v.salaire = personne.getSalaire();
+        v.statutActivite = personne.getStatutActivite();
 
         // HABITATION
         v.habitation = LieuResponse.convert(personne.getHabitation());
@@ -77,21 +76,12 @@ public class PersonneResponse {
         return v;
     }
 
-    public static PersonneResponse convertWithVisites(Personne personne) {
+    public static PersonneResponse convertWithVisitesAndAdoptions(Personne personne) {
         PersonneResponse v = PersonneResponse.convert(personne);
         v.visites = personne.getVisites().stream().map(visite -> VisiteDTO.convert(visite)).toList();
-        return v;
-    }
-
-    public static PersonneResponse convertWithAdoptions(Personne personne) {
-        PersonneResponse v = PersonneResponse.convert(personne);
         v.adoptions = personne.getAdoptions().stream().map(a -> StatutAnimalReponse.convert(a)).toList();
         return v;
     }
-
-
-
-
 
     public Integer getId() {
         return id;
@@ -213,9 +203,4 @@ public class PersonneResponse {
         this.visites = visites;
     }
 
-
-
-
-
-    
 }

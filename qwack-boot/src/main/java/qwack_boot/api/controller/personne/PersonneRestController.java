@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -101,9 +102,13 @@ public class PersonneRestController {
         return ResponseEntity.ok(personneSrv.loginExist(login));
     }
 
-    @GetMapping("/login/{login}")
-public PersonneResponse findByLogin(@PathVariable String login) {
-    return PersonneResponse.convert(personneSrv.getByLogin(login));
-}
+    @GetMapping("/profil")
+    public PersonneResponse getMonProfil(Authentication authentication) {
 
+        String login = authentication.getName();
+
+        Personne personne = personneSrv.getProfilByLogin(login);
+
+        return PersonneResponse.convertWithVisitesAndAdoptions(personne);
+    }
 }
