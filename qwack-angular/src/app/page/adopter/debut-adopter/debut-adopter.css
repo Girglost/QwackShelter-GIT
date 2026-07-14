@@ -96,6 +96,7 @@
   border: 2px solid transparent;
   cursor: pointer;
   white-space: nowrap;
+  text-decoration: none;
 }
 
 .btn--primary {
