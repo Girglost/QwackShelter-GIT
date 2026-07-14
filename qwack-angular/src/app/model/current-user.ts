@@ -9,4 +9,7 @@ export interface CurrentUser {
     admin: boolean;
     habitation?: Lieu;
     quackShelterId?: number;
+    dateInscription: Date;
+    dateEmbauche: Date;
+    dateEngagement: Date;
 }

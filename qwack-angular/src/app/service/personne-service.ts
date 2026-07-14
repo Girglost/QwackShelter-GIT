@@ -11,27 +11,26 @@ import { Personne } from '../model/personne';
 })
 export class PersonneService {
   private http: HttpClient = inject(HttpClient);
-  private apiUrl: string = "/personne";
+  private apiUrl: string = '/personne';
 
   // Distinguer les roles, on va chercher le bon controller
   //  AddVisiteur, AddBenevole etc...
   private getUrlByRole(role: Role): string {
-
     switch (role) {
       case Role.EMPLOYE:
-        return "/employe";
+        return '/employe';
 
       case Role.BENEVOLE:
-        return "/benevole";
+        return '/benevole';
 
       case Role.PATRON:
-        return "/patron";
+        return '/patron';
 
       case Role.VISITEUR:
-        return "/visiteur";
+        return '/visiteur';
 
       default:
-        return "/personne";
+        return '/personne';
     }
   }
 
@@ -72,17 +71,15 @@ export class PersonneService {
     return this.http.get<Personne[]>(`${this.apiUrl}/admin`);
   }
 
-
   public getMe(): Observable<CurrentUser> {
     return this.http.get<CurrentUser>(`/auth/me`);
   }
 
-
   public checkLogin(login: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/check-login?login=${login}`);
+  }
 
-    return this.http.get<boolean>(
-      `${this.apiUrl}/check-login?login=${login}`
-    );
-
+  public findByLogin(login: string): Observable<Personne> {
+    return this.http.get<Personne>(`${this.apiUrl}/login/${login}`);
   }
 }

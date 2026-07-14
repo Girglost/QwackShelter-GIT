@@ -13,7 +13,7 @@
 <p>
   {{ roleLabel }} depuis le
   <br>
-  {{ personne?.dateEngagement | date:'dd MMMM yyyy' }}
+  {{dateRole}}
 </p>
       </div>
     </div>
@@ -96,7 +96,7 @@
 
           <div>
             <label>Adresse</label>
-            <p>{{ personne?.habitation}}</p>
+            <p>{{ personne?.habitation?.adresse?.numero }} {{ personne?.habitation?.adresse?.voie }}, {{ personne?.habitation?.adresse?.cp }} {{ personne?.habitation?.adresse?.ville }}</p>
           </div>
 
           <div>
@@ -106,7 +106,7 @@
 
           <div>
             <label>Engagement</label>
-            <p>{{ dateRole}}</p>
+            <p>{{dateRole}}</p>
           </div>
 
         </div>

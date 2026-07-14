@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import qwack_boot.api.responseDTO.personne.EmployeResponse;
+import qwack_boot.api.responseDTO.personne.PersonneResponse;
 import qwack_boot.api.responseDTO.personne.VisiteurResponse;
 import qwack_boot.model.Personne;
 import qwack_boot.model.StatutActivite;
@@ -99,5 +100,10 @@ public class PersonneRestController {
             @RequestParam String login) {
         return ResponseEntity.ok(personneSrv.loginExist(login));
     }
+
+    @GetMapping("/login/{login}")
+public PersonneResponse findByLogin(@PathVariable String login) {
+    return PersonneResponse.convert(personneSrv.getByLogin(login));
+}
 
 }

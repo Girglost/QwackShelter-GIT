@@ -17,7 +17,7 @@ import { APropos } from './page/a-propos/a-propos';
 import { AdoptionForm } from './page/adopter/adopter-formulaire/adopter-formulaire';
 import { Adopter } from './page/adopter/adopter/adopter';
 import { AnimalPage } from './page/animal-page/animal-page';
-import { EmployePage } from './page/employe-page/employe-page';
+import { ProfilPersonnePage } from './page/profil-personne-page/profil-personne-page';
 import { InscriptionPage } from './page/inscription-page/inscription-page';
 import { LieuPage } from './page/lieu-page/lieu-page';
 import { LoginPage } from './page/login-page/login-page';
@@ -39,7 +39,7 @@ export const routes: Routes = [
   { path: 'inscription', component: InscriptionPage },
   { path: 'inscription-success', component: InscriptionSuccess },
   { path: 'animaux', component: NosAnimauxPage },
-  { path: 'employe', component: EmployePage },
+  { path: 'profil-personne', component: ProfilPersonnePage },
 
   { path: 'animal/:id', component: ProfilAnimal },
   { path: 'demande-adoption', component: AdoptionForm },
