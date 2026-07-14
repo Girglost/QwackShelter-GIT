@@ -73,6 +73,32 @@ export class ProfilPersonnePage implements OnInit {
     return !!(this.personne() as any)?.admin;
   }
 
+  get isVisiteur(): boolean {
+    return this.personne()?.role === Role.VISITEUR;
+  }
+
+  get isBenevole(): boolean {
+    return this.personne()?.role === Role.BENEVOLE;
+  }
+
+  get isEmploye(): boolean {
+    return this.personne()?.role === Role.EMPLOYE;
+  }
+
+  get isPatron(): boolean {
+    return this.personne()?.role === Role.PATRON;
+  }
+
+  // Planning + tâches : bénévoles, employés et patrons
+  get hasPlanning(): boolean {
+    return this.isBenevole || this.isEmploye || this.isPatron;
+  }
+
+  // Statistiques du refuge : employés / admins
+  get hasStats(): boolean {
+    return this.isEmploye || this.isAdmin;
+  }
+
   get menuItems(): MenuItem[] {
     const role = this.personne()?.role;
 
@@ -108,6 +134,13 @@ export class ProfilPersonnePage implements OnInit {
           { icon: 'fa-solid fa-folder-open', label: 'Gestion des demandes' },
         );
         break;
+
+      case Role.PATRON:
+        items.push(
+          { icon: 'fa-regular fa-calendar', label: 'Mon planning' },
+          { icon: 'fa-solid fa-list-check', label: 'Mes tâches' },
+        );
+        break;
     }
 
     // Ajout des items admin, quel que soit le rôle
@@ -116,7 +149,6 @@ export class ProfilPersonnePage implements OnInit {
         { icon: 'fa-solid fa-users-gear', label: 'Gestion des personnes', link: '/personne' },
         { icon: 'fa-solid fa-dog', label: 'Gestion des animaux', link: '/animal' },
         { icon: 'fa-solid fa-dog', label: 'Gestion des refuges', link: '/refuge' }
-
       );
     }
 

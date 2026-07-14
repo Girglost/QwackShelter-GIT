@@ -5,7 +5,12 @@
   <aside class="sidebar">
 
     <div class="user-card">
-      <img src="assets/images/avatar.png" alt="Photo de profil">
+
+      <svg class="avatar-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="60" height="60">
+        <circle cx="50" cy="50" r="50" fill="#e0e0e0"/>
+        <circle cx="50" cy="38" r="18" fill="#9e9e9e"/>
+        <path d="M50 60c-19 0-34 12-34 27v13h68V87c0-15-15-27-34-27z" fill="#9e9e9e"/>
+      </svg>
 
       <div class="user-info">
         <h2>Hello !</h2>
@@ -46,7 +51,11 @@
     <section class="profile card">
 
       <div class="avatar">
-        <img src="assets/images/avatar.png" alt="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+          <circle cx="50" cy="50" r="50" fill="#e0e0e0"/>
+          <circle cx="50" cy="38" r="18" fill="#9e9e9e"/>
+          <path d="M50 60c-19 0-34 12-34 27v13h68V87c0-15-15-27-34-27z" fill="#9e9e9e"/>
+        </svg>
       </div>
 
       <div class="profile-content">
@@ -91,7 +100,8 @@
 
     </section>
 
-    <section class="planning card">
+    <!-- Planning : bénévole / employé / patron -->
+    <section class="planning card" *ngIf="hasPlanning">
 
       <h2>Planning</h2>
 
@@ -101,7 +111,8 @@
 
     </section>
 
-    <section class="todo card">
+    <!-- À venir / tâches : bénévole / employé / patron -->
+    <section class="todo card" *ngIf="hasPlanning">
 
       <h2>À venir</h2>
 
@@ -122,7 +133,8 @@
 
     </section>
 
-    <section class="stats card">
+    <!-- Statistiques du refuge : employé / admin -->
+    <section class="stats card" *ngIf="hasStats">
 
       <div class="stat">
         <h3>150</h3>
@@ -156,6 +168,7 @@
 
     </section>
 
+    <!-- Adoptions : commun à tous les rôles -->
     <section class="adoptions card">
 
       <h2>Mes adoptions</h2>
@@ -188,6 +201,7 @@
 
     </section>
 
+    <!-- Demandes : commun à tous les rôles -->
     <section class="requests card">
 
       <h2>Mes demandes</h2>
