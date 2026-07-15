@@ -1,5 +1,5 @@
-import { Animal } from './animal';
 import { Cause } from '../enum/cause';
+import { Animal } from './animal';
 
 export interface HistoriqueSante {
   id: number;
@@ -8,5 +8,6 @@ export interface HistoriqueSante {
   heure: string; // format "HH:mm" côté formulaire
   poids: number;
   commentaire: string;
-  animal: Animal;
+  animal?: Animal;
+  animalId: number;
 }

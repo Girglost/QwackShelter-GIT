@@ -10,10 +10,10 @@
     <div class="form-group">
       <label for="animal">Animal :</label>
       <div class="input-container">
-        <select id="animal" formControlName="animal">
+        <select id="animal" formControlName="animalId">
           <option [ngValue]="''">-- Sélectionner un animal --</option>
           @for (a of animaux$ | async; track a.id) {
-            <option [ngValue]="a">{{ a.nomAnimal }}</option>
+          <option [ngValue]="a.id">{{ a.nomAnimal }}</option>
           }
         </select>
         <div class="error-message" *ngIf="CtrlAnimal.dirty && CtrlAnimal.hasError('required')">
@@ -28,7 +28,7 @@
         <select id="cause" formControlName="cause">
           <option value="">-- Sélectionner une cause --</option>
           @for (c of causeValues; track c) {
-            <option [value]="c">{{ c }}</option>
+          <option [value]="c">{{ c }}</option>
           }
         </select>
         <div class="error-message" *ngIf="CtrlCause.dirty && CtrlCause.hasError('required')">
@@ -79,14 +79,10 @@
 
     <div class="form-actions">
       @if (editingHistoriqueId) {
-        <button type="button" class="btn-cancel" (click)="annulerEdition()">Annuler</button>
+      <button type="button" class="btn-cancel" (click)="annulerEdition()">Annuler</button>
       }
-      <input
-        [disabled]="formHistorique.invalid"
-        type="submit"
-        [value]="editingHistoriqueId ? 'Modifier' : 'Ajouter'"
-        class="btn-submit"
-      />
+      <input [disabled]="formHistorique.invalid" type="submit" [value]="editingHistoriqueId ? 'Modifier' : 'Ajouter'"
+        class="btn-submit" />
     </div>
   </form>
 </div>
@@ -95,29 +91,20 @@
 
 <!-- Barre de filtres -->
 <div class="filter-bar">
-  <button
-    class="filter-btn"
-    [class.active]="!causeFiltre && !animalFiltre"
-    (click)="filtrerParCause(null)">
+  <button class="filter-btn" [class.active]="!causeFiltre && !animalFiltre" (click)="filtrerParCause(null)">
     Tous
   </button>
 
   @for (c of causeValues; track c) {
-    <button
-      class="filter-btn"
-      [class.active]="causeFiltre === c"
-      (click)="filtrerParCause(c)">
-      {{ c }}
-    </button>
+  <button class="filter-btn" [class.active]="causeFiltre === c" (click)="filtrerParCause(c)">
+    {{ c }}
+  </button>
   }
 
-  <select
-    class="filter-select"
-    [(ngModel)]="animalFiltre"
-    (ngModelChange)="filtrerParAnimal($event)">
+  <select class="filter-select" [(ngModel)]="animalFiltre" (ngModelChange)="filtrerParAnimal($event)">
     <option [ngValue]="null">-- Filtrer par animal --</option>
     @for (a of animaux$ | async; track a.id) {
-      <option [ngValue]="a">{{ a.nomAnimal }}</option>
+    <option [ngValue]="a">{{ a.nomAnimal }}</option>
     }
   </select>
 </div>
@@ -137,9 +124,12 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let h of historiques$ | async">
+    @for (h of historiques(); track h) {
+    <tr>
       <td>{{ h.id }}</td>
+      @if (h.animal){
       <td>{{ h.animal?.nomAnimal }}</td>
+      }
       <td>{{ h.cause }}</td>
       <td>{{ h.date }}</td>
       <td>{{ h.heure }}</td>
@@ -150,5 +140,6 @@
         <button (click)="remove(h)">SUPPRIMER</button>
       </td>
     </tr>
+    }
   </tbody>
 </table>
