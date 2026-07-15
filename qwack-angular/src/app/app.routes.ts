@@ -23,14 +23,13 @@ import { DemandeVisite } from './page/demande-visite/demande-visite';
 import { InscriptionPage } from './page/inscription-page/inscription-page';
 import { LieuPage } from './page/lieu-page/lieu-page';
 import { LoginPage } from './page/login-page/login-page';
+import { MesAdoptions } from './page/mes-adoptions/mes-adoptions';
 import { MesDemandesPage } from './page/mes-demandes/mes-demandes';
+import { MesVisites } from './page/mes-visites/mes-visites';
 import { NosAnimauxPage } from './page/nos-animaux-page/nos-animaux-page';
 import { PersonnePage } from './page/personne-page/personne-page';
 import { ProfilAnimal } from './page/profil-animal/profil-animal';
 import { ProfilPersonnePage } from './page/profil-personne-page/profil-personne-page';
-import { MesDemandesPage } from './page/mes-demandes/mes-demandes';
-import { MesAdoptions } from './page/mes-adoptions/mes-adoptions';
-import { MesVisites } from './page/mes-visites/mes-visites';
 
 export const routes: Routes = [
   { path: 'accueil', component: Accueil },
@@ -47,9 +46,9 @@ export const routes: Routes = [
   { path: 'inscription-success', component: InscriptionSuccess },
   { path: 'animaux', component: NosAnimauxPage, },
   { path: 'profil-personne', component: ProfilPersonnePage },
-  {path: 'mes-demandes',component:MesDemandesPage},
-  {path: 'mes-adoptions',component:MesAdoptions},
-  {path: 'mes-visites',component:MesVisites},
+  { path: 'mes-demandes', component: MesDemandesPage },
+  { path: 'mes-adoptions', component: MesAdoptions },
+  { path: 'mes-visites', component: MesVisites },
 
   { path: 'animal/:id', component: ProfilAnimal },
   {
@@ -67,8 +66,8 @@ export const routes: Routes = [
   },
 
   {
-  path: 'animal/:id',
-  loadComponent: () => import('./page/profil-animal/profil-animal').then(m => m.ProfilAnimal),
+    path: 'animal/:id',
+    loadComponent: () => import('./page/profil-animal/profil-animal').then(m => m.ProfilAnimal),
   },
 
   // ====== Routes vers le CRUD des classes ======

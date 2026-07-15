@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
-import { Animal } from './../../../model/animal';
-import { Genre } from './../../../enum/genre';
 import { AnimalService } from '../../../service/animal-service';
 import { AuthService } from '../../../service/auth-service';
+import { Genre } from './../../../enum/genre';
+import { Animal } from './../../../model/animal';
 
+import { getImageAnimal } from '../../../utils/animal-image-utils.utils';
 const PHOTO_PLACEHOLDER = 'assets/image/animaux/placeholder.png';
 
 @Component({
@@ -16,13 +17,13 @@ const PHOTO_PLACEHOLDER = 'assets/image/animaux/placeholder.png';
   styleUrl: './hero.css',
 })
 export class Hero implements OnInit {
-  animalDuJour: Animal | null = null;
+  animalDuJour = signal<Animal | null>(null);
 
   constructor(
     private authService: AuthService,
     private animalSrv: AnimalService,
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     console.log('ngOnInit Hero appelé');
@@ -36,8 +37,8 @@ export class Hero implements OnInit {
           return;
         }
         const index = Math.floor(Math.random() * animaux.length);
-        this.animalDuJour = animaux[index];
-        console.log('Animal du jour sélectionné :', JSON.stringify(this.animalDuJour, null, 2));
+        this.animalDuJour.set(animaux[index]);
+        console.log('Animal du jour sélectionné :', JSON.stringify(this.animalDuJour(), null, 2));
       },
       error: (err) => {
         console.error("Erreur lors du chargement de l'animal du jour :", err);
@@ -59,13 +60,13 @@ export class Hero implements OnInit {
 
   // Pas de champ "description" dans le modèle : on résume à partir des caractères.
   get descriptionAnimal(): string {
-    const caracteres = this.animalDuJour?.caracteres ?? [];
+    const caracteres = this.animalDuJour()?.caracteres ?? [];
     return caracteres.length > 0 ? caracteres.join(', ') : '';
   }
 
   get genreLabel(): string {
     // À vérifier selon les valeurs exactes de l'enum Genre
-    switch (this.animalDuJour?.genre) {
+    switch (this.animalDuJour()?.genre) {
       case Genre.Male:
         return 'Mâle';
       case Genre.Femelle:
@@ -76,7 +77,7 @@ export class Hero implements OnInit {
   }
 
   get ageAnimal(): number | null {
-    const dateNaissance = this.animalDuJour?.dateNaissance;
+    const dateNaissance = this.animalDuJour()?.dateNaissance;
     if (!dateNaissance) {
       return null;
     }
@@ -106,8 +107,12 @@ export class Hero implements OnInit {
   }
 
   voirProfil(): void {
-    if (this.animalDuJour) {
-      this.router.navigate(['/profil-animal', this.animalDuJour.id]);
+    if (this.animalDuJour()) {
+      this.router.navigate(['/profil-animal', this.animalDuJour()?.id]);
     }
+  }
+
+  protected getImageAnimal(a: Animal): string {
+    return getImageAnimal(a);
   }
 }

@@ -16,27 +16,28 @@
     </div>
     <div class="btns">
       <div class="btn-adopter" routerLink="/adopter">
-        <img src="assets/image/footer/coeur.png" alt="coeur"/>ADOPTER MAINTENANT
+        <img src="assets/image/footer/coeur.png" alt="coeur" />ADOPTER MAINTENANT
       </div>
       <div class="btn-quizz" routerLink="/quizz">FAIRE LE QUIZZ</div>
     </div>
   </div>
 
-@if (animalDuJour) {
+
+  @if (animalDuJour(); as animalDuJour) {
   <div class="carte">
     <p id="titre-carte">L'ANIMAL DU JOUR</p>
     <div class="trait"></div>
-    <img id="animal" [src]="photoAnimal" [alt]="animalDuJour.nomAnimal" />
+    <img id="animal" [src]="getImageAnimal(animalDuJour)" [alt]="animalDuJour.nomAnimal" />
     <div class="info-animal">
       <p>{{ animalDuJour.nomAnimal }} | {{ ageLabel }} | {{ genreLabel }}</p>
       <br />
       @if (descriptionAnimal) {
-        <p>{{ descriptionAnimal }}</p>
+      <p>{{ descriptionAnimal }}</p>
       }
     </div>
-    <div class="btn-profil" (click)="voirProfil()">VOIR SON PROFIL</div>
+    <div class="btn-profil" [routerLink]="['/animal', animalDuJour.id]">VOIR SON PROFIL</div>
     <div class="btn-animaux" routerLink="/animaux">VOIR TOUS LES ANIMAUX</div>
   </div>
-}
+  }
 
 </div>
