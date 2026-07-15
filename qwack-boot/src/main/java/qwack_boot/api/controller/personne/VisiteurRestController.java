@@ -195,13 +195,20 @@ public class VisiteurRestController {
                                 .body(Map.of("Visiteur devenu Benevole", visiteurDevientBenevole));
         }
 
-        @PostMapping("{id}/visiter")
-        public ResponseEntity<Map<String, VisiteDTO>> demanderVisite(@PathVariable Integer id,
+        @PostMapping("/visiter")
+        public ResponseEntity<Map<String, VisiteDTO>> demanderVisite(
                         @RequestBody VisiteDTO demandeVisite) {
                 System.out.println("DEMANDE DE VISITE");
-                int visiteurId = id;
-                int quackShelterId = demandeVisite.getIdQuackShelter();
+                // On récupère la personne connectée et son id, pour faire la demande d'adoption
+                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                String login = authentication.getName();
+
+                System.out.println("DEMANDE D'ADOPTION");
+                int visiteurId = personneSrv.getByLogin(login).getId();
+
                 int animalId = demandeVisite.getIdAnimal();
+
+                int quackShelterId = animalSrv.getById(animalId).getQuackShelter().getId();
                 LocalDateTime dateVisite = demandeVisite.getDateVisite();
 
                 VisiteDTO visiteDemanded = VisiteDTO

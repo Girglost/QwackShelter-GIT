@@ -3,7 +3,6 @@ import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { AdoptionRequest } from "../model/adoption-request";
 import { StatutAnimal } from "../model/statut-animal";
-import { AnimalService } from "./animal-service";
 
 @Injectable({
     providedIn: 'root',
@@ -11,13 +10,21 @@ import { AnimalService } from "./animal-service";
 export class AdoptionService {
 
     private http: HttpClient = inject(HttpClient);
-    private animalSrv: AnimalService = inject(AnimalService);
 
     public demanderAdoption(
-        demande: AdoptionRequest
+        demande: AdoptionRequest, role: string
     ): Observable<StatutAnimal> {
+        switch (role) {
 
-        return this.http.post<StatutAnimal>(`/visiteur/adopter`, demande);
+            case "VISITEUR":
+                return this.http.post<StatutAnimal>('/visiteur/adopter', demande);
+
+            case "BENEVOLE":
+                return this.http.post<StatutAnimal>('/benevole/adopter', demande);
+            default:
+                throw new Error(`Le ${role} n'est pas autorisé a faire une demande d'adoption`);
+        }
+
 
     }
 

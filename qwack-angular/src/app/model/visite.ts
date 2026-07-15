@@ -3,7 +3,7 @@ import { StatutValidation } from "../enum/statut-validation";
 export interface Visite {
 
     id: number;
-    ateVisite: Date;
+    dateVisite: Date;
     idVisiteur: number;
     nomVisiteur: string;
 

@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +29,7 @@ import qwack_boot.model.Lieu;
 import qwack_boot.model.Personne;
 import qwack_boot.model.QuackShelter;
 import qwack_boot.model.StatutAnimal;
+import qwack_boot.service.AnimalService;
 import qwack_boot.service.PersonneService;
 import qwack_boot.service.QuackShelterService;
 import qwack_boot.service.StatutAnimalService;
@@ -40,6 +43,8 @@ public class BenevoleRestController {
         PersonneService personneSrv;
         @Autowired
         QuackShelterService quackSrv;
+        @Autowired
+        AnimalService animalSrv;
 
         @Autowired
         StatutAnimalService statutAnimalSrv;
@@ -177,13 +182,20 @@ public class BenevoleRestController {
         @PostMapping("/adopter")
         public ResponseEntity<Map<String, StatutAnimalReponse>> demanderAdoption(
                         @RequestBody AdoptionRequest demandeAdoption) {
+
+                // On récupère la personne connectée et son id, pour faire la demande d'adoption
+                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                String login = authentication.getName();
+
                 System.out.println("DEMANDE D'ADOPTION");
-                int benevoleId = demandeAdoption.getIdPersonne();
-                int quackShelterId = demandeAdoption.getIdQuackShelter();
+                int visiteurId = personneSrv.getByLogin(login).getId();
+
                 int animalId = demandeAdoption.getIdAnimal();
 
+                int quackShelterId = animalSrv.getById(animalId).getQuackShelter().getId();
+
                 StatutAnimalReponse adoptionDemanded = StatutAnimalReponse
-                                .convert(personneSrv.demanderAdoption(quackShelterId, benevoleId, animalId));
+                                .convert(personneSrv.demanderAdoption(quackShelterId, visiteurId, animalId));
                 return ResponseEntity.status(HttpStatus.OK)
                                 .body(Map.of("Adoption en attente", adoptionDemanded));
         }

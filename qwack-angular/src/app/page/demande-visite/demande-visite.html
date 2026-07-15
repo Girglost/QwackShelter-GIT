@@ -1,0 +1,76 @@
+<section class="adoption-form">
+
+    <div class="container">
+
+        <h1>Demande de Visite </h1>
+
+        <p class="subtitle">
+            Merci de remplir ce formulaire. Notre équipe reviendra vers vous rapidement.
+        </p>
+
+        <form [formGroup]="adoptionForm" (ngSubmit)="onSubmit()">
+
+            <div class="grid">
+
+                <div class="field">
+                    <label>Nom*</label>
+                    <input type="text" formControlName="nom">
+                </div>
+
+                <div class="field">
+                    <label>Prénom*</label>
+                    <input type="text" formControlName="prenom">
+                </div>
+
+                <div class="field">
+                    <label>Email*</label>
+                    <input type="email" formControlName="email">
+                </div>
+
+                <div class="field">
+                    <label>Téléphone (facultatif)</label>
+                    <input type="tel" formControlName="telephone">
+                </div>
+
+
+                <div class="field full">
+
+                    <label for="animal">
+                        Animal souhaité*
+                    </label>
+
+
+
+                    <select formControlName="animalId">
+                        <option value="">
+                            Choisir un animal
+                        </option>
+
+                        @for (animal of animauxPresent$ | async; track animal.id) {
+
+                        <option [value]="animal.id">
+                            {{animal.id}} - {{ animal.nomAnimal }} - {{ animal.typeAnimal }}
+                        </option>
+
+                        }
+                    </select>
+
+                </div>
+
+
+                <div class="field">
+                    <label>Date et heure de la visite*</label>
+                    <input type="datetime-local" id="dateVisite" formControlName="dateVisite">
+                </div>
+
+            </div>
+
+            <button class="btn" type="submit" [disabled]="adoptionForm.invalid">
+                Envoyer ma demande
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
