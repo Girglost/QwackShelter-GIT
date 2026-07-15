@@ -34,6 +34,10 @@ export class AnimalService {
   }
 
   public findDisponibles(): Observable<Animal[]> {
-  return this.http.get<Animal[]>(`${this.apiUrl}/statut/PRESENT`);
-}
+    return this.http.get<Animal[]>(`${this.apiUrl}/disponible/PRESENT`);
+  }
+
+  public findPresent(): Observable<Animal[]> {
+    return this.http.get<Animal[]>(`${this.apiUrl}/present`);
+  }
 }

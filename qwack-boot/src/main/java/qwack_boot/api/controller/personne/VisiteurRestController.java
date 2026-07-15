@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +31,7 @@ import qwack_boot.api.responseDTO.personne.VisiteurResponse;
 import qwack_boot.model.Lieu;
 import qwack_boot.model.Personne;
 import qwack_boot.model.QuackShelter;
+import qwack_boot.service.AnimalService;
 import qwack_boot.service.EmplacementService;
 import qwack_boot.service.LieuService;
 import qwack_boot.service.PersonneService;
@@ -48,6 +51,8 @@ public class VisiteurRestController {
         QuackShelterService quackSrv;
         @Autowired
         LieuService lieuSrv;
+        @Autowired
+        AnimalService animalSrv;
 
         @Autowired
         StatutAnimalService statutAnimalSrv;
@@ -207,13 +212,20 @@ public class VisiteurRestController {
 
         }
 
-        @PostMapping("{id}/adopter")
-        public ResponseEntity<Map<String, StatutAnimalReponse>> demanderAdoption(@PathVariable Integer id,
+        @PostMapping("/adopter")
+        public ResponseEntity<Map<String, StatutAnimalReponse>> demanderAdoption(
                         @RequestBody AdoptionRequest demandeAdoption) {
+
+                // On récupère la personne connectée et son id, pour faire la demande d'adoption
+                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                String login = authentication.getName();
+
                 System.out.println("DEMANDE D'ADOPTION");
-                int visiteurId = id;
-                int quackShelterId = demandeAdoption.getIdQuackShelter();
+                int visiteurId = personneSrv.getByLogin(login).getId();
+
                 int animalId = demandeAdoption.getIdAnimal();
+
+                int quackShelterId = animalSrv.getById(animalId).getQuackShelter().getId();
 
                 StatutAnimalReponse adoptionDemanded = StatutAnimalReponse
                                 .convert(personneSrv.demanderAdoption(quackShelterId, visiteurId, animalId));

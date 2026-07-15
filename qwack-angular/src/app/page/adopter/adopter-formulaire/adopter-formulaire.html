@@ -40,27 +40,32 @@
 
         <div class="field full">
 
-    <label for="animal">
-        Animal souhaité*
-    </label>
+          <label for="animal">
+            Animal souhaité*
+          </label>
 
-    <select id="animal" formControlName="animalId">
 
-        <option value="">
-            Sélectionnez un animal
-        </option>
 
-        <option
-            *ngFor="let animal of animaux"
-            [value]="animal.id">
+          <select formControlName="animalId">
 
-            {{ $any(animal).nom }} - {{ $any(animal).espece }}
 
-        </option>
+            <option value="">
+              Choisir un animal
+            </option>
 
-    </select>
 
-</div>
+            @for (animal of animauxPresent$ | async; track animal.id) {
+
+            <option [value]="animal.id">
+              {{animal.id}} - {{ animal.nomAnimal }} - {{ animal.typeAnimal }}
+            </option>
+
+            }
+
+
+          </select>
+
+        </div>
 
 
 
@@ -69,8 +74,8 @@
 
           <select formControlName="logement">
             <option value="">Choisir...</option>
-            <option>Appartement</option>
-            <option>Maison</option>
+            <option value="APPARTEMENT">Appartement</option>
+            <option value="MAISON">Maison</option>
           </select>
         </div>
 
@@ -79,17 +84,15 @@
 
           <select formControlName="jardin">
             <option value="">Choisir...</option>
-            <option>Oui</option>
-            <option>Non</option>
+            <option value="oui">Oui</option>
+            <option value="non">Non</option>
           </select>
         </div>
 
         <div class="field full">
           <label>Pourquoi souhaitez-vous adopter ?*</label>
 
-          <textarea
-            rows="5"
-            formControlName="motivation">
+          <textarea rows="5" formControlName="motivation">
           </textarea>
         </div>
 

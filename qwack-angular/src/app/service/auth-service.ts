@@ -13,7 +13,11 @@ export class AuthService {
   private http: HttpClient = inject(HttpClient);
   private personneSrv: PersonneService = inject(PersonneService);
   private _token = signal(sessionStorage.getItem("token") ?? "");
-  private _currentUser = signal<CurrentUser | null>(null);
+
+  //Charger le currentUser depuis la session
+  private _currentUser = signal<CurrentUser | null>(
+    JSON.parse(sessionStorage.getItem("currentUser") ?? "null")
+  );
 
   public token() {
     return this._token();
@@ -33,8 +37,10 @@ export class AuthService {
 
   public resetAuth() {
     this._token.set("");
-    sessionStorage.removeItem("token");
     this._currentUser.set(null);
+
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("currentUser");
   }
   public loadCurrentUser(): Observable<CurrentUser> {
 
@@ -43,6 +49,11 @@ export class AuthService {
         tap(user => {
           console.log("USER CONNECTED ", user)
           this._currentUser.set(user);
+          // Le sauvegarder en session
+          sessionStorage.setItem(
+            "currentUser",
+            JSON.stringify(user)
+          );
         })
       );
 
@@ -53,10 +64,7 @@ export class AuthService {
     return new Observable<void>(observer => {
       this.http.post<AuthResponseDto>('/auth', request).subscribe({
         next: resp => {
-          this._token.set(resp.token);
-
-          // Enregistrement du jeton dans la session Storage
-          sessionStorage.setItem('token', resp.token);
+          this.setToken(resp.token);
           this.loadCurrentUser().subscribe({
             next: () => {
               observer.next();

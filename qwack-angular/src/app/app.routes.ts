@@ -13,17 +13,19 @@ import { SwipeCompagnon } from './page/swipe-compagnon/swipe-compagnon';
 
 import { InscriptionSuccess } from './component/inscription-success/inscription-success';
 import { authGuard } from './guard/auth-guard';
+import { roleGuardGuard } from './guard/role-guard-guard';
 import { APropos } from './page/a-propos/a-propos';
+import { AccessDenied } from './page/access-denied/access-denied';
 import { AdoptionForm } from './page/adopter/adopter-formulaire/adopter-formulaire';
 import { Adopter } from './page/adopter/adopter/adopter';
 import { AnimalPage } from './page/animal-page/animal-page';
-import { ProfilPersonnePage } from './page/profil-personne-page/profil-personne-page';
 import { InscriptionPage } from './page/inscription-page/inscription-page';
 import { LieuPage } from './page/lieu-page/lieu-page';
 import { LoginPage } from './page/login-page/login-page';
 import { NosAnimauxPage } from './page/nos-animaux-page/nos-animaux-page';
 import { PersonnePage } from './page/personne-page/personne-page';
 import { ProfilAnimal } from './page/profil-animal/profil-animal';
+import { ProfilPersonnePage } from './page/profil-personne-page/profil-personne-page';
 
 export const routes: Routes = [
   { path: 'accueil', component: Accueil },
@@ -38,19 +40,62 @@ export const routes: Routes = [
   { path: 'login', component: LoginPage },
   { path: 'inscription', component: InscriptionPage },
   { path: 'inscription-success', component: InscriptionSuccess },
-  { path: 'animaux', component: NosAnimauxPage },
+  { path: 'animaux', component: NosAnimauxPage, },
   { path: 'profil-personne', component: ProfilPersonnePage },
 
   { path: 'animal/:id', component: ProfilAnimal },
-  { path: 'demande-adoption', component: AdoptionForm },
+  { path: 'demande-adoption', component: AdoptionForm, canActivate: [authGuard] },
 
   // ====== Routes vers le CRUD des classes ======
-  { path: 'emplacement', component: EmplacementPage, canActivate: [authGuard] },
-  { path: 'sAnimal', component: StatutAnimalPage, canActivate: [authGuard] },
-  { path: 'hSante', component: HistoriqueSantePage, canActivate: [authGuard] },
-  { path: 'personne', component: PersonnePage, canActivate: [authGuard] },
-  { path: 'lieu', component: LieuPage, canActivate: [authGuard] },
-  { path: 'animal', component: AnimalPage, canActivate: [authGuard] },
-
+  {
+    path: 'emplacement', component: EmplacementPage, canActivate: [authGuard, roleGuardGuard], data: {
+      roles: [
+        'PATRON', 'EMPLOYE'
+      ],
+      admin: true
+    }
+  },
+  {
+    path: 'sAnimal', component: StatutAnimalPage, canActivate: [authGuard, roleGuardGuard], data: {
+      roles: [
+        'PATRON', 'EMPLOYE'
+      ],
+      admin: true
+    }
+  },
+  {
+    path: 'hSante', component: HistoriqueSantePage, canActivate: [authGuard, roleGuardGuard], data: {
+      roles: [
+        'PATRON', 'EMPLOYE'
+      ],
+      admin: true
+    }
+  },
+  {
+    path: 'personne', component: PersonnePage, canActivate: [authGuard, roleGuardGuard], data: {
+      roles: [
+        'PATRON', 'EMPLOYE'
+      ],
+      admin: true
+    }
+  },
+  {
+    path: 'lieu', component: LieuPage, canActivate: [authGuard, roleGuardGuard], data: {
+      roles: [
+        'PATRON', 'EMPLOYE'
+      ],
+      admin: true
+    }
+  },
+  {
+    path: 'animal', component: AnimalPage, canActivate: [authGuard, roleGuardGuard], data: {
+      roles: [
+        'PATRON'
+      ],
+      admin: true
+    }
+  },
+  { path: 'access-denied', component: AccessDenied },
   { path: '**', component: NotFound }, // a mettre a la fin de toutes les routes pour gérer les pages non trouvées
+
 ];
