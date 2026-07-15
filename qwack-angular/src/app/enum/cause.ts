@@ -1,8 +1,8 @@
 export enum Cause {
-  Maladie= "MALADIE",
-  Blessure= "BLESSURE",
-  Vaccin= "VACCIN",
-  Accouchement= "ACCOUCHEMENT",
-  Operation= "OPERATION",
-  Sterilisation = "STERILISATION"
+  Maladie = "Maladie",
+  Blessure = "Blessure",
+  Vaccin = "Vaccin",
+  Accouchement = "Accouchement",
+  Operation = "Operation",
+  Sterilisation = "Sterilisation"
 }

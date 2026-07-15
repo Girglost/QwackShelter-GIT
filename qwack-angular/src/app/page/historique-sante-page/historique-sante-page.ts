@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -10,11 +10,11 @@ import {
 } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { merge, Observable, startWith, Subject, switchMap } from 'rxjs';
-import { HistoriqueSante } from '../../model/historique-sante';
-import { HistoriqueSanteService } from '../../service/historique-sante-service';
 import { Cause } from '../../enum/cause';
 import { Animal } from '../../model/animal';
+import { HistoriqueSante } from '../../model/historique-sante';
 import { AnimalService } from '../../service/animal-service';
+import { HistoriqueSanteService } from '../../service/historique-sante-service';
 
 @Component({
   selector: 'app-historique-sante-page',
@@ -29,6 +29,10 @@ export class HistoriqueSantePage implements OnInit {
 
   private refresh$: Subject<void> = new Subject<void>();
   protected historiques$!: Observable<HistoriqueSante[]>;
+
+
+  // On reconstruit un historiques avec l'animal au complet
+  historiques = signal<HistoriqueSante[]>([]);
 
   protected causeValues: string[] = Object.values(Cause);
   protected animaux$!: Observable<Animal[]>;
@@ -60,6 +64,15 @@ export class HistoriqueSantePage implements OnInit {
     this.animaux$ = this.animalSrv.findAll();
 
     this.historiques$.subscribe((historiques: HistoriqueSante[]) => {
+      historiques.forEach(historique => {
+
+        this.animalSrv.findById(historique.animalId)
+          .subscribe(animal => {
+            historique.animal = animal;
+          });
+      });
+      this.historiques.set(historiques);
+      console.log("H SANTE")
       console.log(historiques);
     });
 
@@ -76,7 +89,7 @@ export class HistoriqueSantePage implements OnInit {
       heure: this.CtrlHeure,
       poids: this.CtrlPoids,
       commentaire: this.CtrlCommentaire,
-      animal: this.CtrlAnimal,
+      animalId: this.CtrlAnimal
     });
   }
 
@@ -111,9 +124,11 @@ export class HistoriqueSantePage implements OnInit {
 
     if (this.editingHistoriqueId) {
       h.id = this.editingHistoriqueId;
+      console.log("EDITING")
       console.log(h);
       this.hsSrv.update(h).subscribe(() => this.reload());
     } else {
+      console.log("ADDD")
       console.log(h);
       this.hsSrv.add(h).subscribe(() => this.reload());
     }
@@ -128,7 +143,7 @@ export class HistoriqueSantePage implements OnInit {
     this.CtrlHeure.setValue(h.heure);
     this.CtrlPoids.setValue(h.poids);
     this.CtrlCommentaire.setValue(h.commentaire);
-    this.CtrlAnimal.setValue(h.animal);
+    this.CtrlAnimal.setValue(h.animalId);
   }
 
   protected annulerEdition(): void {
