@@ -44,7 +44,6 @@ export const routes: Routes = [
   { path: 'inscription', component: InscriptionPage },
   { path: 'inscription-success', component: InscriptionSuccess },
   { path: 'animaux', component: NosAnimauxPage, },
-  { path: 'profil-personne', component: ProfilPersonnePage },
   { path: 'mes-demandes', component: MesDemandesPage },
   { path: 'mes-adoptions', component: MesAdoptions },
   { path: 'mes-visites', component: MesVisites },
