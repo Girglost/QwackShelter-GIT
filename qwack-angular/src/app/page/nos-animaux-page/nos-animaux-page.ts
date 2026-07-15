@@ -22,10 +22,14 @@ import { Animal } from '../../model/animal';
 import { AnimalService } from '../../service/animal-service';
 import { QuackShelterService } from '../../service/quack-shelter-service';
 import { QuackShelter } from '../../model/quack-shelter';
+import { RouterLink } from '@angular/router';
+import { getImageAnimal } from '../../utils/animal-image-utils.utils';
+
+
 
 @Component({
   selector: 'app-nos-animaux-page',
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './nos-animaux-page.html',
   styleUrl: './nos-animaux-page.css',
 })
@@ -56,13 +60,6 @@ export class NosAnimauxPage implements OnInit {
   protected rechercheControl = new FormControl<string>('', { nonNullable: true });
   private recherche$!: Observable<string>;
 
-  private readonly nbImagesParType: Record<string, number> = {
-    [TypeAnimal.Chat]: 5,
-    [TypeAnimal.Canard]: 5,
-    [TypeAnimal.Chien]: 5,
-    [TypeAnimal.Poule]: 3,
-    [TypeAnimal.NAC]: 5,
-  };
 
   protected filtreAgeControl = new FormControl<string>('', { nonNullable: true });
   protected filtreEspeceControl = new FormControl<TypeAnimal | ''>('', { nonNullable: true });
@@ -122,23 +119,10 @@ export class NosAnimauxPage implements OnInit {
     });
   }
 
-  private imageCache = new Map<string, string>();
 
   protected getImageAnimal(a: Animal): string {
-    const cle = String(a.id);
-
-    if (!this.imageCache.has(cle)) {
-      const type = a.typeAnimal;
-      const nb = this.nbImagesParType[type] ?? 1;
-      const index = Math.floor(Math.random() * nb) + 1;
-      const dossier = type; // ex: "Chat"
-      const prefixe = type.toString().toLowerCase(); // ex: "chat"
-
-      this.imageCache.set(cle, `assets/image/animaux/${dossier}/${prefixe}${index}.png`);
-    }
-
-    return this.imageCache.get(cle)!;
-  }
+  return getImageAnimal(a);
+}
 
   private correspondAuxFiltres(a: Animal): boolean {
     const matchFamille = this.famillesFiltre.size === 0 || this.famillesFiltre.has(a.famille);

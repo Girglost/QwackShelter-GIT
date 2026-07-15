@@ -52,6 +52,11 @@ export const routes: Routes = [
   { path: 'animal/:id', component: ProfilAnimal },
   { path: 'demande-adoption', component: AdoptionForm, canActivate: [authGuard] },
 
+  {
+  path: 'animal/:id',
+  loadComponent: () => import('./page/profil-animal/profil-animal').then(m => m.ProfilAnimal),
+  },
+
   // ====== Routes vers le CRUD des classes ======
   {
     path: 'emplacement', component: EmplacementPage, canActivate: [authGuard, roleGuardGuard], data: {

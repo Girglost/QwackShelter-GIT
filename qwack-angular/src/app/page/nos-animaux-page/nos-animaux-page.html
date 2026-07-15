@@ -48,7 +48,7 @@
 <div class="ListeAnimaux">
   <ng-container *ngFor="let a of animauxFiltres$ | async">
     <div class="animalFiche">
-      <div class="animalImg">
+      <div class="animalImg" [routerLink]="['/animal', a.id]" style="cursor: pointer;">
         <img [src]="getImageAnimal(a)" [alt]="a.nomAnimal" width="100%" height="100%">
       </div>
       <div class="animalInfo">

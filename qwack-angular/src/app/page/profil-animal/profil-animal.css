@@ -1,0 +1,86 @@
+.profilAnimal {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.retour {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+}
+
+.profilCarte {
+  display: flex;
+  gap: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+}
+
+.profilImage {
+  flex: 0 0 300px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.profilImage img {
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.profilInfos {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.profilNom {
+  margin: 0 0 0.5rem 0;
+  font-size: 2rem;
+}
+
+.profilLigne {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1.05rem;
+}
+
+.profilLabel {
+  font-weight: 600;
+  min-width: 150px;
+}
+
+.profilCaracteres {
+  align-items: flex-start;
+}
+
+.tagsCaracteres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tagCaractere {
+  background: #eef3ec;
+  color: #3a5a40;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 700px) {
+  .profilCarte {
+    flex-direction: column;
+  }
+
+  .profilImage {
+    flex: none;
+    width: 100%;
+    height: 250px;
+  }
+}

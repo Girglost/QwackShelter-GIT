@@ -7,7 +7,7 @@
 
   <form class="form-login" (submit)="auth()" [formGroup]="formAuth">
     <div>
-      <label for="login">Email</label>
+      <label for="login">Email ou login</label>
       <input type="text" formControlName="login" />
       @if (formCtrlLogin.dirty && formCtrlLogin.invalid) {
       <div class="div-error-login">Le nom d'utilisateur est obligatoire</div>
