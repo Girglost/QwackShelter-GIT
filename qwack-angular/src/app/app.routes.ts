@@ -49,6 +49,14 @@ export const routes: Routes = [
   { path: 'mes-demandes', component: MesDemandesPage },
   { path: 'mes-adoptions', component: MesAdoptions },
   { path: 'mes-visites', component: MesVisites },
+  { path: 'profil-personne', component: ProfilPersonnePage, canActivate: [authGuard] },
+  {
+    path: 'mes-demandes', component: MesDemandesPage, canActivate: [authGuard, roleGuardGuard], data: {
+      roles: [
+        'VISITEUR', 'BENEVOLE'
+      ]
+    }
+  },
 
   { path: 'animal/:id', component: ProfilAnimal },
   {
