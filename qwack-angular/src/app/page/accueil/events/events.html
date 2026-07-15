@@ -28,10 +28,12 @@
 
       <div class="a-venir">
         <h3>A venir</h3>
-        <div class="skeleton-item"></div>
-        <div class="skeleton-item"></div>
-        <div class="skeleton-item"></div>
-        <div class="skeleton-item"></div>
+        @for (evenement of evenementsAVenir; track evenement.titre) {
+          <div class="item-a-venir">
+            <span class="item-a-venir-date">{{ evenement.date }}</span>
+            <span class="item-a-venir-titre">{{ evenement.titre }}</span>
+          </div>
+        }
       </div>
     </div>
 
