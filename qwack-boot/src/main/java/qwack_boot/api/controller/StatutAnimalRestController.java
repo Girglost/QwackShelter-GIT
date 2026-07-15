@@ -32,7 +32,8 @@ public class StatutAnimalRestController {
     final EmplacementService empsSrv;
     final PersonneService pSrv;
 
-    StatutAnimalRestController(StatutAnimalService saSrv, AnimalService animalSrv, EmplacementService empsSrv, PersonneService pSrv) {
+    StatutAnimalRestController(StatutAnimalService saSrv, AnimalService animalSrv, EmplacementService empsSrv,
+            PersonneService pSrv) {
         this.saSrv = saSrv;
         this.animalSrv = animalSrv;
         this.empsSrv = empsSrv;
@@ -57,18 +58,20 @@ public class StatutAnimalRestController {
 
     @PostMapping
     public StatutAnimalReponse ajouter(@RequestBody CreateStatutAnimalRequest sar) {
-        
-        StatutAnimal sa = new StatutAnimal(
-            empsSrv.getById(sar.emplacementId()),
-            animalSrv.getById(sar.animalId()));
 
-        saSrv.insert(sa);
-        return StatutAnimalReponse.convert(sa);
+        System.out.println("Emplacement : " + sar.emplacementId());
+        System.out.println("Animal : " + sar.animalId());
+
+        StatutAnimal sa = new StatutAnimal(
+                empsSrv.getById(sar.emplacementId()),
+                animalSrv.getById(sar.animalId()));
+
+        return StatutAnimalReponse.convert(saSrv.insert(sa));
     }
 
     @PutMapping("/{id}")
     public void modifier(@PathVariable Integer id, @RequestBody UpdateStatutAnimalRequest sar) {
-       StatutAnimal sa = new StatutAnimal();
+        StatutAnimal sa = new StatutAnimal();
 
         sa.setAnimal(animalSrv.getById(sar.animalId()));
         sa.setDateArrivee(sar.dateArrivee());
@@ -76,22 +79,18 @@ public class StatutAnimalRestController {
         sa.setEmplacement(empsSrv.getById(sar.emplacementId()));
         sa.setStatutAdoption(sar.statutAdoption());
         sa.setAdoptant(
-				sar.adoptantId() != null
-						? pSrv.getById(sar.adoptantId())
-						: null);
-        
+                sar.adoptantId() != null
+                        ? pSrv.getById(sar.adoptantId())
+                        : null);
 
-        saSrv.update(id,sa);
+        saSrv.update(id, sa);
     }
-
-
-
 
     @GetMapping("/dispo")
     public List<AnimalResponse> dispo() {
         return saSrv.getByDispo().stream().map(a -> AnimalResponse.convert(a)).toList();
     }
-    
+
     @GetMapping("/adoptant/{idAdoptant}")
     public List<StatutAnimalReponse> getByAdoptant(@PathVariable Integer idAdoptant) {
         return saSrv.getByAdoptantId(idAdoptant).stream().map(a -> StatutAnimalReponse.convert(a)).toList();
@@ -101,14 +100,14 @@ public class StatutAnimalRestController {
     public StatutAnimalReponse getByAnimal(@PathVariable Integer idAnimal) {
         return StatutAnimalReponse.convert(saSrv.getByAnimalId(idAnimal));
     }
-    
+
     @GetMapping("/statut/{statut}")
     public List<StatutAnimalReponse> getByStatut(@PathVariable Statut statut) {
         return saSrv.getByStatut(statut).stream().map(a -> StatutAnimalReponse.convert(a)).toList();
     }
 
     @GetMapping("/arrivee/{date1}/{date2}")
-    public List<StatutAnimalReponse> getByArriveeBetween(@PathVariable LocalDate date1,@PathVariable LocalDate date2) {
+    public List<StatutAnimalReponse> getByArriveeBetween(@PathVariable LocalDate date1, @PathVariable LocalDate date2) {
         return saSrv.getByDateArriveeBetween(date1, date2).stream().map(a -> StatutAnimalReponse.convert(a)).toList();
     }
 
@@ -116,14 +115,14 @@ public class StatutAnimalRestController {
     public List<StatutAnimalReponse> getByArriveeBefore(@PathVariable LocalDate date) {
         return saSrv.getByDateArriveeBefore(date).stream().map(a -> StatutAnimalReponse.convert(a)).toList();
     }
-    
+
     @GetMapping("/arrivee/after/{date}")
     public List<StatutAnimalReponse> getByArriveeAfter(@PathVariable LocalDate date) {
         return saSrv.getByDateArriveeAfter(date).stream().map(a -> StatutAnimalReponse.convert(a)).toList();
     }
 
     @GetMapping("/depart/{date1}/{date2}")
-    public List<StatutAnimalReponse> getByDepartBetween(@PathVariable LocalDate date1,@PathVariable LocalDate date2) {
+    public List<StatutAnimalReponse> getByDepartBetween(@PathVariable LocalDate date1, @PathVariable LocalDate date2) {
         return saSrv.getByDateDepartBetween(date1, date2).stream().map(a -> StatutAnimalReponse.convert(a)).toList();
     }
 
@@ -131,7 +130,7 @@ public class StatutAnimalRestController {
     public List<StatutAnimalReponse> getByDepartBefore(@PathVariable LocalDate date) {
         return saSrv.getByDateDepartBefore(date).stream().map(a -> StatutAnimalReponse.convert(a)).toList();
     }
-    
+
     @GetMapping("/depart/after/{date}")
     public List<StatutAnimalReponse> getByDepartAfter(@PathVariable LocalDate date) {
         return saSrv.getByDateDepartAfter(date).stream().map(a -> StatutAnimalReponse.convert(a)).toList();

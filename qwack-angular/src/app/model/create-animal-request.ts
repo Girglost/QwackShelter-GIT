@@ -4,14 +4,15 @@ import { Caractere } from '../enum/caractere';
 
 export interface CreateAnimalRequest {
   nomAnimal: string;
-  dateNaissance: string; // format "yyyy-MM-dd" pour LocalDate
+  dateNaissance: string;
   couleur: string;
   regimeAlimentaire: string;
   traitement: string;
+  emplacement:number;
   famille: Famille;
   genre: Genre;
   caracteres: Caractere[];
-  quackShelterId: number;
+  qwackShelterId: number; // <-- renommé avec le "w"
   capaciteVol: boolean;
   pondeuse: boolean;
   race: string;
@@ -19,4 +20,5 @@ export interface CreateAnimalRequest {
   gestante: boolean;
   estSauvage: boolean;
   espece: string;
+  type_animal: string;
 }

@@ -2,13 +2,17 @@ package qwack_boot.api.controller.animaux;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import qwack_boot.api.requestDTO.animal.CreateAnimalRequest;
 import qwack_boot.api.responseDTO.animal.AnimalResponse;
 import qwack_boot.api.responseDTO.animal.AnimalResponseAdmin;
 import qwack_boot.model.Animal;

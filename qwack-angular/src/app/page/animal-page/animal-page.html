@@ -57,7 +57,7 @@
           <select id="emplacement" formControlName="emplacement">
             <option [ngValue]="''">-- Sélectionner un Emplacement --</option>
             @for (e of emplacements$ | async; track e.id) {
-              <option [ngValue]="e">{{ e.id }}</option>
+              <option [ngValue]="e.id">{{ e.id }}-{{e.box}}</option>
             }
           </select>
           <div

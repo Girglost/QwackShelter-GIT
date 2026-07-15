@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Statut } from '../enum/statut';
 import { StatutAnimal } from '../model/statut-animal';
+import { CreateStatutAnimalRequest } from '../model/create-statut-animal-request';
 
 
 @Injectable({
@@ -10,14 +11,14 @@ import { StatutAnimal } from '../model/statut-animal';
 })
 export class StatutAnimalService {
   private http: HttpClient = inject(HttpClient);
-  private apiUrl: string = '/sAnimal';
+  private apiUrl: string = '/statutAnimal';
 
   public findAll(): Observable<StatutAnimal[]> {
     return this.http.get<StatutAnimal[]>(this.apiUrl);
   }
 
-  public add(sAnimal: StatutAnimal): Observable<StatutAnimal> {
-    return this.http.post<StatutAnimal>(this.apiUrl, sAnimal);
+  public add(sAnimal: CreateStatutAnimalRequest): Observable<CreateStatutAnimalRequest> {
+    return this.http.post<CreateStatutAnimalRequest>(this.apiUrl, sAnimal);
   }
 
   public update(sAnimal: StatutAnimal): Observable<StatutAnimal> {

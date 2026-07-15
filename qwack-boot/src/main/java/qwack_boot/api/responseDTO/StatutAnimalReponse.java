@@ -21,25 +21,29 @@ public class StatutAnimalReponse {
     private Integer adoptantId;
     private Integer animalId;
 
-    public static StatutAnimalReponse convert(StatutAnimal sAnimal){
-        StatutAnimalReponse sa = new StatutAnimalReponse();
-
-        sa.id = sAnimal.getId();
-        sa.dateArrivee = sAnimal.getDateArrivee();
-        sa.dateDepart = sAnimal.getDateDepart();
-        sa.statut = sAnimal.getStatut();
-        sa.statutAdoption = sAnimal.getStatutAdoption();
-        sa.emplacement = sAnimal.getEmplacement();
-
-        sa.adoptantId = null;
-        if(sAnimal.getAdoptant()!=null){
-            sa.adoptantId = sAnimal.getAdoptant().getId();
-        }
-
-        sa.animalId = sAnimal.getAnimal().getId();
-
-        return sa;
+   public static StatutAnimalReponse convert(StatutAnimal sAnimal){
+    if (sAnimal == null) {
+        return null;
     }
+
+    StatutAnimalReponse sa = new StatutAnimalReponse();
+
+    sa.id = sAnimal.getId();
+    sa.dateArrivee = sAnimal.getDateArrivee();
+    sa.dateDepart = sAnimal.getDateDepart();
+    sa.statut = sAnimal.getStatut();
+    sa.statutAdoption = sAnimal.getStatutAdoption();
+    sa.emplacement = sAnimal.getEmplacement();
+
+    sa.adoptantId = null;
+    if(sAnimal.getAdoptant()!=null){
+        sa.adoptantId = sAnimal.getAdoptant().getId();
+    }
+
+    sa.animalId = sAnimal.getAnimal().getId();
+
+    return sa;
+}
 
     public Integer getId() {
         return id;

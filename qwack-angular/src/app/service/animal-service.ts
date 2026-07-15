@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 import { Animal } from '../model/animal';
 import { CreateAnimalRequest } from '../model/create-animal-request';
 import { UpdateAnimalRequest } from '../model/update-animal-request';
+import { TypeAnimal } from '../enum/type-animal';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnimalService {
-  [x: string]: any;
   private http: HttpClient = inject(HttpClient);
-  private apiUrl: string = "/animal";
+  private apiUrl: string = '/animal';
 
   public findAll(): Observable<Animal[]> {
     return this.http.get<Animal[]>(this.apiUrl);
@@ -22,11 +22,13 @@ export class AnimalService {
   }
 
   public add(req: CreateAnimalRequest): Observable<Animal> {
-    return this.http.post<Animal>(this.apiUrl, req);
+    const url = this.resoudreUrl(req.type_animal);
+    return this.http.post<Animal>(url, req);
   }
 
-  public update(id: number, req: UpdateAnimalRequest): Observable<Animal> {
-    return this.http.put<Animal>(`${this.apiUrl}/${id}`, req);
+  public update(id: number, req: UpdateAnimalRequest, typeAnimal: TypeAnimal): Observable<Animal> {
+    const url = this.resoudreUrl(typeAnimal);
+    return this.http.put<Animal>(`${url}/${id}`, req);
   }
 
   public remove(id: number): Observable<void> {
@@ -39,5 +41,22 @@ export class AnimalService {
 
   public findPresent(): Observable<Animal[]> {
     return this.http.get<Animal[]>(`${this.apiUrl}/present`);
+  }
+
+  private resoudreUrl(typeAnimal: string): string {
+    switch (typeAnimal) {
+      case TypeAnimal.Chat:
+        return '/chat';
+      case TypeAnimal.Chien:
+        return '/chien';
+      case TypeAnimal.Canard:
+        return '/canard';
+      case TypeAnimal.Poule:
+        return '/poule';
+      case TypeAnimal.NAC:
+        return '/nac';
+      default:
+        throw new Error(`Type d'animal inconnu : ${typeAnimal}`);
+    }
   }
 }

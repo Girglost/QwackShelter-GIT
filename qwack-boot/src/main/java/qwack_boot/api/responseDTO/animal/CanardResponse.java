@@ -49,7 +49,7 @@ public class CanardResponse {
 
         BeanUtils.copyProperties(canard, p);
 
-        p.setqwackShelterId(canard.getQuackShelter().getId());
+        p.setQwackShelterId(canard.getQuackShelter().getId());
 
         return p;
     }
@@ -124,14 +124,6 @@ public class CanardResponse {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
-    }
-
-    public Integer getqwackShelterId() {
-        return qwackShelterId;
-    }
-
-    public void setqwackShelterId(Integer idQuackShelter) {
-        this.qwackShelterId = idQuackShelter;
     }
 
     public boolean isCapaciteVol() {

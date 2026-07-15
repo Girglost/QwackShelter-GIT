@@ -1,3 +1,4 @@
+import { CreateStatutAnimalRequest } from './../../model/create-statut-animal-request';
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import {
@@ -31,6 +32,7 @@ import { CreateAnimalRequest } from '../../model/create-animal-request';
 import { UpdateAnimalRequest } from '../../model/update-animal-request';
 import { Emplacement } from '../../model/emplacement';
 import { EmplacementService } from '../../service/emplacement-service';
+import { StatutAnimalService } from '../../service/statut-animal-service';
 
 @Component({
   selector: 'app-animal-page',
@@ -43,6 +45,7 @@ export class AnimalPage implements OnInit {
   private animalSrv: AnimalService = inject(AnimalService);
   private quackShelterSrv: QuackShelterService = inject(QuackShelterService);
   private EmpSrv: EmplacementService = inject(EmplacementService);
+  private statutSrv: StatutAnimalService = inject(StatutAnimalService);
 
   private refresh$: Subject<void> = new Subject<void>();
   private animaux$!: Observable<Animal[]>;
@@ -100,7 +103,6 @@ export class AnimalPage implements OnInit {
       switchMap(() => this.animalSrv.findAll()),
     );
 
-
     this.animauxFiltres$ = combineLatest([this.animaux$, this.filtreChange$]).pipe(
       map(([animaux]) => animaux.filter((a) => this.correspondAuxFiltres(a))),
     );
@@ -108,12 +110,11 @@ export class AnimalPage implements OnInit {
     this.quackShelters$ = this.quackShelterSrv.findAll();
     this.emplacements$ = this.EmpSrv.findAll();
 
-    this.animaux$.subscribe(animaux => console.log(animaux));
+    this.animaux$.subscribe((animaux) => console.log(animaux));
 
-    this.quackShelters$.subscribe(q => console.log(q));
+    this.quackShelters$.subscribe((q) => console.log(q));
 
-    this.emplacements$.subscribe(emplacements => console.log(emplacements));
-
+    this.emplacements$.subscribe((emplacements) => console.log(emplacements));
 
     this.CtrlTypeAnimal = this.formBuilder.control('', Validators.required);
     this.CtrlNomAnimal = this.formBuilder.control('', Validators.required);
@@ -188,7 +189,6 @@ export class AnimalPage implements OnInit {
 
   // ===== Sert a verif si l'Animal en question respecte tous les filtres  ==============
 
-
   private correspondAuxFiltres(a: Animal): boolean {
     const matchFamille = this.famillesFiltre.size === 0 || this.famillesFiltre.has(a.famille);
     const matchGenre = this.genresFiltre.size === 0 || this.genresFiltre.has(a.genre);
@@ -209,7 +209,6 @@ export class AnimalPage implements OnInit {
     this.filtreChange$.next();
   }
 
-
   // ===== Ajouter des valeurs dans les filtres ==============
 
   protected toggleFamilleFiltre(f: Famille): void {
@@ -229,8 +228,6 @@ export class AnimalPage implements OnInit {
     this.appliquerFiltres();
   }
 
-
-
   protected reinitialiserFiltres(): void {
     this.famillesFiltre.clear();
     this.genresFiltre.clear();
@@ -241,13 +238,9 @@ export class AnimalPage implements OnInit {
 
   // ===== Permet de d'ajouter/retirer un filtre ==============
 
-
   private toggleSet<T>(set: Set<T>, valeur: T): void {
     set.has(valeur) ? set.delete(valeur) : set.add(valeur);
   }
-
-
-
 
   protected toggleCaractereForm(c: Caractere): void {
     const index = this.caracteresSelectionnes.indexOf(c);
@@ -261,8 +254,6 @@ export class AnimalPage implements OnInit {
   protected addOrUpdate() {
     const v = this.formAnimal.getRawValue();
 
-
-
     const commun = {
       nomAnimal: v.nomAnimal,
       dateNaissance: v.dateNaissance,
@@ -271,44 +262,57 @@ export class AnimalPage implements OnInit {
       traitement: v.traitement,
       genre: v.genre,
       caracteres: this.caracteresSelectionnes,
-      quackShelterId: v.quackShelter,
+      qwackShelterId: v.quackShelter?.id, // <-- CORRIGÉ : on extrait l'id de l'objet QuackShelter
       capaciteVol: v.capaciteVol,
       pondeuse: v.pondeuse,
       race: v.race,
+      emplacement: v.emplacement,
       sterilisation: v.sterilisation,
       gestante: v.gestante,
       estSauvage: v.estSauvage,
-      espece: v.typeAnimal, // "Chat" | "Chien" | "Canard" | "NAC" | "Poule"
+      espece: v.typeAnimal,
+      type_animal: v.typeAnimal, // <-- utilisé pour router vers le bon contrôleur
     };
 
     if (this.editingAnimal) {
       const req: UpdateAnimalRequest = commun;
-      this.animalSrv.update(this.editingAnimal.id, req).subscribe(() => this.reload());
+      this.animalSrv
+        .update(this.editingAnimal.id, req, v.typeAnimal)
+        .subscribe(() => this.reload());
     } else {
       const req: CreateAnimalRequest = { ...commun, famille: this.defaultFamille(v)! };
       console.log(req);
-      this.animalSrv.add(req).subscribe(() => this.reload());
-    }
+      this.animalSrv.add(req).subscribe((animal) => {
+        console.log("animal",animal);
+        const s: CreateStatutAnimalRequest = {
+          emplacementId: req.emplacement,
+          animalId: animal.id,
+        };
 
+        console.log('SA', s);
+
+        this.statutSrv.add(s).subscribe(() => this.reload());
+        // this.animalSrv.add(req).subscribe(() => this.reload());
+      });
+    }
     this.annulerEdition();
   }
 
-  protected defaultFamille(a : Animal) : Famille | undefined {
-    if(a.typeAnimal === TypeAnimal.Chat){
+  protected defaultFamille(a: Animal): Famille | undefined {
+    if (a.typeAnimal === TypeAnimal.Chat) {
       return Famille.Felin;
     }
-    if(a.typeAnimal === TypeAnimal.Chien){
+    if (a.typeAnimal === TypeAnimal.Chien) {
       return Famille.Canin;
     }
-    if(a.typeAnimal === TypeAnimal.NAC){
+    if (a.typeAnimal === TypeAnimal.NAC) {
       return Famille.Muscilide;
     }
-    if(a.typeAnimal === TypeAnimal.Canard || a.typeAnimal === TypeAnimal.Poule){
+    if (a.typeAnimal === TypeAnimal.Canard || a.typeAnimal === TypeAnimal.Poule) {
       return Famille.Galide;
     }
     return undefined;
   }
-
 
   protected edit(a: Animal) {
     this.editingAnimal = a;

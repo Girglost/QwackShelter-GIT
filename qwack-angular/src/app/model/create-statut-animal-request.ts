@@ -1,6 +1,6 @@
 
 export interface CreateStatutAnimalRequest {
-  id: number;
+  id?: number;
   emplacementId: number;
   animalId: number;
 }

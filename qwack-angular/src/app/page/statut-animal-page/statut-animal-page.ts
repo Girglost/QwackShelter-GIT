@@ -18,6 +18,7 @@ import { Emplacement } from '../../model/emplacement';
 import { Animal } from '../../model/animal';
 import { EmplacementService } from '../../service/emplacement-service';
 import { AnimalService } from '../../service/animal-service';
+import { CreateStatutAnimalRequest } from '../../model/create-statut-animal-request';
 
 @Component({
   selector: 'app-statut-animal-page',
@@ -125,10 +126,11 @@ export class StatutAnimalPage implements OnInit {
       };
       this.sAnimalSrv.update(sa).subscribe(() => this.reload());
     } else {
-      const sa: StatutAnimal = {
-        emplacement: valeurs.emplacement,
+      const sa: CreateStatutAnimalRequest = {
+        emplacementId: valeurs.emplacement,
         animalId: valeurs.animal,
-      } as StatutAnimal;
+      }
+      console.log("SA",sa);
       this.sAnimalSrv.add(sa).subscribe(() => this.reload());
     }
 

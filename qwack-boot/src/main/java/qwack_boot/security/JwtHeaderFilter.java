@@ -38,13 +38,13 @@ public class JwtHeaderFilter extends OncePerRequestFilter {
                 String login = JwtUtils.validate(token);
                 Personne personne = this.service.getByLogin(login);
 
-                /*
-                 * System.out.println(authHeader);
-                 * 
-                 * System.out.println(login);
-                 * 
-                 * System.out.println(personne);
-                 */
+                
+                  System.out.println(authHeader);
+                  
+                  System.out.println(login);
+                  
+                  System.out.println(personne);
+                 
 
                 if (personne != null) {
                     List<GrantedAuthority> authorities = new ArrayList<>();

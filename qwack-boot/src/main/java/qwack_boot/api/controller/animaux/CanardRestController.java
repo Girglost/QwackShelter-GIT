@@ -56,8 +56,8 @@ public class CanardRestController {
         canard.setPondeuse(request.isPondeuse());
         canard.setDescription(request.getDescription());
 
-        srvCanard.insert(canard);
-        return CanardResponse.convert(canard);
+        System.out.println("ID créé : " + canard.getId());
+        return CanardResponse.convert(srvCanard.insert(canard));
     }
 
     @PutMapping("/{id}")
