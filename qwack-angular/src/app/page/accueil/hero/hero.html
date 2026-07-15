@@ -22,17 +22,21 @@
     </div>
   </div>
 
+@if (animalDuJour) {
   <div class="carte">
     <p id="titre-carte">L'ANIMAL DU JOUR</p>
     <div class="trait"></div>
-    <img id="animal" src="assets/image/animaux/qwackito.jpg" alt="qwackito" />
-    <!-- <img id="coeur" src="assets/image/coeur.png" alt="coeur" /> -->
+    <img id="animal" [src]="photoAnimal" [alt]="animalDuJour.nomAnimal" />
     <div class="info-animal">
-      <p>Qwackito | 1 an | mâle</p>
+      <p>{{ animalDuJour.nomAnimal }} | {{ ageLabel }} | {{ genreLabel }}</p>
       <br />
-      <!-- <p>Jeune canard sympatoche , faut écrire la suite</p> -->
+      @if (descriptionAnimal) {
+        <p>{{ descriptionAnimal }}</p>
+      }
     </div>
     <div class="btn-profil" (click)="voirProfil()">VOIR SON PROFIL</div>
     <div class="btn-animaux" routerLink="/animaux">VOIR TOUS LES ANIMAUX</div>
   </div>
+}
+
 </div>
