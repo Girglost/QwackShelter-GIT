@@ -19,9 +19,11 @@ import { AccessDenied } from './page/access-denied/access-denied';
 import { AdoptionForm } from './page/adopter/adopter-formulaire/adopter-formulaire';
 import { Adopter } from './page/adopter/adopter/adopter';
 import { AnimalPage } from './page/animal-page/animal-page';
+import { DemandeVisite } from './page/demande-visite/demande-visite';
 import { InscriptionPage } from './page/inscription-page/inscription-page';
 import { LieuPage } from './page/lieu-page/lieu-page';
 import { LoginPage } from './page/login-page/login-page';
+import { MesDemandesPage } from './page/mes-demandes/mes-demandes';
 import { NosAnimauxPage } from './page/nos-animaux-page/nos-animaux-page';
 import { PersonnePage } from './page/personne-page/personne-page';
 import { ProfilAnimal } from './page/profil-animal/profil-animal';
@@ -50,7 +52,19 @@ export const routes: Routes = [
   {path: 'mes-visites',component:MesVisites},
 
   { path: 'animal/:id', component: ProfilAnimal },
-  { path: 'demande-adoption', component: AdoptionForm, canActivate: [authGuard] },
+  {
+    path: 'demande-adoption', component: AdoptionForm, canActivate: [authGuard, roleGuardGuard], data: {
+      roles: [
+        'VISITEUR', 'BENEVOLE'
+      ]
+    }
+  }, {
+    path: 'demande-visite', component: DemandeVisite, canActivate: [authGuard, roleGuardGuard], data: {
+      roles: [
+        'VISITEUR'
+      ]
+    }
+  },
 
   {
   path: 'animal/:id',
@@ -61,7 +75,7 @@ export const routes: Routes = [
   {
     path: 'emplacement', component: EmplacementPage, canActivate: [authGuard, roleGuardGuard], data: {
       roles: [
-        'PATRON', 'EMPLOYE'
+        'PATRON'
       ],
       admin: true
     }
@@ -69,7 +83,7 @@ export const routes: Routes = [
   {
     path: 'sAnimal', component: StatutAnimalPage, canActivate: [authGuard, roleGuardGuard], data: {
       roles: [
-        'PATRON', 'EMPLOYE'
+        'PATRON'
       ],
       admin: true
     }
@@ -77,7 +91,7 @@ export const routes: Routes = [
   {
     path: 'hSante', component: HistoriqueSantePage, canActivate: [authGuard, roleGuardGuard], data: {
       roles: [
-        'PATRON', 'EMPLOYE'
+        'PATRON'
       ],
       admin: true
     }
@@ -85,7 +99,7 @@ export const routes: Routes = [
   {
     path: 'personne', component: PersonnePage, canActivate: [authGuard, roleGuardGuard], data: {
       roles: [
-        'PATRON', 'EMPLOYE'
+        'PATRON'
       ],
       admin: true
     }
@@ -93,7 +107,7 @@ export const routes: Routes = [
   {
     path: 'lieu', component: LieuPage, canActivate: [authGuard, roleGuardGuard], data: {
       roles: [
-        'PATRON', 'EMPLOYE'
+        'PATRON'
       ],
       admin: true
     }
