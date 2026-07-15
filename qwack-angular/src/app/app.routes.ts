@@ -44,9 +44,9 @@ export const routes: Routes = [
   { path: 'inscription', component: InscriptionPage },
   { path: 'inscription-success', component: InscriptionSuccess },
   { path: 'animaux', component: NosAnimauxPage, },
-  { path: 'mes-demandes', component: MesDemandesPage },
-  { path: 'mes-adoptions', component: MesAdoptions },
-  { path: 'mes-visites', component: MesVisites },
+  { path: 'mes-demandes', component: MesDemandesPage, canActivate: [authGuard] },
+  { path: 'mes-adoptions', component: MesAdoptions, canActivate: [authGuard] },
+  { path: 'mes-visites', component: MesVisites, canActivate: [authGuard] },
   { path: 'profil-personne', component: ProfilPersonnePage, canActivate: [authGuard] },
   {
     path: 'mes-demandes', component: MesDemandesPage, canActivate: [authGuard, roleGuardGuard], data: {
