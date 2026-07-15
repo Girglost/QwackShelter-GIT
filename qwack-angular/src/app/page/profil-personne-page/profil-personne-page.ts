@@ -128,8 +128,8 @@ export class ProfilPersonnePage implements OnInit {
         items.push(
           { icon: 'fa-regular fa-calendar', label: 'Mon planning',link: '/planning' },
           { icon: 'fa-solid fa-list-check', label: 'Mes tâches' },
-          { icon: 'fa-solid fa-kit-medical', label: 'Soins des animaux' },
-          { icon: 'fa-solid fa-folder-open', label: 'Gestion des demandes' },
+          { icon: 'fa-solid fa-kit-medical', label: 'Soins des animaux', link:'/hSante' },
+          { icon: 'fa-solid fa-folder-open', label: 'Gestion des demandes', link:'/demandes' },
         );
         break;
 
