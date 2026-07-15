@@ -1,1 +1,48 @@
-<p>profil-animal works!</p>
+<ng-container *ngIf="animal$ | async as a">
+  <div class="profilAnimal">
+    <a class="retour" [routerLink]="['/animaux']">← Retour aux animaux</a>
+
+    <div class="profilCarte">
+      <div class="profilImage">
+        <img [src]="getImageAnimal(a)" [alt]="a.nomAnimal" width="100%" height="100%" />
+      </div>
+
+      <div class="profilInfos">
+        <h1 class="profilNom">{{ a.nomAnimal }}</h1>
+
+        <div class="profilLigne">
+          <span class="profilLabel">Date de naissance :</span>
+          <span>{{ formatDateNaissance(a.dateNaissance) | date: 'dd/MM/yyyy' }}</span>
+        </div>
+
+        <div class="profilLigne">
+          <span class="profilLabel">Âge :</span>
+          <span>
+            @if (calculAge(a.dateNaissance) < 1) {
+              {{ convertAnneeEnMois(calculAge(a.dateNaissance)) }} mois
+            } @else {
+              {{ cleanAge(calculAge(a.dateNaissance)) }} ans
+            }
+          </span>
+        </div>
+
+        <div class="profilLigne">
+          <span class="profilLabel">Famille :</span>
+          <span>{{ a.famille }}</span>
+        </div>
+
+        <div class="profilLigne">
+          <span class="profilLabel">Genre :</span>
+          <span>{{ a.genre }}</span>
+        </div>
+
+        <div class="profilLigne profilCaracteres">
+          <span class="profilLabel">Caractères :</span>
+          <div class="tagsCaracteres">
+            <span class="tagCaractere" *ngFor="let c of a.caracteres">{{ c }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
