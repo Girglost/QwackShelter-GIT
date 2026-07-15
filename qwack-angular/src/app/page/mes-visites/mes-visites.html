@@ -1,0 +1,107 @@
+<div class="dashboard">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="user-card">
+      <svg
+        class="avatar-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 100 100"
+        width="60"
+        height="60"
+      >
+        <circle cx="50" cy="50" r="50" fill="#e0e0e0" />
+        <circle cx="50" cy="38" r="18" fill="#9e9e9e" />
+        <path d="M50 60c-19 0-34 12-34 27v13h68V87c0-15-15-27-34-27z" fill="#9e9e9e" />
+      </svg>
+
+      <div class="user-info">
+        <h2>Hello !</h2>
+        <h3>{{ personne()?.prenom }} {{ personne()?.nom }}</h3>
+
+        <p>
+          {{ roleLabel }} depuis le
+          <br />
+          {{ dateRole }}
+        </p>
+      </div>
+    </div>
+
+    <nav>
+      <a routerLink="/profil">
+        <i class="fa-solid fa-table-columns"></i>
+        Tableau de bord
+      </a>
+
+      <a *ngFor="let item of menuItems"
+         [routerLink]="item.link"
+         [class.active]="item.label === 'Mes visites'">
+        <i [class]="item.icon"></i>
+        {{ item.label }}
+      </a>
+    </nav>
+
+    <button class="logout" (click)="logout()">Déconnexion</button>
+  </aside>
+
+  <!-- Contenu -->
+
+  <main class="content">
+
+    <!-- En-tête -->
+    <section class="page-actions card">
+      <div>
+        <h2>Mes visites</h2>
+        <p>Retrouvez vos visites passées et à venir au refuge</p>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn-primary" routerLink="/mes-demandes">Planifier une visite</button>
+      </div>
+    </section>
+
+    <!-- Visites -->
+    <section class="requests card">
+      <table>
+        <thead>
+          <tr>
+            <th>Animal</th>
+            <th>Date</th>
+            <th>Créneau</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Mimi — Chatte européenne</td>
+            <td>19/07/2026</td>
+            <td>Samedi après-midi</td>
+            <td><span class="status status-attente">À VENIR</span></td>
+          </tr>
+
+          <tr>
+            <td>Rex — Berger australien</td>
+            <td>15/06/2026</td>
+            <td>Matinée</td>
+            <td><span class="status status-validee">EFFECTUÉE</span></td>
+          </tr>
+
+          <tr>
+            <td>Nala — Chatonne</td>
+            <td>10/06/2026</td>
+            <td>Après-midi</td>
+            <td><span class="status status-validee">EFFECTUÉE</span></td>
+          </tr>
+
+          <tr>
+            <td>Max — Labrador</td>
+            <td>28/05/2026</td>
+            <td>Matinée</td>
+            <td><span class="status status-refusee">ANNULÉE</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+</div>

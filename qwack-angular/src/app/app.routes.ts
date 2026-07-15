@@ -27,6 +27,8 @@ import { PersonnePage } from './page/personne-page/personne-page';
 import { ProfilAnimal } from './page/profil-animal/profil-animal';
 import { ProfilPersonnePage } from './page/profil-personne-page/profil-personne-page';
 import { MesDemandesPage } from './page/mes-demandes/mes-demandes';
+import { MesAdoptions } from './page/mes-adoptions/mes-adoptions';
+import { MesVisites } from './page/mes-visites/mes-visites';
 
 export const routes: Routes = [
   { path: 'accueil', component: Accueil },
@@ -44,6 +46,8 @@ export const routes: Routes = [
   { path: 'animaux', component: NosAnimauxPage, },
   { path: 'profil-personne', component: ProfilPersonnePage },
   {path: 'mes-demandes',component:MesDemandesPage},
+  {path: 'mes-adoptions',component:MesAdoptions},
+  {path: 'mes-visites',component:MesVisites},
 
   { path: 'animal/:id', component: ProfilAnimal },
   { path: 'demande-adoption', component: AdoptionForm, canActivate: [authGuard] },

@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
-import { Router, RouterLink } from "@angular/router";
-import { Role } from '../../enum/role';
 import { Personne } from '../../model/personne';
 import { AuthService } from '../../service/auth-service';
 import { PersonneService } from '../../service/personne-service';
+import { Router, RouterLink } from '@angular/router';
+import { Role } from '../../enum/role';
+import { CommonModule } from '@angular/common';
 
 interface MenuItem {
   icon: string;
@@ -13,13 +13,12 @@ interface MenuItem {
 }
 
 @Component({
-  selector: 'app-employe-page',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
-  templateUrl: './profil-personne-page.html',
-  styleUrls: ['./profil-personne-page.css']
+  selector: 'app-mes-visites',
+  imports: [CommonModule,RouterLink],
+  templateUrl: './mes-visites.html',
+  styleUrl: './mes-visites.css',
 })
-export class ProfilPersonnePage implements OnInit {
+export class MesVisites  implements OnInit {
 
   personne = signal<Personne | null>(null);
 
@@ -36,7 +35,6 @@ export class ProfilPersonnePage implements OnInit {
   ngOnInit(): void {
     this.personneService.getMonProfil()
       .subscribe(personne => {
-        console.log("PROFIL :", personne);
         this.personne.set(personne);
       });
   }
@@ -103,10 +101,10 @@ export class ProfilPersonnePage implements OnInit {
 
     const items: MenuItem[] = [
       { icon: 'fa-regular fa-user', label: 'Mon profil' },
-      { icon: 'fa-regular fa-envelope', label: 'Mes demandes', link:'/mes-demandes' },
-      { icon: 'fa-solid fa-paw', label: 'Mes adoptions', link:'/mes-adoptions' },
-      { icon: 'fa-regular fa-calendar-check', label: 'Mes visites',link:'/mes-visites' },
-      { icon: 'fa-solid fa-hand-holding-heart', label: 'Mes dons',link:'/mes-dons' },
+      { icon: 'fa-regular fa-envelope', label: 'Mes demandes', link: '/mes-demandes' },
+      { icon: 'fa-solid fa-paw', label: 'Mes adoptions', link: '/mes-adoptions' },
+      { icon: 'fa-regular fa-calendar-check', label: 'Mes visites', link: '/mes-visites' },
+      { icon: 'fa-solid fa-hand-holding-heart', label: 'Mes dons' },
     ];
 
     switch (role) {
@@ -119,14 +117,14 @@ export class ProfilPersonnePage implements OnInit {
       case Role.BENEVOLE:
         items.push(
           { icon: 'fa-solid fa-heart', label: 'Mes parrainages' },
-          { icon: 'fa-regular fa-calendar', label: 'Mon planning',link: '/planning' },
+          { icon: 'fa-regular fa-calendar', label: 'Mon planning', link: '/planning' },
           { icon: 'fa-solid fa-list-check', label: 'Mes tâches' },
         );
         break;
 
       case Role.EMPLOYE:
         items.push(
-          { icon: 'fa-regular fa-calendar', label: 'Mon planning',link: '/planning' },
+          { icon: 'fa-regular fa-calendar', label: 'Mon planning', link: '/planning' },
           { icon: 'fa-solid fa-list-check', label: 'Mes tâches' },
           { icon: 'fa-solid fa-kit-medical', label: 'Soins des animaux' },
           { icon: 'fa-solid fa-folder-open', label: 'Gestion des demandes' },
@@ -135,8 +133,8 @@ export class ProfilPersonnePage implements OnInit {
 
       case Role.PATRON:
         items.push(
-          { icon: 'fa-regular fa-calendar', label: 'Mon planning',link: '/planning' },
-          { icon: 'fa-solid fa-list-check', label: 'Mes tâches',link: '/taches' },
+          { icon: 'fa-regular fa-calendar', label: 'Mon planning', link: '/planning' },
+          { icon: 'fa-solid fa-list-check', label: 'Mes tâches', link: '/taches' },
         );
         break;
     }
@@ -156,5 +154,7 @@ export class ProfilPersonnePage implements OnInit {
     this.authService.resetAuth();
     this.router.navigate(['/accueil']);
   }
+
+
 
 }

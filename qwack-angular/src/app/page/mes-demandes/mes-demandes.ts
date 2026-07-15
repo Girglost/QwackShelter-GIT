@@ -102,10 +102,10 @@ export class MesDemandesPage implements OnInit {
 
     const items: MenuItem[] = [
       { icon: 'fa-regular fa-user', label: 'Mon profil' },
-      { icon: 'fa-regular fa-envelope', label: 'Mes demandes', link: '/mes-demandes' },
-      { icon: 'fa-solid fa-paw', label: 'Mes adoptions' },
-      { icon: 'fa-regular fa-calendar-check', label: 'Mes visites' },
-      { icon: 'fa-solid fa-hand-holding-heart', label: 'Mes dons' },
+      { icon: 'fa-regular fa-envelope', label: 'Mes demandes', link:'/mes-demandes' },
+      { icon: 'fa-solid fa-paw', label: 'Mes adoptions', link:'/mes-adoptions' },
+      { icon: 'fa-regular fa-calendar-check', label: 'Mes visites',link:'/mes-visites' },
+      { icon: 'fa-solid fa-hand-holding-heart', label: 'Mes dons',link:'/mes-dons' },
     ];
 
     switch (role) {
