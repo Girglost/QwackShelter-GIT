@@ -10,6 +10,7 @@ import qwack_boot.model.Chat;
 import qwack_boot.model.Genre;
 
 public class ChatResponse {
+    private Integer id;
     private String nomAnimal;
     private LocalDate dateNaissance;
     private String couleur;
@@ -37,6 +38,8 @@ public class ChatResponse {
         c.qwackShelterId = chat.getQuackShelter().getId();
         return c;
     }
+
+    
 
     public void setNomAnimal(String nomAnimal) {
         this.nomAnimal = nomAnimal;
@@ -124,5 +127,13 @@ public class ChatResponse {
 
     public Integer getQwackShelterId() {
         return qwackShelterId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

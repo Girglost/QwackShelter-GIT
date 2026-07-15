@@ -11,6 +11,7 @@ import qwack_boot.model.Genre;
 
 public class ChienResponse {
 
+    private Integer id;
     private String nomAnimal;
     private LocalDate dateNaissance;
     private String couleur;
@@ -31,6 +32,8 @@ public class ChienResponse {
         return c;
     }
 
+
+    
     public void setNomAnimal(String nomAnimal) {
         this.nomAnimal = nomAnimal;
     }
@@ -125,5 +128,17 @@ public class ChienResponse {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+
+    public Integer getId() {
+        return id;
+    }
+
+
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

@@ -46,8 +46,8 @@ public class ChatRestController {
         chat.setQuackShelter(qSrv.getById(request.getQwackShelterId()));
         chat.setDescription(request.getDescription());
 
-        srvChat.insert(chat);
-        return ChatResponse.convert(chat);
+        
+        return ChatResponse.convert(srvChat.insert(chat));
     }
 
     @PutMapping("/{id}")
@@ -68,8 +68,8 @@ public class ChatRestController {
         chat.setQuackShelter(qSrv.getById(request.getQwackShelterId()));
         chat.setDescription(request.getDescription());
 
-        srvChat.update(id, chat);
 
-        return ChatResponse.convert(chat);
+
+        return ChatResponse.convert(srvChat.update(id, chat));
     }
 }

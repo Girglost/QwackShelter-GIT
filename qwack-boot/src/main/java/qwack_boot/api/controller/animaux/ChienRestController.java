@@ -45,9 +45,9 @@ public class ChienRestController {
         chien.setQuackShelter(qSrv.getById(request.getQwackShelterId()));
         chien.setDescription(request.getDescription());
 
-        srvChien.insert(chien);
 
-        return ChienResponse.convert(chien);
+
+        return ChienResponse.convert(srvChien.insert(chien));
     }
 
     @PutMapping("/{id}")
@@ -68,9 +68,8 @@ public class ChienRestController {
         chien.setQuackShelter(qSrv.getById(request.getQwackShelterId()));
         chien.setDescription(request.getDescription());
 
-        srvChien.update(id, chien);
 
-        return ChienResponse.convert(chien);
+        return ChienResponse.convert(srvChien.update(id, chien));
 
     }
 }

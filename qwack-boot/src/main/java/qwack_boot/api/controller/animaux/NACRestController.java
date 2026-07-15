@@ -55,8 +55,8 @@ public class NACRestController {
         nac.setQuackShelter(refuge);
         nac.setDescription(request.getDescription());
 
-        srvNAC.insert(nac);
-        return NACResponse.convert(nac);
+        
+        return NACResponse.convert(srvNAC.insert(nac));
     }
 
     @PutMapping("/{id}")
@@ -85,9 +85,9 @@ public class NACRestController {
             nac.setQuackShelter(refuge);
         }
 
-        srvNAC.update(nac);
 
-        return NACResponse.convert(nac);
+
+        return NACResponse.convert(srvNAC.update(nac));
 
     }
 

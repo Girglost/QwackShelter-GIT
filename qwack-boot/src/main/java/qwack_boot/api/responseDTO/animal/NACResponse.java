@@ -11,6 +11,7 @@ import qwack_boot.model.NAC;
 
 public class NACResponse {
 
+    private Integer id;
     private String nomAnimal;
     private LocalDate dateNaissance;
     private String couleur;
@@ -30,6 +31,8 @@ public class NACResponse {
         n.qwackShelterId = nac.getQuackShelter().getId();
         return n;
     }
+
+    
 
     public void setNomAnimal(String nomAnimal) {
         this.nomAnimal = nomAnimal;
@@ -125,5 +128,17 @@ public class NACResponse {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+
+    public Integer getId() {
+        return id;
+    }
+
+
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

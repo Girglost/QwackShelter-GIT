@@ -55,8 +55,7 @@ public class PouleRestController {
         poule.setPondeuse(request.isPondeuse());
         poule.setDescription(request.getDescription());
 
-        srvPoule.insert(poule);
-        return PouleResponse.convert(poule);
+        return PouleResponse.convert(srvPoule.insert(poule));
     }
 
     @PutMapping("/{id}")
@@ -83,9 +82,8 @@ public class PouleRestController {
             poule.setQuackShelter(refuge);
         }
 
-        srvPoule.update(poule);
 
-        return PouleResponse.convert(poule);
+        return PouleResponse.convert(srvPoule.update(poule));
 
     }
 }
