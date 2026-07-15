@@ -28,7 +28,6 @@ import { NosAnimauxPage } from './page/nos-animaux-page/nos-animaux-page';
 import { PersonnePage } from './page/personne-page/personne-page';
 import { ProfilAnimal } from './page/profil-animal/profil-animal';
 import { ProfilPersonnePage } from './page/profil-personne-page/profil-personne-page';
-import { MesDemandesPage } from './page/mes-demandes/mes-demandes';
 import { MesAdoptions } from './page/mes-adoptions/mes-adoptions';
 import { MesVisites } from './page/mes-visites/mes-visites';
 
