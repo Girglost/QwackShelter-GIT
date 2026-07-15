@@ -13,13 +13,13 @@ interface MenuItem {
 }
 
 @Component({
-  selector: 'app-employe-page',
+  selector: 'app-mes-demandes-page',
   standalone: true,
   imports: [CommonModule, RouterLink],
-  templateUrl: './profil-personne-page.html',
-  styleUrls: ['./profil-personne-page.css']
+  templateUrl: './mes-demandes.html',
+  styleUrls: ['./mes-demandes.css']
 })
-export class ProfilPersonnePage implements OnInit {
+export class MesDemandesPage implements OnInit {
 
   personne = signal<Personne | null>(null);
 
@@ -36,7 +36,6 @@ export class ProfilPersonnePage implements OnInit {
   ngOnInit(): void {
     this.personneService.getMonProfil()
       .subscribe(personne => {
-        console.log("PROFIL :", personne);
         this.personne.set(personne);
       });
   }
@@ -103,7 +102,7 @@ export class ProfilPersonnePage implements OnInit {
 
     const items: MenuItem[] = [
       { icon: 'fa-regular fa-user', label: 'Mon profil' },
-      { icon: 'fa-regular fa-envelope', label: 'Mes demandes', link:'/mes-demandes' },
+      { icon: 'fa-regular fa-envelope', label: 'Mes demandes', link: '/mes-demandes' },
       { icon: 'fa-solid fa-paw', label: 'Mes adoptions' },
       { icon: 'fa-regular fa-calendar-check', label: 'Mes visites' },
       { icon: 'fa-solid fa-hand-holding-heart', label: 'Mes dons' },
@@ -119,14 +118,14 @@ export class ProfilPersonnePage implements OnInit {
       case Role.BENEVOLE:
         items.push(
           { icon: 'fa-solid fa-heart', label: 'Mes parrainages' },
-          { icon: 'fa-regular fa-calendar', label: 'Mon planning',link: '/planning' },
+          { icon: 'fa-regular fa-calendar', label: 'Mon planning', link: '/planning' },
           { icon: 'fa-solid fa-list-check', label: 'Mes tâches' },
         );
         break;
 
       case Role.EMPLOYE:
         items.push(
-          { icon: 'fa-regular fa-calendar', label: 'Mon planning',link: '/planning' },
+          { icon: 'fa-regular fa-calendar', label: 'Mon planning', link: '/planning' },
           { icon: 'fa-solid fa-list-check', label: 'Mes tâches' },
           { icon: 'fa-solid fa-kit-medical', label: 'Soins des animaux' },
           { icon: 'fa-solid fa-folder-open', label: 'Gestion des demandes' },
@@ -135,8 +134,8 @@ export class ProfilPersonnePage implements OnInit {
 
       case Role.PATRON:
         items.push(
-          { icon: 'fa-regular fa-calendar', label: 'Mon planning',link: '/planning' },
-          { icon: 'fa-solid fa-list-check', label: 'Mes tâches',link: '/taches' },
+          { icon: 'fa-regular fa-calendar', label: 'Mon planning', link: '/planning' },
+          { icon: 'fa-solid fa-list-check', label: 'Mes tâches', link: '/taches' },
         );
         break;
     }

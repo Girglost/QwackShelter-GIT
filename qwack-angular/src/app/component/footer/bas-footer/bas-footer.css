@@ -9,21 +9,21 @@
 
 #mention {
   font-family: 'Montserrat';
-  font-size: 24px;
+  font-size: 16px;
   color: #474745;
   cursor: pointer;
 }
 
 #nom {
   font-family: 'Montserrat';
-  font-size: 24px;
+  font-size: 16px;
   color: #365027;
   opacity: 50%;
 }
 
 #contact {
   font-family: 'Montserrat';
-  font-size: 24px;
+  font-size: 16px;
   color: #474745;
   cursor: pointer;
 }
